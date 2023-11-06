@@ -24,14 +24,8 @@ public abstract class AbstractDAO {
   }
 
   public AbstractDAO(DataOutputStream Ouput, DataInputStream Input) {
-    if (Input != null) {
-      in = Input;
-    }
-    if (Ouput != null) {
-
-      out = Ouput;
-    }
-
+      this.out = Ouput;
+      this.in = Input;
   }
 
   public void close() {
