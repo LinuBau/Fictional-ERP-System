@@ -14,7 +14,11 @@ public class Musik_MediumDAO extends AbstractDAO {
     public Musik_MediumDAO(String filename, boolean write) {
         super(filename, write);
     }
-
+/**
+ * Implimiert das schreiben des Objetks Musik_Medium
+ * @param obj muss ein Musik_Medium sein 
+ * @throws IOException  muss weil wir schreiben
+ */
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
@@ -36,7 +40,11 @@ public class Musik_MediumDAO extends AbstractDAO {
             out.writeBoolean(MM.getIsMp3());
         }
     }
-
+/**
+ * Implimiert das lesen des Obejects Musik_Medium
+ * @param obj muss ein Musik_Medium sein 
+ * @throws IOException muss weil wir schreiben
+ */
     @Override
     public void read(Object obj) throws IOException {
         if (in != null) {
