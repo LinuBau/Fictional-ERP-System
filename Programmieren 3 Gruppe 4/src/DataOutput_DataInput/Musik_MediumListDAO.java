@@ -1,5 +1,6 @@
 package DataOutput_DataInput;
 
+import GeschaftsObejekt.Musik_MediumList;
 import GeschaftsObejekt.Musik_Medium;
 import java.io.IOException;
 
@@ -14,9 +15,9 @@ public class Musik_MediumListDAO extends AbstractDAO {
     public void write(Object obj) throws IOException {
         if (out != null) {
             Musik_MediumList mml = (Musik_MediumList) obj;
-            out.writeInt(mml.list.size());
+            out.writeInt(mml.size());
             Musik_MediumDAO mmdao = new Musik_MediumDAO(out, null);
-            for (Musik_Medium mm : mml.list) {
+            for (Musik_Medium mm : mml) {
                 mmdao.write(mm);
             }
         }
