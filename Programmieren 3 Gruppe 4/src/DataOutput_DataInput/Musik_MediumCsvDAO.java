@@ -26,10 +26,13 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
     public Musik_MediumCsvDAO(String filename, boolean writing){
         super(filename, writing);
     }
+    
       public Musik_MediumCsvDAO(PrintWriter out, BufferedReader in) {
         super(out, in);
     }
-
+      public Musik_MediumCsvDAO(){
+          
+      }
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
@@ -50,7 +53,7 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
         
     }
 
-    private void toMusik_Medium(String csv, String splitCondition,Musik_Medium MM) {
+    protected void toMusik_Medium(String csv, String splitCondition,Musik_Medium MM) {
         String[] csvStrings = csv.split(splitCondition);
     
         MM.setMusik_GUID(Integer.parseInt(csvStrings[0]));
