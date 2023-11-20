@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Musik_MediumWriterDAO extends AbstractWriterDAO {
+public class Musik_MediumCsvDAO extends AbstractCsvDOA {
 
     private String splitCondition = ",";
 
@@ -23,10 +23,10 @@ public class Musik_MediumWriterDAO extends AbstractWriterDAO {
         this.splitCondition = splitCondition;
     }
 
-    public Musik_MediumWriterDAO(String filename, boolean writing){
+    public Musik_MediumCsvDAO(String filename, boolean writing){
         super(filename, writing);
     }
-      public Musik_MediumWriterDAO(PrintWriter out, BufferedReader in) {
+      public Musik_MediumCsvDAO(PrintWriter out, BufferedReader in) {
         super(out, in);
     }
 

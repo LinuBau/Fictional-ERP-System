@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-public abstract class AbstractWriterDAO {
+public abstract class AbstractCsvDOA {
     protected PrintWriter out;
     protected BufferedReader in;
-    public AbstractWriterDAO(String filename, boolean writing){
+    public AbstractCsvDOA(){
+    }
+    public AbstractCsvDOA(String filename, boolean writing){
         try {
             if (writing) {
             out = new PrintWriter(filename);
@@ -22,7 +24,7 @@ public abstract class AbstractWriterDAO {
         } catch (FileNotFoundException e) {
         }
     }
-    public AbstractWriterDAO(PrintWriter out , BufferedReader in){
+    public AbstractCsvDOA(PrintWriter out , BufferedReader in){
         this.in = in;
         this.out = out;
     }
