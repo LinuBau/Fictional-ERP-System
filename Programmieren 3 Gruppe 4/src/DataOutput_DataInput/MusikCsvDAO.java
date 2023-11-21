@@ -1,17 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DataOutput_DataInput;
 
 
 
-import GeschaftsObejekt.Musik_Medium;
+import GeschaftsObejekt.Musik;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Musik_MediumCsvDAO extends AbstractCsvDOA {
+public class MusikCsvDAO extends AbstractCsvDOA {
 
     private String splitCondition = ",";
 
@@ -23,20 +20,20 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
         this.splitCondition = splitCondition;
     }
 
-    public Musik_MediumCsvDAO(String filename, boolean writing){
+    public MusikCsvDAO(String filename, boolean writing){
         super(filename, writing);
     }
     
-      public Musik_MediumCsvDAO(PrintWriter out, BufferedReader in) {
+      public MusikCsvDAO(PrintWriter out, BufferedReader in) {
         super(out, in);
     }
-      public Musik_MediumCsvDAO(){
+      public MusikCsvDAO(){
           
       }
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
-              Musik_Medium MM = (Musik_Medium) obj;
+              Musik MM = (Musik) obj;
              out.println(this.tocvs(splitCondition,MM));
         }
      
@@ -45,7 +42,7 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
     @Override
     public void read(Object obj) throws IOException {
         if (in != null ) {
-            Musik_Medium MM = (Musik_Medium) obj;
+            Musik MM = (Musik) obj;
          String hhh = in.readLine();
          this.toMusik_Medium(hhh, splitCondition,MM);
         }
@@ -53,7 +50,7 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
         
     }
 
-    protected void toMusik_Medium(String csv, String splitCondition,Musik_Medium MM) {
+    protected void toMusik_Medium(String csv, String splitCondition,Musik MM) {
         String[] csvStrings = csv.split(splitCondition);
     
         MM.setMusik_GUID(Integer.parseInt(csvStrings[0]));
@@ -72,7 +69,7 @@ public class Musik_MediumCsvDAO extends AbstractCsvDOA {
         MM.setIsPlatte(Boolean.parseBoolean(csvStrings[13]));
         MM.setIsMp3(Boolean.parseBoolean(csvStrings[14]));
     }
-    private String tocvs(String splitKondiotn,Musik_Medium MM) {
+    private String tocvs(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
              MM.getMusiker() + splitKondiotn +

@@ -1,28 +1,28 @@
 package DataOutput_DataInput;
 
-import GeschaftsObejekt.Musik_Medium;
+import GeschaftsObejekt.Musik;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Musik_MediumDAO extends AbstractDAO {
+public class MusikDAO extends AbstractDAO {
 
-    public Musik_MediumDAO(DataOutputStream Ouput, DataInputStream Input) {
+    public MusikDAO(DataOutputStream Ouput, DataInputStream Input) {
         super(Ouput, Input);
     }
 
-    public Musik_MediumDAO(String filename, boolean write) {
+    public MusikDAO(String filename, boolean write) {
         super(filename, write);
     }
 /**
- * Implimiert das schreiben des Objetks Musik_Medium
- * @param obj muss ein Musik_Medium sein 
+ * Implimiert das schreiben des Objetks Musik
+ * @param obj muss ein Musik sein 
  * @throws IOException  muss weil wir schreiben
  */
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
-            Musik_Medium MM = (Musik_Medium) obj;
+            Musik MM = (Musik) obj;
             out.writeInt(MM.getMusik_GUID());
             out.writeUTF(MM.getMusiker());
             out.writeUTF(MM.getAlbum());
@@ -41,14 +41,14 @@ public class Musik_MediumDAO extends AbstractDAO {
         }
     }
 /**
- * Implimiert das lesen des Obejects Musik_Medium
- * @param obj muss ein Musik_Medium sein 
+ * Implimiert das lesen des Obejects Musik
+ * @param obj muss ein Musik sein 
  * @throws IOException muss weil wir schreiben
  */
     @Override
     public void read(Object obj) throws IOException {
         if (in != null) {
-            Musik_Medium MM = (Musik_Medium) obj;
+            Musik MM = (Musik) obj;
             MM.setMusik_GUID(in.readInt());
             MM.setMusiker(in.readUTF());
             MM.setAlbum(in.readUTF());
