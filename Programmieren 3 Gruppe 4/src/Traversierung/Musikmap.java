@@ -1,14 +1,19 @@
 package Traversierung;
+import DataOutput_DataInput.Musik_MediumListDAO;
 import GeschaftsObejekt.Musik_Medium;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+import GeschaftsObejekt.Musik_MediumList;
+import java.io.IOException;
+
 
 public class Musikmap {
     
-    private List<Musik_Medium> medienListe;
+    private Musik_MediumListDAO musikMediumListDAO;
+    private Musik_MediumList musikMediumList;
     private HashMap<String, List<Musik_Medium>> songNameMap;
     private HashMap<String, List<Musik_Medium>> musikerMap;
     private HashMap<String, List<Musik_Medium>> genreMap;
@@ -18,10 +23,19 @@ public class Musikmap {
     private TreeMap<Double, List<Musik_Medium>> platteListenpreisMap;
     private TreeMap<Double, List<Musik_Medium>> mp3ListenpreisMap;
 
-    public Musikmap(List<Musik_Medium> medienListe) {
-        this.medienListe = new ArrayList<>(medienListe);
-        initializeMaps();
+    public Musikmap(String filename) {
+    this.musikMediumListDAO = new Musik_MediumListDAO(filename, true);
+    this.musikMediumList = new Musik_MediumList(); 
+    try {
+        musikMediumListDAO.read(this.musikMediumList); // Lesen der Liste aus der Datei
+    } catch (IOException e) {
+        e.printStackTrace(); // gibt fehlermeldung aus
     }
+    initializeMaps();
+}
+
+
+        
   
     private void initializeMaps() {
         songNameMap = new HashMap<>();
@@ -33,7 +47,7 @@ public class Musikmap {
         platteListenpreisMap = new TreeMap<>();
         mp3ListenpreisMap = new TreeMap<>();
 
-        for (Musik_Medium medium : medienListe) {
+        for (Musik_Medium medium : musikMediumList) {
             updateAllMaps(medium);
         }
     }
@@ -45,12 +59,12 @@ public class Musikmap {
     }
     
     public void addMedium(Musik_Medium neuesMedium) {
-        medienListe.add(neuesMedium);
+        musikMediumList.add(neuesMedium);
         updateAllMaps(neuesMedium);
     }
     
     public void removeMedium(Musik_Medium zuEntfernendesMedium) {
-        medienListe.remove(zuEntfernendesMedium);
+        musikMediumList.remove(zuEntfernendesMedium);
         removeFromAllMaps(zuEntfernendesMedium);
     }
     
@@ -155,7 +169,7 @@ public class Musikmap {
     }
     
     public List<Musik_Medium> filterMedienByMusikerGenreIsCD(String musiker, String genre, boolean isCD) {
-        return medienListe.stream()
+        return musikMediumList.stream()
             .filter(medium -> medium.getMusiker().equals(musiker))
             .filter(medium -> medium.getGenre().equals(genre))
             .filter(medium -> (isCD && medium.getIsCD()) || (!isCD && !medium.getIsCD()))
