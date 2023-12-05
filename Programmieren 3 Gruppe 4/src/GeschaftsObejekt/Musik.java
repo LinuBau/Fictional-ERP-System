@@ -2,7 +2,7 @@
 package GeschaftsObejekt;
 
 
-public class Musik_Medium {
+public class Musik {
      private int Musik_GUID;
     private String Musiker;
     private String Album; 
@@ -15,9 +15,9 @@ public class Musik_Medium {
     private double PlatteEinkaufpreis;
     private double Mp3Einkaufpreis;
     private String Genre;
-    private boolean isCD;
-    private boolean isPlatte;
-    private boolean isMp3;
+    private boolean CD;
+    private boolean Platte;
+    private boolean Mp3;
 
     @Override
     public String toString() {
@@ -40,7 +40,7 @@ public class Musik_Medium {
             "}";
     }
 
-    public Musik_Medium(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_Platz, double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis, double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte, boolean isMp3) {
+    public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_Platz, double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis, double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte, boolean isMp3) {
         this.Musik_GUID = Musik_GUID;
         this.Musiker = Musiker;
         this.Album = Album;
@@ -53,9 +53,9 @@ public class Musik_Medium {
         this.PlatteEinkaufpreis = PlatteEinkaufpreis;
         this.Mp3Einkaufpreis = Mp3Einkaufpreis;
         this.Genre = Genre;
-        this.isCD = isCD;
-        this.isPlatte = isPlatte;
-        this.isMp3 = isMp3;
+        this.CD = isCD;
+        this.Platte = isPlatte;
+        this.Mp3 = isMp3;
     }
 
     public int getMusik_GUID() {
@@ -155,41 +155,41 @@ public class Musik_Medium {
     }
 
     public boolean isIsCD() {
-        return this.isCD;
+        return this.CD;
     }
 
     public boolean getIsCD() {
-        return this.isCD;
+        return this.CD;
     }
 
     public void setIsCD(boolean isCD) {
-        this.isCD = isCD;
+        this.CD = isCD;
     }
 
     public boolean isIsPlatte() {
-        return this.isPlatte;
+        return this.Platte;
     }
 
     public boolean getIsPlatte() {
-        return this.isPlatte;
+        return this.Platte;
     }
 
     public void setIsPlatte(boolean isPlatte) {
-        this.isPlatte = isPlatte;
+        this.Platte = isPlatte;
     }
 
     public boolean isIsMp3() {
-        return this.isMp3;
+        return this.Mp3;
     }
 
     public boolean getIsMp3() {
-        return this.isMp3;
+        return this.Mp3;
     }
 
     public void setIsMp3(boolean isMp3) {
-        this.isMp3 = isMp3;
+        this.Mp3 = isMp3;
     }
-    public Musik_Medium() {
+    public Musik() {
     }
 
    

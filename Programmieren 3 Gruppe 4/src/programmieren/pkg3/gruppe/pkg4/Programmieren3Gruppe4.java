@@ -1,19 +1,19 @@
 package programmieren.pkg3.gruppe.pkg4;
 
-import DataOutput_DataInput.Musik_MediumDAO;
-import GeschaftsObejekt.Musik_Medium;
+import DataOutput_DataInput.MusikDAO;
+import GeschaftsObejekt.Musik;
 
 public class Programmieren3Gruppe4 {
 
     public static void main(String[] args) {
         // TODO code application logic here
         String filepath = "build/data/neu.data";
-        Musik_Medium gg = new Musik_Medium(1, "fg", "er", "tr", "A1", 4.9, 49, 1, 1, 1, 1, "hg", true, false, false);
+        Musik gg = new Musik(1, "fg", "er", "tr", "A1", 4.9, 49, 1, 1, 1, 1, "hg", true, false, false);
         // String fileName = "C:/Users/linus/OneDrive/Desktop/gj.data/";
-        Musik_MediumDAO output = new Musik_MediumDAO(filepath, true);
-        Musik_MediumDAO input = new Musik_MediumDAO(filepath, false);
+        MusikDAO output = new MusikDAO(filepath, true);
+        MusikDAO input = new MusikDAO(filepath, false);
 
-        Musik_Medium hr = new Musik_Medium();
+        Musik hr = new Musik();
         try {
             output.write(gg);
             output.close();
