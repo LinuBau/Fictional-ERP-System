@@ -162,4 +162,9 @@ public class MusikTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;
     }
+    
+       // Methode zum Aktualisieren der MusikList
+    public void setMusikList(MusikList neueMusikList) {
+        this.musikList = neueMusikList;
+    }
 }

@@ -52,19 +52,31 @@ public class MusikCsvDAO extends AbstractCsvDOA {
 
     protected void toMusik_Medium(String csv, String splitCondition,Musik MM) {
         String[] csvStrings = csv.split(splitCondition);
-    
-        MM.setMusik_GUID(Integer.parseInt(csvStrings[0]));
+        
+         try 
+         {
+        MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim())); // trim() entfernt Leerzeichen
+    } catch (NumberFormatException e) {
+        System.err.println("Fehler beim Parsen von Musik_GUID: " + csvStrings[0]);
+    }
         MM.setMusiker(csvStrings[1]);
         MM.setAlbum(csvStrings[2]);
         MM.setSongName(csvStrings[3]);
         MM.setRegal_PlatzCD(csvStrings[4]);
         MM.setRegal_PlatzPlatte(csvStrings[5]);
+        
+        try
+        {
         MM.setCDListenpreis(Double.parseDouble(csvStrings[6]));
         MM.setPlatteListenpreis(Double.parseDouble(csvStrings[7]));
         MM.setMp3Listenpreis(Double.parseDouble(csvStrings[8]));
         MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[9]));
         MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[10]));
         MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[11]));
+        
+        } catch (NumberFormatException e) {
+        System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
+    }
         MM.setGenre(csvStrings[12]);
         MM.setIsCD(Boolean.parseBoolean(csvStrings[13]));
         MM.setIsPlatte(Boolean.parseBoolean(csvStrings[14]));

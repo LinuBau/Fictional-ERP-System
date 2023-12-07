@@ -1,5 +1,4 @@
 package Traversierung;
-import DataOutput_DataInput.MusikListDAO;
 import GeschaftsObejekt.Musik;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,76 +6,87 @@ import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import GeschaftsObejekt.MusikList;
-import java.io.IOException;
 
 
-public class Musikmap {
+public class MusikMap {
     
-    private MusikListDAO MusikListDAO;
-    private MusikList MusikList;
-    private HashMap<String, List<Musik>> songNameMap;
-    private HashMap<String, List<Musik>> musikerMap;
-    private HashMap<String, List<Musik>> genreMap;
-    private HashMap<String, List<Musik>> albumMap;
+    private MusikList musikList; 
+    private TreeMap<String, List<Musik>> songNameMap;
+    private TreeMap<String, List<Musik>> musikerMap;
+    private TreeMap<String, List<Musik>> genreMap;
+    private TreeMap<String, List<Musik>> albumMap;
     private HashMap<String, List<Musik>> mediumTypMap;
     private TreeMap<Double, List<Musik>> cdListenpreisMap;
     private TreeMap<Double, List<Musik>> platteListenpreisMap;
     private TreeMap<Double, List<Musik>> mp3ListenpreisMap;
 
-    public Musikmap(String filename) {
-    this.MusikListDAO = new MusikListDAO(filename, true);
-    this.MusikList = new MusikList(); 
-    try {
-        MusikListDAO.read(this.MusikList); // Lesen der Liste aus der Datei
-    } catch (IOException e) {
-        e.printStackTrace(); // gibt fehlermeldung aus
+    public MusikMap(MusikList musikList) {
+        this.musikList = musikList; // Verwendet die übergebene MusikList-Instanz
+        initializeMaps();
     }
-    initializeMaps();
-}
 
     private void initializeMaps() {
-        songNameMap = new HashMap<>();
-        musikerMap = new HashMap<>();
-        genreMap = new HashMap<>();
-        albumMap = new HashMap<>();
+        songNameMap = new TreeMap<>();
+        musikerMap = new TreeMap<>();
+        genreMap = new TreeMap<>();
+        albumMap = new TreeMap<>();
         mediumTypMap = new HashMap<>();
         cdListenpreisMap = new TreeMap<>();
         platteListenpreisMap = new TreeMap<>();
         mp3ListenpreisMap = new TreeMap<>();
 
-        for (Musik medium : MusikList) {
+            for (Musik medium : musikList) { 
             updateAllMaps(medium);
         }
-    }
-    
-    public void updateMedienListe(List<Musik> neueMedienListe) {
-        for (Musik medium : neueMedienListe) {
-            addMedium(medium);
+     }
+        public void updateMedienListe(List<Musik> neueMedienListe) {
+            for (Musik medium : neueMedienListe) {
+                addMedium(medium);
+            }
+        }
+
+        public void addMedium(Musik neuesMedium) {
+            musikList.add(neuesMedium); 
+            updateAllMaps(neuesMedium);
+        }
+
+        public void removeMedium(Musik zuEntfernendesMedium) {
+            musikList.remove(zuEntfernendesMedium); 
+            removeFromAllMaps(zuEntfernendesMedium);
+        }
+
+        private void removeMediumFromMap(TreeMap<String, List<Musik>> map, String key, Musik medium) {
+    List<Musik> medien = map.get(key);
+    if (medien != null) {
+        medien.remove(medium);
+        if (medien.isEmpty()) {
+            map.remove(key);
         }
     }
-    
-    public void addMedium(Musik neuesMedium) {
-        MusikList.add(neuesMedium);
-        updateAllMaps(neuesMedium);
-    }
-    
-    public void removeMedium(Musik zuEntfernendesMedium) {
-        MusikList.remove(zuEntfernendesMedium);
-        removeFromAllMaps(zuEntfernendesMedium);
-    }
-    
-    private void removeFromAllMaps(Musik medium) {
-        removeMediumFromMap(musikerMap, medium.getMusiker(), medium);
-        removeMediumFromMap(genreMap, medium.getGenre(), medium);
-        removeMediumFromMap(albumMap, medium.getAlbum(), medium);
+}
 
-      //  String mediumTyp = getMediumTyp(medium);
-       // removeMediumFromMap(mediumTypMap, mediumTyp, medium);
+  private void removeFromAllMaps(Musik medium) {
+    removeMediumFromMap(musikerMap, medium.getMusiker(), medium);
+    removeMediumFromMap(genreMap, medium.getGenre(), medium);
+    removeMediumFromMap(albumMap, medium.getAlbum(), medium);
+    removeMediumFromMap(songNameMap, medium.getSongName(), medium);
 
-        removeMediumFromMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
-        removeMediumFromMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
-        removeMediumFromMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+    // Entfernen von Mediumtypen, wenn zutreffend
+    if (medium.getIsCD()) {
+        removeMediumFromMap(mediumTypMap, "CD", medium);
     }
+    if (medium.getIsPlatte()) {
+        removeMediumFromMap(mediumTypMap, "Platte", medium);
+    }
+    if (medium.getIsMp3()) {
+        removeMediumFromMap(mediumTypMap, "MP3", medium);
+    }
+
+    removeMediumFromMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
+    removeMediumFromMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
+    removeMediumFromMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+}
+
     
     private void removeMediumFromMap(HashMap<String, List<Musik>> map, String key, Musik medium) {
         List<Musik> medien = map.get(key);
@@ -98,18 +108,33 @@ public class Musikmap {
         }
     }
     
-    private void updateAllMaps(Musik medium) {
-        addToMap(musikerMap, medium.getMusiker(), medium);
-        addToMap(genreMap, medium.getGenre(), medium);
-        addToMap(albumMap, medium.getAlbum(), medium);
-        addToMap(songNameMap, medium.getSongName(), medium);
-        // mediumTyp = getMediumTyp(medium);
-        // addToMap(mediumTypMap, mediumTyp, medium);
+    public void addToMap(TreeMap<String, List<Musik>> map, String key, Musik value) {
+    map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+}
 
-        addToMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
-        addToMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
-        addToMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+    
+   private void updateAllMaps(Musik medium) {
+    addToMap(musikerMap, medium.getMusiker(), medium);
+    addToMap(genreMap, medium.getGenre(), medium);
+    addToMap(albumMap, medium.getAlbum(), medium);
+    addToMap(songNameMap, medium.getSongName(), medium);
+    
+    // Anstatt eine getMediumTyp Methode zu verwenden, könnten Sie direkt prüfen und aktualisieren.
+    if (medium.getIsCD()) {
+        addToMap(mediumTypMap, "CD", medium);
     }
+    if (medium.getIsPlatte()) {
+        addToMap(mediumTypMap, "Platte", medium);
+    }
+    if (medium.getIsMp3()) {
+        addToMap(mediumTypMap, "MP3", medium);
+    }
+
+    addToMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
+    addToMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
+    addToMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+}
+
 
     private List<String> getMediumTyp(Musik medium) {
         List<String> types = new ArrayList<>();
@@ -148,6 +173,24 @@ public class Musikmap {
     public List<Musik> getMedienByAlbum(String album) {
         return albumMap.getOrDefault(album, new ArrayList<>());
     }
+    
+        public List<Musik> getMedienByCD() {
+        return musikList.stream()
+            .filter(medium -> medium.getIsCD())
+            .collect(Collectors.toList());
+    }
+
+    public List<Musik> getMedienByMP3() {
+        return musikList.stream()
+            .filter(medium -> medium.getIsMp3())
+            .collect(Collectors.toList());
+    }
+
+    public List<Musik> getMedienByVinyl() {
+        return musikList.stream()
+            .filter(medium -> medium.getIsPlatte())
+            .collect(Collectors.toList());
+    }
 
     public List<Musik> getMedienByMediumTyp(String typ) {
         return mediumTypMap.getOrDefault(typ, new ArrayList<>());
@@ -166,7 +209,7 @@ public class Musikmap {
     }
     
     public List<Musik> filterMedienByMusikerGenreIsCD(String musiker, String genre, boolean isCD) {
-        return MusikList.stream()
+        return musikList.stream()
             .filter(medium -> medium.getMusiker().equals(musiker))
             .filter(medium -> medium.getGenre().equals(genre))
             .filter(medium -> (isCD && medium.getIsCD()) || (!isCD && !medium.getIsCD()))
@@ -197,5 +240,20 @@ public class Musikmap {
             .filter(medium -> albums.isEmpty() || albums.contains(medium.getAlbum()))
             .collect(Collectors.toList());
     }
+    
+public List<Musik> getDefaultOrAllMedien() {
+        return new ArrayList<>(musikList);
+    }
+
+public List<Musik> getGesamteMusikListe() {
+        return new ArrayList<>(musikList);
+    }
+public List<Musik> sortMusikListBySongName(List<Musik> unsortedList) {
+    TreeMap<String, Musik> sortedMap = new TreeMap<>();
+    for (Musik m : unsortedList) {
+        sortedMap.put(m.getSongName(), m);
+    }
+    return new ArrayList<>(sortedMap.values());
+}
 
 }

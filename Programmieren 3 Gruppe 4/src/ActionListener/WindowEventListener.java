@@ -18,9 +18,10 @@ public class WindowEventListener implements WindowListener{
     }
 
     @Override
-    public void windowClosing(WindowEvent e) {
+    public void windowClosing(WindowEvent e)    {
+        Gui gui = (Gui) e.getWindow();
         MusikListDAO mld = new MusikListDAO("Programmieren 3 Gruppe 4/build/data/setup.data", true);
-        Gui gui = new Gui();
+    
         try {
             mld.read(gui.getMusikList());
         } catch (IOException e1) {
