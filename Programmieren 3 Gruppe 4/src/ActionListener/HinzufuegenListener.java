@@ -41,7 +41,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     public HinzufuegenListener() {
         super();
-        this.setSize(400, 150);
+        this.setSize(250, 500);
 
         String[] genreOptionen = { "Alle", "Pop", "Rock", "Hip-Hop", "Klassik", "Andere" };
         genreComboBox = new JComboBox<>(genreOptionen);
@@ -63,7 +63,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         this.setLayout(new FlowLayout());
         // Textflied vor all Compents
-        JPanel eingabePanel = new JPanel(new GridLayout(8, 2));
+        JPanel eingabePanel = new JPanel(new GridLayout(16, 1));
 
         eingabePanel.add(new JLabel("Musik_GUID: "));
         eingabePanel.add(musikGUIDTextField);
