@@ -21,42 +21,45 @@ public class FilterListener extends JDialog implements ActionListener {
 
     private JTextField titelTextField;
     private JTextField interpretTextField;
-    private JComboBox<String> genreComboBox;
+    private JTextField albumTextField;
+    private JTextField genreTextField;
+    
     
 
     public FilterListener() {
         super();
-        this.setSize(400,400);
+        this.setSize(400,150);
         
-        JCheckBox checkBoxAlle = new JCheckBox("Alle");
-        JCheckBox checkBoxPop = new JCheckBox("Pop");
-        JCheckBox checkBoxRock = new JCheckBox("Rock");
-        JCheckBox checkBoxHipHop = new JCheckBox("Hip-Hop");
-        JCheckBox checkBoxKlassik = new JCheckBox("Klassik");
-        JCheckBox checkBoxAndere = new JCheckBox("Andere");
+        JCheckBox checkBoxTitel = new JCheckBox();
+        JCheckBox checkBoxInterpred = new JCheckBox();
+        JCheckBox checkBoxAlbum = new JCheckBox();
+        JCheckBox checkBoxGenre = new JCheckBox();
         
         
         
         titelTextField = new JTextField(20);
         interpretTextField = new JTextField(20);
+        albumTextField = new JTextField(20);
+        genreTextField = new JTextField(20);
         
         this.setLayout(new FlowLayout());
         
-        JPanel eingabePanel = new JPanel(new GridLayout(3, 2));
+        JPanel eingabePanel = new JPanel(new GridLayout(4, 3));
         eingabePanel.add(new JLabel("Titel: "));
+        eingabePanel.add(checkBoxTitel);
         eingabePanel.add(titelTextField);
         eingabePanel.add(new JLabel("Interpret: "));
+        eingabePanel.add(checkBoxInterpred);
         eingabePanel.add(interpretTextField);
+        eingabePanel.add(new JLabel("Album: "));
+        eingabePanel.add(checkBoxAlbum);
+        eingabePanel.add(albumTextField);
         eingabePanel.add(new JLabel("Genre: "));
+        eingabePanel.add(checkBoxGenre);
+        eingabePanel.add(genreTextField);
+
         
-        JPanel checkboxPanel = new JPanel(new GridLayout(6, 1));
-        
-        checkboxPanel.add(checkBoxAlle);
-        checkboxPanel.add(checkBoxPop);
-        checkboxPanel.add(checkBoxRock);
-        checkboxPanel.add(checkBoxHipHop);
-        checkboxPanel.add(checkBoxKlassik);
-        checkboxPanel.add(checkBoxAndere);
+
         
         JButton Filtern = new JButton("Filtern");
         
@@ -65,7 +68,6 @@ public class FilterListener extends JDialog implements ActionListener {
              
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
-        this.getContentPane().add(checkboxPanel, BorderLayout.CENTER);
         this.getContentPane().add(filterPanel, BorderLayout.SOUTH);
 
         
