@@ -38,9 +38,9 @@ public class FilterListener extends JDialog implements ActionListener {
         this.musikMap = musikMap;
         this.gui = gui;
 
-        toggleButtonCD = new JToggleButton("CD", true);
-        toggleButtonMP3 = new JToggleButton("MP3", true);
-        toggleButtonVinyl = new JToggleButton("Vinyl", true);
+        toggleButtonCD = new JToggleButton("CD", false);
+        toggleButtonMP3 = new JToggleButton("MP3", false);
+        toggleButtonVinyl = new JToggleButton("Vinyl", false);
 
         titelTextField = new JTextField(20);
         interpretTextField = new JTextField(20);
