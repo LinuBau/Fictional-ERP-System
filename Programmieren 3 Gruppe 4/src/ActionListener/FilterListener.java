@@ -30,10 +30,6 @@ public class FilterListener extends JDialog implements ActionListener {
         super();
         this.setSize(400,150);
         
-        JCheckBox checkBoxTitel = new JCheckBox();
-        JCheckBox checkBoxInterpred = new JCheckBox();
-        JCheckBox checkBoxAlbum = new JCheckBox();
-        JCheckBox checkBoxGenre = new JCheckBox();
         
         
         
@@ -46,16 +42,12 @@ public class FilterListener extends JDialog implements ActionListener {
         
         JPanel eingabePanel = new JPanel(new GridLayout(4, 3));
         eingabePanel.add(new JLabel("Titel: "));
-        eingabePanel.add(checkBoxTitel);
         eingabePanel.add(titelTextField);
         eingabePanel.add(new JLabel("Interpret: "));
-        eingabePanel.add(checkBoxInterpred);
         eingabePanel.add(interpretTextField);
         eingabePanel.add(new JLabel("Album: "));
-        eingabePanel.add(checkBoxAlbum);
         eingabePanel.add(albumTextField);
         eingabePanel.add(new JLabel("Genre: "));
-        eingabePanel.add(checkBoxGenre);
         eingabePanel.add(genreTextField);
 
         
