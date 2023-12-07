@@ -28,7 +28,7 @@ public class FilterListener extends JDialog implements ActionListener {
 
     public FilterListener() {
         super();
-        this.setSize(400,150);
+        this.setSize(300,150);
         
         
         
