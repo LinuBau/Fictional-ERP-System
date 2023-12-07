@@ -1,13 +1,13 @@
 
 package GeschaftsObejekt;
 
-
 public class Musik {
-     private int Musik_GUID;
+    private int Musik_GUID;
     private String Musiker;
-    private String Album; 
-    private  String SongName;
-    private String Regal_Platz;
+    private String Album;
+    private String SongName;
+    private String Regal_PlatzCD;
+    private String Regal_PlatzPlatte;
     private double CDListenpreis;
     private double PlatteListenpreis;
     private double Mp3Listenpreis;
@@ -22,30 +22,35 @@ public class Musik {
     @Override
     public String toString() {
         return "{" +
-            " Musik_GUID='" + getMusik_GUID() + "'" +
-            ", Musiker='" + getMusiker() + "'" +
-            ", Album='" + getAlbum() + "'" +
-            ", SongName='" + getSongName() + "'" +
-            ", Regal_Platz='" + getRegal_Platz() + "'" +
-            ", CDListenpreis='" + getCDListenpreis() + "'" +
-            ", PlatteListenpreis='" + getPlatteListenpreis() + "'" +
-            ", Mp3Listenpreis='" + getMp3Listenpreis() + "'" +
-            ", CDEinkaufpreis='" + getCDEinkaufpreis() + "'" +
-            ", PlatteEinkaufpreis='" + getPlatteEinkaufpreis() + "'" +
-            ", Mp3Einkaufpreis='" + getMp3Einkaufpreis() + "'" +
-            ", Genre='" + getGenre() + "'" +
-            ", isCD='" + isIsCD() + "'" +
-            ", isPlatte='" + isIsPlatte() + "'" +
-            ", isMp3='" + isIsMp3() + "'" +
-            "}";
+                " Musik_GUID='" + getMusik_GUID() + "'" +
+                ", Musiker='" + getMusiker() + "'" +
+                ", Album='" + getAlbum() + "'" +
+                ", SongName='" + getSongName() + "'" +
+                ", Regal_Platz='" + getRegal_PlatzCD() + "'" +
+                ",Regal_PlatzPlatte="+ getRegal_PlatzPlatte()+ "'"+
+                ", CDListenpreis='" + getCDListenpreis() + "'" +
+                ", PlatteListenpreis='" + getPlatteListenpreis() + "'" +
+                ", Mp3Listenpreis='" + getMp3Listenpreis() + "'" +
+                ", CDEinkaufpreis='" + getCDEinkaufpreis() + "'" +
+                ", PlatteEinkaufpreis='" + getPlatteEinkaufpreis() + "'" +
+                ", Mp3Einkaufpreis='" + getMp3Einkaufpreis() + "'" +
+                ", Genre='" + getGenre() + "'" +
+                ", isCD='" + isIsCD() + "'" +
+                ", isPlatte='" + isIsPlatte() + "'" +
+                ", isMp3='" + isIsMp3() + "'" +
+                "}";
     }
 
-    public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_Platz, double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis, double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte, boolean isMp3) {
+    public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
+            double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
+            double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
+            boolean isMp3) {
         this.Musik_GUID = Musik_GUID;
         this.Musiker = Musiker;
         this.Album = Album;
         this.SongName = SongName;
-        this.Regal_Platz = Regal_Platz;
+        this.Regal_PlatzCD = Regal_PlatzCD;
+        this.Regal_PlatzPlatte = Regal_PlatzPlatte;
         this.CDListenpreis = CDListenpreis;
         this.PlatteListenpreis = PlatteListenpreis;
         this.Mp3Listenpreis = Mp3Listenpreis;
@@ -90,12 +95,19 @@ public class Musik {
         this.SongName = SongName;
     }
 
-    public String getRegal_Platz() {
-        return this.Regal_Platz;
+    public String getRegal_PlatzCD() {
+        return this.Regal_PlatzCD;
     }
 
-    public void setRegal_Platz(String Regal_Platz) {
-        this.Regal_Platz = Regal_Platz;
+    public void setRegal_PlatzCD(String Regal_PlatzCD) {
+        this.Regal_PlatzCD = Regal_PlatzCD;
+    }
+     public String getRegal_PlatzPlatte() {
+        return this.Regal_PlatzPlatte;
+    }
+
+    public void setRegal_PlatzPlatte(String Regal_PlatzPlatte) {
+        this.Regal_PlatzPlatte = Regal_PlatzPlatte;
     }
 
     public double getCDListenpreis() {
@@ -189,8 +201,8 @@ public class Musik {
     public void setIsMp3(boolean isMp3) {
         this.Mp3 = isMp3;
     }
+
     public Musik() {
     }
 
-   
 }

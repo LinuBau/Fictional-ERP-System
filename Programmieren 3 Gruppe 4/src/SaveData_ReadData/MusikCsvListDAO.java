@@ -1,7 +1,6 @@
-package DataOutput_DataInput;
+package SaveData_ReadData;
 
 import java.io.IOException;
-
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
@@ -25,7 +24,7 @@ public class MusikCsvListDAO extends MusikCsvDAO {
     @Override
     public void read(Object obj) throws IOException {
         if (in !=null) {
-            MusikList mml = (MusikList) obj;
+        MusikList mml = (MusikList) obj;
         MusikCsvDAO mmd = new MusikCsvDAO();
            String line;
          while ((line = in.readLine()) != null) {

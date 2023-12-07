@@ -1,4 +1,4 @@
-package DataOutput_DataInput;
+package SaveData_ReadData;
 
 import GeschaftsObejekt.Musik;
 import java.io.DataInputStream;
@@ -27,7 +27,8 @@ public class MusikDAO extends AbstractDAO {
             out.writeUTF(MM.getMusiker());
             out.writeUTF(MM.getAlbum());
             out.writeUTF(MM.getSongName());
-            out.writeUTF(MM.getRegal_Platz());
+            out.writeUTF(MM.getRegal_PlatzCD());
+            out.writeUTF(MM.getRegal_PlatzPlatte());
             out.writeDouble(MM.getCDListenpreis());
             out.writeDouble(MM.getPlatteListenpreis());
             out.writeDouble(MM.getMp3Listenpreis());
@@ -53,7 +54,8 @@ public class MusikDAO extends AbstractDAO {
             MM.setMusiker(in.readUTF());
             MM.setAlbum(in.readUTF());
             MM.setSongName(in.readUTF());
-            MM.setRegal_Platz(in.readUTF());
+            MM.setRegal_PlatzCD(in.readUTF());
+            MM.setRegal_PlatzPlatte(in.readUTF());
             MM.setCDListenpreis(in.readDouble());
             MM.setPlatteListenpreis(in.readDouble());
             MM.setMp3Listenpreis(in.readDouble());

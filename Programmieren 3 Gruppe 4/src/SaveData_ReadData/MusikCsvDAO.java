@@ -1,5 +1,5 @@
 
-package DataOutput_DataInput;
+package SaveData_ReadData;
 
 
 
@@ -57,17 +57,18 @@ public class MusikCsvDAO extends AbstractCsvDOA {
         MM.setMusiker(csvStrings[1]);
         MM.setAlbum(csvStrings[2]);
         MM.setSongName(csvStrings[3]);
-        MM.setRegal_Platz(csvStrings[4]);
-        MM.setCDListenpreis(Double.parseDouble(csvStrings[5]));
-        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[6]));
-        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[7]));
-        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[8]));
-        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[9]));
-        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[10]));
-        MM.setGenre(csvStrings[11]);
-        MM.setIsCD(Boolean.parseBoolean(csvStrings[12]));
-        MM.setIsPlatte(Boolean.parseBoolean(csvStrings[13]));
-        MM.setIsMp3(Boolean.parseBoolean(csvStrings[14]));
+        MM.setRegal_PlatzCD(csvStrings[4]);
+        MM.setRegal_PlatzPlatte(csvStrings[5]);
+        MM.setCDListenpreis(Double.parseDouble(csvStrings[6]));
+        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[7]));
+        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[8]));
+        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[9]));
+        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[10]));
+        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[11]));
+        MM.setGenre(csvStrings[12]);
+        MM.setIsCD(Boolean.parseBoolean(csvStrings[13]));
+        MM.setIsPlatte(Boolean.parseBoolean(csvStrings[14]));
+        MM.setIsMp3(Boolean.parseBoolean(csvStrings[15]));
     }
     private String tocvs(String splitKondiotn,Musik MM) {
         return  
@@ -75,7 +76,8 @@ public class MusikCsvDAO extends AbstractCsvDOA {
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +
-             MM.getRegal_Platz() + splitKondiotn +
+             MM.getRegal_PlatzCD() + splitKondiotn +
+             MM.getRegal_PlatzPlatte() + splitKondiotn+
              MM.getCDListenpreis() + splitKondiotn +
              MM.getPlatteListenpreis() + splitKondiotn +
              MM.getMp3Listenpreis() + splitKondiotn +
