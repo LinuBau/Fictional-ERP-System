@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class Musikmap {
     
-    private MusikListDAO musikMediumListDAO;
-    private MusikList musikMediumList;
+    private MusikListDAO MusikListDAO;
+    private MusikList MusikList;
     private HashMap<String, List<Musik>> songNameMap;
     private HashMap<String, List<Musik>> musikerMap;
     private HashMap<String, List<Musik>> genreMap;
@@ -24,10 +24,10 @@ public class Musikmap {
     private TreeMap<Double, List<Musik>> mp3ListenpreisMap;
 
     public Musikmap(String filename) {
-    this.musikMediumListDAO = new MusikListDAO(filename, true);
-    this.musikMediumList = new MusikList(); 
+    this.MusikListDAO = new MusikListDAO(filename, true);
+    this.MusikList = new MusikList(); 
     try {
-        musikMediumListDAO.read(this.musikMediumList); // Lesen der Liste aus der Datei
+        MusikListDAO.read(this.MusikList); // Lesen der Liste aus der Datei
     } catch (IOException e) {
         e.printStackTrace(); // gibt fehlermeldung aus
     }
@@ -44,7 +44,7 @@ public class Musikmap {
         platteListenpreisMap = new TreeMap<>();
         mp3ListenpreisMap = new TreeMap<>();
 
-        for (Musik medium : musikMediumList) {
+        for (Musik medium : MusikList) {
             updateAllMaps(medium);
         }
     }
@@ -56,12 +56,12 @@ public class Musikmap {
     }
     
     public void addMedium(Musik neuesMedium) {
-        musikMediumList.add(neuesMedium);
+        MusikList.add(neuesMedium);
         updateAllMaps(neuesMedium);
     }
     
     public void removeMedium(Musik zuEntfernendesMedium) {
-        musikMediumList.remove(zuEntfernendesMedium);
+        MusikList.remove(zuEntfernendesMedium);
         removeFromAllMaps(zuEntfernendesMedium);
     }
     
@@ -166,7 +166,7 @@ public class Musikmap {
     }
     
     public List<Musik> filterMedienByMusikerGenreIsCD(String musiker, String genre, boolean isCD) {
-        return musikMediumList.stream()
+        return MusikList.stream()
             .filter(medium -> medium.getMusiker().equals(musiker))
             .filter(medium -> medium.getGenre().equals(genre))
             .filter(medium -> (isCD && medium.getIsCD()) || (!isCD && !medium.getIsCD()))
