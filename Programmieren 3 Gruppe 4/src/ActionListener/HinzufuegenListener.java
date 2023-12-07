@@ -41,7 +41,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     public HinzufuegenListener() {
         super();
-        this.setSize(250, 500);
+        this.setSize(300, 500);
 
         String[] genreOptionen = { "Alle", "Pop", "Rock", "Hip-Hop", "Klassik", "Andere" };
         genreComboBox = new JComboBox<>(genreOptionen);
