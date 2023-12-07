@@ -1,6 +1,7 @@
 
 package App_GUI;
 
+import ActionListener.FilterListener;
 import ActionListener.WindowEventListener;
 import MenuBar.MenuBar;
 import java.awt.BorderLayout;
@@ -38,7 +39,7 @@ public class Gui extends JFrame{
     public Gui(){
         hinzufuegenButton = new JButton("Hinzufügen");
         loeschenButton = new JButton("Löschen");
-        filternButton = new JButton("Nach Genre filtern");
+        filternButton = new JButton("Filtern");
         musikListe = new ArrayList<>();
         listModel = new DefaultListModel<>();
         musikJList = new JList<>(listModel);
@@ -51,15 +52,14 @@ public class Gui extends JFrame{
         musikListe.add("Bohemian Rhapsody - Queen (Andere)");
         
         
-        JPanel eingabePanel = new JPanel(new GridLayout(4, 2));
+        JPanel eingabePanel = new JPanel(new GridLayout(3, 1));
 
         eingabePanel.add(hinzufuegenButton);
         eingabePanel.add(loeschenButton);
+        eingabePanel.add(filternButton);
         
         hinzufuegenButton.addActionListener(new HinzufuegenListener()); 
-
-        JPanel filterPanel = new JPanel(new FlowLayout());
-        filterPanel.add(filternButton);
+        filternButton.addActionListener(new FilterListener());
         
         String[][] data = {
             {"Shape of You", "Ed Sheeran", ": Deluxe", "Pop", "null", "null", "null", "null", "null", "null"},
@@ -125,7 +125,7 @@ public class Gui extends JFrame{
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
         getContentPane().add(eingabePanel, BorderLayout.NORTH);
-        getContentPane().add(filterPanel, BorderLayout.SOUTH);
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
