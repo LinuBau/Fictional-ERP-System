@@ -47,7 +47,6 @@ public class FilterListener extends JDialog implements ActionListener {
         albumTextField = new JTextField(20);
         genreTextField = new JTextField(20);
 
-        // Ändern Sie das GridLayout, um die gewünschte Anordnung zu erreichen
         JPanel eingabePanel = new JPanel(new GridLayout(5, 2));
         eingabePanel.add(new JLabel("Titel: "));
         eingabePanel.add(titelTextField);
@@ -128,7 +127,7 @@ public class FilterListener extends JDialog implements ActionListener {
         gefilterteErgebnisse.addAll(sortierteErgebnisse);
 
         gui.updateTableWithFilterResults(gefilterteErgebnisse);
-        this.setVisible(false); // Schließt den Dialog
+        this.setVisible(false); 
     }
 
 }

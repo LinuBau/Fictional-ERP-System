@@ -119,7 +119,6 @@ public class MusikMap {
     addToMap(albumMap, medium.getAlbum(), medium);
     addToMap(songNameMap, medium.getSongName(), medium);
     
-    // Anstatt eine getMediumTyp Methode zu verwenden, könnten Sie direkt prüfen und aktualisieren.
     if (medium.getIsCD()) {
         addToMap(mediumTypMap, "CD", medium);
     }
