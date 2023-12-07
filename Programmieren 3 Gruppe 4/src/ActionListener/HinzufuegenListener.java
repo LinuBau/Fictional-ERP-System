@@ -23,21 +23,21 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JTextField interpretTextField;
 
     private JComboBox<String> genreComboBox;
-    private JTextField musikGUIDTextField ;
-    private JTextField musikerTextField ;
-    private JTextField albumTextField ;
+    private JTextField musikGUIDTextField;
+    private JTextField musikerTextField;
+    private JTextField albumTextField;
     private JTextField songNameTextField;
-    private JTextField regalPlatzCDTextField ;
-    private JTextField regalPlatzPlatteTextField ;
-    private JTextField cdListenpreisTextField ;
-    private JTextField platteListenpreisTextField ;
-    private JTextField mp3ListenpreisTextField ;
-    private JTextField cdEinkaufspreisTextField ;
-    private JTextField platteEinkaufspreisTextField ;
+    private JTextField regalPlatzCDTextField;
+    private JTextField regalPlatzPlatteTextField;
+    private JTextField cdListenpreisTextField;
+    private JTextField platteListenpreisTextField;
+    private JTextField mp3ListenpreisTextField;
+    private JTextField cdEinkaufspreisTextField;
+    private JTextField platteEinkaufspreisTextField;
     private JTextField mp3EinkaufspreisTextField;
-    private JCheckBox cdCheckBox ;
-    private JCheckBox platteCheckBox ;
-    private JCheckBox mp3CheckBox ;
+    private JCheckBox cdCheckBox;
+    private JCheckBox platteCheckBox;
+    private JCheckBox mp3CheckBox;
 
     public HinzufuegenListener() {
         super();
@@ -45,16 +45,73 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         String[] genreOptionen = { "Alle", "Pop", "Rock", "Hip-Hop", "Klassik", "Andere" };
         genreComboBox = new JComboBox<>(genreOptionen);
+        musikGUIDTextField = new JTextField();
+        musikerTextField = new JTextField();
+        albumTextField = new JTextField();
+        songNameTextField = new JTextField();
+        regalPlatzCDTextField = new JTextField();
+        regalPlatzPlatteTextField = new JTextField();
+        cdListenpreisTextField = new JTextField();
+        platteListenpreisTextField = new JTextField();
+        mp3ListenpreisTextField = new JTextField();
+        cdEinkaufspreisTextField = new JTextField();
+        platteEinkaufspreisTextField = new JTextField();
+        mp3EinkaufspreisTextField = new JTextField();
+        cdCheckBox = new JCheckBox();
+        platteCheckBox = new JCheckBox();
+        mp3CheckBox = new JCheckBox();
 
         this.setLayout(new FlowLayout());
+        // Textflied vor all Compents
+        JPanel eingabePanel = new JPanel(new GridLayout(8, 2));
 
-        JPanel eingabePanel = new JPanel(new GridLayout(3, 2));
-        eingabePanel.add(new JLabel("Titel: "));
-        eingabePanel.add(titelTextField);
-        eingabePanel.add(new JLabel("Interpret: "));
-        eingabePanel.add(interpretTextField);
+        eingabePanel.add(new JLabel("Musik_GUID: "));
+        eingabePanel.add(musikGUIDTextField);
+
+        eingabePanel.add(new JLabel("Musiker: "));
+        eingabePanel.add(musikerTextField);
+
+        eingabePanel.add(new JLabel("Album: "));
+        eingabePanel.add(albumTextField);
+
+        eingabePanel.add(new JLabel("Song Name: "));
+        eingabePanel.add(songNameTextField);
+
+        eingabePanel.add(new JLabel("Regal Platz CD: "));
+        eingabePanel.add(regalPlatzCDTextField);
+
+        eingabePanel.add(new JLabel("Regal Platz Platte: "));
+        eingabePanel.add(regalPlatzPlatteTextField);
+
+        eingabePanel.add(new JLabel("Listenpreis CD: "));
+        eingabePanel.add(cdListenpreisTextField);
+
+        eingabePanel.add(new JLabel("Listenpreis Platte: "));
+        eingabePanel.add(platteListenpreisTextField);
+
+        eingabePanel.add(new JLabel("Listenpreis MP3: "));
+        eingabePanel.add(mp3ListenpreisTextField);
+
+        eingabePanel.add(new JLabel("Einkaufspreis CD: "));
+        eingabePanel.add(cdEinkaufspreisTextField);
+
+        eingabePanel.add(new JLabel("Einkaufspreis Platte: "));
+        eingabePanel.add(platteEinkaufspreisTextField);
+
+        eingabePanel.add(new JLabel("Einkaufspreis MP3: "));
+        eingabePanel.add(mp3EinkaufspreisTextField);
+
         eingabePanel.add(new JLabel("Genre: "));
         eingabePanel.add(genreComboBox);
+
+        eingabePanel.add(new JLabel("CD: "));
+        eingabePanel.add(cdCheckBox);
+
+        eingabePanel.add(new JLabel("Platte: "));
+        eingabePanel.add(platteCheckBox);
+
+        eingabePanel.add(new JLabel("MP3: "));
+        eingabePanel.add(mp3CheckBox);
 
         JButton Hinzufuegen = new JButton("Hinzufuegen");
 

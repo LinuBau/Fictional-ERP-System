@@ -54,7 +54,7 @@ public class Gui extends JFrame {
         eingabePanel.add(filternButton);
         
 
-        //hinzufuegenButton.addActionListener(new HinzufuegenListener());
+        hinzufuegenButton.addActionListener(new HinzufuegenListener());
         filternButton.addActionListener(new FilterListener());
 
 
