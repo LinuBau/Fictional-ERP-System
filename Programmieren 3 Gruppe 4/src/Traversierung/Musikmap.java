@@ -1,10 +1,11 @@
 package Traversierung;
-import GeschaftsObejekt.Musik;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+
+import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
 
@@ -253,6 +254,9 @@ public List<Musik> sortMusikListBySongName(List<Musik> unsortedList) {
         sortedMap.put(m.getSongName(), m);
     }
     return new ArrayList<>(sortedMap.values());
+}
+public MusikList getMusikList(){
+    return this.musikList;
 }
 
 }

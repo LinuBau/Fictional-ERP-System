@@ -1,9 +1,9 @@
 package App_GUI;
 
 import ActionListener.WindowEventListener;
+import GeschaftsObejekt.MusikList;
 import ActionListener.FilterListener;
 import ActionListener.HinzufuegenListener;
-import GeschaftsObejekt.MusikList;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikCsvListDAO;
@@ -34,7 +34,7 @@ public class Gui extends JFrame {
             hinzufuegenButton = new JButton("Hinzufügen");
             loeschenButton = new JButton("Löschen");
             filternButton = new JButton("Filtern");
-            
+
             JPanel eingabePanel = new JPanel(new GridLayout(3, 1));
             eingabePanel.add(hinzufuegenButton);
             eingabePanel.add(loeschenButton);
@@ -42,7 +42,7 @@ public class Gui extends JFrame {
 
             // Importing Data
             musikList = new MusikList();
-            MusikCsvListDAO mld = new MusikCsvListDAO("C:/Users/Mo/Documents/GitHub/P3-G4/Song.csv", false);
+            MusikCsvListDAO mld = new MusikCsvListDAO("Song.csv", false);
             try {
                 mld.read(musikList);
             } catch (IOException e1) {
@@ -65,18 +65,24 @@ public class Gui extends JFrame {
             // Setup FilterListener
             FilterListener filterListener = new FilterListener(musikmap, this);
             filternButton.addActionListener(e -> filterListener.setVisible(true));
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            hinzufuegenButton.addActionListener(new HinzufuegenListener("c", this));
 
+            // Create MenuBar
+            setJMenuBar(new MenuBar(this));
         }
     }
 
-    public void updateTableWithFilterResults(MusikList gefilterteErgebnisse) {
-        this.tableModel.setMusikList(gefilterteErgebnisse);
+    public void updateTableWithMusikListe(MusikList musiklist) {
+        this.tableModel.setMusikList(musiklist);
         this.tableModel.fireTableDataChanged();
     }
-    
-     public MusikList getMusikList() {
+
+    public MusikList getMusikList() {
         return musikList;
+    }
+
+    public MusikMap getMusikMap() {
+        return this.musikmap;
     }
 
     public static void main(String[] args) {
@@ -84,7 +90,6 @@ public class Gui extends JFrame {
         mainWindow.addWindowListener(new WindowEventListener());
         mainWindow.setTitle("Musik Katalog");
         mainWindow.setSize(1000, 500);
-        mainWindow.setJMenuBar(new MenuBar());
         mainWindow.setLocationRelativeTo(null);
         mainWindow.setVisible(true);
     }

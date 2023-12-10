@@ -23,7 +23,7 @@ public class WindowEventListener implements WindowListener{
         MusikListDAO mld = new MusikListDAO("Programmieren 3 Gruppe 4/build/data/setup.data", true);
     
         try {
-            mld.read(gui.getMusikList());
+            mld.read(gui.getMusikMap().getMusikList());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

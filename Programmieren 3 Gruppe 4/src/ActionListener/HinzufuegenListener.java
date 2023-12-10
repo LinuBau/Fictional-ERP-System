@@ -5,22 +5,21 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import App_GUI.Gui;
+import GeschaftsObejekt.Musik;
 
 public class HinzufuegenListener extends JDialog implements ActionListener {
-
-    private JTextField titelTextField;
-    private JTextField interpretTextField;
 
     private JComboBox<String> genreComboBox;
     private JTextField musikGUIDTextField;
@@ -29,20 +28,24 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JTextField songNameTextField;
     private JTextField regalPlatzCDTextField;
     private JTextField regalPlatzPlatteTextField;
-    private JTextField cdListenpreisTextField;
-    private JTextField platteListenpreisTextField;
-    private JTextField mp3ListenpreisTextField;
-    private JTextField cdEinkaufspreisTextField;
-    private JTextField platteEinkaufspreisTextField;
-    private JTextField mp3EinkaufspreisTextField;
+    private JFormattedTextField cdListenpreisTextField;
+    private JFormattedTextField platteListenpreisTextField;
+    private JFormattedTextField mp3ListenpreisTextField;
+    private JFormattedTextField cdEinkaufspreisTextField;
+    private JFormattedTextField platteEinkaufspreisTextField;
+    private JFormattedTextField mp3EinkaufspreisTextField;
     private JCheckBox cdCheckBox;
     private JCheckBox platteCheckBox;
     private JCheckBox mp3CheckBox;
-
-    public HinzufuegenListener() {
+    private JButton beenden;
+    private JButton Hinzufuegen;
+    Gui parent;
+    
+    public HinzufuegenListener(String wasmachen, Gui p) {
         super();
+        parent = p;
+        NumberFormat format = new DecimalFormat("#.00");
         this.setSize(300, 500);
-
         String[] genreOptionen = { "Alle", "Pop", "Rock", "Hip-Hop", "Klassik", "Andere" };
         genreComboBox = new JComboBox<>(genreOptionen);
         musikGUIDTextField = new JTextField();
@@ -51,12 +54,12 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         songNameTextField = new JTextField();
         regalPlatzCDTextField = new JTextField();
         regalPlatzPlatteTextField = new JTextField();
-        cdListenpreisTextField = new JTextField();
-        platteListenpreisTextField = new JTextField();
-        mp3ListenpreisTextField = new JTextField();
-        cdEinkaufspreisTextField = new JTextField();
-        platteEinkaufspreisTextField = new JTextField();
-        mp3EinkaufspreisTextField = new JTextField();
+        cdListenpreisTextField = new JFormattedTextField(format);
+        platteListenpreisTextField = new JFormattedTextField(format);
+        mp3ListenpreisTextField = new JFormattedTextField(format);
+        cdEinkaufspreisTextField = new JFormattedTextField(format);
+        platteEinkaufspreisTextField = new JFormattedTextField(format);
+        mp3EinkaufspreisTextField = new JFormattedTextField(format);
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
@@ -113,10 +116,13 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         eingabePanel.add(new JLabel("MP3: "));
         eingabePanel.add(mp3CheckBox);
 
-        JButton Hinzufuegen = new JButton("Hinzufuegen");
-
+        Hinzufuegen = new JButton("Hinzufuegen");
+        beenden = new JButton("Beenden");
         JPanel hinzufuegenPanel = new JPanel(new FlowLayout());
         hinzufuegenPanel.add(Hinzufuegen);
+        hinzufuegenPanel.add(beenden);
+        beenden.addActionListener(this);
+        Hinzufuegen.addActionListener(this);
 
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
@@ -130,6 +136,33 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
+        if (e.getSource().equals(beenden)) {
+            this.setVisible(false);
+        }
+        if (e.getSource().equals(Hinzufuegen)) {
+            Musik m = new Musik();
+            m.setMusik_GUID(Integer.parseInt(musikGUIDTextField.getText()));
+            m.setMusiker(musikerTextField.getText());
+            m.setAlbum(albumTextField.getText());
+            m.setSongName(songNameTextField.getText());
+            m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
+            m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",","."));
+            m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",",".")));
+            m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",",".")));
+            m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",",".")));
+            m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",",".")));
+            m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",",".")));
+            m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",",".")));
+            m.setGenre((String) genreComboBox.getSelectedItem());
+            m.setIsCD(cdCheckBox.isSelected());
+            m.setIsPlatte(platteCheckBox.isSelected());
+            m.setIsMp3(mp3CheckBox.isSelected());
+            if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())) {
+                parent.getMusikMap().addMedium(m);
+                parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+            }
+            this.setVisible(false);
+        }
     }
 
 }

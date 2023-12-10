@@ -1,15 +1,16 @@
 
 package MenuBar;
 
+
 import javax.swing.JMenuItem;
 
-/**
- *
- * @author st1056
- */
+import Actions.FileSaveAction;
+import App_GUI.Gui;
+
 public class FileOpenItem extends JMenuItem {
 
-    FileOpenItem() {
+    FileOpenItem(Gui parent) {
         super("Öffnen");
+        this.addActionListener(new FileSaveAction(parent));
     }
 }

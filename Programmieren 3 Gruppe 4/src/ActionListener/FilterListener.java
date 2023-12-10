@@ -126,7 +126,7 @@ public class FilterListener extends JDialog implements ActionListener {
         MusikList gefilterteErgebnisse = new MusikList();
         gefilterteErgebnisse.addAll(sortierteErgebnisse);
 
-        gui.updateTableWithFilterResults(gefilterteErgebnisse);
+        gui.updateTableWithMusikListe(gefilterteErgebnisse);
         this.setVisible(false); 
     }
 

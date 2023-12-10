@@ -6,12 +6,16 @@ package MenuBar;
 
 import javax.swing.JMenuItem;
 
+import Actions.FileSaveAction;
+import App_GUI.Gui;
+
 /**
  *
  * @author ninfr
  */
 public class FileSafeItem extends JMenuItem {
-    FileSafeItem() {
+    FileSafeItem(Gui parent) {
         super("Speichern");
+        this.addActionListener(new FileSaveAction(parent));
     }
 }
