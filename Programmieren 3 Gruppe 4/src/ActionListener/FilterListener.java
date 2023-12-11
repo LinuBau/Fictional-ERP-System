@@ -3,7 +3,7 @@ package ActionListener;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
-import Traversierung.MusikMap;
+import Traversierung.Musikmap;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -29,10 +29,10 @@ public class FilterListener extends JDialog implements ActionListener {
     private final JTextField interpretTextField;
     private final JTextField albumTextField;
     private final JTextField genreTextField;
-    private final MusikMap musikMap;
+    private final Musikmap musikMap;
     private final Gui gui;
 
-    public FilterListener(MusikMap musikMap, Gui gui) {
+    public FilterListener(Musikmap musikMap, Gui gui) {
         super();
         this.setSize(400, 300);
         this.musikMap = musikMap;
