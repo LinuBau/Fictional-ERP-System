@@ -136,7 +136,7 @@ public class MusikMap {
 }
 
 
-    private List<String> getMediumTyp(Musik medium) {
+  /*  private List<String> getMediumTyp(Musik medium) {
         List<String> types = new ArrayList<>();
         if (medium.getIsCD()) {
             types.add("CD");
@@ -148,7 +148,7 @@ public class MusikMap {
             types.add("MP3");
         }
         return types;
-    }
+    }  */
 
     public void addToMap(HashMap<String, List<Musik>> map, String key, Musik value) {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
@@ -174,7 +174,7 @@ public class MusikMap {
         return albumMap.getOrDefault(album, new ArrayList<>());
     }
     
-        public List<Musik> getMedienByCD() {
+    public List<Musik> getMedienByCD() {
         return musikList.stream()
             .filter(medium -> medium.getIsCD())
             .collect(Collectors.toList());
@@ -191,8 +191,8 @@ public class MusikMap {
             .filter(medium -> medium.getIsPlatte())
             .collect(Collectors.toList());
     }
-
-    public List<Musik> getMedienByMediumTyp(String typ) {
+/* 
+   public List<Musik> getMedienByMediumTyp(String typ) {
         return mediumTypMap.getOrDefault(typ, new ArrayList<>());
     }
 
@@ -239,7 +239,7 @@ public class MusikMap {
         return byGenre.stream()
             .filter(medium -> albums.isEmpty() || albums.contains(medium.getAlbum()))
             .collect(Collectors.toList());
-    }
+    } */
     
 public List<Musik> getDefaultOrAllMedien() {
         return new ArrayList<>(musikList);
@@ -254,9 +254,9 @@ public List<Musik> sortMusikListBySongName(List<Musik> unsortedList) {
         sortedMap.put(m.getSongName(), m);
     }
     return new ArrayList<>(sortedMap.values());
-}
+} 
 public MusikList getMusikList(){
     return this.musikList;
-}
+} 
 
 }
