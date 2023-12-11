@@ -7,7 +7,7 @@ import ActionListener.HinzufuegenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikCsvListDAO;
-import Traversierung.Musikmap;
+import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -26,7 +26,7 @@ public class Gui extends JFrame {
     private JButton filternButton;
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
-    private Musikmap musikmap;
+    private MusikMap musikmap;
     private MusikList musikList;
 
     public Gui(boolean starten) {
@@ -50,7 +50,7 @@ public class Gui extends JFrame {
             }
 
             // Initializing the MusikMap
-            musikmap = new Musikmap(musikList);
+            musikmap = new MusikMap(musikList);
 
             // Initializing the JTable
             tableModel = new MusikTableModel(musikList);
@@ -81,7 +81,7 @@ public class Gui extends JFrame {
         return musikList;
     }
 
-    public Musikmap getMusikMap() {
+    public MusikMap getMusikMap() {
         return this.musikmap;
     }
 
