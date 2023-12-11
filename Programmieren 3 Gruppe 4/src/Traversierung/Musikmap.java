@@ -9,7 +9,7 @@ import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
 
-public class MusikMap {
+public class Musikmap {
     
     private MusikList musikList; 
     private TreeMap<String, List<Musik>> songNameMap;
@@ -21,7 +21,7 @@ public class MusikMap {
     private TreeMap<Double, List<Musik>> platteListenpreisMap;
     private TreeMap<Double, List<Musik>> mp3ListenpreisMap;
 
-    public MusikMap(MusikList musikList) {
+    public Musikmap(MusikList musikList) {
         this.musikList = musikList; // Verwendet die übergebene MusikList-Instanz
         initializeMaps();
     }
