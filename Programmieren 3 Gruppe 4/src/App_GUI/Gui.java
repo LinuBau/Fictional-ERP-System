@@ -61,6 +61,8 @@ public class Gui extends JFrame {
             getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
             getContentPane().add(eingabePanel, BorderLayout.NORTH);
             setLocationRelativeTo(null);
+            // Add Mouse Pressed Event
+
 
             // Setup FilterListener
             FilterListener filterListener = new FilterListener(musikmap, this);
@@ -69,6 +71,8 @@ public class Gui extends JFrame {
 
             // Create MenuBar
             setJMenuBar(new MenuBar(this));
+            //add WindowEventListner
+            addWindowListener(new WindowEventListener(this));
         }
     }
 
@@ -87,7 +91,6 @@ public class Gui extends JFrame {
 
     public static void main(String[] args) {
         Gui mainWindow = new Gui(true);
-        mainWindow.addWindowListener(new WindowEventListener());
         mainWindow.setTitle("Musik Katalog");
         mainWindow.setSize(1000, 500);
         mainWindow.setLocationRelativeTo(null);

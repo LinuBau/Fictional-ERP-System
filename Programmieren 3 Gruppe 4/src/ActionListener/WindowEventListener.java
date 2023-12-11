@@ -10,7 +10,12 @@ import SaveData_ReadData.MusikListDAO;
 
 
 public class WindowEventListener implements WindowListener{
-
+    private Gui parent;
+    public WindowEventListener(Gui p){
+        super();
+        this.parent = p;
+    }
+    
     @Override
     public void windowOpened(WindowEvent e) {
        
@@ -19,11 +24,10 @@ public class WindowEventListener implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e)    {
-        Gui gui = (Gui) e.getWindow();
         MusikListDAO mld = new MusikListDAO("Programmieren 3 Gruppe 4/build/data/setup.data", true);
     
         try {
-            mld.read(gui.getMusikMap().getMusikList());
+            mld.read(parent.getMusikMap().getMusikList());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
