@@ -10,7 +10,6 @@ import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -21,7 +20,7 @@ import GeschaftsObejekt.Musik;
 
 public class HinzufuegenListener extends JDialog implements ActionListener {
 
-    private JComboBox<String> genreComboBox;
+    private JTextField genreComboBox;
     private JTextField musikGUIDTextField;
     private JTextField musikerTextField;
     private JTextField albumTextField;
@@ -40,14 +39,13 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JButton beenden;
     private JButton Hinzufuegen;
     Gui parent;
-    
+
     public HinzufuegenListener(String wasmachen, Gui p) {
         super();
         parent = p;
         NumberFormat format = new DecimalFormat("#.00");
         this.setSize(300, 500);
-        String[] genreOptionen = { "Alle", "Pop", "Rock", "Hip-Hop", "Klassik", "Andere" };
-        genreComboBox = new JComboBox<>(genreOptionen);
+        genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
@@ -115,6 +113,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         eingabePanel.add(new JLabel("MP3: "));
         eingabePanel.add(mp3CheckBox);
+        fillTextBox();
 
         Hinzufuegen = new JButton("Hinzufuegen");
         beenden = new JButton("Beenden");
@@ -133,6 +132,27 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     }
 
+    public HinzufuegenListener() {
+
+    }
+
+    public void fillTextBox() {
+
+        musikerTextField.setText("");
+        albumTextField.setText("");
+        songNameTextField.setText("");
+        regalPlatzCDTextField.setText("");
+        regalPlatzPlatteTextField.setText("");
+        cdListenpreisTextField.setText("0");
+        platteListenpreisTextField.setText("0");
+        mp3ListenpreisTextField.setText("0");
+        cdEinkaufspreisTextField.setText("0");
+        platteEinkaufspreisTextField.setText("0");
+        mp3EinkaufspreisTextField.setText("0");
+        genreComboBox.setText("");
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
@@ -141,19 +161,26 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         }
         if (e.getSource().equals(Hinzufuegen)) {
             Musik m = new Musik();
-            m.setMusik_GUID(Integer.parseInt(musikGUIDTextField.getText()));
+            try {
+                String GUidText = musikGUIDTextField.getText();
+                if (!(GUidText.equals(0)) && !(GUidText == null)) {
+                    m.setMusik_GUID(Integer.parseInt(GUidText));
+                }
+            } catch (Exception e1) {
+
+            }
             m.setMusiker(musikerTextField.getText());
             m.setAlbum(albumTextField.getText());
             m.setSongName(songNameTextField.getText());
             m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
-            m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",","."));
-            m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",",".")));
-            m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",",".")));
-            m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",",".")));
-            m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",",".")));
-            m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",",".")));
-            m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",",".")));
-            m.setGenre((String) genreComboBox.getSelectedItem());
+            m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
+            m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
+            m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
+            m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
+            m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
+            m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
+            m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+            m.setGenre(genreComboBox.getText());
             m.setIsCD(cdCheckBox.isSelected());
             m.setIsPlatte(platteCheckBox.isSelected());
             m.setIsMp3(mp3CheckBox.isSelected());

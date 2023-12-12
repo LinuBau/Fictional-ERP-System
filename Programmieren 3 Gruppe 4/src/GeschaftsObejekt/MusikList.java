@@ -13,5 +13,13 @@ public class MusikList extends ArrayList<Musik> {
         }
         return true;
     }
+    public int getIndex(int id, MusikList ml){
+        for(int i=0;i<ml.size();i++){
+            if(ml.get(i).getMusik_GUID()==id){
+                return i;
+            }
+        }
+        return -1;
+    }
   
 }
