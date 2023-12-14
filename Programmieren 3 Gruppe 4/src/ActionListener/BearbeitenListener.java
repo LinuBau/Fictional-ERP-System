@@ -1,6 +1,5 @@
 package ActionListener;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +16,6 @@ import javax.swing.JTextField;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
-import GeschaftsObejekt.MusikList;
 
 public class BearbeitenListener extends JPanel implements ActionListener {
     public JPanel eingabePanel;
@@ -47,7 +44,8 @@ public class BearbeitenListener extends JPanel implements ActionListener {
         super();
         parent = p;
     }
-    public void setMusik(Musik m){
+
+    public void setMusik(Musik m) {
         medium = m;
     }
 
@@ -150,6 +148,7 @@ public class BearbeitenListener extends JPanel implements ActionListener {
         mp3CheckBox.setSelected(m.getIsMp3());
 
     }
+
     public void clearTextBox() {
         musikGUIDTextField.setText("0");
         musikerTextField.setText("");
@@ -164,9 +163,11 @@ public class BearbeitenListener extends JPanel implements ActionListener {
         platteEinkaufspreisTextField.setText("0");
         mp3EinkaufspreisTextField.setText("0");
         genreComboBox.setText("");
+        cdCheckBox.setSelected(false);
+        platteCheckBox.setSelected(false);
+        mp3CheckBox.setSelected(false);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -189,11 +190,12 @@ public class BearbeitenListener extends JPanel implements ActionListener {
             medium.setIsMp3(mp3CheckBox.isSelected());
             parent.updateTableWithMusikListe(parent.getTableModel().geMusikList());
             parent.getMusikMap().addMedium(medium);
-            clearTextBox();
             this.setVisible(false);
         }
         if (e.getSource().equals(delteButton)) {
             parent.getMusikMap().removeMedium(medium);
+            clearTextBox();
+            parent.update(parent.getGraphics());
         }
     }
 }

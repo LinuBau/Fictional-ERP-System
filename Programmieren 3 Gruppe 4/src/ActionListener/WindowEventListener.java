@@ -6,14 +6,17 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 
 import App_GUI.Gui;
+import GeschaftsObejekt.MusikList;
 import SaveData_ReadData.MusikListDAO;
 
 
 public class WindowEventListener implements WindowListener{
     private Gui parent;
+    private MusikList musikList;
     public WindowEventListener(Gui p){
         super();
         this.parent = p;
+        musikList = parent.getMusikMap().getMusikList();
     }
     
     @Override
@@ -24,10 +27,10 @@ public class WindowEventListener implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e)    {
-        MusikListDAO mld = new MusikListDAO("Programmieren 3 Gruppe 4/build/data/setup.data", true);
-    
+        MusikListDAO mld = new MusikListDAO("setup.data", true);
         try {
-            mld.read(parent.getMusikMap().getMusikList());
+            mld.write(musikList);
+            mld.close();
         } catch (IOException e1) {
             e1.printStackTrace();
         }

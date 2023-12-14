@@ -8,6 +8,7 @@ import ActionListener.HinzufuegenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikCsvListDAO;
+import SaveData_ReadData.MusikListDAO;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
@@ -48,7 +49,7 @@ public class Gui extends JFrame {
             eingabePanel.add(bearbeitenListener.setJPanel());
             // Importing Data
             musikList = new MusikList();
-            MusikCsvListDAO mld = new MusikCsvListDAO("Song.csv", false);
+            MusikListDAO mld = new MusikListDAO("setup.data", false);
             try {
                 mld.read(musikList);
             } catch (IOException e1) {
@@ -74,7 +75,6 @@ public class Gui extends JFrame {
                     int row = AtributTabelle.rowAtPoint(point);
                     bearbeitenListener.fillTextBox(tableModel.geMusikList().get(row));
                     bearbeitenListener.setMusik(tableModel.geMusikList().get(row));
-                    update(getGraphics());
                 }
             });
 
