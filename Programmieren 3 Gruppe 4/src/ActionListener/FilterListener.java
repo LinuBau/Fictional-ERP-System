@@ -47,7 +47,7 @@ public class FilterListener extends JDialog implements ActionListener {
         albumTextField = new JTextField(20);
         genreTextField = new JTextField(20);
 
-        JPanel eingabePanel = new JPanel(new GridLayout(5, 2));
+        JPanel eingabePanel = new JPanel(new GridLayout(2, 5));
         eingabePanel.add(new JLabel("Titel: "));
         eingabePanel.add(titelTextField);
         eingabePanel.add(new JLabel("Interpret: "));

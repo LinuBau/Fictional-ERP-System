@@ -5,6 +5,7 @@ import GeschaftsObejekt.MusikList;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import ActionListener.HinzufuegenListener;
+import ActionListener.ReinhörenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikCsvListDAO;
@@ -27,24 +28,26 @@ import javax.swing.JTable;
 public class Gui extends JFrame {
 
     private JButton hinzufuegenButton;
-    private JButton loeschenButton;
+    private JButton reinhörenButton;
     private JButton filternButton;
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
     private MusikMap musikmap;
     private MusikList musikList;
     private BearbeitenListener bearbeitenListener;
+    private ReinhörenListener reinhörenListener;
 
     public Gui(boolean starten) {
         if (starten) {
             hinzufuegenButton = new JButton("Hinzufügen");
-            loeschenButton = new JButton("Löschen");
+            reinhörenButton = new JButton("Reinhören");
             filternButton = new JButton("Filtern");
             bearbeitenListener = new BearbeitenListener(this);
+            reinhörenListener = new ReinhörenListener();
 
             JPanel eingabePanel = new JPanel(new FlowLayout());
             eingabePanel.add(hinzufuegenButton);
-            eingabePanel.add(loeschenButton);
+            eingabePanel.add(reinhörenButton);
             eingabePanel.add(filternButton);
             eingabePanel.add(bearbeitenListener.setJPanel());
             // Importing Data
@@ -68,20 +71,23 @@ public class Gui extends JFrame {
             getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
             getContentPane().add(eingabePanel, BorderLayout.NORTH);
             setLocationRelativeTo(null);
+
             // Add Mouse Pressed Event
             AtributTabelle.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent mouseEvent) {
                     Point point = mouseEvent.getPoint();
                     int row = AtributTabelle.rowAtPoint(point);
-                    bearbeitenListener.fillTextBox(tableModel.geMusikList().get(row));
-                    bearbeitenListener.setMusik(tableModel.geMusikList().get(row));
+                    bearbeitenListener.fillTextBox(tableModel.getMusikList().get(row));
+                    bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+                    reinhörenListener.setMedium(tableModel.getMusikList().get(row));
                 }
             });
 
-            // Setup FilterListener
+            // Setup ActionListner
             FilterListener filterListener = new FilterListener(musikmap, this);
             filternButton.addActionListener(e -> filterListener.setVisible(true));
-            hinzufuegenButton.addActionListener(new HinzufuegenListener("c", this));
+            hinzufuegenButton.addActionListener(new HinzufuegenListener(this));
+            reinhörenButton.addActionListener(reinhörenListener);
 
             // Create MenuBar
             setJMenuBar(new MenuBar(this));

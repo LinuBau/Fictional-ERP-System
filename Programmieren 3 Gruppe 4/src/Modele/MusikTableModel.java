@@ -163,7 +163,7 @@ public class MusikTableModel extends AbstractTableModel {
         return false;
     }
 
-    public MusikList geMusikList(){
+    public MusikList getMusikList(){
         return this.musikList;
     }
     

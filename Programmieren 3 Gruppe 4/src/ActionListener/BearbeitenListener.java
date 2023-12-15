@@ -188,7 +188,7 @@ public class BearbeitenListener extends JPanel implements ActionListener {
             medium.setIsCD(cdCheckBox.isSelected());
             medium.setIsPlatte(platteCheckBox.isSelected());
             medium.setIsMp3(mp3CheckBox.isSelected());
-            parent.updateTableWithMusikListe(parent.getTableModel().geMusikList());
+            parent.updateTableWithMusikListe(parent.getTableModel().getMusikList());
             parent.getMusikMap().addMedium(medium);
             this.setVisible(false);
         }

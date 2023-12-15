@@ -40,7 +40,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JButton Hinzufuegen;
     Gui parent;
 
-    public HinzufuegenListener(String wasmachen, Gui p) {
+    public HinzufuegenListener( Gui p) {
         super();
         parent = p;
         NumberFormat format = new DecimalFormat("#.00");
