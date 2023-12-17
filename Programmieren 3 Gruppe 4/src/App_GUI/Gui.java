@@ -5,15 +5,14 @@ import GeschaftsObejekt.MusikList;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import ActionListener.HinzufuegenListener;
-import ActionListener.ReinhörenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
-import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,27 +27,28 @@ import javax.swing.JTable;
 public class Gui extends JFrame {
 
     private JButton hinzufuegenButton;
-    private JButton reinhörenButton;
+   
     private JButton filternButton;
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
     private MusikMap musikmap;
     private MusikList musikList;
     private BearbeitenListener bearbeitenListener;
-    private ReinhörenListener reinhörenListener;
+   
 
     public Gui(boolean starten) {
         if (starten) {
             hinzufuegenButton = new JButton("Hinzufügen");
-            reinhörenButton = new JButton("Reinhören");
             filternButton = new JButton("Filtern");
             bearbeitenListener = new BearbeitenListener(this);
-            reinhörenListener = new ReinhörenListener();
+            JPanel centerPanel = new JPanel(new GridLayout(2, 1));
+
 
             JPanel eingabePanel = new JPanel(new FlowLayout());
-            eingabePanel.add(hinzufuegenButton);
-            eingabePanel.add(reinhörenButton);
-            eingabePanel.add(filternButton);
+            centerPanel.add(hinzufuegenButton);
+            centerPanel.add(filternButton);
+
+            eingabePanel.add(centerPanel);
             eingabePanel.add(bearbeitenListener.setJPanel());
             // Importing Data
             musikList = new MusikList();
@@ -79,7 +79,6 @@ public class Gui extends JFrame {
                     int row = AtributTabelle.rowAtPoint(point);
                     bearbeitenListener.fillTextBox(tableModel.getMusikList().get(row));
                     bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
-                    reinhörenListener.setMedium(tableModel.getMusikList().get(row));
                 }
             });
 
@@ -87,7 +86,6 @@ public class Gui extends JFrame {
             FilterListener filterListener = new FilterListener(musikmap, this);
             filternButton.addActionListener(e -> filterListener.setVisible(true));
             hinzufuegenButton.addActionListener(new HinzufuegenListener(this));
-            reinhörenButton.addActionListener(reinhörenListener);
 
             // Create MenuBar
             setJMenuBar(new MenuBar(this));
@@ -114,10 +112,12 @@ public class Gui extends JFrame {
     }
 
     public static void main(String[] args) {
+
         Gui mainWindow = new Gui(true);
         mainWindow.setTitle("Musik Katalog");
         mainWindow.setSize(1000, 500);
         mainWindow.setLocationRelativeTo(null);
         mainWindow.setVisible(true);
+
     }
 }

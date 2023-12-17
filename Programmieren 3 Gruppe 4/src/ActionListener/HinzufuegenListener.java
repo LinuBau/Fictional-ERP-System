@@ -13,6 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import App_GUI.Gui;
@@ -161,13 +162,15 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         }
         if (e.getSource().equals(Hinzufuegen)) {
             Musik m = new Musik();
+            boolean IdisOk = true;
             try {
                 String GUidText = musikGUIDTextField.getText();
-                if (!(GUidText.equals(0)) && !(GUidText == null)) {
+                if (!(GUidText.equals("0")) && !(GUidText == null)) {
                     m.setMusik_GUID(Integer.parseInt(GUidText));
+                    IdisOk =  false;
                 }
             } catch (Exception e1) {
-
+                JOptionPane.showMessageDialog(this, "Id ist nicht Gültig","Error", JOptionPane.ERROR_MESSAGE);
             }
             m.setMusiker(musikerTextField.getText());
             m.setAlbum(albumTextField.getText());
@@ -188,7 +191,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
                 parent.getMusikMap().addMedium(m);
                 parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             }
-            this.setVisible(false);
+                this.setVisible(IdisOk);
         }
     }
 

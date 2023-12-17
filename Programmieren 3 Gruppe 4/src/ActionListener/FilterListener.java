@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -47,7 +46,7 @@ public class FilterListener extends JDialog implements ActionListener {
         albumTextField = new JTextField(20);
         genreTextField = new JTextField(20);
 
-        JPanel eingabePanel = new JPanel(new GridLayout(2, 5));
+        JPanel eingabePanel = new JPanel(new GridLayout(5, 2));
         eingabePanel.add(new JLabel("Titel: "));
         eingabePanel.add(titelTextField);
         eingabePanel.add(new JLabel("Interpret: "));

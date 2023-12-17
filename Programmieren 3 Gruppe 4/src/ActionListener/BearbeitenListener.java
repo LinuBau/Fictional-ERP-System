@@ -1,6 +1,6 @@
 package ActionListener;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +37,8 @@ public class BearbeitenListener extends JPanel implements ActionListener {
     private JCheckBox mp3CheckBox;
     private JButton delteButton;
     private JButton SaveButton;
+    private JButton reinhörenButton;
+    private ReinhörenListener reinhörenListener;
     Gui parent;
     private Musik medium;
 
@@ -47,6 +49,7 @@ public class BearbeitenListener extends JPanel implements ActionListener {
 
     public void setMusik(Musik m) {
         medium = m;
+        reinhörenListener.setMedium(m);
     }
 
     public JPanel setJPanel() {
@@ -69,63 +72,79 @@ public class BearbeitenListener extends JPanel implements ActionListener {
         mp3CheckBox = new JCheckBox();
         delteButton = new JButton("Löschen");
         SaveButton = new JButton("Speicher");
+        reinhörenButton = new JButton("Reinhören");
 
-        this.setLayout(new FlowLayout());
+        reinhörenListener = new ReinhörenListener();
+
+        JPanel centerPanel = new JPanel(new GridLayout(13,2 ));
+        JPanel southPanel = new JPanel(new BorderLayout());
+
+
+        JPanel southcenterPanel = new JPanel(new GridLayout(1,3));
+        JPanel southsouthPanel = new JPanel(new GridLayout(1,3));
         // Textflied vor all Compents
-        eingabePanel = new JPanel(new GridLayout(18, 1));
+        eingabePanel = new JPanel(new BorderLayout());
 
-        eingabePanel.add(new JLabel("Musik_GUID: "));
-        eingabePanel.add(musikGUIDTextField);
+        centerPanel.add(new JLabel("Musik_GUID: "));
+        centerPanel.add(musikGUIDTextField);
 
-        eingabePanel.add(new JLabel("Musiker: "));
-        eingabePanel.add(musikerTextField);
+        centerPanel.add(new JLabel("Musiker: "));
+        centerPanel.add(musikerTextField);
 
-        eingabePanel.add(new JLabel("Album: "));
-        eingabePanel.add(albumTextField);
+        centerPanel.add(new JLabel("Album: "));
+        centerPanel.add(albumTextField);
 
-        eingabePanel.add(new JLabel("Song Name: "));
-        eingabePanel.add(songNameTextField);
+        centerPanel.add(new JLabel("Song Name: "));
+        centerPanel.add(songNameTextField);
 
-        eingabePanel.add(new JLabel("Regal Platz CD: "));
-        eingabePanel.add(regalPlatzCDTextField);
+        centerPanel.add(new JLabel("Regal Platz CD: "));
+        centerPanel.add(regalPlatzCDTextField);
 
-        eingabePanel.add(new JLabel("Regal Platz Platte: "));
-        eingabePanel.add(regalPlatzPlatteTextField);
+        centerPanel.add(new JLabel("Regal Platz Platte: "));
+        centerPanel.add(regalPlatzPlatteTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis CD: "));
-        eingabePanel.add(cdListenpreisTextField);
+        centerPanel.add(new JLabel("Listenpreis CD: "));
+        centerPanel.add(cdListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis Platte: "));
-        eingabePanel.add(platteListenpreisTextField);
+        centerPanel.add(new JLabel("Listenpreis Platte: "));
+        centerPanel.add(platteListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis MP3: "));
-        eingabePanel.add(mp3ListenpreisTextField);
+        centerPanel.add(new JLabel("Listenpreis MP3: "));
+        centerPanel.add(mp3ListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis CD: "));
-        eingabePanel.add(cdEinkaufspreisTextField);
+        centerPanel.add(new JLabel("Einkaufspreis CD: "));
+        centerPanel.add(cdEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis Platte: "));
-        eingabePanel.add(platteEinkaufspreisTextField);
+        centerPanel.add(new JLabel("Einkaufspreis Platte: "));
+        centerPanel.add(platteEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis MP3: "));
-        eingabePanel.add(mp3EinkaufspreisTextField);
+        centerPanel.add(new JLabel("Einkaufspreis MP3: "));
+        centerPanel.add(mp3EinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Genre: "));
-        eingabePanel.add(genreComboBox);
+        centerPanel.add(new JLabel("Genre: "));
+        centerPanel.add(genreComboBox);
 
-        eingabePanel.add(new JLabel("CD: "));
-        eingabePanel.add(cdCheckBox);
+        southcenterPanel.add(new JLabel("CD: "));
+        southcenterPanel.add(cdCheckBox);
 
-        eingabePanel.add(new JLabel("Platte: "));
-        eingabePanel.add(platteCheckBox);
+        southcenterPanel.add(new JLabel("Platte: "));
+        southcenterPanel.add(platteCheckBox);
 
-        eingabePanel.add(new JLabel("MP3: "));
-        eingabePanel.add(mp3CheckBox);
+        southcenterPanel.add(new JLabel("MP3: "));
+        southcenterPanel.add(mp3CheckBox);
 
-        eingabePanel.add(SaveButton);
-        eingabePanel.add(delteButton);
+        southsouthPanel.add(SaveButton);
+        southsouthPanel.add(delteButton);
+        southsouthPanel.add(reinhörenButton);
+
+        eingabePanel.add(centerPanel,BorderLayout.CENTER);
+        southPanel.add(southcenterPanel,BorderLayout.CENTER);
+        southPanel.add(southsouthPanel,BorderLayout.SOUTH);
+        eingabePanel.add(southPanel,BorderLayout.SOUTH);
         SaveButton.addActionListener(this);
         delteButton.addActionListener(this);
+        reinhörenButton.addActionListener(reinhörenListener);
+
         return eingabePanel;
     }
 
@@ -172,25 +191,26 @@ public class BearbeitenListener extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(SaveButton)) {
-            parent.getMusikMap().removeMedium(medium);
-            medium.setMusiker(musikerTextField.getText());
-            medium.setAlbum(albumTextField.getText());
-            medium.setSongName(songNameTextField.getText());
-            medium.setRegal_PlatzCD(regalPlatzCDTextField.getText());
-            medium.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
-            medium.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
-            medium.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
-            medium.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
-            medium.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
-            medium.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
-            medium.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
-            medium.setGenre(genreComboBox.getText());
-            medium.setIsCD(cdCheckBox.isSelected());
-            medium.setIsPlatte(platteCheckBox.isSelected());
-            medium.setIsMp3(mp3CheckBox.isSelected());
+            Musik m = new Musik();
+            m.setMusik_GUID(medium.getMusik_GUID());
+            m.setMusiker(musikerTextField.getText());
+            m.setAlbum(albumTextField.getText());
+            m.setSongName(songNameTextField.getText());
+            m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
+            m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
+            m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
+            m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
+            m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
+            m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
+            m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
+            m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+            m.setGenre(genreComboBox.getText());
+            m.setIsCD(cdCheckBox.isSelected());
+            m.setIsPlatte(platteCheckBox.isSelected());
+            m.setIsMp3(mp3CheckBox.isSelected());
+            parent.getTableModel().getMusikList().replaceMusik(m, parent.getTableModel().getMusikList());
             parent.updateTableWithMusikListe(parent.getTableModel().getMusikList());
-            parent.getMusikMap().addMedium(medium);
-            this.setVisible(false);
+            parent.getMusikMap().replaceMedium(medium, m);
         }
         if (e.getSource().equals(delteButton)) {
             parent.getMusikMap().removeMedium(medium);
