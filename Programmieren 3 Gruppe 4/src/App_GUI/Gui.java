@@ -4,7 +4,6 @@ import ActionListener.WindowEventListener;
 import GeschaftsObejekt.MusikList;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
-import ActionListener.HinzufuegenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikListDAO;
@@ -13,13 +12,12 @@ import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import javax.swing.JButton;
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -40,7 +38,7 @@ public class Gui extends JFrame {
             bearbeitenListener = new BearbeitenListener(this);
             filterListener = new FilterListener(this);
 
-            JPanel eingabePanel = new JPanel(new GridLayout(1,2));
+            JPanel eingabePanel = new JPanel(new FlowLayout());
             eingabePanel.add(filterListener.getFilterPanel());
             eingabePanel.add(bearbeitenListener.getBearbeitenPanel());
             // Importing Data
@@ -56,7 +54,9 @@ public class Gui extends JFrame {
             musikmap = new MusikMap(musikList);
 
             // Initializing the JTable
-            tableModel = new MusikTableModel(musikList);
+            MusikList sotierteList = new MusikList();
+            sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+            tableModel = new MusikTableModel(sotierteList);
             AtributTabelle = new JTable(tableModel);
             JPanel southPanel = new JPanel(new BorderLayout());
             southPanel.add(eingabePanel, BorderLayout.CENTER);
