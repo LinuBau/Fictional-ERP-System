@@ -8,6 +8,7 @@ import ActionListener.HinzufuegenListener;
 import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikListDAO;
+import ToolBar.toolBar;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
@@ -26,30 +27,22 @@ import javax.swing.JTable;
 
 public class Gui extends JFrame {
 
-    private JButton hinzufuegenButton;
-   
-    private JButton filternButton;
+
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
     private MusikMap musikmap;
     private MusikList musikList;
     private BearbeitenListener bearbeitenListener;
-   
+    FilterListener filterListener;
 
     public Gui(boolean starten) {
         if (starten) {
-            hinzufuegenButton = new JButton("Hinzufügen");
-            filternButton = new JButton("Filtern");
             bearbeitenListener = new BearbeitenListener(this);
-            JPanel centerPanel = new JPanel(new GridLayout(2, 1));
+            filterListener = new FilterListener(this);
 
-
-            JPanel eingabePanel = new JPanel(new FlowLayout());
-            centerPanel.add(hinzufuegenButton);
-            centerPanel.add(filternButton);
-
-            eingabePanel.add(centerPanel);
-            eingabePanel.add(bearbeitenListener.setJPanel());
+            JPanel eingabePanel = new JPanel(new GridLayout(1,2));
+            eingabePanel.add(filterListener.getFilterPanel());
+            eingabePanel.add(bearbeitenListener.getBearbeitenPanel());
             // Importing Data
             musikList = new MusikList();
             MusikListDAO mld = new MusikListDAO("setup.data", false);
@@ -65,11 +58,14 @@ public class Gui extends JFrame {
             // Initializing the JTable
             tableModel = new MusikTableModel(musikList);
             AtributTabelle = new JTable(tableModel);
+            JPanel southPanel = new JPanel(new BorderLayout());
+            southPanel.add(eingabePanel, BorderLayout.CENTER);
+            southPanel.add(new toolBar(this),BorderLayout.NORTH);
 
             // Setting up the layout
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
-            getContentPane().add(eingabePanel, BorderLayout.NORTH);
+            getContentPane().add(southPanel,BorderLayout.NORTH);
             setLocationRelativeTo(null);
 
             // Add Mouse Pressed Event
@@ -82,10 +78,6 @@ public class Gui extends JFrame {
                 }
             });
 
-            // Setup ActionListner
-            FilterListener filterListener = new FilterListener(musikmap, this);
-            filternButton.addActionListener(e -> filterListener.setVisible(true));
-            hinzufuegenButton.addActionListener(new HinzufuegenListener(this));
 
             // Create MenuBar
             setJMenuBar(new MenuBar(this));

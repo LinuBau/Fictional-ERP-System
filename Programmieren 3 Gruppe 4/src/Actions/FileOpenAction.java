@@ -23,7 +23,7 @@ public class FileOpenAction extends AbstractAction {
         chooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Datein", "csv");
         chooser.addChoosableFileFilter(filter);
-        int returnval = chooser.showOpenDialog(parent);
+        int returnval = chooser.showOpenDialog(null);
         if (returnval == chooser.APPROVE_OPTION) {
             MusikCsvListDAO mmd = new MusikCsvListDAO(chooser.getSelectedFile().getAbsolutePath(), false);
             try {

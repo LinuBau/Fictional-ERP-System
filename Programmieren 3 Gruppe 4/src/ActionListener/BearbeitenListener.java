@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 
-public class BearbeitenListener extends JPanel implements ActionListener {
+public class BearbeitenListener implements ActionListener {
     public JPanel eingabePanel;
     private JTextField genreComboBox;
     private JTextField musikGUIDTextField;
@@ -52,7 +52,7 @@ public class BearbeitenListener extends JPanel implements ActionListener {
         reinhörenListener.setMedium(m);
     }
 
-    public JPanel setJPanel() {
+    public JPanel getBearbeitenPanel() {
         NumberFormat format = new DecimalFormat("#.00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();

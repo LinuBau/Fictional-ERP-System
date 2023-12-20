@@ -22,9 +22,9 @@ public class FileSaveAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser chooser = new JFileChooser();
-        int returnval = chooser.showSaveDialog(parent);
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int returnval = chooser.showSaveDialog(parent);
         if (returnval == chooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
             if (!path.endsWith(".csv")) {

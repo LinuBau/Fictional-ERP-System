@@ -3,7 +3,6 @@ package ActionListener;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
-import Traversierung.MusikMap;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -12,31 +11,41 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
-public class FilterListener extends JDialog implements ActionListener {
+public class FilterListener implements ActionListener {
 
     private JToggleButton toggleButtonCD;
     private JToggleButton toggleButtonMP3;
     private JToggleButton toggleButtonVinyl;
 
-    private final JTextField titelTextField;
-    private final JTextField interpretTextField;
-    private final JTextField albumTextField;
-    private final JTextField genreTextField;
-    private final MusikMap musikMap;
-    private final Gui gui;
+    private JTextField titelTextField;
+    private  JTextField interpretTextField;
+    private  JTextField albumTextField;
+    private  JTextField genreTextField;
+    private  Gui parent;
 
-    public FilterListener(MusikMap musikMap, Gui gui) {
+    public FilterListener( Gui gui) {
         super();
-        this.setSize(400, 300);
-        this.musikMap = musikMap;
-        this.gui = gui;
+        this.parent = gui;
 
+    }
+
+    private JPanel createMedientypenPanel() {
+        JPanel medientypenPanel = new JPanel();
+        medientypenPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        medientypenPanel.add(toggleButtonCD);
+        medientypenPanel.add(toggleButtonMP3);
+        medientypenPanel.add(toggleButtonVinyl);
+
+        return medientypenPanel;
+    }
+    public JPanel getFilterPanel(){
+        
         toggleButtonCD = new JToggleButton("CD", false);
         toggleButtonMP3 = new JToggleButton("MP3", false);
         toggleButtonVinyl = new JToggleButton("Vinyl", false);
@@ -63,24 +72,11 @@ public class FilterListener extends JDialog implements ActionListener {
 
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(filternButton);
-
-        this.getContentPane().setLayout(new BorderLayout());
-        this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
-        this.getContentPane().add(filterPanel, BorderLayout.SOUTH);
-
-        this.setModal(true);
-        this.setVisible(false);
-    }
-
-    private JPanel createMedientypenPanel() {
-        JPanel medientypenPanel = new JPanel();
-        medientypenPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        medientypenPanel.add(toggleButtonCD);
-        medientypenPanel.add(toggleButtonMP3);
-        medientypenPanel.add(toggleButtonVinyl);
-
-        return medientypenPanel;
+        JPanel returbPanel = new JPanel();
+        returbPanel.setLayout(new BorderLayout());
+        returbPanel.add(eingabePanel, BorderLayout.NORTH);
+        returbPanel.add(filterPanel, BorderLayout.SOUTH);
+        return returbPanel;
     }
     
 
@@ -95,38 +91,37 @@ public class FilterListener extends JDialog implements ActionListener {
         boolean isMP3Selected = toggleButtonMP3.isSelected();
         boolean isVinylSelected = toggleButtonVinyl.isSelected();
 
-        List<Musik> gesamteMusikListe = musikMap.getGesamteMusikListe();
-        List<Musik> ergebnisse = new ArrayList<>(gesamteMusikListe);
+       
+        List<Musik> ergebnisse = new ArrayList<>(parent.getMusikMap().getMusikList());
 
         if (!titel.isEmpty()) {
-            ergebnisse.retainAll(musikMap.getMedienBySongName(titel));
+            ergebnisse.retainAll(parent.getMusikMap().getMedienBySongName(titel));
         }
         if (!interpret.isEmpty()) {
-            ergebnisse.retainAll(musikMap.getMedienByMusiker(interpret));
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByMusiker(interpret));
         }
         if (!album.isEmpty()) {
-            ergebnisse.retainAll(musikMap.getMedienByAlbum(album));
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByAlbum(album));
         }
         if (!genre.isEmpty()) {
-            ergebnisse.retainAll(musikMap.getMedienByGenre(genre));
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByGenre(genre));
         }
         if (isCDSelected) {
-            ergebnisse.retainAll(musikMap.getMedienByCD());
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByCD());
         }
         if (isMP3Selected) {
-            ergebnisse.retainAll(musikMap.getMedienByMP3());
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByMP3());
         }
         if (isVinylSelected) {
-            ergebnisse.retainAll(musikMap.getMedienByVinyl());
+            ergebnisse.retainAll(parent.getMusikMap().getMedienByVinyl());
         }
 
-        List<Musik> sortierteErgebnisse = musikMap.sortMusikListBySongName(ergebnisse);
+        List<Musik> sortierteErgebnisse = parent.getMusikMap().sortMusikListBySongName(ergebnisse);
 
         MusikList gefilterteErgebnisse = new MusikList();
         gefilterteErgebnisse.addAll(sortierteErgebnisse);
 
-        gui.updateTableWithMusikListe(gefilterteErgebnisse);
-        this.setVisible(false); 
+        parent.updateTableWithMusikListe(gefilterteErgebnisse); 
     }
 
 }
