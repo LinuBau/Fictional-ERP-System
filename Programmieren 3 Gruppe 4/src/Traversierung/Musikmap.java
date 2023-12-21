@@ -135,22 +135,6 @@ public class MusikMap {
     addToMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
 }
 
-
-  /*  private List<String> getMediumTyp(Musik medium) {
-        List<String> types = new ArrayList<>();
-        if (medium.getIsCD()) {
-            types.add("CD");
-        }
-        if (medium.getIsPlatte()) {
-            types.add("Platte");
-        }
-        if (medium.getIsMp3()) {
-            types.add("MP3");
-        }
-        return types;
-    }
-   */
-
     public void addToMap(HashMap<String, List<Musik>> map, String key, Musik value) {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
@@ -159,89 +143,7 @@ public class MusikMap {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
     
-  /*  public List<Musik> getMedienBySongName(String songName) {
-        return songNameMap.getOrDefault(songName, new ArrayList<>());
-    }
 
-    public List<Musik> getMedienByMusiker(String musiker) {
-        return musikerMap.getOrDefault(musiker, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByGenre(String genre) {
-        return genreMap.getOrDefault(genre, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByAlbum(String album) {
-        return albumMap.getOrDefault(album, new ArrayList<>());
-    }
-    
-  */ /*     public List<Musik> getMedienByCD() {
-        return musikList.stream()
-            .filter(medium -> medium.getIsCD())
-            .collect(Collectors.toList());
-    }
-
-    public List<Musik> getMedienByMP3() {
-        return musikList.stream()
-            .filter(medium -> medium.getIsMp3())
-            .collect(Collectors.toList());
-    }
-
-    public List<Musik> getMedienByVinyl() {
-        return musikList.stream()
-            .filter(medium -> medium.getIsPlatte())
-            .collect(Collectors.toList());
-    }
-*/
-   /* public List<Musik> getMedienByMediumTyp(String typ) {
-        return mediumTypMap.getOrDefault(typ, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByCDListenpreis(Double preis) {
-        return cdListenpreisMap.getOrDefault(preis, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByPlatteListenpreis(Double preis) {
-        return platteListenpreisMap.getOrDefault(preis, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByMp3Listenpreis(Double preis) {
-        return mp3ListenpreisMap.getOrDefault(preis, new ArrayList<>());
-    }
-    
-    public List<Musik> filterMedienByMusikerGenreIsCD(String musiker, String genre, boolean isCD) {
-        return musikList.stream()
-            .filter(medium -> medium.getMusiker().equals(musiker))
-            .filter(medium -> medium.getGenre().equals(genre))
-            .filter(medium -> (isCD && medium.getIsCD()) || (!isCD && !medium.getIsCD()))
-            .collect(Collectors.toList());
-    }
-    
-    public List<Musik> filterMedienByMusikerGenre(String musiker, String genre) {
-    List<Musik> byMusiker = musikerMap.getOrDefault(musiker, new ArrayList<>());
-    List<Musik> byGenre = genreMap.getOrDefault(genre, new ArrayList<>());
-
-        return byMusiker.stream()
-            .filter(byGenre::contains)
-            .collect(Collectors.toList());
-    }
-
-    public List<Musik> filterMedienByMusikerAlbums(String musiker, List<String> albums) {
-    List<Musik> byMusiker = musikerMap.getOrDefault(musiker, new ArrayList<>());
-
-        return byMusiker.stream()
-            .filter(medium -> albums.isEmpty() || albums.contains(medium.getAlbum()))
-            .collect(Collectors.toList());
-    }
-
-    public List<Musik> filterMedienByGenreAlbums(String genre, List<String> albums) {
-    List<Musik> byGenre = genreMap.getOrDefault(genre, new ArrayList<>());
-
-        return byGenre.stream()
-            .filter(medium -> albums.isEmpty() || albums.contains(medium.getAlbum()))
-            .collect(Collectors.toList());
-    }
-    */
 public List<Musik> getDefaultOrAllMedien() {
         return new ArrayList<>(musikList);
     }
