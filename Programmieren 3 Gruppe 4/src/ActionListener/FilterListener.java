@@ -3,53 +3,41 @@ package ActionListener;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
+import Traversierung.MusikMap;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import Traversierung.MusikMap;
-import java.util.stream.Collectors;
 
 public class FilterListener implements ActionListener {
-
+    private MusikMap musikMap;
     private JToggleButton toggleButtonCD;
     private JToggleButton toggleButtonMP3;
     private JToggleButton toggleButtonVinyl;
 
     private JTextField titelTextField;
-    private  JTextField interpretTextField;
-    private  JTextField albumTextField;
-    private  JTextField genreTextField;
-    private  Gui parent;
+    private JTextField interpretTextField;
+    private JTextField albumTextField;
+    private JTextField genreTextField;
+    private Gui parent;
 
-    public FilterListener( Gui gui) {
-        super();
+    public FilterListener(Gui gui, MusikMap musikMap) {
         this.parent = gui;
+        this.musikMap = musikMap;
 
     }
 
-    private JPanel createMedientypenPanel() {
-        JPanel medientypenPanel = new JPanel();
-        medientypenPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        medientypenPanel.add(toggleButtonCD);
-        medientypenPanel.add(toggleButtonMP3);
-        medientypenPanel.add(toggleButtonVinyl);
-
-        return medientypenPanel;
-    }
-    public JPanel getFilterPanel(){
-        
+    public JPanel getFilterPanel() {
+        // Initialisierung der Schaltflächen und Textfelder
         toggleButtonCD = new JToggleButton("CD", false);
         toggleButtonMP3 = new JToggleButton("MP3", false);
         toggleButtonVinyl = new JToggleButton("Vinyl", false);
@@ -59,6 +47,7 @@ public class FilterListener implements ActionListener {
         albumTextField = new JTextField(20);
         genreTextField = new JTextField(20);
 
+        // Erstellen des Eingabepanels
         JPanel eingabePanel = new JPanel(new GridLayout(5, 2));
         eingabePanel.add(new JLabel("Titel: "));
         eingabePanel.add(titelTextField);
@@ -71,19 +60,19 @@ public class FilterListener implements ActionListener {
         eingabePanel.add(new JLabel("Medientypen: "));
         eingabePanel.add(createMedientypenPanel());
 
+        // Erstellen des Filterknopfes
         JButton filternButton = new JButton("Filtern");
         filternButton.addActionListener(this);
-
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(filternButton);
 
-        this.getContentPane().setLayout(new BorderLayout());
-        this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
-        this.getContentPane().add(filterPanel, BorderLayout.SOUTH);
+        // Zusammenführen der Panels
+        JPanel returbPanel = new JPanel();
+        returbPanel.setLayout(new BorderLayout());
+        returbPanel.add(eingabePanel, BorderLayout.NORTH);
+        returbPanel.add(filterPanel, BorderLayout.SOUTH);
 
-        this.setModal(true);
-        this.setLocationRelativeTo(null);
-        this.setVisible(false);
+        return returbPanel;
     }
 
     private JPanel createMedientypenPanel() {
@@ -95,13 +84,7 @@ public class FilterListener implements ActionListener {
         medientypenPanel.add(toggleButtonVinyl);
 
         return medientypenPanel;
-        JPanel returbPanel = new JPanel();
-        returbPanel.setLayout(new BorderLayout());
-        returbPanel.add(eingabePanel, BorderLayout.NORTH);
-        returbPanel.add(filterPanel, BorderLayout.SOUTH);
-        return returbPanel;
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -142,28 +125,7 @@ public class FilterListener implements ActionListener {
             (existing, replacement) -> existing, 
             TreeMap::new));
         
-       /* if (!titel.isEmpty()) {
-            ergebnisse.retainAll(musikMap.getMedienBySongName(titel));
-        }
-        if (!interpret.isEmpty()) {
-            ergebnisse.retainAll(parent.getMusikMap().getMedienByMusiker(interpret));
-        }
-        if (!album.isEmpty()) {
-            ergebnisse.retainAll(parent.getMusikMap().getMedienByAlbum(album));
-        }
-        if (!genre.isEmpty()) {
-            ergebnisse.retainAll(parent.getMusikMap().getMedienByGenre(genre));
-        }
-        if (isCDSelected) {
-            ergebnisse.retainAll(parent.getMusikMap().getMedienByCD());
-        }
-        if (isMP3Selected) {
-            ergebnisse.retainAll(parent.getMusikMap().getMedienByMP3());
-        }
-        if (isVinylSelected) {
-            ergebnisse.retainAll(musikMap.getMedienByVinyl());
-        }   */
-
+   
    
         MusikList gefilterteErgebnisse = new MusikList();
         gefilterteErgebnisse.addAll(sortierteErgebnisse.values());

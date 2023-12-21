@@ -118,7 +118,8 @@ public class MusikMap {
         addToMap(genreMap, medium.getGenre(), medium);
         addToMap(albumMap, medium.getAlbum(), medium);
         addToMap(songNameMap, medium.getSongName(), medium);
-
+    }
+    
     public void addToMap(HashMap<String, List<Musik>> map, String key, Musik value) {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
@@ -184,6 +185,7 @@ public List<Musik> getDefaultOrAllMedien() {
                 medien.set(index, newmedium);
             }
         }
+    }
 
          private void replaceMediumFromMap(HashMap<String, List<Musik>> map, String key, Musik medium, Musik newmedium) {
         List<Musik> medien = map.get(key);
