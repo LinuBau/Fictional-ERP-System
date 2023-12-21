@@ -53,7 +53,7 @@ public class Gui extends JFrame {
             // Initializing the MusikMap
             musikmap = new MusikMap(musikList);
 
-            // Initializing the JTable
+            // Initializing sortetd JTable
             MusikList sotierteList = new MusikList();
             sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
             tableModel = new MusikTableModel(sotierteList);
