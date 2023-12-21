@@ -21,7 +21,7 @@ import GeschaftsObejekt.Musik;
 
 public class HinzufuegenListener extends JDialog implements ActionListener {
 
-    private JTextField genreComboBox;
+    private JTextField genreTextField;
     private JTextField musikGUIDTextField;
     private JTextField musikerTextField;
     private JTextField albumTextField;
@@ -46,7 +46,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         parent = p;
         NumberFormat format = new DecimalFormat("#.00");
         this.setSize(300, 500);
-        genreComboBox = new JTextField();
+        genreTextField = new JTextField();
         musikGUIDTextField = new JTextField();
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
@@ -104,7 +104,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         eingabePanel.add(mp3EinkaufspreisTextField);
 
         eingabePanel.add(new JLabel("Genre: "));
-        eingabePanel.add(genreComboBox);
+        eingabePanel.add(genreTextField);
 
         eingabePanel.add(new JLabel("CD: "));
         eingabePanel.add(cdCheckBox);
@@ -133,9 +133,6 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     }
 
-    public HinzufuegenListener() {
-
-    }
 
     public void fillTextBox() {
 
@@ -150,7 +147,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         cdEinkaufspreisTextField.setText("0");
         platteEinkaufspreisTextField.setText("0");
         mp3EinkaufspreisTextField.setText("0");
-        genreComboBox.setText("");
+        genreTextField.setText("");
 
     }
 
@@ -183,7 +180,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
             m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
             m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
-            m.setGenre(genreComboBox.getText());
+            m.setGenre(genreTextField.getText());
             m.setIsCD(cdCheckBox.isSelected());
             m.setIsPlatte(platteCheckBox.isSelected());
             m.setIsMp3(mp3CheckBox.isSelected());
