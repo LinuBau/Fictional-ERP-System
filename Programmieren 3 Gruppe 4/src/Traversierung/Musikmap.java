@@ -16,7 +16,7 @@ public class MusikMap {
     private TreeMap<String, List<Musik>> musikerMap;
     private TreeMap<String, List<Musik>> genreMap;
     private TreeMap<String, List<Musik>> albumMap;
-    private HashMap<String, List<Musik>> mediumTypMap;
+    private TreeMap<String, List<Musik>> mediumTypMap;
     private TreeMap<Double, List<Musik>> cdListenpreisMap;
     private TreeMap<Double, List<Musik>> platteListenpreisMap;
     private TreeMap<Double, List<Musik>> mp3ListenpreisMap;
@@ -31,7 +31,7 @@ public class MusikMap {
         musikerMap = new TreeMap<>();
         genreMap = new TreeMap<>();
         albumMap = new TreeMap<>();
-        mediumTypMap = new HashMap<>();
+        mediumTypMap = new TreeMap<>();
         cdListenpreisMap = new TreeMap<>();
         platteListenpreisMap = new TreeMap<>();
         mp3ListenpreisMap = new TreeMap<>();
@@ -136,7 +136,7 @@ public class MusikMap {
 }
 
 
-    private List<String> getMediumTyp(Musik medium) {
+  /*  private List<String> getMediumTyp(Musik medium) {
         List<String> types = new ArrayList<>();
         if (medium.getIsCD()) {
             types.add("CD");
@@ -149,6 +149,7 @@ public class MusikMap {
         }
         return types;
     }
+   */
 
     public void addToMap(HashMap<String, List<Musik>> map, String key, Musik value) {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
@@ -158,7 +159,7 @@ public class MusikMap {
         map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
     
-    public List<Musik> getMedienBySongName(String songName) {
+  /*  public List<Musik> getMedienBySongName(String songName) {
         return songNameMap.getOrDefault(songName, new ArrayList<>());
     }
 
@@ -174,7 +175,7 @@ public class MusikMap {
         return albumMap.getOrDefault(album, new ArrayList<>());
     }
     
-        public List<Musik> getMedienByCD() {
+  */ /*     public List<Musik> getMedienByCD() {
         return musikList.stream()
             .filter(medium -> medium.getIsCD())
             .collect(Collectors.toList());
@@ -191,8 +192,8 @@ public class MusikMap {
             .filter(medium -> medium.getIsPlatte())
             .collect(Collectors.toList());
     }
-
-    public List<Musik> getMedienByMediumTyp(String typ) {
+*/
+   /* public List<Musik> getMedienByMediumTyp(String typ) {
         return mediumTypMap.getOrDefault(typ, new ArrayList<>());
     }
 
@@ -240,7 +241,7 @@ public class MusikMap {
             .filter(medium -> albums.isEmpty() || albums.contains(medium.getAlbum()))
             .collect(Collectors.toList());
     }
-    
+    */
 public List<Musik> getDefaultOrAllMedien() {
         return new ArrayList<>(musikList);
     }

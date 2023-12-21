@@ -12,12 +12,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import Traversierung.MusikMap;
+import java.util.stream.Collectors;
 
 public class FilterListener extends JDialog implements ActionListener {
 
@@ -70,6 +73,7 @@ public class FilterListener extends JDialog implements ActionListener {
         this.getContentPane().add(filterPanel, BorderLayout.SOUTH);
 
         this.setModal(true);
+        this.setLocationRelativeTo(null);
         this.setVisible(false);
     }
 
@@ -87,19 +91,44 @@ public class FilterListener extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String titel = titelTextField.getText();
-        String interpret = interpretTextField.getText();
-        String album = albumTextField.getText();
-        String genre = genreTextField.getText();
+        
+        String titel = titelTextField.getText().toLowerCase();
+        String interpret = interpretTextField.getText().toLowerCase();
+        String album = albumTextField.getText().toLowerCase();
+        String genre = genreTextField.getText().toLowerCase();
 
         boolean isCDSelected = toggleButtonCD.isSelected();
         boolean isMP3Selected = toggleButtonMP3.isSelected();
         boolean isVinylSelected = toggleButtonVinyl.isSelected();
 
-        List<Musik> gesamteMusikListe = musikMap.getGesamteMusikListe();
-        List<Musik> ergebnisse = new ArrayList<>(gesamteMusikListe);
+         Stream<Musik> stream = musikMap.getMusikList().stream();
 
-        if (!titel.isEmpty()) {
+         if (!titel.isEmpty()) {
+        stream = stream.filter(m -> m.getSongName().toLowerCase().contains(titel));
+        }
+        if (!interpret.isEmpty()) {
+            stream = stream.filter(m -> m.getMusiker().toLowerCase().contains(interpret));
+        }
+        if (!album.isEmpty()) {
+            stream = stream.filter(m -> m.getAlbum().toLowerCase().contains(album));
+        }
+        if (!genre.isEmpty()) {
+            stream = stream.filter(m -> m.getGenre().toLowerCase().contains(genre));
+        }
+
+        // Filtern basierend auf Medientyp
+         stream = stream.filter(m -> (!isCDSelected || m.getIsCD()) &&
+                                (!isMP3Selected || m.getIsMp3()) &&
+                                (!isVinylSelected || m.getIsPlatte()));
+            
+        TreeMap<String, Musik> sortierteErgebnisse = stream
+        .collect(Collectors.toMap(
+            Musik::getSongName, 
+            m -> m, 
+            (existing, replacement) -> existing, 
+            TreeMap::new));
+        
+       /* if (!titel.isEmpty()) {
             ergebnisse.retainAll(musikMap.getMedienBySongName(titel));
         }
         if (!interpret.isEmpty()) {
@@ -119,12 +148,11 @@ public class FilterListener extends JDialog implements ActionListener {
         }
         if (isVinylSelected) {
             ergebnisse.retainAll(musikMap.getMedienByVinyl());
-        }
+        }   */
 
-        List<Musik> sortierteErgebnisse = musikMap.sortMusikListBySongName(ergebnisse);
-
+   
         MusikList gefilterteErgebnisse = new MusikList();
-        gefilterteErgebnisse.addAll(sortierteErgebnisse);
+        gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
 
         gui.updateTableWithMusikListe(gefilterteErgebnisse);
         this.setVisible(false); 
