@@ -77,8 +77,7 @@ public class Gui extends JFrame {
                     bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
                 }
             });
-
-
+            
             // Create MenuBar
             setJMenuBar(new MenuBar(this));
             // add WindowEventListner

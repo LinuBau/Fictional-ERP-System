@@ -187,7 +187,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             m.setIsCD(cdCheckBox.isSelected());
             m.setIsPlatte(platteCheckBox.isSelected());
             m.setIsMp3(mp3CheckBox.isSelected());
-            if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())) {
+            if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())& m.getMusik_GUID() != 0) {
                 parent.getMusikMap().addMedium(m);
                 parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             }
