@@ -302,7 +302,6 @@ public class MusikMap {
             }
         }
     }
-
          private void replaceMediumFromMap(HashMap<String, List<Musik>> map, String key, Musik medium, Musik newmedium) {
         List<Musik> medien = map.get(key);
         if (medien != null) {
