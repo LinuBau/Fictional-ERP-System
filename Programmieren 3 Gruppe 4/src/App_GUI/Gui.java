@@ -33,15 +33,9 @@ public class Gui extends JFrame {
     private BearbeitenListener bearbeitenListener;
     FilterListener filterListener;
 
-    public Gui(boolean starten) {
+public Gui(boolean starten) {
         if (starten) {
-            bearbeitenListener = new BearbeitenListener(this);
-            filterListener = new FilterListener(this);
-
-            JPanel eingabePanel = new JPanel(new FlowLayout());
-            eingabePanel.add(filterListener.getFilterPanel());
-            eingabePanel.add(bearbeitenListener.getBearbeitenPanel());
-            // Importing Data
+            // Initialisierung der MusikList und MusikMap
             musikList = new MusikList();
             MusikListDAO mld = new MusikListDAO("setup.data", false);
             try {
@@ -49,26 +43,33 @@ public class Gui extends JFrame {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-
-            // Initializing the MusikMap
             musikmap = new MusikMap(musikList);
 
-            // Initializing sortetd JTable
-            MusikList sotierteList = new MusikList();
-            sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
-            tableModel = new MusikTableModel(sotierteList);
+            // Initialisierung der Listener
+            bearbeitenListener = new BearbeitenListener(this);
+            filterListener = new FilterListener(this, musikmap);
+
+            // Erstellen des Eingabe-Panels
+            JPanel eingabePanel = new JPanel(new FlowLayout());
+            eingabePanel.add(filterListener.getFilterPanel());
+            eingabePanel.add(bearbeitenListener.getBearbeitenPanel());
+
+            // Initialisierung und Einrichtung der Tabelle
+            MusikList sortierteList = new MusikList();
+            sortierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+            tableModel = new MusikTableModel(sortierteList);
             AtributTabelle = new JTable(tableModel);
             JPanel southPanel = new JPanel(new BorderLayout());
             southPanel.add(eingabePanel, BorderLayout.CENTER);
-            southPanel.add(new toolBar(this),BorderLayout.NORTH);
+            southPanel.add(new toolBar(this), BorderLayout.NORTH);
 
-            // Setting up the layout
+            // Layout einrichten
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
-            getContentPane().add(southPanel,BorderLayout.NORTH);
+            getContentPane().add(southPanel, BorderLayout.NORTH);
             setLocationRelativeTo(null);
 
-            // Add Mouse Pressed Event
+            // Maus-Event für die Tabelle hinzufügen
             AtributTabelle.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent mouseEvent) {
                     Point point = mouseEvent.getPoint();
@@ -77,10 +78,9 @@ public class Gui extends JFrame {
                     bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
                 }
             });
-            
-            // Create MenuBar
+
+            // Menüleiste und WindowListener hinzufügen
             setJMenuBar(new MenuBar(this));
-            // add WindowEventListner
             addWindowListener(new WindowEventListener(this));
         }
     }
