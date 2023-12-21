@@ -21,9 +21,9 @@ public class FileOpenAction extends AbstractAction {
         JFileChooser chooser = new JFileChooser();
         MusikList musikList = new MusikList();
         chooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("CVS Datein", "cvs");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Datein", "csv");
         chooser.addChoosableFileFilter(filter);
-        int returnval = chooser.showOpenDialog(parent);
+        int returnval = chooser.showOpenDialog(null);
         if (returnval == chooser.APPROVE_OPTION) {
             MusikCsvListDAO mmd = new MusikCsvListDAO(chooser.getSelectedFile().getAbsolutePath(), false);
             try {
