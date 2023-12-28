@@ -106,7 +106,7 @@ public class Gui extends JFrame {
 
         Gui mainWindow = new Gui(true);
         mainWindow.setTitle("Musik Katalog");
-        mainWindow.setSize(1000, 500);
+        mainWindow.setSize(1000, 800);
         mainWindow.setLocationRelativeTo(null);
         mainWindow.setVisible(true);
 
