@@ -41,7 +41,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JButton Hinzufuegen;
     Gui parent;
 
-    public HinzufuegenListener( Gui p) {
+    public HinzufuegenListener(Gui p) {
         super();
         parent = p;
         NumberFormat format = new DecimalFormat("#.00");
@@ -133,7 +133,6 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     }
 
-
     public void fillTextBox() {
 
         musikerTextField.setText("");
@@ -160,14 +159,15 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         if (e.getSource().equals(Hinzufuegen)) {
             Musik m = new Musik();
             boolean IdisOk = true;
+
             try {
                 String GUidText = musikGUIDTextField.getText();
                 if (!(GUidText.equals("0")) && !(GUidText == null)) {
                     m.setMusik_GUID(Integer.parseInt(GUidText));
-                    IdisOk =  false;
+                    IdisOk = false;
                 }
             } catch (Exception e1) {
-                JOptionPane.showMessageDialog(this, "Id ist nicht Gültig","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Id ist nicht Gültig", "Error", JOptionPane.ERROR_MESSAGE);
             }
             m.setMusiker(musikerTextField.getText());
             m.setAlbum(albumTextField.getText());
@@ -184,11 +184,19 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             m.setIsCD(cdCheckBox.isSelected());
             m.setIsPlatte(platteCheckBox.isSelected());
             m.setIsMp3(mp3CheckBox.isSelected());
-            if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())& m.getMusik_GUID() != 0) {
-                parent.getMusikMap().addMedium(m);
-                parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+            try {
+                if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())
+                        & !IdisOk) {
+                    parent.getMusikMap().addMedium(m);
+                    parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Id ist nicht Gültig", "Error", JOptionPane.ERROR_MESSAGE);
+                    IdisOk = true;
+                }
+            } catch (Exception e1) {
+                JOptionPane.showMessageDialog(this, "Id ist nicht Gültig", "Error", JOptionPane.ERROR_MESSAGE);
             }
-                this.setVisible(IdisOk);
+            this.setVisible(IdisOk);
         }
     }
 
