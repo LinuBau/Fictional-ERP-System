@@ -102,7 +102,7 @@ public class Gui extends JFrame {
 
     public MusikMap getMusikMap() {
         return this.musikmap;
-    }
+    }  
 
     public MusikTableModel getTableModel() {
         return this.tableModel;
@@ -118,11 +118,5 @@ public class Gui extends JFrame {
          loginWindow.setTitle("Login");
          loginWindow.setSize(500, 500);
          loginWindow.setVisible(true);
-         
-        /*Gui mainWindow = new Gui(false);
-        mainWindow.setTitle("Musik Katalog");
-        mainWindow.setSize(1000, 500);
-        mainWindow.setLocationRelativeTo(null);
-        mainWindow.setVisible(true);*/
     }
 }
