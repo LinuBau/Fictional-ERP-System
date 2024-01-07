@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -23,6 +24,8 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private JTable selectTabele;
     private MusikTableModel tableModel;
     private MusikList musikList;
+    private ArrayList<Integer> pallteStückZahlList;
+    private ArrayList<Integer> cdStückZahlList;
     private JButton loeschenButton;
     private JButton orderButton;
     private int index;
@@ -32,6 +35,8 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         musikList = new MusikList();
         tableModel = new MusikTableModel(musikList);
         selectTabele = new JTable(tableModel);
+        pallteStückZahlList = new ArrayList<Integer>();
+        cdStückZahlList =  new ArrayList<Integer>();
         orderButton = new JButton("Bestellen");
         loeschenButton = new JButton("Löschen");
         buttonPanel.add(orderButton);
@@ -45,9 +50,6 @@ public class shoppingCartListner extends JDialog implements ActionListener {
                 index = selectTabele.rowAtPoint(point);
             }
         });
-
-        selectTabele.removeColumnSelectionInterval(4,12);
-
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         this.getContentPane().add(new JScrollPane(selectTabele), BorderLayout.CENTER);
@@ -62,8 +64,10 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         this.tableModel.fireTableDataChanged();
     }
 
-    public void add(Musik m) {
+    public void add(Musik m,int ps,int cs) {
         musikList.add(m);
+        pallteStückZahlList.add(ps);
+        cdStückZahlList.add(cs);
         updateTableWithMusikListe(musikList);
     }
 
@@ -78,6 +82,8 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private void removeFromMusikList() {
         if (!(index == -1)) {
             musikList.remove(index);
+            pallteStückZahlList.remove(index);
+            cdStückZahlList.remove(index);
             updateTableWithMusikListe(musikList);
             index = -1;
         } else {

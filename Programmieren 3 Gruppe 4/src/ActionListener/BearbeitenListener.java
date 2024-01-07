@@ -195,9 +195,7 @@ public class BearbeitenListener implements ActionListener {
         if (e.getSource().equals(SaveButton)) {
             if (parent.starten) {
              bearbeitenButton();
-            } else {
-                parent.getShoppingCartListner().add(medium);
-            }
+            } 
         }
         if (e.getSource().equals(delteButton)) {
             parent.getMusikMap().removeMedium(medium);
