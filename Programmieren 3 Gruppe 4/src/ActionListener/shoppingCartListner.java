@@ -29,6 +29,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private JButton loeschenButton;
     private JButton orderButton;
     private int index;
+    private Musik musik;
 
     public shoppingCartListner() {
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
@@ -63,9 +64,15 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         this.tableModel.setMusikList(musiklist);
         this.tableModel.fireTableDataChanged();
     }
+    public void setMusik(Musik m){
+        this.musik = m;
+    }
+    public Musik getMusik(){
+        return this.musik;
+    }
 
-    public void add(Musik m,int ps,int cs) {
-        musikList.add(m);
+    public void add(int ps,int cs) {
+        musikList.add(musik);
         pallteStückZahlList.add(ps);
         cdStückZahlList.add(cs);
         updateTableWithMusikListe(musikList);

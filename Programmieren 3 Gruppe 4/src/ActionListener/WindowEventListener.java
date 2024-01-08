@@ -8,6 +8,7 @@ import java.io.IOException;
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
 import SaveData_ReadData.MusikListDAO;
+import SaveData_ReadData.ProfilListDOA;
 
 
 public class WindowEventListener implements WindowListener{
@@ -28,9 +29,12 @@ public class WindowEventListener implements WindowListener{
     @Override
     public void windowClosing(WindowEvent e)    {
         MusikListDAO mld = new MusikListDAO("setup.data", true);
+        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);
+            pld.write(parent.getProfilList());
             mld.close();
+            pld.close();
         } catch (IOException e1) {
             e1.printStackTrace();
         }

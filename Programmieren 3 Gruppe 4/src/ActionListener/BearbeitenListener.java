@@ -143,10 +143,17 @@ public class BearbeitenListener implements ActionListener {
         southPanel.add(southcenterPanel, BorderLayout.CENTER);
         southPanel.add(southsouthPanel, BorderLayout.SOUTH);
         eingabePanel.add(southPanel, BorderLayout.SOUTH);
-        SaveButton.addActionListener(this);
+        if (parent.starten) {
+          SaveButton.addActionListener(this);  
+        }else{
+            SaveButton.addActionListener(new addToShoppingCart(parent));
+        }
+        
         delteButton.addActionListener(this);
         reinhörenButton.addActionListener(reinhörenListener);
-
+        SaveButton.setEnabled(false);
+        delteButton.setEnabled(false);
+        reinhörenButton.setEnabled(false);       
         return eingabePanel;
     }
 
@@ -167,6 +174,9 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
         mp3CheckBox.setSelected(m.getIsMp3());
+        SaveButton.setEnabled(true);
+        delteButton.setEnabled(true);
+        reinhörenButton.setEnabled(true);   
 
     }
 
@@ -187,7 +197,9 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(false);
         platteCheckBox.setSelected(false);
         mp3CheckBox.setSelected(false);
-
+        SaveButton.setEnabled(false);
+        delteButton.setEnabled(false);
+        reinhörenButton.setEnabled(false); 
     }
 
     @Override
@@ -195,7 +207,7 @@ public class BearbeitenListener implements ActionListener {
         if (e.getSource().equals(SaveButton)) {
             if (parent.starten) {
              bearbeitenButton();
-            } 
+            }
         }
         if (e.getSource().equals(delteButton)) {
             parent.getMusikMap().removeMedium(medium);

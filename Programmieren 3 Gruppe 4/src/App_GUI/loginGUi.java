@@ -8,7 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ActionListener.loginListner;
-import GeschaftsObejekt.profil;
+import ActionListener.newUserListener;
 import GeschaftsObejekt.profilList;
 import SaveData_ReadData.ProfilListDOA;
 
@@ -23,7 +23,8 @@ public class loginGUi extends JFrame {
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private JButton loginButton;
-
+    private JButton newUserButton;
+    
     public loginGUi() {
         profilList = new profilList();
         /*String x = "benutzer";
@@ -47,6 +48,7 @@ public class loginGUi extends JFrame {
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
         loginButton = new JButton("Login");
+        newUserButton = new JButton("Neu Hinzufügen");
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(userNameLabel);
@@ -55,14 +57,18 @@ public class loginGUi extends JFrame {
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(passwordLabel);
         centerconetentPanel.add(passwordField);
+        JPanel southPanel = new JPanel(new GridLayout(1,2));
+        southPanel.add(newUserButton);
+        southPanel.add(loginButton);
+
         loginButton.addActionListener(new loginListner(this));
+        newUserButton.addActionListener(new newUserListener(this));
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
-        getContentPane().add(loginButton, BorderLayout.SOUTH);
+        getContentPane().add(southPanel, BorderLayout.SOUTH);
 
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-
     }
 
     public String getUsername() {

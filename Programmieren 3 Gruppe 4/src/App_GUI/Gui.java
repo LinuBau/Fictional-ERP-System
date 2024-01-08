@@ -3,6 +3,7 @@ package App_GUI;
 import ActionListener.WindowEventListener;
 import ActionListener.shoppingCartListner;
 import GeschaftsObejekt.MusikList;
+import GeschaftsObejekt.profilList;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import MenuBar.MenuBar;
@@ -29,13 +30,16 @@ public class Gui extends JFrame {
     private MusikTableModel tableModel;
     private MusikMap musikmap;
     private MusikList musikList;
+    private profilList profilList;
     private BearbeitenListener bearbeitenListener;
     private shoppingCartListner shoppingCartListner;
     FilterListener filterListener;
     public boolean starten;
 
-    public Gui(boolean starten) {
+    public Gui(boolean starten,profilList pl) {
         this.starten = starten;
+        this.profilList = pl;
+
         filterListener = new FilterListener(this);
         JPanel eingabePanel = new JPanel(new FlowLayout());
         shoppingCartListner = new shoppingCartListner();
@@ -79,6 +83,7 @@ public class Gui extends JFrame {
                 int row = AtributTabelle.rowAtPoint(point);
                 bearbeitenListener.fillTextBox(tableModel.getMusikList().get(row));
                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+                shoppingCartListner.setMusik(tableModel.getMusikList().get(row));
             }
         });
 
@@ -109,6 +114,10 @@ public class Gui extends JFrame {
 
     public shoppingCartListner getShoppingCartListner() {
         return this.shoppingCartListner;
+    }
+
+    public profilList getProfilList(){
+        return this.profilList;
     }
 
     public static void main(String[] args) {

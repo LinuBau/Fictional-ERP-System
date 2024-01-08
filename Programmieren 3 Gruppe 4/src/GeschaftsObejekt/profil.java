@@ -47,6 +47,12 @@ public class profil {
             return 0;
         }
     }
+    public void addtoArrayList(int id,int pallteStückZahl,int cdStückZahl,boolean mp3){
+        musikId.add(id);
+        pallteStückZahlList.add(pallteStückZahl);
+        cdStückZahlList.add(cdStückZahl);
+        mp3Gekauft.add(mp3);
+    }
 
     public String getUsername() {
         return this.username;
