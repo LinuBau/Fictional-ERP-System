@@ -7,43 +7,23 @@ import App_GUI.Gui;
 import App_GUI.loginGUi;
 
 public class loginListner implements ActionListener {
-    private final String loginString;
-    private final String loginString2;
-    private final String password;
-    private final String password1;
     private loginGUi parent;
 
     public loginListner(loginGUi p) {
-        loginString = "mitarbeiter";
-        password = "mitarbeiter";
-        password1 = "benutzer";
-        loginString2 = "benutzer";
         parent = p;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (parent.getPassword().trim().equals(password)) {
-            if (parent.getUsername().trim().equals(loginString)) {
-                Gui mainWindow = new Gui(true);
+    public void actionPerformed(ActionEvent e) { 
+        int index = parent.getProfilList().indexOfLogin( parent.getUsername().trim(),parent.getPassword(), parent.getProfilList());
+        if(index != -1){
+               Gui mainWindow = new Gui(parent.getProfilList().get(index).getIsmitarbeiter());
                 mainWindow.setTitle("Musik Katalog");
                 mainWindow.setSize(1000, 500);
                 mainWindow.setLocationRelativeTo(null);
                 parent.setVisible(false);
                 mainWindow.setVisible(true);
-            }
         }
-        if (parent.getPassword().trim().equals(password1)) {
-             if (parent.getUsername().trim().equals(loginString2)) {
-                Gui mainWindow = new Gui(false);
-                mainWindow.setTitle("Musik Katalog");
-                mainWindow.setSize(1000, 500);
-                mainWindow.setLocationRelativeTo(null);
-                parent.setVisible(false);
-                mainWindow.setVisible(true);
-            }
-        }
-
     }
 
 }

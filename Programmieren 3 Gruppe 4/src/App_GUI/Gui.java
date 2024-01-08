@@ -83,7 +83,6 @@ public class Gui extends JFrame {
         });
 
         // Create MenuBar
-
         setJMenuBar(new MenuBar(this));
 
         // add WindowEventListner
@@ -114,9 +113,11 @@ public class Gui extends JFrame {
 
     public static void main(String[] args) {
         
-         loginGUi loginWindow = new loginGUi();
-         loginWindow.setTitle("Login");
-         loginWindow.setSize(500, 500);
-         loginWindow.setVisible(true);
+      loginGUi loginWindow = new loginGUi();
+     loginWindow.setTitle("Login");
+     loginWindow.setSize(500, 500);
+     loginWindow.setVisible(true);
+     //loginWindow.w();
+        
     }
 }

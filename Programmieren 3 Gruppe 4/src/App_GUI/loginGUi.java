@@ -8,6 +8,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ActionListener.loginListner;
+import GeschaftsObejekt.profil;
+import GeschaftsObejekt.profilList;
+import SaveData_ReadData.ProfilListDOA;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -16,11 +19,28 @@ public class loginGUi extends JFrame {
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
     private JLabel passwordLabel;
+    private profilList profilList;
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private JButton loginButton;
 
     public loginGUi() {
+        profilList = new profilList();
+        /*String x = "benutzer";
+        String y = "mitarbeiter";
+        profil p0 = new profil(x, x.hashCode(), false);
+        profil p1 = new profil(y, y.hashCode(), true);
+        profilList.add(p0);
+        profilList.add(p1);*/
+        try {
+            ProfilListDOA profilListDOA = new ProfilListDOA("logindata.data", false);
+            profilListDOA.read(profilList);
+            profilListDOA.close();
+            System.out.println(profilList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         centerconetentPanel = new JPanel(new GridLayout(4, 4));
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password");
@@ -48,9 +68,22 @@ public class loginGUi extends JFrame {
     public String getUsername() {
         return this.usserNameTextField.getText();
     }
-
-    public String getPassword() {
-        String tmp = new String(passwordField.getPassword());
-        return tmp;
+    public profilList getProfilList(){
+        return this.profilList;
     }
+
+    public int getPassword() {
+        String tmp = new String(passwordField.getPassword());
+        return tmp.hashCode();
+    }
+    public void w(){
+        try {
+            ProfilListDOA pd = new ProfilListDOA("logindata.data", true);
+            pd.write(profilList);
+            pd.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+   
 }
