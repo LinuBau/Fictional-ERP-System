@@ -4,12 +4,14 @@ import ActionListener.WindowEventListener;
 import ActionListener.shoppingCartListner;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profilList;
+import GeschaftsObejekt.MenuBar.benutzerMenuBar;
+import GeschaftsObejekt.MenuBar.mitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
-import MenuBar.MenuBar;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikListDAO;
-import ToolBar.toolBar;
+import ToolBar.benutzerToolBar;
+import ToolBar.mitarbeiterToolBar;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
@@ -36,26 +38,61 @@ public class Gui extends JFrame {
     FilterListener filterListener;
     public boolean starten;
 
-    public Gui(boolean starten,profilList pl) {
-        this.starten = starten;
+    public Gui(boolean starten, profilList pl) {
+        if(starten){
+            initialiseMitarbeiterFarme(pl);
+        }else{
+            initialiseUsserFrame(pl);
+        }
+    }
+
+    public void updateTableWithMusikListe(MusikList musiklist) {
+        this.tableModel.setMusikList(musiklist);
+        this.tableModel.fireTableDataChanged();
+    }
+
+    public MusikList getMusikList() {
+        return this.musikList;
+    }
+
+    public MusikMap getMusikMap() {
+        return this.musikmap;
+    }
+
+    public MusikTableModel getTableModel() {
+        return this.tableModel;
+    }
+
+    public shoppingCartListner getShoppingCartListner() {
+        return this.shoppingCartListner;
+    }
+
+    public profilList getProfilList() {
+        return this.profilList;
+    }
+
+    private void initialiseUsserFrame( profilList pl) {
         this.profilList = pl;
-
-        filterListener = new FilterListener(this);
-        JPanel eingabePanel = new JPanel(new FlowLayout());
-        shoppingCartListner = new shoppingCartListner();
-        eingabePanel.add(filterListener.getFilterPanel());
-        bearbeitenListener = new BearbeitenListener(this);
-
-        eingabePanel.add(bearbeitenListener.getBearbeitenPanel());
 
         // Importing Data
         musikList = new MusikList();
         MusikListDAO mld = new MusikListDAO("setup.data", false);
         try {
             mld.read(musikList);
+            mld.close();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+
+        // Initializing the ActionListner
+        filterListener = new FilterListener(this);
+        bearbeitenListener = new BearbeitenListener(this);
+        shoppingCartListner = new shoppingCartListner(this);
+
+        // add FilterPanel and EditPanel
+        JPanel eingabePanel = new JPanel(new FlowLayout());
+        eingabePanel.add(filterListener.getFilterPanel());
+        eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
 
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
@@ -68,7 +105,15 @@ public class Gui extends JFrame {
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(eingabePanel, BorderLayout.CENTER);
 
-        northPanel.add(new toolBar(this), BorderLayout.NORTH);
+        // Remove Collum that user are not allowod to see
+        int[] columnsToHide = { 0, 4, 5, 9, 10, 11 };
+        int removeCount = 0;
+        for (int i : columnsToHide) {
+            AtributTabelle.removeColumn(AtributTabelle.getColumnModel().getColumn(i - removeCount));
+            removeCount++;
+        }
+
+        northPanel.add(new benutzerToolBar(this), BorderLayout.NORTH);
 
         // Setting up the layout
         getContentPane().setLayout(new BorderLayout());
@@ -81,52 +126,86 @@ public class Gui extends JFrame {
             public void mousePressed(MouseEvent mouseEvent) {
                 Point point = mouseEvent.getPoint();
                 int row = AtributTabelle.rowAtPoint(point);
-                bearbeitenListener.fillTextBox(tableModel.getMusikList().get(row));
+                bearbeitenListener.benutzerFillTextBox(tableModel.getMusikList().get(row));
                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
                 shoppingCartListner.setMusik(tableModel.getMusikList().get(row));
             }
         });
 
         // Create MenuBar
-        setJMenuBar(new MenuBar(this));
+        setJMenuBar(new benutzerMenuBar());
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
 
     }
 
-    public void updateTableWithMusikListe(MusikList musiklist) {
-        this.tableModel.setMusikList(musiklist);
-        this.tableModel.fireTableDataChanged();
-    }
+    private void initialiseMitarbeiterFarme(profilList pl) {
+        this.profilList = pl;
 
-    public MusikList getMusikList() {
-        return musikList;
-    }
+        // Importing Data
+        musikList = new MusikList();
+        MusikListDAO mld = new MusikListDAO("setup.data", false);
+        try {
+            mld.read(musikList);
+            mld.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
-    public MusikMap getMusikMap() {
-        return this.musikmap;
-    }  
+        // Initializing the ActionListner
+        filterListener = new FilterListener(this);
+        bearbeitenListener = new BearbeitenListener(this);
 
-    public MusikTableModel getTableModel() {
-        return this.tableModel;
-    }
+        // add FilterPanel and EditPanel#
+        JPanel eingabePanel = new JPanel(new FlowLayout());
+        eingabePanel.add(filterListener.getFilterPanel());
+        eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
 
-    public shoppingCartListner getShoppingCartListner() {
-        return this.shoppingCartListner;
-    }
+        // Initializing the MusikMap
+        musikmap = new MusikMap(musikList);
 
-    public profilList getProfilList(){
-        return this.profilList;
+        // Initializing sortetd JTable
+        MusikList sotierteList = new MusikList();
+        sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+        tableModel = new MusikTableModel(sotierteList);
+        AtributTabelle = new JTable(tableModel);
+        JPanel northPanel = new JPanel(new BorderLayout());
+        northPanel.add(eingabePanel, BorderLayout.CENTER);
+
+
+        northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
+
+        // Setting up the layout
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
+        getContentPane().add(northPanel, BorderLayout.NORTH);
+        setLocationRelativeTo(null);
+
+        // Add Mouse Pressed Event
+        AtributTabelle.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                Point point = mouseEvent.getPoint();
+                int row = AtributTabelle.rowAtPoint(point);
+                bearbeitenListener.mitarbeiterFillTextBox(tableModel.getMusikList().get(row));
+                bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+            }
+        });
+
+        // Create MenuBar
+        setJMenuBar(new mitarbeiterMenuBar(this));
+
+        // add WindowEventListner
+        addWindowListener(new WindowEventListener(this));
     }
 
     public static void main(String[] args) {
-        
-      loginGUi loginWindow = new loginGUi();
-     loginWindow.setTitle("Login");
-     loginWindow.setSize(500, 500);
-     loginWindow.setVisible(true);
-     //loginWindow.w();
-        
+
+        loginGUi loginWindow = new loginGUi();
+        loginWindow.setTitle("Login");
+        loginWindow.setSize(500, 500);
+        loginWindow.setVisible(true);
+        // loginWindow.w();
+
     }
 }

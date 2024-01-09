@@ -3,26 +3,37 @@ package GeschaftsObejekt;
 
 
 import java.util.ArrayList;
+import java.util.ListIterator;
+
+
 
 public class MusikList extends ArrayList<Musik> {
-    public boolean unique(int id,MusikList ml){
-        for(Musik m : ml){
-            if (m.getMusik_GUID() == id) {
-                return false;
+    public boolean unique(int id){
+        ListIterator<Musik> it = listIterator();
+        if(id != 0){
+            while (it.hasNext()) {
+                if (it.next().getMusik_GUID() == id) {
+                    return false;
+                }
             }
+        }else{
+            return true;
         }
         return true;
     }
-    public int getIndex(int id, MusikList ml){
-        for(int i=0;i<ml.size();i++){
-            if(ml.get(i).getMusik_GUID()==id){
-                return i;
+    public int getIndex(int id){
+       ListIterator<Musik> it = listIterator();
+        if(id != 0){
+            while (it.hasNext()) {
+                if (it.next().getMusik_GUID() == id) {
+                    return it.previousIndex();
+                }
             }
         }
         return -1;
     }
     public void replaceMusik( Musik newmedium,MusikList musikList){
-        int index = getIndex(newmedium.getMusik_GUID(), musikList);
+        int index = getIndex(newmedium.getMusik_GUID());
         musikList.set(index, newmedium);
     }
   

@@ -33,10 +33,12 @@ public class newUserListener extends JDialog implements ActionListener {
         centerconetentPanel = new JPanel(new GridLayout(4, 4));
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
+
         showPasswordCheckBox = new JCheckBox("Passwort anzeigen");
         hinzufügenButton = new JButton("Hinzufügen");
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password");
+
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
 
@@ -50,10 +52,12 @@ public class newUserListener extends JDialog implements ActionListener {
         centerconetentPanel.add(passwordField);
         this.setModalityType(JDialog.ModalityType.APPLICATION_MODAL);
         this.setLocationRelativeTo(parent);
+
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
         showPasswordCheckBox.addActionListener(this);
         hinzufügenButton.addActionListener(this);
+        
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);
@@ -88,6 +92,7 @@ public class newUserListener extends JDialog implements ActionListener {
                 loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),
                         parent);
             }
+            this.setVisible(false);
         }
     }
 

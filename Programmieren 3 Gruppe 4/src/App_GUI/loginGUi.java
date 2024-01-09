@@ -27,12 +27,6 @@ public class loginGUi extends JFrame {
     
     public loginGUi() {
         profilList = new profilList();
-        /*String x = "benutzer";
-        String y = "mitarbeiter";
-        profil p0 = new profil(x, x.hashCode(), false);
-        profil p1 = new profil(y, y.hashCode(), true);
-        profilList.add(p0);
-        profilList.add(p1);*/
         try {
             ProfilListDOA profilListDOA = new ProfilListDOA("logindata.data", false);
             profilListDOA.read(profilList);

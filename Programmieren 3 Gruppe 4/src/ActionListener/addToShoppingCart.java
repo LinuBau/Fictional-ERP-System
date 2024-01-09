@@ -57,7 +57,7 @@ public class addToShoppingCart extends JDialog implements ActionListener {
         this.setVisible(true);
         if (e.getSource().equals(hinzufuegeButton)) {
             int index = parent.getProfilList().getIndexofLogin();
-            parent.getShoppingCartListner().add(Integer.parseInt(platteTextField.getText().trim()),Integer.parseInt(cdTextField.getText().trim()));
+            parent.getShoppingCartListner().add();
             parent.getProfilList().get(index).addtoArrayList(parent.getShoppingCartListner().getMusik().getMusik_GUID(),Integer.parseInt(platteTextField.getText().trim()),
             Integer.parseInt(cdTextField.getText().trim()),mp3CheckBox.isSelected());
             clearTextBox();

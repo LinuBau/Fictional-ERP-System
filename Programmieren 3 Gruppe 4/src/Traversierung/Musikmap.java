@@ -266,8 +266,7 @@ public class MusikMap {
     }
 
  public void replaceMedium(Musik altesmedium,Musik neuesMedium) {
-        int index = musikList.getIndex(altesmedium.getMusik_GUID(), musikList);
-        musikList.set(index, neuesMedium);
+        musikList.replaceMusik(neuesMedium, musikList);
         replaceFromAllMaps(altesmedium,neuesMedium);
     }
 

@@ -11,7 +11,7 @@ public class profil {
     private ArrayList<Integer> cdStückZahlList;
     private ArrayList<Boolean> mp3Gekauft;
     private final boolean ismitarbeiter;
-    
+
     public profil(String username, int passwordHash, boolean ismitarbeiter) {
         this.username = username;
         this.passwordHash = passwordHash;
@@ -22,7 +22,7 @@ public class profil {
         this.mp3Gekauft = new ArrayList<>();
     }
 
-    public profil(String username, int passwordHash,boolean ismitarbeiter, List<Integer> id, List<Integer> platteStück,
+    public profil(String username, int passwordHash, boolean ismitarbeiter, List<Integer> id, List<Integer> platteStück,
             List<Integer> cdStück, List<Boolean> mp3) {
         this.username = username;
         this.passwordHash = passwordHash;
@@ -40,14 +40,16 @@ public class profil {
             return false;
         }
     }
-    public int  ismitarbeiter(profil p){
-        if(p.getIsmitarbeiter()){
+
+    public int ismitarbeiter(profil p) {
+        if (p.getIsmitarbeiter()) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
-    public void addtoArrayList(int id,int pallteStückZahl,int cdStückZahl,boolean mp3){
+
+    public void addtoArrayList(int id, int pallteStückZahl, int cdStückZahl, boolean mp3) {
         musikId.add(id);
         pallteStückZahlList.add(pallteStückZahl);
         cdStückZahlList.add(cdStückZahl);
@@ -97,8 +99,12 @@ public class profil {
     public boolean getIsmitarbeiter() {
         return this.ismitarbeiter;
     }
-    public void setIsmitarbeiter(){
 
+    public void removeArray(int index) {
+        musikId.remove(index);
+        pallteStückZahlList.remove(index);
+        cdStückZahlList.remove(index);
+        mp3Gekauft.remove(index);
     }
 
 }
