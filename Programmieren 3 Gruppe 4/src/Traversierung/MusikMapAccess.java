@@ -19,7 +19,7 @@ public class MusikMapAccess implements IMusikMapAccess {
     
     @Override
     public MusikList getAllMusik() {
-        musikMap.getGesamteMusikListe();
+ //       musikMap.getGesamteMusikListe();
     return musikMap.getMusikList();
 }
 

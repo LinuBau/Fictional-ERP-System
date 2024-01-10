@@ -106,7 +106,7 @@ public Gui(boolean starten) {
 
         Gui mainWindow = new Gui(true);
         mainWindow.setTitle("Musik Katalog");
-        mainWindow.setSize(1000, 500);
+        mainWindow.setSize(1200, 750);
         mainWindow.setLocationRelativeTo(null);
         mainWindow.setVisible(true);
 
