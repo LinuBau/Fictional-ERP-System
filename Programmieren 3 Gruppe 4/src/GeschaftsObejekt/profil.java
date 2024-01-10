@@ -55,6 +55,11 @@ public class profil {
         cdStückZahlList.add(cdStückZahl);
         mp3Gekauft.add(mp3);
     }
+     public void replacetoArrayList(int index, int newpallteStückZahl, int newcdStückZahl, boolean newmp3) {
+        pallteStückZahlList.set(index, newpallteStückZahl);
+        cdStückZahlList.set(index, newcdStückZahl);
+        mp3Gekauft.set(index, newmp3);
+    }
 
     public String getUsername() {
         return this.username;

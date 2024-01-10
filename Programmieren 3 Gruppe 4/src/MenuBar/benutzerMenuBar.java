@@ -1,4 +1,4 @@
-package GeschaftsObejekt.MenuBar;
+package MenuBar;
 
 import javax.swing.JMenuBar;
 

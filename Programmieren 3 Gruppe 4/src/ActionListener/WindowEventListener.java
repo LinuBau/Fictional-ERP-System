@@ -28,7 +28,7 @@ public class WindowEventListener implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e)    {
-        MusikListDAO mld = new MusikListDAO("setup.data", true);
+        MusikListDAO mld = new MusikListDAO("setup/setup.data", true);
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);

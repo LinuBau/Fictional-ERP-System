@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import ActionListener.loginListner;
 import ActionListener.newUserListener;
@@ -62,7 +63,7 @@ public class loginGUi extends JFrame {
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
 
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public String getUsername() {

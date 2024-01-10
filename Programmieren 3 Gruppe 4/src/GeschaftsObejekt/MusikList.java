@@ -8,6 +8,11 @@ import java.util.ListIterator;
 
 
 public class MusikList extends ArrayList<Musik> {
+    /**
+     * 
+     * @param id
+     * @return false if int id in List else return true
+     */
     public boolean unique(int id){
         ListIterator<Musik> it = listIterator();
         if(id != 0){

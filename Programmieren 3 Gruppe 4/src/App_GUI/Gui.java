@@ -4,8 +4,8 @@ import ActionListener.WindowEventListener;
 import ActionListener.shoppingCartListner;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profilList;
-import GeschaftsObejekt.MenuBar.benutzerMenuBar;
-import GeschaftsObejekt.MenuBar.mitarbeiterMenuBar;
+import MenuBar.benutzerMenuBar;
+import MenuBar.mitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import Modele.MusikTableModel;
@@ -139,6 +139,14 @@ public class Gui extends JFrame {
         addWindowListener(new WindowEventListener(this));
 
     }
+
+
+
+    
+    /**
+     * 
+     * @param pl
+     */
 
     private void initialiseMitarbeiterFarme(profilList pl) {
         this.profilList = pl;
