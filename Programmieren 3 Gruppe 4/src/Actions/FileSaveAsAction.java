@@ -1,24 +1,20 @@
-
 package Actions;
 
-package Actions;
-
-import App_GUI.Gui;
-import SaveData_ReadData.MusikCsvListDAO;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
+import App_GUI.Gui;
 import SaveData_ReadData.MusikCsvListDAO;
 
 
 
-public class FileSaveAction extends AbstractAction {
+public class FileSaveAsAction extends AbstractAction {
     private Gui parent;
 
-    public FileSaveAction(Gui parent){
+    public FileSaveAsAction(Gui parent){
         super();
         this.parent = parent;
     }
@@ -27,8 +23,7 @@ public class FileSaveAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        chooser.setCurrentDirectory(workingDirectory);
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int returnval = chooser.showSaveDialog(parent);
         if (returnval == chooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
@@ -44,6 +39,5 @@ public class FileSaveAction extends AbstractAction {
             }
         }
     }
-}
     
-
+}

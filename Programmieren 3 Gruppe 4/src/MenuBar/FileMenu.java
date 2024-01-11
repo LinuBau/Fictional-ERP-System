@@ -12,9 +12,10 @@ public class FileMenu extends JMenu{
     FileMenu(Gui parent){
     
         super("File");
-        this.add(new FileSafeItem(parent));
-        this.addSeparator();
         this.add(new FileOpenItem(parent));
-        
+        this.addSeparator();
+        this.add(new FileSaveAsItem(parent));
+        this.addSeparator();
+        this.add(new FileSaveItem(parent));
     }
 }

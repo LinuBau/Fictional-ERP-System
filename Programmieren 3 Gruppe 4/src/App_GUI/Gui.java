@@ -84,6 +84,8 @@ public class Gui extends JFrame {
             addWindowListener(new WindowEventListener(this));
         }
     }
+    
+    
 
     public void updateTableWithMusikListe(MusikList musiklist) {
         this.tableModel.setMusikList(musiklist);
