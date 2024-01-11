@@ -25,8 +25,7 @@ public class loginListner implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = parent.getProfilList().indexOfLogin(parent.getUsername().trim(), parent.getPassword(),
-                parent.getProfilList());
+        int index = parent.getProfilList().indexOfLogin(parent.getUsername().trim(), parent.getPassword());
         if (index != -1) {
             login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent);
         }

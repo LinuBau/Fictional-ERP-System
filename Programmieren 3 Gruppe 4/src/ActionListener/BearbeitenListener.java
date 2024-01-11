@@ -147,25 +147,7 @@ public class BearbeitenListener implements ActionListener {
         delteButton.addActionListener(this);
         reinhörenButton.addActionListener(reinhörenListener);
 
-        genreComboBox.setEnabled(false);
-        musikGUIDTextField.setEnabled(false);
-        musikerTextField.setEnabled(false);
-        albumTextField.setEnabled(false);
-        songNameTextField.setEnabled(false);
-        regalPlatzCDTextField.setEnabled(false);
-        regalPlatzPlatteTextField.setEnabled(false);
-        cdListenpreisTextField.setEnabled(false);
-        platteListenpreisTextField.setEnabled(false);
-        mp3ListenpreisTextField.setEnabled(false);
-        cdEinkaufspreisTextField.setEnabled(false);
-        platteEinkaufspreisTextField.setEnabled(false);
-        mp3EinkaufspreisTextField.setEnabled(false);
-        cdCheckBox.setEnabled(false);
-        platteCheckBox.setEnabled(false);
-        mp3CheckBox.setEnabled(false);
-        SaveButton.setEnabled(false);
-        delteButton.setEnabled(false);
-        reinhörenButton.setEnabled(false);
+        setMitarbeiterEnable(false);
 
         return eingabePanel;
     }
@@ -342,15 +324,13 @@ public class BearbeitenListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(SaveButton)) {
-            if (parent.starten) {
-                bearbeitenButton();
-            }
+        if (e.getSource().equals(SaveButton)) {          
+         bearbeitenButton();          
         }
         if (e.getSource().equals(delteButton)) {
             parent.getMusikMap().removeMedium(medium);
             clearTextBox();
-            parent.update(parent.getGraphics());
+            parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
         }
     }
 

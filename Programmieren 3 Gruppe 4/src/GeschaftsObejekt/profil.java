@@ -40,6 +40,12 @@ public class profil {
             return false;
         }
     }
+    public void clear(){
+        musikId.clear();
+        pallteStückZahlList.clear();
+        cdStückZahlList.clear();
+        mp3Gekauft.clear();
+    }
 
     public int ismitarbeiter(profil p) {
         if (p.getIsmitarbeiter()) {

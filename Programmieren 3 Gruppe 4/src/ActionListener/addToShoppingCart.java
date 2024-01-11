@@ -2,7 +2,6 @@ package ActionListener;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,21 +10,22 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 
 public class addToShoppingCart extends JDialog implements ActionListener {
-    private TextField platteTextField;
-    private TextField cdTextField;
+    private JSpinner platteTextField;
+    private JSpinner cdTextField;
     private JCheckBox mp3CheckBox;
     private JButton hinzufuegeButton;
     private Gui parent;
 
     public addToShoppingCart(Gui p) {
         parent = p;
-        platteTextField = new TextField();
-        cdTextField = new TextField();
+        platteTextField = new JSpinner();
+        cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
         hinzufuegeButton = new JButton("Hinzufügen");
         JPanel centerPanel = new JPanel(new GridLayout(1, 3));
@@ -58,8 +58,8 @@ public class addToShoppingCart extends JDialog implements ActionListener {
     }
 
     private void clearTextBox() {
-        platteTextField.setText("");
-        cdTextField.setText("");
+        platteTextField.setValue(0);;
+        cdTextField.setValue(0);;
         mp3CheckBox.setSelected(false);
     }
 
@@ -75,15 +75,14 @@ public class addToShoppingCart extends JDialog implements ActionListener {
                 int cdAnzahl = 0;
                 boolean mp3Seclect = false;
                 if (platteTextField.isEnabled()) {
-                    platteAnzahl = Integer.parseInt(platteTextField.getText().trim());
+                    platteAnzahl = (int)platteTextField.getValue();
                 }
                 if (cdTextField.isEnabled()) {
-                    cdAnzahl = Integer.parseInt(cdTextField.getText().trim());
+                    cdAnzahl = (int)(cdTextField.getValue());
                 }
                 if (mp3CheckBox.isEnabled()) {
                     mp3Seclect = mp3CheckBox.isSelected();
                 }
-
                 parent.getProfilList().get(index).addtoArrayList(
                         parent.getShoppingCartListner().getMusik().getMusik_GUID(),
                         platteAnzahl,

@@ -86,8 +86,7 @@ public class newUserListener extends JDialog implements ActionListener {
         if (e.getSource().equals(hinzufügenButton)) {
             profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
             parent.getProfilList().add(p);
-            int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword(),
-                    parent.getProfilList());
+            int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
             if (index != -1) {
                 loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),
                         parent);

@@ -3,7 +3,6 @@ package ActionListener;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,12 +17,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import Modele.MusikTableModel;
+import SaveData_ReadData.TxtWriting;
 
 public class shoppingCartListner extends JDialog implements ActionListener {
     private JTable selectTabele;
@@ -32,8 +34,8 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private JButton loeschenButton;
     private JButton orderButton;
     private JButton speicherButton;
-    private TextField platteTextField;
-    private TextField cdTextField;
+    private JSpinner platteTextField;
+    private JSpinner cdTextField;
     private JCheckBox mp3CheckBox;
     private int index;
     private Musik musik;
@@ -48,8 +50,8 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         speicherButton = new JButton("Speichern");
         orderButton = new JButton("Bestellen");
         loeschenButton = new JButton("Löschen");
-        platteTextField = new TextField();
-        cdTextField = new TextField();
+        platteTextField = new JSpinner();
+        cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
         buttonPanel.add(platteTextField);
         buttonPanel.add(cdTextField);
@@ -68,6 +70,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
 
         loeschenButton.addActionListener(this);
         speicherButton.addActionListener(this);
+        orderButton.addActionListener(this);
 
         selectTabele.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
@@ -76,6 +79,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
                 fillTextField(index);
             }
         });
+        
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         this.getContentPane().add(new JScrollPane(selectTabele), BorderLayout.CENTER);
@@ -88,17 +92,16 @@ public class shoppingCartListner extends JDialog implements ActionListener {
 
     private void fillTextField(int indexl) {
         int indexofProfil = parent.getProfilList().getIndexofLogin();
-        String StringPlatte = parent.getProfilList().get(indexofProfil).getPallteStückZahlList().get(indexl).toString();
-        String StringCD = parent.getProfilList().get(indexofProfil).getCdStückZahlList().get(indexl).toString();
+        int stückZahlPlatte = parent.getProfilList().get(indexofProfil).getPallteStückZahlList().get(indexl);
+        int stückZahlCD = parent.getProfilList().get(indexofProfil).getCdStückZahlList().get(indexl);
         boolean isMp3 = parent.getProfilList().get(indexofProfil).getMp3Gekauft().get(indexl);
         platteTextField.setEnabled(musikList.get(index).getIsPlatte());
         cdTextField.setEnabled(musikList.get(index).getIsCD());
         mp3CheckBox.setEnabled(musikList.get(index).getIsMp3());
-        platteTextField.setText(StringPlatte);
-        cdTextField.setText(StringCD);
+        platteTextField.setValue(stückZahlPlatte);
+        cdTextField.setValue(stückZahlCD);
         mp3CheckBox.setSelected(isMp3);
     }
-
 
     public void updateTableWithMusikListe(MusikList musiklist) {
         this.tableModel.setMusikList(musiklist);
@@ -125,8 +128,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private void saveData() {
         int indexofLogin = parent.getProfilList().getIndexofLogin();
         parent.getProfilList().get(indexofLogin).replacetoArrayList(index,
-                Integer.parseInt(platteTextField.getText().trim()),
-                Integer.parseInt(cdTextField.getText().trim()), mp3CheckBox.isSelected());
+                (int) platteTextField.getValue(), (int) cdTextField.getValue(), mp3CheckBox.isSelected());
     }
 
     @Override
@@ -135,8 +137,24 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         if (e.getSource().equals(loeschenButton)) {
             removeFromMusikList();
         }
-        if(e.getSource().equals(speicherButton)){
+
+        if (e.getSource().equals(speicherButton)) {
             saveData();
+        }
+
+        if (e.getSource().equals(orderButton)) {
+            String filepath = JFileChooserTxt();
+            TxtWriting pdfwriter = new TxtWriting(filepath, true, musikList,
+                    parent.getProfilList().get(parent.getProfilList().getIndexofLogin()));
+            try {
+                pdfwriter.write(filepath);
+                pdfwriter.close();
+                musikList.clear();
+                parent.getProfilList().get(parent.getProfilList().getIndexofLogin()).clear();
+                updateTableWithMusikListe(musikList);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -169,17 +187,21 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         }
     }
 
-    private String JFileChooserPDF() {
+    private String JFileChooserTxt() {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        int returnval = chooser.showSaveDialog(parent);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PDf Datei", "pdf");
+        chooser.setFileFilter(filter);
+        int returnval = chooser.showSaveDialog(null);
+        System.out.println(returnval);
         if (returnval == JFileChooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
-            if (!path.endsWith(".pdf")) {
-                path = path + ".pdf";
-                return path;
+            if (!path.endsWith(".txt")) {
+                path = path + ".txt";
+                System.out.println(path);
             }
+            return path;
         }
         return null;
     }
