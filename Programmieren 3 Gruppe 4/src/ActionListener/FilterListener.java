@@ -45,7 +45,7 @@ public class FilterListener implements ActionListener {
     private JSpinner mindestpreisSpinner;
     private JSpinner höchstpreisSpinner;
 
-    
+    private JLabel trefferAnzeige;
 
     public FilterListener(Gui gui, MusikMap musikMap) {
         this.parent = gui;
@@ -129,10 +129,13 @@ public class FilterListener implements ActionListener {
         eingabePanel.validate();
 
         // Erstellen des Filterknopfes
+        trefferAnzeige = new JLabel("Treffer: 0");
+
         JButton filternButton = new JButton("Filtern");
         filternButton.addActionListener(this);
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(filternButton);
+        filterPanel.add(trefferAnzeige);
 
         // Zusammenführen der Panels
         JPanel returbPanel = new JPanel();
@@ -155,59 +158,66 @@ public class FilterListener implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        List<Musik> gefilterteListe = new ArrayList<>(musikMap.getMusikList());
-        
-        double minPreis = (double) mindestpreisSpinner.getValue();
-        double maxPreis = (double) höchstpreisSpinner.getValue();
-        String selectedAlbum = (String) albumComboBox.getSelectedItem();
+public void actionPerformed(ActionEvent e) {
+    double minPreis = (double) mindestpreisSpinner.getValue();
+    double maxPreis = (double) höchstpreisSpinner.getValue();
+    String selectedAlbum = (String) albumComboBox.getSelectedItem();
 
-        String titel = titelTextField.getText().toLowerCase();
-        String interpret = interpretTextField.getText().toLowerCase();
-        String genre = (String) genreComboBox.getSelectedItem();
+    String titel = titelTextField.getText().toLowerCase();
+    String interpret = interpretTextField.getText().toLowerCase();
+    String genre = (String) genreComboBox.getSelectedItem();
 
-        boolean isCDSelected = toggleButtonCD.isSelected();
-        boolean isMP3Selected = toggleButtonMP3.isSelected();
-        boolean isVinylSelected = toggleButtonVinyl.isSelected();
+    boolean isCDSelected = toggleButtonCD.isSelected();
+    boolean isMP3Selected = toggleButtonMP3.isSelected();
+    boolean isVinylSelected = toggleButtonVinyl.isSelected();
 
-        if (genre != null && !genre.equals("Alle")) {
-        gefilterteListe = new ArrayList<>(musikMap.getGenreMap().getOrDefault(genre, Collections.emptyList()));
-            }
-        
-        if (selectedAlbum != null && !selectedAlbum.equals("Alle")) {
-        List<Musik> albumList = musikMap.getAlbumMap().getOrDefault(selectedAlbum, Collections.emptyList());
-        gefilterteListe.retainAll(albumList);
-        }
-        
-        Stream<Musik> stream = gefilterteListe.stream();
-        
-        if (isCDSelected || isMP3Selected || isVinylSelected) {
-            stream = stream.filter(m -> {
-                boolean matchesCD = isCDSelected && m.getIsCD() && m.getCDListenpreis() >= minPreis && m.getCDListenpreis() <= maxPreis;
-                boolean matchesMP3 = isMP3Selected && m.getIsMp3() && m.getMp3Listenpreis() >= minPreis && m.getMp3Listenpreis() <= maxPreis;
-                boolean matchesVinyl = isVinylSelected && m.getIsPlatte() && m.getPlatteListenpreis() >= minPreis && m.getPlatteListenpreis() <= maxPreis;
-                return matchesCD || matchesMP3 || matchesVinyl;
-        });
-       
-        if (!interpret.isEmpty()) {
-            stream = stream.filter(m -> m.getMusiker().toLowerCase().contains(interpret));
-        }
-        if (!titel.isEmpty()) {
-        stream = stream.filter(m -> m.getSongName().toLowerCase().contains(titel));
-        }
-      
-         TreeMap<String, Musik> sortierteErgebnisse = stream.collect(Collectors.toMap(
-                Musik::getSongName, 
-                m -> m, 
-                (existing, replacement) -> existing, 
-                TreeMap::new));
-   
-   
-        MusikList gefilterteErgebnisse = new MusikList();
-        gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
+    // Filtern Sie die Liste einmal und speichern Sie das Ergebnis in einer neuen Liste
+    List<Musik> gefilterteListe = musikMap.getMusikList().stream()
+            .filter(m -> {
+                if (genre != null && !genre.equals("Alle")) {
+                    List<Musik> genreList = musikMap.getGenreMap().getOrDefault(genre, Collections.emptyList());
+                    if (!genreList.contains(m)) {
+                        return false;
+                    }
+                }
 
-        parent.updateTableWithMusikListe(gefilterteErgebnisse); 
-    }
+                if (selectedAlbum != null && !selectedAlbum.equals("Alle")) {
+                    List<Musik> albumList = musikMap.getAlbumMap().getOrDefault(selectedAlbum, Collections.emptyList());
+                    if (!albumList.contains(m)) {
+                        return false;
+                    }
+                }
 
+                if ((isCDSelected && m.getIsCD() && m.getCDListenpreis() >= minPreis && m.getCDListenpreis() <= maxPreis) ||
+                    (isMP3Selected && m.getIsMp3() && m.getMp3Listenpreis() >= minPreis && m.getMp3Listenpreis() <= maxPreis) ||
+                    (isVinylSelected && m.getIsPlatte() && m.getPlatteListenpreis() >= minPreis && m.getPlatteListenpreis() <= maxPreis)) {
+                    return true;
+                }
+                return false;
+            })
+            .filter(m -> {
+                if (!interpret.isEmpty() && !m.getMusiker().toLowerCase().contains(interpret)) {
+                    return false;
+                }
+                return true;
+            })
+            .filter(m -> titel.isEmpty() || m.getSongName().toLowerCase().contains(titel))
+            .collect(Collectors.toList());
+
+    long anzahlTreffer = gefilterteListe.size();
+    trefferAnzeige.setText("Treffer: " + anzahlTreffer);
+
+    TreeMap<String, Musik> sortierteErgebnisse = gefilterteListe.stream()
+            .collect(Collectors.toMap(
+                    Musik::getSongName,
+                    m -> m,
+                    (existing, replacement) -> existing,
+                    TreeMap::new));
+
+    MusikList gefilterteErgebnisse = new MusikList();
+    gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
+
+    parent.updateTableWithMusikListe(gefilterteErgebnisse);
 }
+
 }
