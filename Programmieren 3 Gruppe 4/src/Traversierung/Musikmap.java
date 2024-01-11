@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
 public class MusikMap {
 
-    private MusikList musikList;
+    private final MusikList musikList;
     private HashMap<String, List<Musik>> songNameMap;
     private HashMap<String, List<Musik>> musikerMap;
     private HashMap<String, List<Musik>> genreMap;
@@ -131,46 +130,6 @@ public class MusikMap {
         }
     }
 
-    public List<Musik> getMedienBySongName(String songName) {
-        return songNameMap.getOrDefault(songName, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByMusiker(String musiker) {
-        return musikerMap.getOrDefault(musiker, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByGenre(String genre) {
-        return genreMap.getOrDefault(genre, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByAlbum(String album) {
-        return albumMap.getOrDefault(album, new ArrayList<>());
-    }
-
-    public List<Musik> getMedienByCD() {
-        return musikList.stream()
-                .filter(medium -> medium.getIsCD())
-                .collect(Collectors.toList());
-    }
-
-    public List<Musik> getMedienByMP3() {
-        return musikList.stream()
-                .filter(medium -> medium.getIsMp3())
-                .collect(Collectors.toList());
-    }
-
-    public List<Musik> getMedienByVinyl() {
-        return musikList.stream()
-                .filter(medium -> medium.getIsPlatte())
-                .collect(Collectors.toList());
-    }
-
-    public List<Musik> getDefaultOrAllMedien() {
-        return new ArrayList<>(musikList);
-    }
-
-    
-
     public List<Musik> sortMusikListBySongName(List<Musik> unsortedList) {
         TreeMap<String, Musik> sortedMap = new TreeMap<>();
         for (Musik m : unsortedList) {
@@ -194,7 +153,7 @@ public class MusikMap {
     replaceMediumFromMap(genreMap, altesMedium.getGenre(), altesMedium, neuesMedium);
     replaceMediumFromMap(albumMap, altesMedium.getAlbum(), altesMedium, neuesMedium);
     replaceMediumFromMap(songNameMap, altesMedium.getSongName(), altesMedium, neuesMedium);
-    replaceMediumInMediumTypMap(altesMedium, neuesMedium);  // Neue Methode
+    replaceMediumInMediumTypMap(altesMedium, neuesMedium); 
     replaceMediumInPreisMap(cdListenpreisMap, altesMedium.getCDListenpreis(), altesMedium, neuesMedium);
     replaceMediumInPreisMap(platteListenpreisMap, altesMedium.getPlatteListenpreis(), altesMedium, neuesMedium);
     replaceMediumInPreisMap(mp3ListenpreisMap, altesMedium.getMp3Listenpreis(), altesMedium, neuesMedium);

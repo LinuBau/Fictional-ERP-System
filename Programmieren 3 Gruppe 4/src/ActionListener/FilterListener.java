@@ -12,12 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -29,16 +27,14 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 public class FilterListener implements ActionListener {
-    private MusikMap musikMap;
+    private final MusikMap musikMap;
     private JToggleButton toggleButtonCD;
     private JToggleButton toggleButtonMP3;
     private JToggleButton toggleButtonVinyl;
 
     private JTextField titelTextField;
     private JTextField interpretTextField;
-    private JTextField albumTextField;
-    private JTextField genreTextField;
-    private Gui parent;
+    private final Gui parent;
     private JComboBox<String> genreComboBox;
     private JComboBox<String> albumComboBox;
 
@@ -61,8 +57,7 @@ public class FilterListener implements ActionListener {
 
         titelTextField = new JTextField(20);
         interpretTextField = new JTextField(20);
-        albumTextField = new JTextField(20);
-        genreTextField = new JTextField(20);
+        
         
         SpinnerNumberModel minModel = new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 0.5);
         SpinnerNumberModel maxModel = new SpinnerNumberModel(100, 0.0, Double.MAX_VALUE, 0.5);
