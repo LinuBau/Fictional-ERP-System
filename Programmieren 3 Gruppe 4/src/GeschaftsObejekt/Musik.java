@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Musik {
     private int Musik_GUID;
+    private String MBID;
     private String Musiker;
     private String Album;
     private String SongName;
@@ -66,6 +67,13 @@ public class Musik {
         this.CD = isCD;
         this.Platte = isPlatte;
         this.Mp3 = isMp3;
+    }
+    public double getPreisofAll(Musik m,int platteMenge,int cdMenge){
+        double mp3prise=0;
+        if (m.Mp3) {
+            mp3prise=Mp3Listenpreis;
+        }
+        return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
 
     public int getMusik_GUID() {

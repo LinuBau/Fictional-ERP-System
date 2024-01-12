@@ -41,7 +41,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JButton Hinzufuegen;
     Gui parent;
 
-    public HinzufuegenListener( Gui p) {
+    public HinzufuegenListener(Gui p) {
         super();
         parent = p;
         NumberFormat format = new DecimalFormat("#.00");
@@ -133,7 +133,6 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     }
 
-
     public void fillTextBox() {
 
         musikerTextField.setText("");
@@ -158,38 +157,47 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             this.setVisible(false);
         }
         if (e.getSource().equals(Hinzufuegen)) {
-            Musik m = new Musik();
-            boolean IdisOk = true;
-            try {
-                String GUidText = musikGUIDTextField.getText();
-                if (!(GUidText.equals("0")) && !(GUidText == null)) {
-                    m.setMusik_GUID(Integer.parseInt(GUidText));
-                    IdisOk =  false;
-                }
-            } catch (Exception e1) {
-                JOptionPane.showMessageDialog(this, "Id ist nicht Gültig","Error", JOptionPane.ERROR_MESSAGE);
-            }
-            m.setMusiker(musikerTextField.getText());
-            m.setAlbum(albumTextField.getText());
-            m.setSongName(songNameTextField.getText());
-            m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
-            m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
-            m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
-            m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
-            m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
-            m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
-            m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
-            m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
-            m.setGenre(genreTextField.getText());
-            m.setIsCD(cdCheckBox.isSelected());
-            m.setIsPlatte(platteCheckBox.isSelected());
-            m.setIsMp3(mp3CheckBox.isSelected());
-            if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID(), parent.getMusikMap().getMusikList())& m.getMusik_GUID() != 0) {
-                parent.getMusikMap().addMedium(m);
-                parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
-            }
-                this.setVisible(IdisOk);
+            boolean visibility = musikHinzufügen();
+            this.setVisible(visibility);
         }
+    }
+
+    private boolean musikHinzufügen() {
+        Musik m = new Musik();
+        boolean IdisOk = true;
+        try {
+            String GUidText = musikGUIDTextField.getText();
+            if (!(GUidText.equals("0")) && !(GUidText == null)) {
+                m.setMusik_GUID(Integer.parseInt(GUidText));
+                IdisOk = false;
+            }
+        } catch (Exception e1) {
+            JOptionPane.showMessageDialog(this, "Id ist nicht Gültig", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        m.setMusiker(musikerTextField.getText());
+        m.setAlbum(albumTextField.getText());
+        m.setSongName(songNameTextField.getText());
+        m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
+        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
+        m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
+        m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
+        m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
+        m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
+        m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
+        m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setGenre(genreTextField.getText());
+        m.setIsCD(cdCheckBox.isSelected());
+        m.setIsPlatte(platteCheckBox.isSelected());
+        m.setIsMp3(mp3CheckBox.isSelected());
+        if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID())
+                && !IdisOk) {
+            parent.getMusikMap().addMedium(m);
+            parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+        } else {
+            JOptionPane.showMessageDialog(this, "Id ist schön verwendet", "Error", JOptionPane.ERROR_MESSAGE);
+            IdisOk = true;
+        }
+        return IdisOk;
     }
 
 }

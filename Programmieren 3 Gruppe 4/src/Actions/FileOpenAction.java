@@ -3,6 +3,7 @@ package Actions;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -12,8 +13,9 @@ import SaveData_ReadData.MusikCsvListDAO;
 
 public class FileOpenAction extends AbstractAction {
     private Gui parent;
-    public FileOpenAction(Gui parent){
-        super();
+    public FileOpenAction(Gui parent,String text, ImageIcon icon, String desc ){
+        super(text,icon);
+        putValue(SHORT_DESCRIPTION, desc);
         this.parent = parent;
     }
     @Override
@@ -24,7 +26,7 @@ public class FileOpenAction extends AbstractAction {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Datein", "csv");
         chooser.addChoosableFileFilter(filter);
         int returnval = chooser.showOpenDialog(null);
-        if (returnval == chooser.APPROVE_OPTION) {
+        if (returnval == JFileChooser.APPROVE_OPTION) {
             MusikCsvListDAO mmd = new MusikCsvListDAO(chooser.getSelectedFile().getAbsolutePath(), false);
             try {
                 mmd.read(musikList);
