@@ -11,8 +11,8 @@ import GeschaftsObejekt.MusikList;
 public class Musikmap {
 
     private final MusikList musikList;
-    private HashMap<String, List<Musik>> songNameMap;
-    private HashMap<String, List<Musik>> musikerMap;
+    private HashMap<String, List<Musik>> titleMap;
+    private HashMap<String, List<Musik>> artistMap;
     private HashMap<String, List<Musik>> genreMap;
     private HashMap<String, List<Musik>> albumMap;
     private HashMap<String, List<Musik>> mediumTypMap;
@@ -26,8 +26,8 @@ public class Musikmap {
     }
 
     private void initializeMaps() {
-        songNameMap = new HashMap<>();
-        musikerMap = new HashMap<>();
+        titleMap = new HashMap<>();
+        artistMap = new HashMap<>();
         genreMap = new HashMap<>();
         albumMap = new HashMap<>();
         mediumTypMap = new HashMap<>();
@@ -67,10 +67,10 @@ public class Musikmap {
     }
 
     private void removeFromAllMaps(Musik medium) {
-        removeMediumFromMap(musikerMap, medium.getMusiker(), medium);
+        removeMediumFromMap(artistMap, medium.getMusiker(), medium);
         removeMediumFromMap(genreMap, medium.getGenre(), medium);
         removeMediumFromMap(albumMap, medium.getAlbum(), medium);
-        removeMediumFromMap(songNameMap, medium.getSongName(), medium);
+        removeMediumFromMap(titleMap, medium.getSongName(), medium);
        removeMediumFromMediumTypMap(medium);
        removeMediumFromPreisMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
        removeMediumFromPreisMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
@@ -108,10 +108,10 @@ public class Musikmap {
 }
 
     private void updateAllMaps(Musik medium) {
-    addToMap(musikerMap, medium.getMusiker(), medium);
+    addToMap(artistMap, medium.getMusiker(), medium);
     addToMap(genreMap, medium.getGenre(), medium);
     addToMap(albumMap, medium.getAlbum(), medium);
-    addToMap(songNameMap, medium.getSongName(), medium);
+    addToMap(titleMap, medium.getSongName(), medium);
     addToMediumTypMap(medium);  
     addToMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
     addToMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
@@ -148,10 +148,10 @@ public class Musikmap {
     }
 
      private void replaceFromAllMaps(Musik altesMedium, Musik neuesMedium) {
-    replaceMediumFromMap(musikerMap, altesMedium.getMusiker(), altesMedium, neuesMedium);
+    replaceMediumFromMap(artistMap, altesMedium.getMusiker(), altesMedium, neuesMedium);
     replaceMediumFromMap(genreMap, altesMedium.getGenre(), altesMedium, neuesMedium);
     replaceMediumFromMap(albumMap, altesMedium.getAlbum(), altesMedium, neuesMedium);
-    replaceMediumFromMap(songNameMap, altesMedium.getSongName(), altesMedium, neuesMedium);
+    replaceMediumFromMap(titleMap, altesMedium.getSongName(), altesMedium, neuesMedium);
     replaceMediumInMediumTypMap(altesMedium, neuesMedium); 
     replaceMediumInPreisMap(cdListenpreisMap, altesMedium.getCDListenpreis(), altesMedium, neuesMedium);
     replaceMediumInPreisMap(platteListenpreisMap, altesMedium.getPlatteListenpreis(), altesMedium, neuesMedium);
@@ -196,4 +196,10 @@ public class Musikmap {
      public HashMap<String, List<Musik>> getAlbumMap() {
     return albumMap;
 }
+     public HashMap<String, List<Musik>> getArtistMap() {
+         return artistMap;
+     }
+     public HashMap<String, List<Musik>> getTitleMap() {
+         return titleMap;
+     }
 }        
