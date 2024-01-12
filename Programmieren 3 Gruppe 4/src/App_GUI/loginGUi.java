@@ -37,8 +37,9 @@ public class loginGUi extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        profil m = new profil(, ABORT, rootPaneCheckingEnabled)
+        String mit = "mitarbeiter";
+        profil m = new profil(mit, mit.hashCode(), true);
+        profilList.add(m);
         centerconetentPanel = new JPanel(new GridLayout(4, 4));
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password");
