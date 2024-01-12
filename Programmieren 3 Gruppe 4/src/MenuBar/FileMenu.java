@@ -17,5 +17,7 @@ public class FileMenu extends JMenu{
         this.add(new FileSaveAsItem(parent));
         this.addSeparator();
         this.add(new FileSaveItem(parent));
+        this.addSeparator();
     }
+    
 }

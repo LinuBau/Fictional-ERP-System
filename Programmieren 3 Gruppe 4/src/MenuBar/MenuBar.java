@@ -7,6 +7,9 @@ package MenuBar;
 import javax.swing.JMenuBar;
 
 import App_GUI.Gui;
+import javax.accessibility.AccessibleContext;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 
 public class MenuBar extends JMenuBar {
      
@@ -15,4 +18,13 @@ public class MenuBar extends JMenuBar {
        this.add(new FileMenu(parent));
        this.add(new SettingsMenu());
     }
+
+    public MenuBar() {
+        
+    }
+
+  
+
+  
+    
 }

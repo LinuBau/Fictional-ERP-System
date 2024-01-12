@@ -4,12 +4,11 @@
  */
 package MenuBar;
 
+import App_GUI.Gui;
 import javax.swing.JMenu;
 
-/**
- *
- * @author ninfr
- */
+import javax.swing.JMenuItem;
+
 public class SettingsMenu extends JMenu{
     
     SettingsMenu(){

@@ -71,7 +71,7 @@ public class BearbeitenListener implements ActionListener {
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
         delteButton = new JButton("Löschen");
-        SaveButton = new JButton("Speicher");
+        SaveButton = new JButton("Speichern");
         reinhörenButton = new JButton("Reinhören");
 
         reinhörenListener = new ReinhörenListener();
