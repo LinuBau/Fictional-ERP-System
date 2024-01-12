@@ -37,6 +37,7 @@ public class FileSaveAsAction extends AbstractAction {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+            System.out.println("Speichern");
         }
     }
     

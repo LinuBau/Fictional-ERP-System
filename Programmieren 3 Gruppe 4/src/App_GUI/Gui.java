@@ -207,7 +207,7 @@ public class Gui extends JFrame {
 
         loginGUi loginWindow = new loginGUi();
         loginWindow.setTitle("Login");
-        loginWindow.setSize(1000, 800);
+        loginWindow.setSize(500, 500);
         loginWindow.setVisible(true);
         // loginWindow.w();
 

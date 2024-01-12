@@ -7,13 +7,19 @@ import java.io.IOException;
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profilList;
+import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import SaveData_ReadData.ProfilListDOA;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class WindowEventListener implements WindowListener {
 
     private Gui parent;
-    public WindowEventListener(Gui p){
+
+    public WindowEventListener(Gui p) {
         super();
         this.parent = p;
     }
@@ -47,9 +53,19 @@ public class WindowEventListener implements WindowListener {
             int returnval = chooser.showSaveDialog(parent);
 
             if (returnval == JFileChooser.APPROVE_OPTION) {
-                // Your save logic here
 
-                System.out.println("Fenster schließen");
+                String path = chooser.getSelectedFile().getAbsolutePath();
+                if (!path.endsWith(".csv")) {
+                    path = path + ".csv";
+                }
+                MusikCsvListDAO mmd = new MusikCsvListDAO(path, true);
+                try {
+                    mmd.write(parent.getMusikMap().getMusikList());
+                    mmd.close();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                System.out.println("Speichern");
             } else if (returnval == JFileChooser.CANCEL_OPTION || returnval == JFileChooser.ERROR_OPTION) {
                 parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 return;
@@ -57,9 +73,10 @@ public class WindowEventListener implements WindowListener {
         }
         if (x == 0) {
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
+            System.out.println("Speichern");
         }
 
-        // If the user didn't cancel or if they chose to save, you can set the default close operation back to EXIT_ON_CLOSE
+        System.out.println("Fenster schließen");
         parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -88,8 +105,8 @@ public class WindowEventListener implements WindowListener {
         System.out.println("Fenster beenden");
     }
 
-    public static void saveListe(MusikList musikList,profilList profilList){
-             MusikListDAO mld = new MusikListDAO("setup.data", true);
+    public static void saveListe(MusikList musikList, profilList profilList) {
+        MusikListDAO mld = new MusikListDAO("setup.data", true);
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);
@@ -101,6 +118,5 @@ public class WindowEventListener implements WindowListener {
         }
 
     }
-   
-    
+
 }
