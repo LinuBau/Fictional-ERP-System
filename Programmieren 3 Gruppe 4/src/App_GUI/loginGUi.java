@@ -10,6 +10,7 @@ import javax.swing.WindowConstants;
 
 import ActionListener.loginListner;
 import ActionListener.newUserListener;
+import GeschaftsObejekt.profil;
 import GeschaftsObejekt.profilList;
 import SaveData_ReadData.ProfilListDOA;
 
@@ -36,7 +37,8 @@ public class loginGUi extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
+        profil m = new profil(, ABORT, rootPaneCheckingEnabled)
         centerconetentPanel = new JPanel(new GridLayout(4, 4));
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password");
