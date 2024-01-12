@@ -1,6 +1,10 @@
 
 package GeschaftsObejekt;
 
+import Traversierung.ChangeLogEntry;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Musik {
     private int Musik_GUID;
     private String MBID;
@@ -19,7 +23,8 @@ public class Musik {
     private boolean CD;
     private boolean Platte;
     private boolean Mp3;
-
+    private List<ChangeLogEntry> changeLog = new ArrayList<>();
+    
     @Override
     public String toString() {
         return "{" +
@@ -211,6 +216,15 @@ public class Musik {
     }
 
     public Musik() {
+    }
+    
+    public void addToChangeLog(String action, Musik originalState, Musik newState) {
+        ChangeLogEntry entry = new ChangeLogEntry(action, originalState, newState);
+        changeLog.add(entry);
+    }
+
+    public List<ChangeLogEntry> getChangeLog() {
+        return changeLog;
     }
 
 }

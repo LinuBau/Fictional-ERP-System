@@ -85,7 +85,7 @@ public class Gui extends JFrame {
         }
 
         // Initializing the ActionListner
-        filterListener = new FilterListener(this);
+        filterListener = new FilterListener(this,musikmap);
         bearbeitenListener = new BearbeitenListener(this);
         shoppingCartListner = new shoppingCartListner(this);
 
@@ -162,7 +162,7 @@ public class Gui extends JFrame {
         }
 
         // Initializing the ActionListner
-        filterListener = new FilterListener(this);
+        filterListener = new FilterListener(this,musikmap);
         bearbeitenListener = new BearbeitenListener(this);
 
         // add FilterPanel and EditPanel#
