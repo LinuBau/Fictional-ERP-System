@@ -30,7 +30,7 @@ public class FileSaveAction extends AbstractAction {
         File workingDirectory = new File(System.getProperty("user.dir"));
         chooser.setCurrentDirectory(workingDirectory);
         int returnval = chooser.showSaveDialog(parent);
-        if (returnval == chooser.APPROVE_OPTION) {
+        if (returnval == JFileChooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
             if (!path.endsWith(".csv")) {
                 path = path + ".csv";

@@ -6,23 +6,16 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
-import SaveData_ReadData.MusikCsvListDAO;
+import GeschaftsObejekt.profilList;
 import SaveData_ReadData.MusikListDAO;
-import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import SaveData_ReadData.ProfilListDOA;
 
 public class WindowEventListener implements WindowListener {
 
     private Gui parent;
-    private MusikList musikList;
-
-    public WindowEventListener(Gui p) {
+    public WindowEventListener(Gui p){
         super();
         this.parent = p;
-        musikList = parent.getMusikMap().getMusikList();
     }
 
     @Override
@@ -62,6 +55,9 @@ public class WindowEventListener implements WindowListener {
                 return;
             }
         }
+        if (x == 0) {
+            WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
+        }
 
         // If the user didn't cancel or if they chose to save, you can set the default close operation back to EXIT_ON_CLOSE
         parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,4 +88,19 @@ public class WindowEventListener implements WindowListener {
         System.out.println("Fenster beenden");
     }
 
+    public static void saveListe(MusikList musikList,profilList profilList){
+             MusikListDAO mld = new MusikListDAO("setup.data", true);
+        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
+        try {
+            mld.write(musikList);
+            pld.write(profilList);
+            mld.close();
+            pld.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+    }
+   
+    
 }

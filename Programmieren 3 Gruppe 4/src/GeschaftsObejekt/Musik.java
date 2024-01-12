@@ -1,8 +1,13 @@
 
 package GeschaftsObejekt;
 
+import Traversierung.ChangeLogEntry;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Musik {
     private int Musik_GUID;
+    private String MBID;
     private String Musiker;
     private String Album;
     private String SongName;
@@ -18,7 +23,8 @@ public class Musik {
     private boolean CD;
     private boolean Platte;
     private boolean Mp3;
-
+    private List<ChangeLogEntry> changeLog = new ArrayList<>();
+    
     @Override
     public String toString() {
         return "{" +
@@ -40,6 +46,7 @@ public class Musik {
                 ", isMp3='" + isIsMp3() + "'" +
                 "}";
     }
+    
 
     public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
@@ -61,6 +68,13 @@ public class Musik {
         this.CD = isCD;
         this.Platte = isPlatte;
         this.Mp3 = isMp3;
+    }
+    public double getPreisofAll(Musik m,int platteMenge,int cdMenge){
+        double mp3prise=0;
+        if (m.Mp3) {
+            mp3prise=Mp3Listenpreis;
+        }
+        return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
 
     public int getMusik_GUID() {
@@ -203,6 +217,15 @@ public class Musik {
     }
 
     public Musik() {
+    }
+    
+    public void addToChangeLog(String action, Musik originalState, Musik newState) {
+        ChangeLogEntry entry = new ChangeLogEntry(action, originalState, newState);
+        changeLog.add(entry);
+    }
+
+    public List<ChangeLogEntry> getChangeLog() {
+        return changeLog;
     }
 
 }
