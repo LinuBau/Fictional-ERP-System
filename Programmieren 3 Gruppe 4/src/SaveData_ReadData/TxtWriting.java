@@ -63,7 +63,7 @@ public class TxtWriting extends AbstractCsvDOA {
         }
     }
 
-    private double berechneGesamtPreis() {
+    private  double berechneGesamtPreis() {
         double summe = 0;
         for (int i = 0; i < musikList.size(); i++) {
             summe += musikList.get(i).getPreisofAll(musikList.get(i), profil.getPallteStückZahlList().get(i),

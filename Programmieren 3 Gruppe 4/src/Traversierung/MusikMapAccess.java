@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import Traversierung.ChangeLogEntry;
 
 public class MusikMapAccess implements IMusikMapAccess {
-    private MusikMap musikMap;
+    private Musikmap musikMap;
     private List<ChangeLogEntry> changeLog;
 
-    public MusikMapAccess(MusikMap musikMap) {
+    public MusikMapAccess(Musikmap musikMap) {
         this.musikMap = musikMap;
         this.changeLog = new ArrayList<>();
     }

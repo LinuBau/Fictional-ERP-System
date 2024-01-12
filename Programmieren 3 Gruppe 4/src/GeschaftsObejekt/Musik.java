@@ -46,6 +46,7 @@ public class Musik {
                 ", isMp3='" + isIsMp3() + "'" +
                 "}";
     }
+    
 
     public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,

@@ -3,7 +3,7 @@ package ActionListener;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
-import Traversierung.MusikMap;
+import Traversierung.Musikmap;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -27,7 +27,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 public class FilterListener implements ActionListener {
-    private final MusikMap musikMap;
+    private final Musikmap musikMap;
     private JToggleButton toggleButtonCD;
     private JToggleButton toggleButtonMP3;
     private JToggleButton toggleButtonVinyl;
@@ -43,7 +43,7 @@ public class FilterListener implements ActionListener {
 
     private JLabel trefferAnzeige;
 
-    public FilterListener(Gui gui, MusikMap musikMap) {
+    public FilterListener(Gui gui, Musikmap musikMap) {
         this.parent = gui;
         this.musikMap = musikMap;
 

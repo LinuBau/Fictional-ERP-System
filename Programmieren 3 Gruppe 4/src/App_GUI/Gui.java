@@ -12,7 +12,7 @@ import Modele.MusikTableModel;
 import SaveData_ReadData.MusikListDAO;
 import ToolBar.benutzerToolBar;
 import ToolBar.mitarbeiterToolBar;
-import Traversierung.MusikMap;
+import Traversierung.Musikmap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -30,7 +30,7 @@ public class Gui extends JFrame {
 
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
-    private MusikMap musikmap;
+    private Musikmap musikmap;
     private MusikList musikList;
     private profilList profilList;
     private BearbeitenListener bearbeitenListener;
@@ -39,9 +39,9 @@ public class Gui extends JFrame {
     public boolean starten;
 
     public Gui(boolean starten, profilList pl) {
-        if(starten){
+        if (starten) {
             initialiseMitarbeiterFarme(pl);
-        }else{
+        } else {
             initialiseUsserFrame(pl);
         }
     }
@@ -55,7 +55,7 @@ public class Gui extends JFrame {
         return this.musikList;
     }
 
-    public MusikMap getMusikMap() {
+    public Musikmap getMusikMap() {
         return this.musikmap;
     }
 
@@ -71,7 +71,7 @@ public class Gui extends JFrame {
         return this.profilList;
     }
 
-    private void initialiseUsserFrame( profilList pl) {
+    private void initialiseUsserFrame(profilList pl) {
         this.profilList = pl;
 
         // Importing Data
@@ -84,8 +84,11 @@ public class Gui extends JFrame {
             e1.printStackTrace();
         }
 
+        // Initializing the MusikMap
+        musikmap = new Musikmap(musikList);
+
         // Initializing the ActionListner
-        filterListener = new FilterListener(this,musikmap);
+        filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
         shoppingCartListner = new shoppingCartListner(this);
 
@@ -93,9 +96,6 @@ public class Gui extends JFrame {
         JPanel eingabePanel = new JPanel(new FlowLayout());
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
-
-        // Initializing the MusikMap
-        musikmap = new MusikMap(musikList);
 
         // Initializing sortetd JTable
         MusikList sotierteList = new MusikList();
@@ -140,9 +140,6 @@ public class Gui extends JFrame {
 
     }
 
-
-
-    
     /**
      * 
      * @param pl
@@ -161,17 +158,17 @@ public class Gui extends JFrame {
             e1.printStackTrace();
         }
 
+        // Initializing the MusikMap
+        musikmap = new Musikmap(musikList);
+
         // Initializing the ActionListner
-        filterListener = new FilterListener(this,musikmap);
+        filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
 
         // add FilterPanel and EditPanel#
         JPanel eingabePanel = new JPanel(new FlowLayout());
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
-
-        // Initializing the MusikMap
-        musikmap = new MusikMap(musikList);
 
         // Initializing sortetd JTable
         MusikList sotierteList = new MusikList();
@@ -180,7 +177,6 @@ public class Gui extends JFrame {
         AtributTabelle = new JTable(tableModel);
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(eingabePanel, BorderLayout.CENTER);
-
 
         northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
 
