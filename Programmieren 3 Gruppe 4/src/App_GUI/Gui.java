@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -43,6 +44,13 @@ public class Gui extends JFrame {
             initialiseMitarbeiterFarme(pl);
         } else {
             initialiseUsserFrame(pl);
+        }
+    }
+    public Gui(boolean starten, profilList pl,MusikList ml) {
+        if (starten) {
+            initialiseMitarbeiterFarme(pl,ml);
+        } else {
+            initialiseUsserFrame(pl,ml);
         }
     }
 
@@ -133,12 +141,72 @@ public class Gui extends JFrame {
         });
 
         // Create MenuBar
-        setJMenuBar(new benutzerMenuBar());
+        setJMenuBar(new benutzerMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
 
     }
+    private void initialiseUsserFrame(profilList pl,MusikList ml) {
+        this.profilList = pl;
+        this.musikList = ml;
+
+        // Initializing the MusikMap
+        musikmap = new Musikmap(musikList);
+
+        // Initializing the ActionListner
+        filterListener = new FilterListener(this, musikmap);
+        bearbeitenListener = new BearbeitenListener(this);
+        shoppingCartListner = new shoppingCartListner(this);
+
+        // add FilterPanel and EditPanel
+        JPanel eingabePanel = new JPanel(new FlowLayout());
+        eingabePanel.add(filterListener.getFilterPanel());
+        eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
+
+        // Initializing sortetd JTable
+        MusikList sotierteList = new MusikList();
+        sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+        tableModel = new MusikTableModel(sotierteList);
+        AtributTabelle = new JTable(tableModel);
+        JPanel northPanel = new JPanel(new BorderLayout());
+        northPanel.add(eingabePanel, BorderLayout.CENTER);
+
+        // Remove Collum that user are not allowod to see
+        int[] columnsToHide = { 0, 4, 5, 9, 10, 11 };
+        int removeCount = 0;
+        for (int i : columnsToHide) {
+            AtributTabelle.removeColumn(AtributTabelle.getColumnModel().getColumn(i - removeCount));
+            removeCount++;
+        }
+
+        northPanel.add(new benutzerToolBar(this), BorderLayout.NORTH);
+
+        // Setting up the layout
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
+        getContentPane().add(northPanel, BorderLayout.NORTH);
+        setLocationRelativeTo(null);
+
+        // Add Mouse Pressed Event
+        AtributTabelle.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                Point point = mouseEvent.getPoint();
+                int row = AtributTabelle.rowAtPoint(point);
+                bearbeitenListener.benutzerFillTextBox(tableModel.getMusikList().get(row));
+                bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+                shoppingCartListner.setMusik(tableModel.getMusikList().get(row));
+            }
+        });
+
+        // Create MenuBar
+        setJMenuBar(new benutzerMenuBar(this));
+
+        // add WindowEventListner
+        addWindowListener(new WindowEventListener(this));
+
+    }
+    
 
     /**
      * 
@@ -202,6 +270,53 @@ public class Gui extends JFrame {
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
     }
+    private void initialiseMitarbeiterFarme(profilList pl,MusikList ml) {
+        this.profilList = pl;
+        this.musikList = ml;
+        // Initializing the MusikMap
+        musikmap = new Musikmap(musikList);
+
+        // Initializing the ActionListner
+        filterListener = new FilterListener(this, musikmap);
+        bearbeitenListener = new BearbeitenListener(this);
+
+        // add FilterPanel and EditPanel#
+        JPanel eingabePanel = new JPanel(new FlowLayout());
+        eingabePanel.add(filterListener.getFilterPanel());
+        eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
+
+        // Initializing sortetd JTable
+        MusikList sotierteList = new MusikList();
+        sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+        tableModel = new MusikTableModel(sotierteList);
+        AtributTabelle = new JTable(tableModel);
+        JPanel northPanel = new JPanel(new BorderLayout());
+        northPanel.add(eingabePanel, BorderLayout.CENTER);
+
+        northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
+
+        // Setting up the layout
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
+        getContentPane().add(northPanel, BorderLayout.NORTH);
+        setLocationRelativeTo(null);
+
+        // Add Mouse Pressed Event
+        AtributTabelle.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                Point point = mouseEvent.getPoint();
+                int row = AtributTabelle.rowAtPoint(point);
+                bearbeitenListener.mitarbeiterFillTextBox(tableModel.getMusikList().get(row));
+                bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+            }
+        });
+
+        // Create MenuBar
+        setJMenuBar(new mitarbeiterMenuBar(this));
+
+        // add WindowEventListner
+        addWindowListener(new WindowEventListener(this));
+    }
 
     public static void main(String[] args) {
 
@@ -209,7 +324,9 @@ public class Gui extends JFrame {
         loginWindow.setTitle("Login");
         loginWindow.setSize(500, 500);
         loginWindow.setVisible(true);
-        // loginWindow.w();
+        // loginWindow.w();*/
+    
+        
 
     }
 }

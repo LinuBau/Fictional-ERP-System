@@ -76,6 +76,12 @@ public class Musik {
         }
         return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
+    public String getMBID(){
+        return this.MBID;
+    }
+    public void setMBID(String mbid){
+        this.MBID = mbid;
+    }
 
     public int getMusik_GUID() {
         return this.Musik_GUID;

@@ -1,7 +1,6 @@
 
 package Actions;
 
-package Actions;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;

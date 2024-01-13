@@ -1,6 +1,7 @@
 package App_GUI;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +11,8 @@ import javax.swing.WindowConstants;
 
 import ActionListener.loginListner;
 import ActionListener.newUserListener;
+import ActionListener.showPasswordListner;
+import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profil;
 import GeschaftsObejekt.profilList;
 import SaveData_ReadData.ProfilListDOA;
@@ -21,9 +24,11 @@ public class loginGUi extends JFrame {
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
     private JLabel passwordLabel;
+    private JCheckBox showPassword;
     private profilList profilList;
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
+    private MusikList musikList;
     private JButton loginButton;
     private JButton newUserButton;
     
@@ -40,6 +45,15 @@ public class loginGUi extends JFrame {
         String mit = "mitarbeiter";
         profil m = new profil(mit, mit.hashCode(), true);
         profilList.add(m);
+        createLoginPlane();
+    }
+
+    public loginGUi(profilList profilList,MusikList musikList){
+        this.profilList = profilList;
+        createLoginPlane();
+    }
+    
+    public void createLoginPlane(){
         centerconetentPanel = new JPanel(new GridLayout(4, 4));
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password");
@@ -55,12 +69,13 @@ public class loginGUi extends JFrame {
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(passwordLabel);
         centerconetentPanel.add(passwordField);
-        JPanel southPanel = new JPanel(new GridLayout(1,2));
+        showPassword = new JCheckBox("Passwort anzeigen");
+        JPanel southPanel = new JPanel(new GridLayout(1,3));
         southPanel.add(newUserButton);
         southPanel.add(loginButton);
-
-        loginButton.addActionListener(new loginListner(this));
-        newUserButton.addActionListener(new newUserListener(this));
+        southPanel.add(showPassword);
+        makeActionListner();
+     
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
@@ -69,13 +84,26 @@ public class loginGUi extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    private  void makeActionListner(){
+        if (musikList == null) {
+            loginButton.addActionListener(new loginListner(this));
+            newUserButton.addActionListener(new newUserListener(this));
+            showPassword.addActionListener(new showPasswordListner(showPassword, passwordField));
+        }else{
+            loginButton.addActionListener(new loginListner(this,musikList));
+            newUserButton.addActionListener(new newUserListener(this));
+            showPassword.addActionListener(new showPasswordListner(showPassword, passwordField));
+        }
+       
+    }
+
     public String getUsername() {
         return this.usserNameTextField.getText();
     }
+
     public profilList getProfilList(){
         return this.profilList;
     }
-
     public int getPassword() {
         String tmp = new String(passwordField.getPassword());
         return tmp.hashCode();

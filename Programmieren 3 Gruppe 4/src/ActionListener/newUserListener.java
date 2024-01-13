@@ -55,7 +55,7 @@ public class newUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(this);
+        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox,passwordField));
         hinzufügenButton.addActionListener(this);
         
         this.getContentPane().setLayout(new BorderLayout());
@@ -76,13 +76,6 @@ public class newUserListener extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
-        if (e.getSource().equals(showPasswordCheckBox)) {
-            if (showPasswordCheckBox.isSelected()) {
-                passwordField.setEchoChar((char) 0);
-            } else {
-                passwordField.setEchoChar('*');
-            }
-        }
         if (e.getSource().equals(hinzufügenButton)) {
             profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
             parent.getProfilList().add(p);

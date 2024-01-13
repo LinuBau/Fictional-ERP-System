@@ -59,6 +59,7 @@ public class MusikCsvDAO extends AbstractCsvDOA {
     } catch (NumberFormatException e) {
         System.err.println("Fehler beim Parsen von Musik_GUID: " + csvStrings[0]);
     }
+    
         MM.setMusiker(csvStrings[1]);
         MM.setAlbum(csvStrings[2]);
         MM.setSongName(csvStrings[3]);
@@ -81,10 +82,44 @@ public class MusikCsvDAO extends AbstractCsvDOA {
         MM.setIsCD(Boolean.parseBoolean(csvStrings[13]));
         MM.setIsPlatte(Boolean.parseBoolean(csvStrings[14]));
         MM.setIsMp3(Boolean.parseBoolean(csvStrings[15]));
+
+        /*try {
+            MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim()));
+        } catch (NumberFormatException e) {
+            System.err.println("Fehler beim Parsen von Musik_GUID: " + csvStrings[0]);
+        }
+        
+
+        MM.setMBID(csvStrings[1]);
+        
+        MM.setMusiker(csvStrings[2]);
+        MM.setAlbum(csvStrings[3]);
+        MM.setSongName(csvStrings[4]);
+        MM.setRegal_PlatzCD(csvStrings[5]);
+        MM.setRegal_PlatzPlatte(csvStrings[6]);
+        
+        try {
+            MM.setCDListenpreis(Double.parseDouble(csvStrings[7]));
+            MM.setPlatteListenpreis(Double.parseDouble(csvStrings[8]));
+            MM.setMp3Listenpreis(Double.parseDouble(csvStrings[9]));
+            MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[10]));
+            MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[11]));
+            MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[12]));
+        
+        } catch (NumberFormatException e) {
+            System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
+        }
+        
+        MM.setGenre(csvStrings[13]);
+        MM.setIsCD(Boolean.parseBoolean(csvStrings[14]));
+        MM.setIsPlatte(Boolean.parseBoolean(csvStrings[15]));
+        MM.setIsMp3(Boolean.parseBoolean(csvStrings[16]));*/
+        
     }
     private String tocvs(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
+             //MM.getMBID() + splitKondiotn+
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +

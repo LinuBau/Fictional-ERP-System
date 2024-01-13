@@ -25,6 +25,7 @@ public class FileMenu extends JMenu{
         this.add(FileOpenAction);
         
     }
+    
     private void createActions(){
         FileOpenAction = new Actions.FileOpenAction(p, "Öffen", createIcon("/icons/53.gif"), "Öffent eine Datei");
     }
