@@ -2,15 +2,19 @@ package ActionListener;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
@@ -24,14 +28,22 @@ public class addToShoppingCart extends JDialog implements ActionListener {
 
     public addToShoppingCart(Gui p) {
         parent = p;
-        platteTextField = new JSpinner();
-        cdTextField = new JSpinner();
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100,1);
+        SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 100,1);
+        platteTextField = new JSpinner(spinnerModel);
+        cdTextField = new JSpinner(spinnerModel1);
         mp3CheckBox = new JCheckBox();
+        JLabel  cdLabel = new JLabel(parent.getL10NText("cdstue"));
+        JLabel  platteLabel = new JLabel(parent.getL10NText("plstue"));
+        JLabel mp3Label = new JLabel(parent.getL10NText("mp3stue"));
         hinzufuegeButton = new JButton(parent.getL10NText("add"));
-        JPanel centerPanel = new JPanel(new GridLayout(1, 3));
+        JPanel centerPanel = new JPanel(new GridLayout(1, 6));
         JPanel southPanel = new JPanel(new GridLayout(1, 3));
+        centerPanel.add(platteLabel);
         centerPanel.add(platteTextField);
+        centerPanel.add(cdLabel);
         centerPanel.add(cdTextField);
+        centerPanel.add(mp3Label);
         centerPanel.add(mp3CheckBox);
 
         southPanel.add(new JPanel());
@@ -45,7 +57,7 @@ public class addToShoppingCart extends JDialog implements ActionListener {
         this.setModalityType(JDialog.ModalityType.APPLICATION_MODAL);
         this.setLocationRelativeTo(parent);
         clearTextBox();
-        this.setSize(150, 100);
+        this.setSize(500, 100);
         this.setVisible(false);
     }
 

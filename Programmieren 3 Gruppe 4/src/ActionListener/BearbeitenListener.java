@@ -21,6 +21,7 @@ public class BearbeitenListener implements ActionListener {
     public JPanel eingabePanel;
     private JTextField genreComboBox;
     private JTextField musikGUIDTextField;
+    private JTextField mbidTextField;
     private JTextField musikerTextField;
     private JTextField albumTextField;
     private JTextField songNameTextField;
@@ -56,6 +57,7 @@ public class BearbeitenListener implements ActionListener {
         NumberFormat format = new DecimalFormat("#.00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
+        mbidTextField = new JTextField();
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
         songNameTextField = new JTextField();
@@ -76,8 +78,9 @@ public class BearbeitenListener implements ActionListener {
         reinhörenListener = new ReinhörenListener();
 
         musikGUIDTextField.setEditable(false);
+        mbidTextField.setEditable(false);
 
-        JPanel centerPanel = new JPanel(new GridLayout(13, 2));
+        JPanel centerPanel = new JPanel(new GridLayout(14, 2));
         JPanel southPanel = new JPanel(new BorderLayout());
 
         JPanel southcenterPanel = new JPanel(new GridLayout(1, 3));
@@ -87,6 +90,9 @@ public class BearbeitenListener implements ActionListener {
 
         centerPanel.add(new JLabel(parent.getL10NText("mid")+": "));
         centerPanel.add(musikGUIDTextField);
+
+        centerPanel.add(new JLabel(parent.getL10NText("mbid")+": "));
+        centerPanel.add(mbidTextField);
 
         centerPanel.add(new JLabel(parent.getL10NText("m")+":" ));
         centerPanel.add(musikerTextField);
@@ -155,6 +161,7 @@ public class BearbeitenListener implements ActionListener {
         NumberFormat format = new DecimalFormat("#.00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
+        
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
         songNameTextField = new JTextField();
@@ -265,6 +272,7 @@ public class BearbeitenListener implements ActionListener {
 
     public void mitarbeiterFillTextBox(Musik m) {
         musikGUIDTextField.setText(String.valueOf(m.getMusik_GUID()));
+        mbidTextField.setText(m.getMBID());
         musikerTextField.setText(m.getMusiker());
         albumTextField.setText(m.getAlbum());
         songNameTextField.setText(m.getSongName());

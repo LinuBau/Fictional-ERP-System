@@ -26,6 +26,19 @@ public class MusikList extends ArrayList<Musik> {
         }
         return true;
     }
+    public boolean mbidunique(String mbid){
+        ListIterator<Musik> it = listIterator();
+        if(mbid == null){
+            while (it.hasNext()) {
+                if (it.next().getMBID().equals(mbid)) {
+                    return true;
+                }
+            }
+        }else{
+            return false;
+        }
+        return false;
+    }
     public int getIndex(int id){
        ListIterator<Musik> it = listIterator();
         if(id != 0){

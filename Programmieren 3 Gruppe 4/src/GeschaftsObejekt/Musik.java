@@ -48,11 +48,12 @@ public class Musik {
     }
     
 
-    public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
+    public Musik(int Musik_GUID,String MBID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
             double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
             boolean isMp3) {
         this.Musik_GUID = Musik_GUID;
+        this.MBID = MBID;
         this.Artist = Musiker;
         this.Album = Album;
         this.SongName = SongName;
@@ -76,6 +77,7 @@ public class Musik {
         }
         return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
+
     public String getMBID(){
         return this.MBID;
     }

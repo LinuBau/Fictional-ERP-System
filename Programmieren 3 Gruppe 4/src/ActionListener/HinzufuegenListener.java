@@ -23,6 +23,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     private JTextField genreTextField;
     private JTextField musikGUIDTextField;
+    private JTextField mbidTextField;
     private JTextField musikerTextField;
     private JTextField albumTextField;
     private JTextField songNameTextField;
@@ -48,6 +49,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         this.setSize(300, 500);
         genreTextField = new JTextField();
         musikGUIDTextField = new JTextField();
+        mbidTextField = new JTextField();
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
         songNameTextField = new JTextField();
@@ -65,10 +67,13 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         this.setLayout(new FlowLayout());
         // Textflied vor all Compents
-        JPanel eingabePanel = new JPanel(new GridLayout(16, 1));
+        JPanel eingabePanel = new JPanel(new GridLayout(17, 1));
 
         eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
         eingabePanel.add(musikGUIDTextField);
+
+        eingabePanel.add(new JLabel(parent.getL10NText("mbid")+": "));
+        eingabePanel.add(mbidTextField);
 
         eingabePanel.add(new JLabel(parent.getL10NText("m")+": "));
         eingabePanel.add(musikerTextField);
@@ -174,6 +179,14 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        /*try {
+            String mbidText = mbidTextField.getText();
+            if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length()==36) {
+                m.setMBID(mbidText);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
+        }*/
         m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
         m.setSongName(songNameTextField.getText());
@@ -199,5 +212,6 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         }
         return IdisOk;
     }
+
 
 }
