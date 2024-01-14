@@ -13,7 +13,7 @@ public class mitarbeiterToolBar extends JToolBar {
     public mitarbeiterToolBar(Gui p) {
         parent = p;
         setSize(200, 10);
-        hinzufügeButton = new JButton("Hinzufügen");
+        hinzufügeButton = new JButton(p.getL10NText("add"));
         hinzufügeButton.addActionListener(new HinzufuegenListener(p));
         add(hinzufügeButton);
 

@@ -8,7 +8,7 @@ import java.util.List;
 public class Musik {
     private int Musik_GUID;
     private String MBID;
-    private String Musiker;
+    private String Artist;
     private String Album;
     private String SongName;
     private String Regal_PlatzCD;
@@ -53,7 +53,7 @@ public class Musik {
             double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
             boolean isMp3) {
         this.Musik_GUID = Musik_GUID;
-        this.Musiker = Musiker;
+        this.Artist = Musiker;
         this.Album = Album;
         this.SongName = SongName;
         this.Regal_PlatzCD = Regal_PlatzCD;
@@ -76,6 +76,12 @@ public class Musik {
         }
         return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
+    public String getMBID(){
+        return this.MBID;
+    }
+    public void setMBID(String mbid){
+        this.MBID = mbid;
+    }
 
     public int getMusik_GUID() {
         return this.Musik_GUID;
@@ -86,11 +92,11 @@ public class Musik {
     }
 
     public String getMusiker() {
-        return this.Musiker;
+        return this.Artist;
     }
 
     public void setMusiker(String Musiker) {
-        this.Musiker = Musiker;
+        this.Artist = Musiker;
     }
 
     public String getAlbum() {

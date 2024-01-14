@@ -44,7 +44,7 @@ public class BearbeitenListener implements ActionListener {
 
     public BearbeitenListener(Gui p) {
         super();
-        parent = p;
+        this.parent = p;
     }
 
     public void setMusik(Musik m) {
@@ -70,9 +70,9 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
-        delteButton = new JButton("Löschen");
-        SaveButton = new JButton("Speichern");
-        reinhörenButton = new JButton("Reinhören");
+        delteButton = new JButton(parent.getL10NText("delete"));
+        SaveButton = new JButton(parent.getL10NText("save"));
+        reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
 
         musikGUIDTextField.setEditable(false);
@@ -85,52 +85,52 @@ public class BearbeitenListener implements ActionListener {
         // Textflied vor all Compents
         eingabePanel = new JPanel(new BorderLayout());
 
-        centerPanel.add(new JLabel("Musik_GUID: "));
+        centerPanel.add(new JLabel(parent.getL10NText("mid")+": "));
         centerPanel.add(musikGUIDTextField);
 
-        centerPanel.add(new JLabel("Musiker: "));
+        centerPanel.add(new JLabel(parent.getL10NText("m")+":" ));
         centerPanel.add(musikerTextField);
 
-        centerPanel.add(new JLabel("Album: "));
+        centerPanel.add(new JLabel(parent.getL10NText("a")+": "));
         centerPanel.add(albumTextField);
 
-        centerPanel.add(new JLabel("Song Name: "));
+        centerPanel.add(new JLabel(parent.getL10NText("sn")+": "));
         centerPanel.add(songNameTextField);
 
-        centerPanel.add(new JLabel("Regal Platz CD: "));
+        centerPanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
         centerPanel.add(regalPlatzCDTextField);
 
-        centerPanel.add(new JLabel("Regal Platz Platte: "));
+        centerPanel.add(new JLabel(parent.getL10NText("rpp")+": "));
         centerPanel.add(regalPlatzPlatteTextField);
 
-        centerPanel.add(new JLabel("Listenpreis CD: "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
         centerPanel.add(cdListenpreisTextField);
 
-        centerPanel.add(new JLabel("Listenpreis Platte: "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpp")+": "));
         centerPanel.add(platteListenpreisTextField);
 
-        centerPanel.add(new JLabel("Listenpreis MP3: "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
         centerPanel.add(mp3ListenpreisTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis CD: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epcd")+": "));
         centerPanel.add(cdEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis Platte: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epp")+": "));
         centerPanel.add(platteEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis MP3: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
         centerPanel.add(mp3EinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Genre: "));
+        centerPanel.add(new JLabel(parent.getL10NText("g")+": "));
         centerPanel.add(genreComboBox);
 
-        southcenterPanel.add(new JLabel("CD: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
         southcenterPanel.add(cdCheckBox);
 
-        southcenterPanel.add(new JLabel("Platte: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("sp")+": "));
         southcenterPanel.add(platteCheckBox);
 
-        southcenterPanel.add(new JLabel("MP3: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
         southcenterPanel.add(mp3CheckBox);
 
         southsouthPanel.add(SaveButton);
@@ -166,9 +166,9 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
-        SaveButton = new JButton("Warenkorb hinzufügen");
+        SaveButton = new JButton(parent.getL10NText("wkh"));
 
-        reinhörenButton = new JButton("Reinhören");
+        reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
 
         JPanel centerPanel = new JPanel(new GridLayout(8, 2));
@@ -178,38 +178,38 @@ public class BearbeitenListener implements ActionListener {
         JPanel southsouthPanel = new JPanel(new GridLayout(1, 3));
         // Textflied vor all Compents
         eingabePanel = new JPanel(new BorderLayout());
-
-        centerPanel.add(new JLabel("Musik_GUID: "));
+        
+        centerPanel.add(new JLabel(parent.getL10NText("mid")+": "));
         centerPanel.add(musikGUIDTextField);
 
-        centerPanel.add(new JLabel("Musiker: "));
+        centerPanel.add(new JLabel(parent.getL10NText("m")+": "));
         centerPanel.add(musikerTextField);
 
-        centerPanel.add(new JLabel("Album: "));
+        centerPanel.add(new JLabel(parent.getL10NText("a")+": "));
         centerPanel.add(albumTextField);
 
-        centerPanel.add(new JLabel("Song Name: "));
+        centerPanel.add(new JLabel(parent.getL10NText("sn")+": "));
         centerPanel.add(songNameTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis CD: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epcd")+": "));
         centerPanel.add(cdEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis Platte: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epp")+": "));
         centerPanel.add(platteEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Einkaufspreis MP3: "));
+        centerPanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
         centerPanel.add(mp3EinkaufspreisTextField);
 
-        centerPanel.add(new JLabel("Genre: "));
+        centerPanel.add(new JLabel(parent.getL10NText("g")));
         centerPanel.add(genreComboBox);
 
-        southcenterPanel.add(new JLabel("CD: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
         southcenterPanel.add(cdCheckBox);
 
-        southcenterPanel.add(new JLabel("Platte: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("sp")+": "));
         southcenterPanel.add(platteCheckBox);
 
-        southcenterPanel.add(new JLabel("MP3: "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
         southcenterPanel.add(mp3CheckBox);
         // Add Button to Panel
         southsouthPanel.add(SaveButton);

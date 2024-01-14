@@ -67,57 +67,57 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         // Textflied vor all Compents
         JPanel eingabePanel = new JPanel(new GridLayout(16, 1));
 
-        eingabePanel.add(new JLabel("Musik_GUID: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
         eingabePanel.add(musikGUIDTextField);
 
-        eingabePanel.add(new JLabel("Musiker: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("m")+": "));
         eingabePanel.add(musikerTextField);
 
-        eingabePanel.add(new JLabel("Album: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("a")+": "));
         eingabePanel.add(albumTextField);
 
-        eingabePanel.add(new JLabel("Song Name: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("sn")+": "));
         eingabePanel.add(songNameTextField);
 
-        eingabePanel.add(new JLabel("Regal Platz CD: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
         eingabePanel.add(regalPlatzCDTextField);
 
-        eingabePanel.add(new JLabel("Regal Platz Platte: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("rpp")+": "));
         eingabePanel.add(regalPlatzPlatteTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis CD: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
         eingabePanel.add(cdListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis Platte: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpp")+": "));
         eingabePanel.add(platteListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Listenpreis MP3: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
         eingabePanel.add(mp3ListenpreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis CD: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epcd")+": "));
         eingabePanel.add(cdEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis Platte: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epp")+": "));
         eingabePanel.add(platteEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Einkaufspreis MP3: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
         eingabePanel.add(mp3EinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel("Genre: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("g")+": "));
         eingabePanel.add(genreTextField);
 
-        eingabePanel.add(new JLabel("CD: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("cd")+": "));
         eingabePanel.add(cdCheckBox);
 
-        eingabePanel.add(new JLabel("Platte: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("p")+": "));
         eingabePanel.add(platteCheckBox);
 
-        eingabePanel.add(new JLabel("MP3: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mp3")+": "));
         eingabePanel.add(mp3CheckBox);
         fillTextBox();
 
-        Hinzufuegen = new JButton("Hinzufuegen");
-        beenden = new JButton("Beenden");
+        Hinzufuegen = new JButton(parent.getL10NText("add"));
+        beenden = new JButton(parent.getL10NText("end"));
         JPanel hinzufuegenPanel = new JPanel(new FlowLayout());
         hinzufuegenPanel.add(Hinzufuegen);
         hinzufuegenPanel.add(beenden);
@@ -172,7 +172,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
                 IdisOk = false;
             }
         } catch (Exception e1) {
-            JOptionPane.showMessageDialog(this, "Id ist nicht Gültig", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
         m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
@@ -194,7 +194,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             parent.getMusikMap().addMedium(m);
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
         } else {
-            JOptionPane.showMessageDialog(this, "Id ist schön verwendet", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, parent.getL10NText("idUsedError"), "Error", JOptionPane.ERROR_MESSAGE);
             IdisOk = true;
         }
         return IdisOk;

@@ -12,7 +12,7 @@ public class benutzerToolBar extends JToolBar {
     public benutzerToolBar(Gui p) {
         parent = p;
         setSize(200, 10);
-        shoppingKartButton = new JButton("Warenkorb");
+        shoppingKartButton = new JButton(p.getL10NText("wk"));
         shoppingKartButton.addActionListener(parent.getShoppingCartListner());
         add(shoppingKartButton);
 

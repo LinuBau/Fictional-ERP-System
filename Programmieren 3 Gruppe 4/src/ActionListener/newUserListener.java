@@ -34,10 +34,10 @@ public class newUserListener extends JDialog implements ActionListener {
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
 
-        showPasswordCheckBox = new JCheckBox("Passwort anzeigen");
-        hinzufügenButton = new JButton("Hinzufügen");
-        userNameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password");
+        showPasswordCheckBox = new JCheckBox(parent.getL10NText("pa"));
+        hinzufügenButton = new JButton(parent.getL10NText("add"));
+        userNameLabel = new JLabel(parent.getL10NText("usser"));
+        passwordLabel = new JLabel(parent.getL10NText("psw"));
 
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
@@ -55,7 +55,7 @@ public class newUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(this);
+        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox,passwordField));
         hinzufügenButton.addActionListener(this);
         
         this.getContentPane().setLayout(new BorderLayout());
@@ -76,13 +76,6 @@ public class newUserListener extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
-        if (e.getSource().equals(showPasswordCheckBox)) {
-            if (showPasswordCheckBox.isSelected()) {
-                passwordField.setEchoChar((char) 0);
-            } else {
-                passwordField.setEchoChar('*');
-            }
-        }
         if (e.getSource().equals(hinzufügenButton)) {
             profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
             parent.getProfilList().add(p);
