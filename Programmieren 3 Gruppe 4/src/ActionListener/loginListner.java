@@ -17,7 +17,7 @@ public class loginListner implements ActionListener {
     public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList);
         mainWindow.setTitle("Musik Katalog");
-        mainWindow.setSize(1000, 500);
+        mainWindow.setExtendedState(mainWindow.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
         mainWindow.setVisible(true);
