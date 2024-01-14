@@ -51,34 +51,31 @@ public class loginGUi extends JFrame {
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         profilList.add(m);
-        createLoginPlane();
+        createLoginPanel();
     }
 
     public loginGUi(profilList profilList,MusikList musikList,String languageShort){
         this.profilList = profilList;
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
-        createLoginPlane();
+        createLoginPanel();
     }
     
-    public void createLoginPlane(){
-        centerconetentPanel = new JPanel(new GridLayout(4, 4));
+    public void createLoginPanel(){
+        centerconetentPanel = new JPanel(new GridLayout(2, 2));
         userNameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password");
+        passwordLabel = new JLabel("Password:");
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
-        loginButton = new JButton("Login");
-        newUserButton = new JButton("Neu Hinzufügen");
-        centerconetentPanel.add(new JPanel());
-        centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(userNameLabel);
         centerconetentPanel.add(usserNameTextField);
-        centerconetentPanel.add(new JPanel());
-        centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(passwordLabel);
         centerconetentPanel.add(passwordField);
-        showPassword = new JCheckBox("Passwort anzeigen");
+        
         JPanel southPanel = new JPanel(new GridLayout(1,3));
+        loginButton = new JButton("Login");
+        newUserButton = new JButton("Neu Hinzufügen");
+        showPassword = new JCheckBox("Passwort anzeigen");
         southPanel.add(newUserButton);
         southPanel.add(loginButton);
         southPanel.add(showPassword);
