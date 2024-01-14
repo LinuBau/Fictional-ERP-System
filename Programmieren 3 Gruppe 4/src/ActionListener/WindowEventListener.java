@@ -42,7 +42,7 @@ public class WindowEventListener implements WindowListener {
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
                 options,
-                options[0]
+                options[0]           
         );
 
         if (x == 1) {
@@ -75,9 +75,16 @@ public class WindowEventListener implements WindowListener {
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
             System.out.println("Speichern");
         }
-
-        System.out.println("Fenster schließen");
+        if (x == 2) {
+            parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } 
+        else {
+            parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            return;
+        }
         parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            System.out.println("Fenster schließen");
+        
     }
 
     @Override
