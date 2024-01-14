@@ -254,7 +254,7 @@ public class Gui extends JFrame {
 
         // Importing Data
         musikList = new MusikList();
-        MusikListDAO mld = new MusikListDAO("Song.csv", false);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Song.csv", false);
         try {
             mld.read(musikList);
             mld.close();

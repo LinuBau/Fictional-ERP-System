@@ -9,7 +9,6 @@ public class changeLanguagePopUp extends JMenu {
         super(label);
         for(int i=0;i<shortlanguage.length;i++){
             boolean b = !(shortlanguage[i].equals(parent.getLocale().getLanguage()));
-            System.out.println(b);
             if (b) {
                 changeLanguageItem changeLanguageItem = new changeLanguageItem(parent,language[i],shortlanguage[i]);
                 add(changeLanguageItem);

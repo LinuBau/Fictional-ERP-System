@@ -52,7 +52,7 @@ public class MusikCsvDAO extends AbstractCsvDOA {
 
     protected void toMusik_Medium(String csv, String splitCondition,Musik MM) {
         String[] csvStrings = csv.split(splitCondition);
-        
+        csv.length();
          try 
          {
         MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim())); // trim() entfernt Leerzeichen
