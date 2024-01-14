@@ -3,6 +3,8 @@ package ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+
 import App_GUI.Gui;
 import App_GUI.loginGUi;
 import GeschaftsObejekt.MusikList;
@@ -24,7 +26,7 @@ public class loginListner implements ActionListener {
     public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList,parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
-        mainWindow.setSize(1000, 500);
+        mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
         mainWindow.setVisible(true);
