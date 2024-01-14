@@ -9,6 +9,7 @@ import MenuBar.mitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import Modele.MusikTableModel;
+import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import ToolBar.benutzerToolBar;
 import ToolBar.mitarbeiterToolBar;
@@ -102,7 +103,7 @@ public class Gui extends JFrame {
 
         // Importing Data
         musikList = new MusikList();
-        MusikListDAO mld = new MusikListDAO("setup.data", false);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Song.csv", false);
         try {
             mld.read(musikList);
             mld.close();
@@ -253,13 +254,14 @@ public class Gui extends JFrame {
 
         // Importing Data
         musikList = new MusikList();
-        MusikListDAO mld = new MusikListDAO("setup.data", false);
+        MusikListDAO mld = new MusikListDAO("Song.csv", false);
         try {
             mld.read(musikList);
             mld.close();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+System.out.println("MusikList hat " + musikList.size() + " Einträge.");
 
         // Initializing the MusikMap
         musikmap = new Musikmap(musikList);

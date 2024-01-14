@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
+import javax.swing.JSpinner;
 
 public class BearbeitenListener implements ActionListener {
     public JPanel eingabePanel;
@@ -39,6 +40,8 @@ public class BearbeitenListener implements ActionListener {
     private JButton SaveButton;
     private JButton reinhörenButton;
     private ReinhörenListener reinhörenListener;
+    private JSpinner VinylCountSpinner;
+    private JSpinner CDCountSpinner;
     Gui parent;
     private Musik medium;
 
@@ -67,6 +70,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField = new JFormattedTextField(format);
         platteEinkaufspreisTextField = new JFormattedTextField(format);
         mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        VinylCountSpinner = new JSpinner();
+        CDCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
@@ -77,7 +82,7 @@ public class BearbeitenListener implements ActionListener {
 
         musikGUIDTextField.setEditable(false);
 
-        JPanel centerPanel = new JPanel(new GridLayout(13, 2));
+        JPanel centerPanel = new JPanel(new GridLayout(15, 2));
         JPanel southPanel = new JPanel(new BorderLayout());
 
         JPanel southcenterPanel = new JPanel(new GridLayout(1, 3));
@@ -123,6 +128,12 @@ public class BearbeitenListener implements ActionListener {
 
         centerPanel.add(new JLabel(parent.getL10NText("g")+": "));
         centerPanel.add(genreComboBox);
+        
+        centerPanel.add(new JLabel("CD Anzahl: "));
+        centerPanel.add(CDCountSpinner);
+        
+        centerPanel.add(new JLabel("Platten Anzahl: "));
+        centerPanel.add(VinylCountSpinner);
 
         southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
         southcenterPanel.add(cdCheckBox);
@@ -280,6 +291,8 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
         mp3CheckBox.setSelected(m.getIsMp3());
+        CDCountSpinner.setValue(m.getCDCount());
+        VinylCountSpinner.setValue(m.getVinylCount());
         setMitarbeiterEnable(true);
     }
 
@@ -297,6 +310,8 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
         mp3CheckBox.setSelected(m.getIsMp3());
+        CDCountSpinner.setValue(m.getCDCount());
+        VinylCountSpinner.setValue(m.getVinylCount());
         SaveButton.setEnabled(true);
         reinhörenButton.setEnabled(true);
     }
@@ -318,6 +333,8 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(false);
         platteCheckBox.setSelected(false);
         mp3CheckBox.setSelected(false);
+        VinylCountSpinner.setValue(0);
+        CDCountSpinner.setValue(0);
         setMitarbeiterEnable(false);
     }
 
@@ -351,9 +368,11 @@ public class BearbeitenListener implements ActionListener {
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
+        m.setCDCount((Integer) CDCountSpinner.getValue());
+        m.setVinylCount((Integer) VinylCountSpinner.getValue());
         parent.getTableModel().getMusikList().replaceMusik(m, parent.getTableModel().getMusikList());
         parent.updateTableWithMusikListe(parent.getTableModel().getMusikList());
         parent.getMusikMap().replaceMedium(medium, m);
-
+        
     }
 }

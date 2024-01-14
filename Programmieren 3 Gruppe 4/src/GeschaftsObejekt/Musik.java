@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Musik {
     private int Musik_GUID;
+    private int CDCount;
+    private int VinylCount;
     private String MBID;
     private String Artist;
     private String Album;
@@ -35,6 +37,8 @@ public class Musik {
                 ", Regal_Platz='" + getRegal_PlatzCD() + "'" +
                 ",Regal_PlatzPlatte="+ getRegal_PlatzPlatte()+ "'"+
                 ", CDListenpreis='" + getCDListenpreis() + "'" +
+                ", CD_Anzahl='" + getCDCount() + "'" +
+                ", Vinyl_Anzahl='" + getVinylCount() + "'" +
                 ", PlatteListenpreis='" + getPlatteListenpreis() + "'" +
                 ", Mp3Listenpreis='" + getMp3Listenpreis() + "'" +
                 ", CDEinkaufpreis='" + getCDEinkaufpreis() + "'" +
@@ -51,7 +55,7 @@ public class Musik {
     public Musik(int Musik_GUID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
             double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
-            boolean isMp3) {
+            boolean isMp3, int CDCount, int VinylCount) {
         this.Musik_GUID = Musik_GUID;
         this.Artist = Musiker;
         this.Album = Album;
@@ -68,6 +72,9 @@ public class Musik {
         this.CD = isCD;
         this.Platte = isPlatte;
         this.Mp3 = isMp3;
+        this.CDCount = CDCount;
+        this.VinylCount = VinylCount;
+        
     }
     public double getPreisofAll(Musik m,int platteMenge,int cdMenge){
         double mp3prise=0;
@@ -76,6 +83,23 @@ public class Musik {
         }
         return (m.PlatteListenpreis*platteMenge)+(CDListenpreis*cdMenge)+mp3prise;
     }
+    
+    public int getCDCount(){
+     return this.CDCount;   
+    }
+    
+    public void setCDCount(int CDCount){
+        this.CDCount = CDCount;
+    }
+    
+    public int getVinylCount(){
+        return this.VinylCount;
+    }
+    
+    public void setVinylCount(int VinylCount){
+        this.VinylCount = VinylCount;
+    }
+    
     public String getMBID(){
         return this.MBID;
     }
