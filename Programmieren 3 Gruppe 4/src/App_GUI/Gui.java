@@ -316,7 +316,7 @@ public class Gui extends JFrame {
         this.musikList = ml;
          //Create Locale
          locale = languageLocale;
-         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
+         bundle = ResourceBundle.getBundle("/I18NPropertiesFiles/Bundel", locale);
         // Initializing the MusikMap
         musikmap = new Musikmap(musikList);
 
@@ -370,11 +370,14 @@ public class Gui extends JFrame {
     public static void main(String[] args) {
 
         
-         loginGUi loginWindow = new loginGUi("de");
+        loginGUi loginWindow = new loginGUi("de");
          loginWindow.setTitle("Login");
          loginWindow.setSize(500, 500);
          loginWindow.setVisible(true);
          // loginWindow.w();
+
+    
+
          
     }
 }
