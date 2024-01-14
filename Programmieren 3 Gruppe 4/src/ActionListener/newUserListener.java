@@ -30,7 +30,7 @@ public class newUserListener extends JDialog implements ActionListener {
     private loginGUi parent;
 
     public newUserListener(loginGUi lg) {
-        centerconetentPanel = new JPanel(new GridLayout(4, 4));
+        centerconetentPanel = new JPanel(new GridLayout(5, 4));
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
 
@@ -50,6 +50,8 @@ public class newUserListener extends JDialog implements ActionListener {
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(passwordLabel);
         centerconetentPanel.add(passwordField);
+        centerconetentPanel.add(new JPanel());
+        centerconetentPanel.add(new JPanel());
         this.setModalityType(JDialog.ModalityType.APPLICATION_MODAL);
         this.setLocationRelativeTo(parent);
 

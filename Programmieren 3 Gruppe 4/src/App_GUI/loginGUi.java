@@ -62,15 +62,21 @@ public class loginGUi extends JFrame {
     }
     
     public void createLoginPanel(){
-        centerconetentPanel = new JPanel(new GridLayout(2, 2));
+        centerconetentPanel = new JPanel(new GridLayout(5, 4));
         userNameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password:");
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
+        centerconetentPanel.add(new JPanel());
+        centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(userNameLabel);
         centerconetentPanel.add(usserNameTextField);
+        centerconetentPanel.add(new JPanel());
+        centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(passwordLabel);
         centerconetentPanel.add(passwordField);
+        centerconetentPanel.add(new JPanel());
+        centerconetentPanel.add(new JPanel());
         
         JPanel southPanel = new JPanel(new GridLayout(1,3));
         loginButton = new JButton("Login");

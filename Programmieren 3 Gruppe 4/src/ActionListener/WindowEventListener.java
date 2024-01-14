@@ -32,11 +32,11 @@ public class WindowEventListener implements WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        String[] options = {"Speichern", "Speichern als", "Beenden"};
+        String[] options = {parent.getL10NText("save"), parent.getL10NText("saveas"), parent.getL10NText("end")};
 
         int x = JOptionPane.showOptionDialog(
                 null,
-                "Möchten Sie Ihren Fortschritt speichern?",
+                ""+parent.getL10NText("wantToSave"),
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
@@ -65,7 +65,7 @@ public class WindowEventListener implements WindowListener {
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                System.out.println("Speichern");
+                System.out.println(parent.getL10NText("save"));
             } else if (returnval == JFileChooser.CANCEL_OPTION || returnval == JFileChooser.ERROR_OPTION) {
                 parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 return;
@@ -73,7 +73,7 @@ public class WindowEventListener implements WindowListener {
         }
         if (x == 0) {
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
-            System.out.println("Speichern");
+            System.out.println(parent.getL10NText("save"));
         }
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
