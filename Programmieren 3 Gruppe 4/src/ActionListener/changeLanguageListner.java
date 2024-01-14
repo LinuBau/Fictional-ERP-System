@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
+import javax.swing.JFrame;
+
 import App_GUI.Gui;
 
 public class changeLanguageListner implements ActionListener {
@@ -21,7 +23,7 @@ public class changeLanguageListner implements ActionListener {
         int index = parent.getProfilList().getIndexofLogin();
         Gui mainWindow = new Gui(parent.getProfilList().get(index).getIsmitarbeiter(),parent.getProfilList(),parent.getMusikMap().getMusikList(),new Locale(language));
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
-        mainWindow.setSize(1000, 500);
+        mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
         mainWindow.setVisible(true);
