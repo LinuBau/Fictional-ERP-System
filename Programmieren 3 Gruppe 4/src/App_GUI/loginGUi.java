@@ -15,6 +15,7 @@ import ActionListener.showPasswordListner;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profil;
 import GeschaftsObejekt.profilList;
+import MenuBar.loginMenuBar;
 import SaveData_ReadData.ProfilListDOA;
 
 import java.awt.BorderLayout;
@@ -35,6 +36,8 @@ public class loginGUi extends JFrame {
     private ResourceBundle bundel;
     private JButton loginButton;
     private JButton newUserButton;
+    private String[] language = {"Deutsch","English","France","Sverige"};
+    private String[] shortlanguage = {"de","en","fr","sv"};
     
     public loginGUi(String languageShort) {
         profilList = new profilList();
@@ -63,8 +66,8 @@ public class loginGUi extends JFrame {
     
     public void createLoginPanel(){
         centerconetentPanel = new JPanel(new GridLayout(5, 4));
-        userNameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password:");
+        userNameLabel = new JLabel(this.getL10NText("usser")+": ");
+        passwordLabel = new JLabel(this.getL10NText("psw"));
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
         centerconetentPanel.add(new JPanel());
@@ -79,9 +82,9 @@ public class loginGUi extends JFrame {
         centerconetentPanel.add(new JPanel());
         
         JPanel southPanel = new JPanel(new GridLayout(1,3));
-        loginButton = new JButton("Login");
-        newUserButton = new JButton("Neu Hinzufügen");
-        showPassword = new JCheckBox("Passwort anzeigen");
+        loginButton = new JButton(this.getL10NText("log"));
+        newUserButton = new JButton(this.getL10NText("nhin"));
+        showPassword = new JCheckBox(this.getL10NText("pa"));
         southPanel.add(newUserButton);
         southPanel.add(loginButton);
         southPanel.add(showPassword);
@@ -91,6 +94,7 @@ public class loginGUi extends JFrame {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
+        setJMenuBar(new loginMenuBar(this, language, shortlanguage));
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
