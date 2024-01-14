@@ -22,8 +22,8 @@ public class loginListner implements ActionListener {
     }
 
     public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent) {
-        Gui mainWindow = new Gui(ismitarbeiter, profilList);
-        mainWindow.setTitle("Musik Katalog");
+        Gui mainWindow = new Gui(ismitarbeiter, profilList,parent.getLocale());
+        mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setSize(1000, 500);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
@@ -31,8 +31,8 @@ public class loginListner implements ActionListener {
     }
 
     public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent, MusikList musikList) {
-        Gui mainWindow = new Gui(ismitarbeiter, profilList);
-        mainWindow.setTitle("Musik Katalog");
+        Gui mainWindow = new Gui(ismitarbeiter, profilList,musikList,parent.getLocale());
+        mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setSize(1000, 500);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);

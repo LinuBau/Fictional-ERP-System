@@ -9,24 +9,7 @@ public class MusikTableModel extends AbstractTableModel {
 
     private MusikList musikList;
 
-    private final String[] columnNames = {
-            "MusikID",
-            "Künstler",
-            "AlbumTitel",
-            "SongTitel",
-            "RegalPlatzCD",
-            "RegalPlatzSchallplatte",
-            "CDVerkaufspreis",
-            "SchallplatteVerkaufspreis",
-            "Mp3Verkaufspreis",
-            "CDEinkaufspreis",
-            "SchallplatteEinkaufspreis",
-            "Mp3Einkaufspreis",
-            "Genre",
-            "CD",
-            "Schallplatte",
-            "Mp3"
-    };
+    private final String[] columnNames;
 
     private final Class<?>[] columnClass = new Class[] {
             Integer.class, String.class, String.class, String.class, String.class,
@@ -34,8 +17,9 @@ public class MusikTableModel extends AbstractTableModel {
             Double.class, Double.class, String.class, Boolean.class, Boolean.class, Boolean.class
     };
 
-    public MusikTableModel(MusikList musikList) {
+    public MusikTableModel(MusikList musikList, String[] columnNames) {
         this.musikList = musikList;
+        this.columnNames = columnNames;
     }
 
     @Override

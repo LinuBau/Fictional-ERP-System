@@ -45,11 +45,16 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         JPanel buttonPanel = new JPanel(new GridLayout(2, 3));
         musikList = new MusikList();
         parent = p;
-        tableModel = new MusikTableModel(musikList);
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
+        String[] tableValue = new String[16];
+        for(int i=0;i<tableValue.length;i++){
+            tableValue[i] = parent.getL10NText(tableKeys[i]);
+        }
+        tableModel = new MusikTableModel(musikList,tableValue);
         selectTabele = new JTable(tableModel);
-        speicherButton = new JButton("Speichern");
-        orderButton = new JButton("Bestellen");
-        loeschenButton = new JButton("Löschen");
+        speicherButton = new JButton(parent.getL10NText("save"));
+        orderButton = new JButton(parent.getL10NText("order"));
+        loeschenButton = new JButton(parent.getL10NText("delete"));
         platteTextField = new JSpinner();
         cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();

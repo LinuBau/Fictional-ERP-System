@@ -27,7 +27,7 @@ public class addToShoppingCart extends JDialog implements ActionListener {
         platteTextField = new JSpinner();
         cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
-        hinzufuegeButton = new JButton("Hinzufügen");
+        hinzufuegeButton = new JButton(parent.getL10NText("add"));
         JPanel centerPanel = new JPanel(new GridLayout(1, 3));
         JPanel southPanel = new JPanel(new GridLayout(1, 3));
         centerPanel.add(platteTextField);

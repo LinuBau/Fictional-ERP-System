@@ -15,7 +15,7 @@ public class FileMenu extends JMenu{
     Action FileOpenAction,FileSaveAction;
     Gui p;
     FileMenu(Gui parent){
-        super("File");
+        super(parent.getL10NText("file"));
         p = parent;
         createActions();
         this.add(new FileSaveAsItem(parent));
@@ -27,7 +27,7 @@ public class FileMenu extends JMenu{
     }
     
     private void createActions(){
-        FileOpenAction = new Actions.FileOpenAction(p, "Öffen", createIcon("/icons/53.gif"), "Öffent eine Datei");
+        FileOpenAction = new Actions.FileOpenAction(p,p.getL10NText("open"), createIcon("/icons/53.gif"), p.getL10NText("opfile"));
     }
 
     private ImageIcon createIcon(String filepath){

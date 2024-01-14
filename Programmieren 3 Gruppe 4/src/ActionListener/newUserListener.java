@@ -34,10 +34,10 @@ public class newUserListener extends JDialog implements ActionListener {
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
 
-        showPasswordCheckBox = new JCheckBox("Passwort anzeigen");
-        hinzufügenButton = new JButton("Hinzufügen");
-        userNameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password");
+        showPasswordCheckBox = new JCheckBox(parent.getL10NText("pa"));
+        hinzufügenButton = new JButton(parent.getL10NText("add"));
+        userNameLabel = new JLabel(parent.getL10NText("usser"));
+        passwordLabel = new JLabel(parent.getL10NText("psw"));
 
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();

@@ -19,6 +19,8 @@ import SaveData_ReadData.ProfilListDOA;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class loginGUi extends JFrame {
     private JPanel centerconetentPanel;
@@ -29,10 +31,12 @@ public class loginGUi extends JFrame {
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private MusikList musikList;
+    private Locale locale;
+    private ResourceBundle bundel;
     private JButton loginButton;
     private JButton newUserButton;
     
-    public loginGUi() {
+    public loginGUi(String languageShort) {
         profilList = new profilList();
         try {
             ProfilListDOA profilListDOA = new ProfilListDOA("logindata.data", false);
@@ -44,12 +48,16 @@ public class loginGUi extends JFrame {
         }
         String mit = "mitarbeiter";
         profil m = new profil(mit, mit.hashCode(), true);
+        locale = new Locale(languageShort);
+        bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         profilList.add(m);
         createLoginPlane();
     }
 
-    public loginGUi(profilList profilList,MusikList musikList){
+    public loginGUi(profilList profilList,MusikList musikList,String languageShort){
         this.profilList = profilList;
+        locale = new Locale(languageShort);
+        bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         createLoginPlane();
     }
     
@@ -97,8 +105,15 @@ public class loginGUi extends JFrame {
        
     }
 
+    public String getL10NText(String key){
+        return bundel.getString(key);
+    }
+
     public String getUsername() {
         return this.usserNameTextField.getText();
+    }
+    public Locale getLocale(){
+        return locale;
     }
 
     public profilList getProfilList(){
