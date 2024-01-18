@@ -148,6 +148,14 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         }
 
         if (e.getSource().equals(orderButton)) {
+             for (int i = 0; i < musikList.size(); i++) {
+                Musik musik = musikList.get(i);
+                int bestellteCdMenge = (Integer) cdTextField.getValue(); 
+                int bestellteVinylMenge = (Integer) platteTextField.getValue(); 
+
+                musik.reduziereCdAnzahl(bestellteCdMenge);
+                musik.reduziereVinylAnzahl(bestellteVinylMenge);
+            }
             String filepath = JFileChooserTxt();
             TxtWriting pdfwriter = new TxtWriting(filepath, true, musikList,
                     parent.getProfilList().get(parent.getProfilList().getIndexofLogin()));

@@ -72,51 +72,51 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         this.setLayout(new FlowLayout());
         // Textflied vor all Compents
-        JPanel eingabePanel = new JPanel(new GridLayout(19, 1));
+        JPanel eingabePanel = new JPanel(new GridLayout(19, 2));
 
-        eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
-        eingabePanel.add(musikGUIDTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("mbid")+": "));
-        eingabePanel.add(mbidTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("m")+": "));
-        eingabePanel.add(musikerTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("a")+": "));
-        eingabePanel.add(albumTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("sn")+": "));
-        eingabePanel.add(songNameTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
-        eingabePanel.add(regalPlatzCDTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("rpp")+": "));
-        eingabePanel.add(regalPlatzPlatteTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
-        eingabePanel.add(cdListenpreisTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("lpp")+": "));
-        eingabePanel.add(platteListenpreisTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
-        eingabePanel.add(mp3ListenpreisTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("epcd")+": "));
-        eingabePanel.add(cdEinkaufspreisTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("epp")+": "));
-        eingabePanel.add(platteEinkaufspreisTextField);
-
-        eingabePanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
-        eingabePanel.add(mp3EinkaufspreisTextField);
+//        eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
+//        eingabePanel.add(musikGUIDTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("mbid")+": "));
+//        eingabePanel.add(mbidTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("m")+": "));
+//        eingabePanel.add(musikerTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("a")+": "));
+//        eingabePanel.add(albumTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("sn")+": "));
+//        eingabePanel.add(songNameTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
+//        eingabePanel.add(regalPlatzCDTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("rpp")+": "));
+//        eingabePanel.add(regalPlatzPlatteTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
+//        eingabePanel.add(cdListenpreisTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("lpp")+": "));
+//        eingabePanel.add(platteListenpreisTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
+//        eingabePanel.add(mp3ListenpreisTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("epcd")+": "));
+//        eingabePanel.add(cdEinkaufspreisTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("epp")+": "));
+//        eingabePanel.add(platteEinkaufspreisTextField);
+//
+//        eingabePanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
+//        eingabePanel.add(mp3EinkaufspreisTextField);
         
-        eingabePanel.add(new JLabel("CdCount: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("CdCount")+": "));
         eingabePanel.add(cdCountSpinner);
         
-        eingabePanel.add(new JLabel("VinylCount: "));
+        eingabePanel.add(new JLabel(parent.getL10NText("VinylCount")+": "));
         eingabePanel.add(vinylCountSpinner);
 
         eingabePanel.add(new JLabel(parent.getL10NText("g")+": "));

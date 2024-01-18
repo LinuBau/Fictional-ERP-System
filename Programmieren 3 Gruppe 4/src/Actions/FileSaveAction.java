@@ -27,7 +27,7 @@ public class FileSaveAction extends AbstractAction {
         this.parent = parent;
     }
         public static void saveListe(MusikList musikList, profilList profilList) {
-        MusikListDAO mld = new MusikListDAO("setup.data", true);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", true);
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);

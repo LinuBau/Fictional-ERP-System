@@ -20,6 +20,8 @@ import SaveData_ReadData.ProfilListDOA;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -81,6 +83,13 @@ public class loginGUi extends JFrame {
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(new JPanel());
         
+        passwordField.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            loginButton.doClick(); // Simuliert einen Klick auf den Login-Button
+        }
+    });
+        
         JPanel southPanel = new JPanel(new GridLayout(1,3));
         loginButton = new JButton(this.getL10NText("log"));
         newUserButton = new JButton(this.getL10NText("nhin"));
@@ -100,6 +109,7 @@ public class loginGUi extends JFrame {
     }
 
     private  void makeActionListner(){
+        loginButton.addActionListener(new loginListner(this, musikList));
         if (musikList == null) {
             loginButton.addActionListener(new loginListner(this));
             newUserButton.addActionListener(new newUserListener(this));

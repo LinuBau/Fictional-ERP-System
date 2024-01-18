@@ -274,7 +274,7 @@ public void actionPerformed(ActionEvent e) {
     gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
     
     long anzahlTreffer = gefilterteErgebnisse.size();
-    trefferAnzeige.setText(parent.getL10NText("tr") + anzahlTreffer);
+    trefferAnzeige.setText(parent.getL10NText("tr") + ": " + anzahlTreffer);
 
     parent.updateTableWithMusikListe(gefilterteErgebnisse);
 }

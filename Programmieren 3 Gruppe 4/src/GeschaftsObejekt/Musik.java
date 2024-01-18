@@ -257,5 +257,15 @@ public class Musik {
     public List<ChangeLogEntry> getChangeLog() {
         return changeLog;
     }
+    
+    public void reduziereCdAnzahl(int menge) {
+        if (menge < 0) return; // Negative Mengen werden ignoriert
+        this.CdCount = Math.max(this.CdCount - menge, 0);
+    }
+    
+    public void reduziereVinylAnzahl(int menge) {
+        if (menge < 0) return; // Negative Mengen werden ignoriert
+        this.VinylCount = Math.max(this.VinylCount - menge, 0);
+    }
 
 }

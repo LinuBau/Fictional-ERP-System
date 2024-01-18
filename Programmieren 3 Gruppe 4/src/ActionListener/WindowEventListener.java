@@ -72,6 +72,7 @@ public class WindowEventListener implements WindowListener {
             }
         }
         if (x == 0) {
+            System.out.println(parent.getClass().getName());
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
             System.out.println(parent.getL10NText("save"));
         }

@@ -1,7 +1,7 @@
 
 package GeschaftsObejekt;
 
-
+import GeschaftsObejekt.Musik;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -54,5 +54,6 @@ public class MusikList extends ArrayList<Musik> {
         int index = getIndex(newmedium.getMusik_GUID());
         musikList.set(index, newmedium);
     }
-  
+    
+
 }
