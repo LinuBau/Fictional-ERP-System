@@ -8,7 +8,7 @@ import java.util.HashMap;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
-public class Musikmap {
+public class MusikMap {
 
     private final MusikList musikList;
     private HashMap<String, List<Musik>> titleMap;
