@@ -8,7 +8,7 @@ import java.util.HashMap;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 
-public class Musikmap {
+public class MusikMap {
 
     private final MusikList musikList;
     private HashMap<String, List<Musik>> titleMap;
@@ -20,7 +20,7 @@ public class Musikmap {
     private HashMap<Double, List<Musik>> platteListenpreisMap;
     private HashMap<Double, List<Musik>> mp3ListenpreisMap;
 
-    public Musikmap(MusikList musikList) {
+    public MusikMap(MusikList musikList) {
         this.musikList = musikList; // Verwendet die übergebene MusikList-Instanz
         initializeMaps();
     }

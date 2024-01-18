@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
+import javax.swing.JSpinner;
 
 public class BearbeitenListener implements ActionListener {
     public JPanel eingabePanel;
@@ -33,6 +34,8 @@ public class BearbeitenListener implements ActionListener {
     private JFormattedTextField cdEinkaufspreisTextField;
     private JFormattedTextField platteEinkaufspreisTextField;
     private JFormattedTextField mp3EinkaufspreisTextField;
+    private JSpinner cdCountSpinner;
+    private JSpinner vinylCountSpinner;
     private JCheckBox cdCheckBox;
     private JCheckBox platteCheckBox;
     private JCheckBox mp3CheckBox;
@@ -69,6 +72,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField = new JFormattedTextField(format);
         platteEinkaufspreisTextField = new JFormattedTextField(format);
         mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        cdCountSpinner = new JSpinner();
+        vinylCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
@@ -80,7 +85,7 @@ public class BearbeitenListener implements ActionListener {
         musikGUIDTextField.setEditable(false);
         mbidTextField.setEditable(false);
 
-        JPanel centerPanel = new JPanel(new GridLayout(14, 2));
+        JPanel centerPanel = new JPanel(new GridLayout(16, 2));
         JPanel southPanel = new JPanel(new BorderLayout());
 
         JPanel southcenterPanel = new JPanel(new GridLayout(1, 3));
@@ -129,6 +134,12 @@ public class BearbeitenListener implements ActionListener {
 
         centerPanel.add(new JLabel(parent.getL10NText("g")+": "));
         centerPanel.add(genreComboBox);
+        
+        centerPanel.add(new JLabel("CdCount: "));
+        centerPanel.add(cdCountSpinner);
+        
+        centerPanel.add(new JLabel("VinylCount: "));
+        centerPanel.add(vinylCountSpinner);
 
         southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
         southcenterPanel.add(cdCheckBox);
@@ -152,7 +163,7 @@ public class BearbeitenListener implements ActionListener {
         delteButton.addActionListener(this);
         reinhörenButton.addActionListener(reinhörenListener);
 
-        setMitarbeiterEnable(false);
+        setMitarbeiterEnable(true);
 
         return eingabePanel;
     }
@@ -161,7 +172,6 @@ public class BearbeitenListener implements ActionListener {
         NumberFormat format = new DecimalFormat("#.00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
-        
         musikerTextField = new JTextField();
         albumTextField = new JTextField();
         songNameTextField = new JTextField();
@@ -170,6 +180,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField = new JFormattedTextField(format);
         platteEinkaufspreisTextField = new JFormattedTextField(format);
         mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        cdCountSpinner = new JSpinner();
+        vinylCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
@@ -178,7 +190,7 @@ public class BearbeitenListener implements ActionListener {
         reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
 
-        JPanel centerPanel = new JPanel(new GridLayout(8, 2));
+        JPanel centerPanel = new JPanel(new GridLayout(10, 2));
         JPanel southPanel = new JPanel(new BorderLayout());
 
         JPanel southcenterPanel = new JPanel(new GridLayout(1, 3));
@@ -209,6 +221,12 @@ public class BearbeitenListener implements ActionListener {
 
         centerPanel.add(new JLabel(parent.getL10NText("g")));
         centerPanel.add(genreComboBox);
+        
+        centerPanel.add(new JLabel("CdCount: "));
+        centerPanel.add(cdCountSpinner);
+        
+        centerPanel.add(new JLabel("VinylCount: "));
+        centerPanel.add(vinylCountSpinner);
 
         southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
         southcenterPanel.add(cdCheckBox);
@@ -231,8 +249,8 @@ public class BearbeitenListener implements ActionListener {
         reinhörenButton.addActionListener(reinhörenListener);
 
         // Defauft
-        SaveButton.setEnabled(false);
-        reinhörenButton.setEnabled(false);
+        SaveButton.setEnabled(true);
+        reinhörenButton.setEnabled(true);
         genreComboBox.setEnabled(false);
         musikGUIDTextField.setEnabled(false);
         musikerTextField.setEnabled(false);
@@ -241,6 +259,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField.setEnabled(false);
         platteEinkaufspreisTextField.setEnabled(false);
         mp3EinkaufspreisTextField.setEnabled(false);
+        cdCountSpinner.setEnabled(false);
+        vinylCountSpinner.setEnabled(false);
         cdCheckBox.setEnabled(false);
         platteCheckBox.setEnabled(false);
         mp3CheckBox.setEnabled(false);
@@ -262,6 +282,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField.setEnabled(b);
         platteEinkaufspreisTextField.setEnabled(b);
         mp3EinkaufspreisTextField.setEnabled(b);
+        cdCountSpinner.setEnabled(b);
+        vinylCountSpinner.setEnabled(b);
         cdCheckBox.setEnabled(b);
         platteCheckBox.setEnabled(b);
         mp3CheckBox.setEnabled(b);
@@ -284,6 +306,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField.setText(String.valueOf(m.getCDEinkaufpreis()));
         platteEinkaufspreisTextField.setText(String.valueOf(m.getPlatteEinkaufpreis()));
         mp3EinkaufspreisTextField.setText(String.valueOf(m.getMp3Einkaufpreis()));
+        cdCountSpinner.setValue(m.getCdCount());
+        vinylCountSpinner.setValue(m.getVinylCount());
         genreComboBox.setText(m.getGenre());
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
@@ -301,6 +325,8 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField.setText(String.valueOf(m.getCDEinkaufpreis()));
         platteEinkaufspreisTextField.setText(String.valueOf(m.getPlatteEinkaufpreis()));
         mp3EinkaufspreisTextField.setText(String.valueOf(m.getMp3Einkaufpreis()));
+        cdCountSpinner.setValue(m.getCdCount());
+        vinylCountSpinner.setValue(m.getVinylCount());
         genreComboBox.setText(m.getGenre());
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
@@ -322,11 +348,13 @@ public class BearbeitenListener implements ActionListener {
         cdEinkaufspreisTextField.setText("0");
         platteEinkaufspreisTextField.setText("0");
         mp3EinkaufspreisTextField.setText("0");
+        cdCountSpinner.setValue(0);
+        vinylCountSpinner.setValue(0);        
         genreComboBox.setText("");
         cdCheckBox.setSelected(false);
         platteCheckBox.setSelected(false);
         mp3CheckBox.setSelected(false);
-        setMitarbeiterEnable(false);
+        setMitarbeiterEnable(true);
     }
 
     @Override
@@ -355,6 +383,8 @@ public class BearbeitenListener implements ActionListener {
         m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
         m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
         m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setCdCount((int) cdCountSpinner.getValue());
+        m.setVinylCount((int) vinylCountSpinner.getValue());
         m.setGenre(genreComboBox.getText());
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());

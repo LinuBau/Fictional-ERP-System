@@ -41,6 +41,8 @@ public class MusikDAO extends AbstractDAO {
             out.writeBoolean(MM.getIsCD());
             out.writeBoolean(MM.getIsPlatte());
             out.writeBoolean(MM.getIsMp3());
+            out.writeInt(MM.getCdCount());
+            out.writeInt(MM.getVinylCount());
         }
     }
 /**
@@ -69,6 +71,8 @@ public class MusikDAO extends AbstractDAO {
             MM.setIsCD(in.readBoolean());
             MM.setIsPlatte(in.readBoolean());
             MM.setIsMp3(in.readBoolean());
+            MM.setCdCount(in.readInt());
+            MM.setVinylCount(in.readInt());
         }
     }
 

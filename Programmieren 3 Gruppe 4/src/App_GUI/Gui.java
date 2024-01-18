@@ -9,10 +9,11 @@ import MenuBar.mitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import Modele.MusikTableModel;
+import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import ToolBar.benutzerToolBar;
 import ToolBar.mitarbeiterToolBar;
-import Traversierung.Musikmap;
+import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -32,7 +33,7 @@ public class Gui extends JFrame {
 
     private JTable AtributTabelle;
     private MusikTableModel tableModel;
-    private Musikmap musikmap;
+    private MusikMap musikmap;
     private MusikList musikList;
     private profilList profilList;
     private BearbeitenListener bearbeitenListener;
@@ -70,7 +71,7 @@ public class Gui extends JFrame {
         return this.musikList;
     }
 
-    public Musikmap getMusikMap() {
+    public MusikMap getMusikMap() {
         return this.musikmap;
     }
     public String getL10NText(String key){
@@ -102,7 +103,7 @@ public class Gui extends JFrame {
 
         // Importing Data
         musikList = new MusikList();
-        MusikListDAO mld = new MusikListDAO("setup.data", false);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", false);
         try {
             mld.read(musikList);
             mld.close();
@@ -111,7 +112,7 @@ public class Gui extends JFrame {
         }
 
         // Initializing the MusikMap
-        musikmap = new Musikmap(musikList);
+        musikmap = new MusikMap(musikList);
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -124,8 +125,8 @@ public class Gui extends JFrame {
         eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
 
         // Initializing sortetd JTable
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
-        String[] tableValue = new String[16];
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
+        String[] tableValue = new String[18];
         for(int i=0;i<tableValue.length;i++){
             tableValue[i] = getL10NText(tableKeys[i]);
         }
@@ -180,7 +181,7 @@ public class Gui extends JFrame {
         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
 
         // Initializing the MusikMap
-        musikmap = new Musikmap(musikList);
+        musikmap = new MusikMap(musikList);
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -194,8 +195,8 @@ public class Gui extends JFrame {
 
         // Initializing sortetd JTable
         MusikList sotierteList = new MusikList();
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
-        String[] tableValue = new String[16];
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
+        String[] tableValue = new String[18];
         for(int i=0;i<tableValue.length;i++){
             tableValue[i] = getL10NText(tableKeys[i]);
         }
@@ -253,7 +254,7 @@ public class Gui extends JFrame {
 
         // Importing Data
         musikList = new MusikList();
-        MusikListDAO mld = new MusikListDAO("setup.data", false);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", false);
         try {
             mld.read(musikList);
             mld.close();
@@ -262,7 +263,7 @@ public class Gui extends JFrame {
         }
 
         // Initializing the MusikMap
-        musikmap = new Musikmap(musikList);
+        musikmap = new MusikMap(musikList);
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -273,8 +274,8 @@ public class Gui extends JFrame {
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
 
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
-        String[] tableValue = new String[16];
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
+        String[] tableValue = new String[18];
         for(int i=0;i<tableValue.length;i++){
             tableValue[i] = getL10NText(tableKeys[i]);
         }
@@ -318,7 +319,7 @@ public class Gui extends JFrame {
          locale = languageLocale;
          bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         // Initializing the MusikMap
-        musikmap = new Musikmap(musikList);
+        musikmap = new MusikMap(musikList);
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -330,8 +331,8 @@ public class Gui extends JFrame {
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
 
         // Initializing sortetd JTable
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
-        String[] tableValue = new String[16];
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
+        String[] tableValue = new String[18];
         for(int i=0;i<tableValue.length;i++){
             tableValue[i] = getL10NText(tableKeys[i]);
         }

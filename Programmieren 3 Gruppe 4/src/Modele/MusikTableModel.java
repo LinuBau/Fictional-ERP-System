@@ -12,10 +12,12 @@ public class MusikTableModel extends AbstractTableModel {
     private final String[] columnNames;
 
     private final Class<?>[] columnClass = new Class[] {
-            Integer.class, String.class, String.class, String.class, String.class,
-            String.class, Double.class, Double.class, Double.class, Double.class,
-            Double.class, Double.class, String.class, Boolean.class, Boolean.class, Boolean.class
-    };
+        Integer.class, String.class, String.class, String.class, String.class,
+        String.class, Double.class, Double.class, Double.class, Double.class,
+        Double.class, Double.class, String.class, Boolean.class, Boolean.class, Boolean.class,
+        Integer.class, Integer.class
+};
+
 
     public MusikTableModel(MusikList musikList, String[] columnNames) {
         this.musikList = musikList;
@@ -78,6 +80,10 @@ public class MusikTableModel extends AbstractTableModel {
                 return row.getIsPlatte();
             case 15:
                 return row.getIsMp3();
+            case 16:
+                return row.getCdCount();
+            case 17:
+                return row.getVinylCount();
             default:
                 return null;
         }
@@ -137,6 +143,11 @@ public class MusikTableModel extends AbstractTableModel {
             case 15:
                 row.setIsMp3((Boolean) aValue);
                 break;
+            case 16:
+                row.setCdCount((Integer) aValue);
+                break;
+            case 17:
+                row.setVinylCount((Integer) aValue);
             default:
                 throw new ArrayIndexOutOfBoundsException();
         }

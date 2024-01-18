@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
+import javax.swing.JSpinner;
 
 public class HinzufuegenListener extends JDialog implements ActionListener {
 
@@ -35,6 +36,8 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JFormattedTextField cdEinkaufspreisTextField;
     private JFormattedTextField platteEinkaufspreisTextField;
     private JFormattedTextField mp3EinkaufspreisTextField;
+    private JSpinner cdCountSpinner;
+    private JSpinner vinylCountSpinner;
     private JCheckBox cdCheckBox;
     private JCheckBox platteCheckBox;
     private JCheckBox mp3CheckBox;
@@ -61,13 +64,15 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         cdEinkaufspreisTextField = new JFormattedTextField(format);
         platteEinkaufspreisTextField = new JFormattedTextField(format);
         mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        cdCountSpinner = new JSpinner();
+        vinylCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
 
         this.setLayout(new FlowLayout());
         // Textflied vor all Compents
-        JPanel eingabePanel = new JPanel(new GridLayout(17, 1));
+        JPanel eingabePanel = new JPanel(new GridLayout(19, 1));
 
         eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
         eingabePanel.add(musikGUIDTextField);
@@ -107,6 +112,12 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
         eingabePanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
         eingabePanel.add(mp3EinkaufspreisTextField);
+        
+        eingabePanel.add(new JLabel("CdCount: "));
+        eingabePanel.add(cdCountSpinner);
+        
+        eingabePanel.add(new JLabel("VinylCount: "));
+        eingabePanel.add(vinylCountSpinner);
 
         eingabePanel.add(new JLabel(parent.getL10NText("g")+": "));
         eingabePanel.add(genreTextField);
@@ -152,6 +163,9 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         platteEinkaufspreisTextField.setText("0");
         mp3EinkaufspreisTextField.setText("0");
         genreTextField.setText("");
+        cdCountSpinner.setValue(0);
+        vinylCountSpinner.setValue(0);
+        
 
     }
 
@@ -198,6 +212,9 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
         m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
         m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setCdCount((int) cdCountSpinner.getValue());
+        m.setVinylCount((int) vinylCountSpinner.getValue());
+        
         m.setGenre(genreTextField.getText());
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());

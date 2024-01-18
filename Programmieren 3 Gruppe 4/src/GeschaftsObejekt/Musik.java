@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Musik {
     private int Musik_GUID;
+    private int CdCount;
+    private int VinylCount;
     private String MBID;
     private String Artist;
     private String Album;
@@ -44,6 +46,8 @@ public class Musik {
                 ", isCD='" + isIsCD() + "'" +
                 ", isPlatte='" + isIsPlatte() + "'" +
                 ", isMp3='" + isIsMp3() + "'" +
+                ", CdCount='" + getCdCount() + "'" +
+                ", VinylCount='" + getVinylCount() + "'" +                               
                 "}";
     }
     
@@ -51,7 +55,7 @@ public class Musik {
     public Musik(int Musik_GUID,String MBID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
             double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
-            boolean isMp3) {
+            boolean isMp3, int CdCount,int VinylCount ) {
         this.Musik_GUID = Musik_GUID;
         this.MBID = MBID;
         this.Artist = Musiker;
@@ -69,6 +73,8 @@ public class Musik {
         this.CD = isCD;
         this.Platte = isPlatte;
         this.Mp3 = isMp3;
+        this.CdCount = CdCount;
+        this.VinylCount = VinylCount;
     }
     public double getPreisofAll(Musik m,int platteMenge,int cdMenge){
         double mp3prise=0;
@@ -83,6 +89,22 @@ public class Musik {
     }
     public void setMBID(String mbid){
         this.MBID = mbid;
+    }
+    
+    public int getCdCount(){
+        return this.CdCount;
+    }
+    
+    public void setCdCount(int CdCount){
+        this.CdCount = CdCount;
+    }
+    
+    public int getVinylCount(){
+        return this.VinylCount;
+    }
+    
+    public void setVinylCount(int VinylCount){
+        this.VinylCount = VinylCount;
     }
 
     public int getMusik_GUID() {
