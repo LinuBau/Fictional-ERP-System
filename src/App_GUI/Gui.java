@@ -395,17 +395,14 @@ public class Gui extends JFrame {
 
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(new JScrollPane(changeLogTable), BorderLayout.EAST);
-        northPanel.add(eingabePanel, BorderLayout.CENTER);
+        northPanel.add(eingabePanel, BorderLayout.WEST);
         northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
 
         // Setting up the layout
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
+        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.SOUTH);
         getContentPane().add(northPanel, BorderLayout.NORTH);
         setLocationRelativeTo(null);
-//        JPanel changeLogPanel = new JPanel(new BorderLayout());
-//        changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
-//        getContentPane().add(changeLogPanel, BorderLayout.EAST);
 
         // Add Mouse Pressed Event
         AtributTabelle.addMouseListener(new MouseAdapter() {

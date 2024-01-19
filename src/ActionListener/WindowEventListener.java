@@ -44,6 +44,14 @@ public class WindowEventListener implements WindowListener {
                 options,
                 options[0]
         );
+        
+         if (x == 0) {
+            System.out.println(parent.getClass().getName());
+            WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
+            System.out.println(parent.getL10NText("save"));
+            System.out.println("Fenster schließen");
+            System.exit(0);
+        }
 
         if (x == 1) {
             JFileChooser chooser = new JFileChooser();
@@ -72,13 +80,6 @@ public class WindowEventListener implements WindowListener {
                 parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 return;
             }
-        }
-        if (x == 0) {
-            System.out.println(parent.getClass().getName());
-            WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
-            System.out.println(parent.getL10NText("save"));
-            System.out.println("Fenster schließen");
-            System.exit(0);
         }
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
