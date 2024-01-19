@@ -7,7 +7,7 @@ import SaveData_ReadData.MusikDAO;
 public class Programmieren3Gruppe4 {
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        Gui.main(args);
         String filepath = "build/data/neu.data";
         MusikDAO output = new MusikDAO(filepath, true);
         MusikDAO input = new MusikDAO(filepath, false);
@@ -22,7 +22,7 @@ public class Programmieren3Gruppe4 {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        Gui.main(args);
+        
     }
 }
 
