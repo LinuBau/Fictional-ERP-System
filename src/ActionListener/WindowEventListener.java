@@ -66,8 +66,8 @@ public class WindowEventListener implements WindowListener {
                     e1.printStackTrace();
                 }
                 System.out.println(parent.getL10NText("save"));
-                System.exit(0);
                 System.out.println("Fenster schließen");
+                System.exit(0);
             } else if (returnval == JFileChooser.CANCEL_OPTION || returnval == JFileChooser.ERROR_OPTION) {
                 parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 return;
@@ -77,8 +77,8 @@ public class WindowEventListener implements WindowListener {
             System.out.println(parent.getClass().getName());
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
             System.out.println(parent.getL10NText("save"));
-            System.exit(0);
             System.out.println("Fenster schließen");
+            System.exit(0);
         }
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,8 +87,8 @@ public class WindowEventListener implements WindowListener {
             parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             return;
         }
-        System.exit(0);
         System.out.println("Fenster schließen");
+        System.exit(0);
         
     }
 
@@ -118,7 +118,7 @@ public class WindowEventListener implements WindowListener {
     }
 
     public static void saveListe(MusikList musikList, profilList profilList) {
-        MusikListDAO mld = new MusikListDAO("setup.data", true);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", true);
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);
