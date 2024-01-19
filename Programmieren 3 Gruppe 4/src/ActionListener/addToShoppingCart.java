@@ -74,7 +74,6 @@ public class addToShoppingCart extends JDialog implements ActionListener {
     int verfuegbareCDs = m.getCdCount();
     int verfuegbareVinyls = m.getVinylCount();
 
-    // Holen Sie die Mengen aus dem Benutzerprofil
     int index = parent.getProfilList().getIndexofLogin();
     int gespeicherteCdMenge = parent.getProfilList().get(index).getCdCount(m.getMusik_GUID());
     int gespeicherteVinylMenge = parent.getProfilList().get(index).getVinylCount(m.getMusik_GUID());

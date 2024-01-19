@@ -1,9 +1,6 @@
 
 package GeschaftsObejekt;
 
-import Traversierung.ChangeLogEntry;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Musik {
@@ -26,7 +23,7 @@ public class Musik {
     private boolean CD;
     private boolean Platte;
     private boolean Mp3;
-    private List<ChangeLogEntry> changeLog = new ArrayList<>();
+ //   private List<ChangeLogEntry> changeLog = new ArrayList<>();
     
     @Override
     public String toString() {
@@ -284,14 +281,14 @@ public int hashCode() {
     public Musik() {
     }
     
-    public void addToChangeLog(String action, Musik originalState, Musik newState) {
-        ChangeLogEntry entry = new ChangeLogEntry(action, originalState, newState);
-        changeLog.add(entry);
-    }
-
-    public List<ChangeLogEntry> getChangeLog() {
-        return changeLog;
-    }
+//    public void addToChangeLog(String action, Musik originalState, Musik newState) {
+//        ChangeLogEntry entry = new ChangeLogEntry(action, originalState, newState);
+//        changeLog.add(entry);
+//    }
+//
+//    public List<ChangeLogEntry> getChangeLog() {
+//        return changeLog;
+//    }
     
     public void reduziereCdAnzahl(int menge) {
         if (menge < 0) return; // Negative Mengen werden ignoriert
