@@ -8,20 +8,7 @@ public class Programmieren3Gruppe4 {
 
     public static void main(String[] args) {
         Gui.main(args);
-        String filepath = "build/data/neu.data";
-        MusikDAO output = new MusikDAO(filepath, true);
-        MusikDAO input = new MusikDAO(filepath, false);
-
-        Musik hr = new Musik();
-        try {
-            //output.write();
-            output.close();
-            input.read(hr);
-            System.out.println(hr.toString());
-            input.close();
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        
         
     }
 }
