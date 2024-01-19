@@ -109,7 +109,6 @@ public class loginGUi extends JFrame {
     }
 
     private void makeActionListner() {
-        loginButton.addActionListener(new loginListner(this, musikList));
         if (musikList == null) {
             loginButton.addActionListener(new loginListner(this));
             newUserButton.addActionListener(new newUserListener(this));
