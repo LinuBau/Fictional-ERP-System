@@ -45,8 +45,6 @@ public class Gui extends JFrame {
     private FilterListener filterListener;
     private Locale locale;
     private ResourceBundle bundle;
-    private String[] language = {"Deutsch", "English", "France", "Sverige"};
-    private String[] shortlanguage = {"de", "en", "fr", "sv"};
     private ChangeLogTableModel changeLogTableModel;
     private JTable changeLogTable;
 
@@ -102,7 +100,7 @@ public class Gui extends JFrame {
     private void initialiseUsserFrame(profilList pl, Locale languageLocale) {
         this.profilList = pl;
 
-        //Create Locale
+        // Create Locale
         locale = languageLocale;
         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
 
@@ -115,78 +113,25 @@ public class Gui extends JFrame {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
-        // Initializing the MusikMap
-        musikmap = new MusikMap(musikList);
-
-        // Initializing the ActionListner
-        filterListener = new FilterListener(this, musikmap);
-        bearbeitenListener = new BearbeitenListener(this);
-        shoppingCartListner = new shoppingCartListner(this);
-
-        // add FilterPanel and EditPanel
-        JPanel eingabePanel = new JPanel(new FlowLayout());
-        eingabePanel.add(filterListener.getFilterPanel());
-        eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
-
-        // Initializing sortetd JTable
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
-        String[] tableValue = new String[18];
-        for (int i = 0; i < tableValue.length; i++) {
-            tableValue[i] = getL10NText(tableKeys[i]);
-        }
-        MusikList sotierteList = new MusikList();
-        sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
-        tableModel = new MusikTableModel(sotierteList, tableValue);
-        AtributTabelle = new JTable(tableModel);
-        JPanel northPanel = new JPanel(new BorderLayout());
-        northPanel.add(eingabePanel, BorderLayout.CENTER);
-
-        // Remove Collum that user are not allowod to see
-        int[] columnsToHide = {0, 4, 5, 9, 10, 11};
-        int removeCount = 0;
-        for (int i : columnsToHide) {
-            AtributTabelle.removeColumn(AtributTabelle.getColumnModel().getColumn(i - removeCount));
-            removeCount++;
-        }
-
-        northPanel.add(new benutzerToolBar(this), BorderLayout.NORTH);
-
-        // Setting up the layout
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
-        getContentPane().add(northPanel, BorderLayout.NORTH);
-        setLocationRelativeTo(null);
-
-        // Add Mouse Pressed Event
-        AtributTabelle.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                Point point = mouseEvent.getPoint();
-                int row = AtributTabelle.rowAtPoint(point);
-                bearbeitenListener.benutzerFillTextBox(tableModel.getMusikList().get(row));
-                bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
-                shoppingCartListner.setMusik(tableModel.getMusikList().get(row));
-            }
-        });
-
-        // Create MenuBar
-        setJMenuBar(new benutzerMenuBar(this, language, shortlanguage));
-
-        // add WindowEventListner
-        addWindowListener(new WindowEventListener(this));
+        createUsserFrame();
 
     }
+
+ 
 
     private void initialiseUsserFrame(profilList pl, MusikList ml, Locale languageLocale) {
         this.profilList = pl;
         this.musikList = ml;
-
-        //Create Locale
+        // Create Locale
         locale = languageLocale;
         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
+        createUsserFrame();
+    }
 
+    private void createUsserFrame() {
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
+
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -199,13 +144,14 @@ public class Gui extends JFrame {
         eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
 
         // Initializing sortetd JTable
-        MusikList sotierteList = new MusikList();
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
         String[] tableValue = new String[18];
         for (int i = 0; i < tableValue.length; i++) {
             tableValue[i] = getL10NText(tableKeys[i]);
         }
+        MusikList sotierteList = new MusikList();
         sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+        tableModel = new MusikTableModel(sotierteList, tableValue);
         tableModel = new MusikTableModel(sotierteList, tableValue);
         AtributTabelle = new JTable(tableModel);
         JPanel northPanel = new JPanel(new BorderLayout());
@@ -239,7 +185,7 @@ public class Gui extends JFrame {
         });
 
         // Create MenuBar
-        setJMenuBar(new benutzerMenuBar(this, language, shortlanguage));
+        setJMenuBar(new benutzerMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
@@ -266,80 +212,7 @@ public class Gui extends JFrame {
             e1.printStackTrace();
         }
 
-        // Initializing the MusikMap
-        musikmap = new MusikMap(musikList);
-
-        //Initialize ChangeLogTableModel
-        changeLogTableModel = new ChangeLogTableModel();
-        changeLogTable = new JTable(changeLogTableModel);
-        //add clickablility for changeloginformation
-        changeLogTable.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
-                    System.out.println("Mouse clicked on table");
-                    JTable target = (JTable) e.getSource();
-                    int row = target.getSelectedRow(); // Die ausgewählte Zeile
-                    if (row >= 0 && row < changeLogTableModel.getRowCount()) {
-                        Object timestamp = changeLogTableModel.getValueAt(row, 0);
-                        Object action = changeLogTableModel.getValueAt(row, 1);
-                        Object newState = changeLogTableModel.getValueAt(row, 3);
-                        Object ogstate = changeLogTableModel.getValueAt(row, 2);
-                        displayChangeLogDetails(timestamp, action, newState, ogstate);
-                    }
-                }
-            }
-        });
-
-        // Initializing the ActionListner
-        filterListener = new FilterListener(this, musikmap);
-        bearbeitenListener = new BearbeitenListener(this);
-
-        // add FilterPanel and EditPanel#
-        JPanel eingabePanel = new JPanel(new FlowLayout());
-        eingabePanel.add(filterListener.getFilterPanel());
-        eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
-
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
-        String[] tableValue = new String[18];
-        for (int i = 0; i < tableValue.length; i++) {
-            tableValue[i] = getL10NText(tableKeys[i]);
-        }
-        // Initializing sortetd JTable
-        MusikList sotierteList = new MusikList();
-        sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
-        tableModel = new MusikTableModel(sotierteList, tableValue);
-        AtributTabelle = new JTable(tableModel);
-        JPanel northPanel = new JPanel(new BorderLayout());
-        northPanel.add(eingabePanel, BorderLayout.CENTER);
-
-        northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
-
-        // Setting up the layout
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
-        getContentPane().add(northPanel, BorderLayout.NORTH);
-        setLocationRelativeTo(null);
-        JPanel changeLogPanel = new JPanel(new BorderLayout());
-        changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
-        getContentPane().add(changeLogPanel, BorderLayout.EAST);
-
-        // Add Mouse Pressed Event
-        AtributTabelle.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                Point point = mouseEvent.getPoint();
-                int row = AtributTabelle.rowAtPoint(point);
-                bearbeitenListener.mitarbeiterFillTextBox(tableModel.getMusikList().get(row));
-                bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
-            }
-        });
-
-        loadChangeLogs();
-
-        // Create MenuBar
-        setJMenuBar(new mitarbeiterMenuBar(this, language, shortlanguage));
-
-        // add WindowEventListner
-        addWindowListener(new WindowEventListener(this));
+       
     }
 
     private void initialiseMitarbeiterFarme(profilList pl, MusikList ml, Locale languageLocale) {
@@ -438,6 +311,82 @@ public class Gui extends JFrame {
                 + "New State: " + originalState + "\n"
                 + "newState" + newState;
         JOptionPane.showMessageDialog(this, message, "ChangeLog Details", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void createMitarbeiterFrame(){
+         // Initializing the MusikMap
+         musikmap = new MusikMap(musikList);
+
+         //Initialize ChangeLogTableModel
+         changeLogTableModel = new ChangeLogTableModel();
+         changeLogTable = new JTable(changeLogTableModel);
+         //add clickablility for changeloginformation
+         changeLogTable.addMouseListener(new MouseAdapter() {
+             public void mouseClicked(MouseEvent e) {
+                 if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
+                     System.out.println("Mouse clicked on table");
+                     JTable target = (JTable) e.getSource();
+                     int row = target.getSelectedRow(); // Die ausgewählte Zeile
+                     if (row >= 0 && row < changeLogTableModel.getRowCount()) {
+                         Object timestamp = changeLogTableModel.getValueAt(row, 0);
+                         Object action = changeLogTableModel.getValueAt(row, 1);
+                         Object newState = changeLogTableModel.getValueAt(row, 3);
+                         Object ogstate = changeLogTableModel.getValueAt(row, 2);
+                         displayChangeLogDetails(timestamp, action, newState, ogstate);
+                     }
+                 }
+             }
+         });
+ 
+         // Initializing the ActionListner
+         filterListener = new FilterListener(this, musikmap);
+         bearbeitenListener = new BearbeitenListener(this);
+ 
+         // add FilterPanel and EditPanel#
+         JPanel eingabePanel = new JPanel(new FlowLayout());
+         eingabePanel.add(filterListener.getFilterPanel());
+         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
+ 
+         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
+         String[] tableValue = new String[18];
+         for (int i = 0; i < tableValue.length; i++) {
+             tableValue[i] = getL10NText(tableKeys[i]);
+         }
+         // Initializing sortetd JTable
+         MusikList sotierteList = new MusikList();
+         sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
+         tableModel = new MusikTableModel(sotierteList, tableValue);
+         AtributTabelle = new JTable(tableModel);
+         JPanel northPanel = new JPanel(new BorderLayout());
+         northPanel.add(eingabePanel, BorderLayout.CENTER);
+ 
+         northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
+ 
+         // Setting up the layout
+         getContentPane().setLayout(new BorderLayout());
+         getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
+         getContentPane().add(northPanel, BorderLayout.NORTH);
+         setLocationRelativeTo(null);
+         JPanel changeLogPanel = new JPanel(new BorderLayout());
+         changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
+         getContentPane().add(changeLogPanel, BorderLayout.EAST);
+ 
+         // Add Mouse Pressed Event
+         AtributTabelle.addMouseListener(new MouseAdapter() {
+             public void mousePressed(MouseEvent mouseEvent) {
+                 Point point = mouseEvent.getPoint();
+                 int row = AtributTabelle.rowAtPoint(point);
+                 bearbeitenListener.mitarbeiterFillTextBox(tableModel.getMusikList().get(row));
+                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
+             }
+         });
+ 
+         loadChangeLogs();
+ 
+         // Create MenuBar
+         setJMenuBar(new mitarbeiterMenuBar(this));
+ 
+         // add WindowEventListner
+         addWindowListener(new WindowEventListener(this));
     }
 
     public static void main(String[] args) {

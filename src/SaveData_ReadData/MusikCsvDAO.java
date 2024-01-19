@@ -81,6 +81,11 @@ public class MusikCsvDAO extends AbstractCsvDOA {
         MM.setIsMp3(Boolean.parseBoolean(csvStrings[15]));
         MM.setCdCount(Integer.parseInt(csvStrings[16]));
         MM.setVinylCount(Integer.parseInt(csvStrings[17]));
+        
+        boolean isPlatte = (MM.getVinylCount() != 0);
+        boolean isCd = (MM.getCdCount() != 0);
+        MM.setIsPlatte(isPlatte);
+        MM.setIsCD(isCd);
 
         /*try {
             MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim()));

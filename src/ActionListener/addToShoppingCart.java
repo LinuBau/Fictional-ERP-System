@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 import App_GUI.Gui;
@@ -25,12 +24,14 @@ public class addToShoppingCart extends JDialog implements ActionListener {
     private JSpinner cdTextField;
     private JCheckBox mp3CheckBox;
     private JButton hinzufuegeButton;
+    private int maxVinyl;
+    private int maxCd;
     private Gui parent;
 
     public addToShoppingCart(Gui p) {
         parent = p;
-        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
-        SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 100, 1);
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 10000,1);
+        SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 10000,1);
         platteTextField = new JSpinner(spinnerModel);
         cdTextField = new JSpinner(spinnerModel1);
         mp3CheckBox = new JCheckBox();
@@ -69,18 +70,12 @@ public class addToShoppingCart extends JDialog implements ActionListener {
         cdTextField.setEnabled(m.getIsCD());
         mp3CheckBox.setEnabled(m.isIsMp3());
     }
-
-    private void setEnabledAndMaxValues() {
-        Musik m = parent.getShoppingCartListner().getMusik();
-        int verfuegbareCDs = m.getCdCount();
-        int verfuegbareVinyls = m.getVinylCount();
-
-        int index = parent.getProfilList().getIndexofLogin();
-        int gespeicherteCdMenge = parent.getProfilList().get(index).getCdCount(m.getMusik_GUID());
-        int gespeicherteVinylMenge = parent.getProfilList().get(index).getVinylCount(m.getMusik_GUID());
-
-        platteTextField.setModel(new SpinnerNumberModel(gespeicherteVinylMenge, 0, verfuegbareVinyls, 1));
-        cdTextField.setModel(new SpinnerNumberModel(gespeicherteCdMenge, 0, verfuegbareCDs, 1));
+    
+     private void setEnabledAndMaxValues() {
+    Musik m = parent.getShoppingCartListner().getMusik();
+    
+    maxVinyl = m.getVinylCount();
+    maxCd = m.getCdCount();
 
         platteTextField.setEnabled(m.getIsPlatte());
         cdTextField.setEnabled(m.getIsCD());
@@ -88,8 +83,8 @@ public class addToShoppingCart extends JDialog implements ActionListener {
     }
 
     private void clearTextBox() {
-        platteTextField.setValue(0);;
-        cdTextField.setValue(0);;
+        platteTextField.setValue(0);
+        cdTextField.setValue(0);
         mp3CheckBox.setSelected(false);
     }
 
@@ -106,10 +101,27 @@ public class addToShoppingCart extends JDialog implements ActionListener {
                 int cdAnzahl = 0;
                 boolean mp3Seclect = false;
                 if (platteTextField.isEnabled()) {
-                    platteAnzahl = (int) platteTextField.getValue();
+                    System.out.println(maxVinyl);
+                    platteAnzahl = (int)platteTextField.getValue();
+                    System.out.println(platteAnzahl);
+
+                    if(platteAnzahl > maxVinyl){
+                       JOptionPane.showMessageDialog(this, "Hast zu viel ausgewählt.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                       platteTextField.setValue(maxVinyl);
+                        return;
+                    }
                 }
                 if (cdTextField.isEnabled()) {
-                    cdAnzahl = (int) (cdTextField.getValue());
+                    System.out.println(maxCd);
+                    cdAnzahl = (int)(cdTextField.getValue());
+                     System.out.println(cdAnzahl);
+                    if(cdAnzahl >maxCd){
+                       JOptionPane.showMessageDialog(this, "Hast zu viel ausgewählt." , "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                       cdTextField.setValue(maxCd);
+                       return;
+                    }
                 }
                 if (mp3CheckBox.isEnabled()) {
                     mp3Seclect = mp3CheckBox.isSelected();
@@ -122,7 +134,7 @@ public class addToShoppingCart extends JDialog implements ActionListener {
 
                 this.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(this, "Musik ist schon in der Liste vorhanden.", "Error",
+                JOptionPane.showMessageDialog(this, parent.getL10NText("isinmes"), "Error",
                         JOptionPane.ERROR_MESSAGE);
                 clearTextBox();
                 this.setVisible(false);

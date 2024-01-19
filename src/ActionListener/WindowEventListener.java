@@ -57,6 +57,7 @@ public class WindowEventListener implements WindowListener {
             JFileChooser chooser = new JFileChooser();
             chooser.setAcceptAllFileFilterUsed(false);
             chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            WindowEventListener.saveProfilListe(parent.getProfilList());
 
             int returnval = chooser.showSaveDialog(parent);
 
@@ -122,13 +123,22 @@ public class WindowEventListener implements WindowListener {
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);
-            pld.write(profilList);
+            
             mld.close();
-            pld.close();
+            
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
+    }
+    public static void saveProfilListe(profilList profilList){
+        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
+        try {
+            pld.write(profilList);
+            pld.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

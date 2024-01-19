@@ -50,7 +50,6 @@ public class MusikList extends ArrayList<Musik> {
         }
         return -1;
     }
-
     public void replaceMusik(Musik newmedium, MusikList musikList) {
         int index = getIndex(newmedium.getMusik_GUID());
         musikList.set(index, newmedium);

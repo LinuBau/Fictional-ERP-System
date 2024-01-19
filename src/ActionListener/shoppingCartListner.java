@@ -26,6 +26,7 @@ import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import Modele.MusikTableModel;
 import SaveData_ReadData.TxtWriting;
+import javax.swing.JLabel;
 import javax.swing.SpinnerNumberModel;
 
 public class shoppingCartListner extends JDialog implements ActionListener {
@@ -44,7 +45,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private Gui parent;
 
     public shoppingCartListner(Gui p) {
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 3));
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 6));
         musikList = new MusikList();
         parent = p;
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
@@ -60,8 +61,11 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         platteTextField = new JSpinner();
         cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
+        buttonPanel.add(new JLabel(parent.getL10NText("plstue")));
         buttonPanel.add(platteTextField);
+        buttonPanel.add(new JLabel(parent.getL10NText("cdstue")));
         buttonPanel.add(cdTextField);
+        buttonPanel.add(new JLabel(parent.getL10NText("mp3")));
         buttonPanel.add(mp3CheckBox);
         buttonPanel.add(orderButton);
         buttonPanel.add(speicherButton);

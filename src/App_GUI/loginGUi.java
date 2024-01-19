@@ -13,7 +13,6 @@ import ActionListener.loginListner;
 import ActionListener.newUserListener;
 import ActionListener.showPasswordListner;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profil;
 import GeschaftsObejekt.profilList;
 import MenuBar.loginMenuBar;
 import SaveData_ReadData.ProfilListDOA;
@@ -39,9 +38,7 @@ public class loginGUi extends JFrame {
     private ResourceBundle bundel;
     private JButton loginButton;
     private JButton newUserButton;
-    private String[] language = {"Deutsch", "English", "France", "Sverige"};
-    private String[] shortlanguage = {"de", "en", "fr", "sv"};
-
+    
     public loginGUi(String languageShort) {
         profilList = new profilList();
         try {
@@ -52,11 +49,8 @@ public class loginGUi extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String mit = "mitarbeiter";
-        profil m = new profil(mit, mit.hashCode(), true);
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
-        profilList.add(m);
         createLoginPanel();
     }
 
@@ -103,12 +97,12 @@ public class loginGUi extends JFrame {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
-        setJMenuBar(new loginMenuBar(this, language, shortlanguage));
+        setJMenuBar(new loginMenuBar(this));
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private void makeActionListner() {
+    private  void makeActionListner(){
         if (musikList == null) {
             loginButton.addActionListener(new loginListner(this));
             newUserButton.addActionListener(new newUserListener(this));

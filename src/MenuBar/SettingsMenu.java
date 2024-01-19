@@ -5,9 +5,9 @@ import javax.swing.JMenu;
 
 public class SettingsMenu extends JMenu {
 
-    SettingsMenu(Gui p, String[] language, String[] shortlanguage) {
+    SettingsMenu(Gui p) {
         super(p.getL10NText("seting"));
-        this.add(new changeLanguagePopUp(p, "Language", shortlanguage, language));
+        this.add(new changeLanguageSupMenu(p, "Language"));
         this.addSeparator();
         this.add(new abmeldungItem(p));
     }

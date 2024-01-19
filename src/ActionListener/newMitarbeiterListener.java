@@ -10,15 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import App_GUI.loginGUi;
+import App_GUI.Gui;
 import GeschaftsObejekt.profil;
-import javax.swing.JOptionPane;
 
-public class newUserListener extends JDialog implements ActionListener {
+public class newMitarbeiterListener extends JDialog implements ActionListener {
 
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
@@ -28,17 +28,17 @@ public class newUserListener extends JDialog implements ActionListener {
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private JPanel southPanel;
-    private loginGUi parent;
+    private Gui parent;
 
-    public newUserListener(loginGUi lg) {
+    public newMitarbeiterListener(Gui lg) {
         centerconetentPanel = new JPanel(new GridLayout(5, 4));
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
 
         showPasswordCheckBox = new JCheckBox(parent.getL10NText("pa"));
         hinzufügenButton = new JButton(parent.getL10NText("add"));
-        userNameLabel = new JLabel("   " + parent.getL10NText("usser") + ": ");
-        passwordLabel = new JLabel("   " + parent.getL10NText("psw") + ": ");
+        userNameLabel = new JLabel(parent.getL10NText("usser"));
+        passwordLabel = new JLabel(parent.getL10NText("psw"));
 
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
@@ -64,9 +64,14 @@ public class newUserListener extends JDialog implements ActionListener {
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);
-        this.setSize(500, 200);
+        this.setSize(500, 150);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
+    }
+
+    public int getPassword() {
+        String tmp = new String(passwordField.getPassword());
+        return tmp.hashCode();
     }
 
     @Override
@@ -74,24 +79,16 @@ public class newUserListener extends JDialog implements ActionListener {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
             String ussername = usserNameTextField.getText();
-            profil p = new profil(ussername, getPassword(), false);
+            profil p = new profil(ussername, getPassword(), true);
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
-                int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
-                if (index != -1) {
-                    loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),
-                            parent);
-                }
+                JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
                 this.setVisible(false);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Ussername ist vergeben", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
     }
 
-    public int getPassword() {
-        String tmp = new String(passwordField.getPassword());
-        return tmp.hashCode();
-    }
 }
