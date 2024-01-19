@@ -60,7 +60,7 @@ public class BearbeitenListener implements ActionListener {
     }
 
     public JPanel getMitarbeiterBearbeitenPanel() {
-        NumberFormat format = new DecimalFormat("#.00");
+  //      NumberFormat format = new DecimalFormat("#,00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
         mbidTextField = new JTextField();
@@ -69,12 +69,12 @@ public class BearbeitenListener implements ActionListener {
         songNameTextField = new JTextField();
         regalPlatzCDTextField = new JTextField();
         regalPlatzPlatteTextField = new JTextField();
-        cdListenpreisTextField = new JFormattedTextField(format);
-        platteListenpreisTextField = new JFormattedTextField(format);
-        mp3ListenpreisTextField = new JFormattedTextField(format);
-        cdEinkaufspreisTextField = new JFormattedTextField(format);
-        platteEinkaufspreisTextField = new JFormattedTextField(format);
-        mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        cdListenpreisTextField = new JFormattedTextField();
+        platteListenpreisTextField = new JFormattedTextField();
+        mp3ListenpreisTextField = new JFormattedTextField();
+        cdEinkaufspreisTextField = new JFormattedTextField();
+        platteEinkaufspreisTextField = new JFormattedTextField();
+        mp3EinkaufspreisTextField = new JFormattedTextField();
         cdCountSpinner = new JSpinner();
         vinylCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();

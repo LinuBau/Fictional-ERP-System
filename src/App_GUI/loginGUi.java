@@ -86,7 +86,7 @@ public class loginGUi extends JFrame {
         passwordField.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            loginButton.doClick(); // Simuliert einen Klick auf den Login-Button
+            loginButton.doClick(); // Simuliert einen Klick auf den Login-Button durch enter
         }
     });
         
