@@ -271,9 +271,10 @@ public class Gui extends JFrame {
         musikmap = new MusikMap(musikList);
         
         
-         
+         //Initialize ChangeLogTableModel
         changeLogTableModel = new ChangeLogTableModel();
         changeLogTable = new JTable(changeLogTableModel);
+        //add clickablility for changeloginformation
              changeLogTable.addMouseListener(new MouseAdapter() {
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
@@ -283,8 +284,9 @@ public class Gui extends JFrame {
             if(row >= 0 && row < changeLogTableModel.getRowCount()) {
                 Object timestamp = changeLogTableModel.getValueAt(row, 0);
                 Object action = changeLogTableModel.getValueAt(row, 1);
-                Object newState = changeLogTableModel.getValueAt(row, 2);                
-                displayChangeLogDetails(timestamp, action, newState);
+                Object newState = changeLogTableModel.getValueAt(row, 3);     
+                Object ogstate = changeLogTableModel.getValueAt(row, 2);
+                displayChangeLogDetails(timestamp, action, newState, ogstate);
             }
         }
     }
@@ -353,9 +355,11 @@ public class Gui extends JFrame {
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
         
-        
+        //initializes ChangeLogTableModel
         changeLogTableModel = new ChangeLogTableModel();
         changeLogTable = new JTable(changeLogTableModel);
+      //add clickablility for changeloginformation
+
              changeLogTable.addMouseListener(new MouseAdapter() {
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
@@ -365,8 +369,10 @@ public class Gui extends JFrame {
             if(row >= 0 && row < changeLogTableModel.getRowCount()) {
                 Object timestamp = changeLogTableModel.getValueAt(row, 0);
                 Object action = changeLogTableModel.getValueAt(row, 1);
-                Object newState = changeLogTableModel.getValueAt(row, 2);                
-                displayChangeLogDetails(timestamp, action, newState);
+                Object newState = changeLogTableModel.getValueAt(row, 3);   
+                Object ogstate = changeLogTableModel.getValueAt(row, 2);
+
+                displayChangeLogDetails(timestamp, action, newState, ogstate);
             }
         }
     }
@@ -425,15 +431,16 @@ public class Gui extends JFrame {
     }
     
     public void loadChangeLogs() {
-        List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // Holt die Changelogs
+        List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // get Changelogs
         changeLogTableModel.setChangeLogs(changeLogs);
-        changeLogTableModel.fireTableDataChanged(); // Aktualisiert die Tabelle
+        changeLogTableModel.fireTableDataChanged(); // update changelogtable
     }
     
-    private void displayChangeLogDetails(Object timestamp, Object action, Object originalState) {
+    private void displayChangeLogDetails(Object timestamp, Object action, Object originalState, Object newState) {
     String message = "Timestamp: " + timestamp + "\n" +
                      "Action: " + action + "\n" +
-                     "New State: " + originalState;
+                     "New State: " + originalState + "\n" +
+                             "newState" + newState;
     JOptionPane.showMessageDialog(this, message, "ChangeLog Details", JOptionPane.INFORMATION_MESSAGE);
 }
     

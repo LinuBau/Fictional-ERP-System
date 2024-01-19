@@ -32,7 +32,7 @@ public class ChangeLogTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {    
-        return 3; 
+        return 4; 
     }
 
     @Override
@@ -45,6 +45,8 @@ public class ChangeLogTableModel extends AbstractTableModel {
                 return entry.getAction();
             case 2:
                 return entry.getNewState();
+            case 3:
+                return entry.getOriginalState();
             default:
                 return null;
         }

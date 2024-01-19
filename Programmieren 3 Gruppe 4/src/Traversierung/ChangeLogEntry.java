@@ -3,6 +3,8 @@ package Traversierung;
 
 import GeschaftsObejekt.Musik;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 
 public class ChangeLogEntry {
@@ -12,7 +14,7 @@ public class ChangeLogEntry {
     private Musik newState;
 
     public ChangeLogEntry(String action, Musik originalState, Musik newState) {
-        this.timestamp = LocalDateTime.now(); 
+        this.timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); 
         this.action = action;
         this.originalState = originalState; 
         this.newState = newState; 
@@ -59,5 +61,21 @@ public class ChangeLogEntry {
                 ", originalState=" + (originalState != null ? originalState.toString() : "null") +
                 ", newState=" + (newState != null ? newState.toString() : "null") +
                 '}';
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChangeLogEntry that = (ChangeLogEntry) o;
+        return 
+                Objects.equals(action, that.action) &&
+                Objects.equals(originalState, that.originalState) &&
+                Objects.equals(newState, that.newState);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( action, originalState, newState);
     }
 }

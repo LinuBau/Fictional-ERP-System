@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MusikMap {
 
@@ -19,7 +21,7 @@ public class MusikMap {
     private HashMap<Double, List<Musik>> cdListenpreisMap;
     private HashMap<Double, List<Musik>> platteListenpreisMap;
     private HashMap<Double, List<Musik>> mp3ListenpreisMap;
-    private List<ChangeLogEntry> changeLog = new ArrayList<>();
+    private Set<ChangeLogEntry> changeLog = new HashSet<>();
 
 
     public MusikMap(MusikList musikList) {
@@ -213,6 +215,7 @@ public class MusikMap {
 
 }
 public List<ChangeLogEntry> getChangeLogs() {
-        return changeLog; 
-    }
+    return new ArrayList<>(changeLog);
+}
+
 }        

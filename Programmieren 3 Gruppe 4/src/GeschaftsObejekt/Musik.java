@@ -4,6 +4,7 @@ package GeschaftsObejekt;
 import Traversierung.ChangeLogEntry;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Musik {
     private int Musik_GUID;
@@ -51,6 +52,39 @@ public class Musik {
        "}";
 
     }
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Musik musik = (Musik) o;
+    return Musik_GUID == musik.Musik_GUID &&
+           CdCount == musik.CdCount &&
+           VinylCount == musik.VinylCount &&
+           Double.compare(musik.CDListenpreis, CDListenpreis) == 0 &&
+           Double.compare(musik.PlatteListenpreis, PlatteListenpreis) == 0 &&
+           Double.compare(musik.Mp3Listenpreis, Mp3Listenpreis) == 0 &&
+           Double.compare(musik.CDEinkaufpreis, CDEinkaufpreis) == 0 &&
+           Double.compare(musik.PlatteEinkaufpreis, PlatteEinkaufpreis) == 0 &&
+           Double.compare(musik.Mp3Einkaufpreis, Mp3Einkaufpreis) == 0 &&
+           CD == musik.CD &&
+           Platte == musik.Platte &&
+           Mp3 == musik.Mp3 &&
+           Objects.equals(MBID, musik.MBID) &&
+           Objects.equals(Artist, musik.Artist) &&
+           Objects.equals(Album, musik.Album) &&
+           Objects.equals(SongName, musik.SongName) &&
+           Objects.equals(Regal_PlatzCD, musik.Regal_PlatzCD) &&
+           Objects.equals(Regal_PlatzPlatte, musik.Regal_PlatzPlatte) &&
+           Objects.equals(Genre, musik.Genre);
+}
+
+@Override
+public int hashCode() {
+    return Objects.hash(Musik_GUID, CdCount, VinylCount, MBID, Artist, Album, SongName, Regal_PlatzCD, Regal_PlatzPlatte, CDListenpreis, PlatteListenpreis, Mp3Listenpreis, CDEinkaufpreis, PlatteEinkaufpreis, Mp3Einkaufpreis, Genre, CD, Platte, Mp3);
+}
+
+
+  
     
 
     public Musik(int Musik_GUID,String MBID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
