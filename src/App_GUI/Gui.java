@@ -18,6 +18,7 @@ import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -378,9 +379,10 @@ public class Gui extends JFrame {
         bearbeitenListener = new BearbeitenListener(this);
 
         // add FilterPanel and EditPanel#
-        JPanel eingabePanel = new JPanel(new FlowLayout());
+        JPanel eingabePanel = new JPanel(new GridLayout(1,3));
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
+        eingabePanel.add(new JScrollPane(changeLogTable));
 
         // Initializing sortetd JTable
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
@@ -394,13 +396,13 @@ public class Gui extends JFrame {
         AtributTabelle = new JTable(tableModel);
 
         JPanel northPanel = new JPanel(new BorderLayout());
-        northPanel.add(new JScrollPane(changeLogTable), BorderLayout.EAST);
-        northPanel.add(eingabePanel, BorderLayout.WEST);
+//        northPanel.add(new JScrollPane(changeLogTable), BorderLayout.EAST);
+       northPanel.add(eingabePanel, BorderLayout.CENTER);
         northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
 
         // Setting up the layout
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.SOUTH);
+        getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
         getContentPane().add(northPanel, BorderLayout.NORTH);
         setLocationRelativeTo(null);
 
