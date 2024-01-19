@@ -37,8 +37,8 @@ public class newUserListener extends JDialog implements ActionListener {
 
         showPasswordCheckBox = new JCheckBox(parent.getL10NText("pa"));
         hinzufügenButton = new JButton(parent.getL10NText("add"));
-        userNameLabel = new JLabel(parent.getL10NText("usser"));
-        passwordLabel = new JLabel(parent.getL10NText("psw"));
+        userNameLabel = new JLabel("   " + parent.getL10NText("usser") + ": ");
+        passwordLabel = new JLabel("   " + parent.getL10NText("psw") + ": ");
 
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
