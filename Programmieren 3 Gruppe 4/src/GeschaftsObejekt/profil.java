@@ -117,5 +117,22 @@ public class profil {
         cdStückZahlList.remove(index);
         mp3Gekauft.remove(index);
     }
+    
+    public int getCdCount(int musikId) {
+        int index = this.musikId.indexOf(musikId);
+        if (index != -1) {
+            return cdStückZahlList.get(index);
+        } else {
+            return 0; 
+        }
+    }
+     public int getVinylCount(int musikId) {
+        int index = this.musikId.indexOf(musikId);
+        if (index != -1) {
+            return pallteStückZahlList.get(index);
+        } else {
+            return 0;
+        }
+    }
 
 }

@@ -436,6 +436,7 @@ public class Gui extends JFrame {
         changeLogTableModel.fireTableDataChanged(); // update changelogtable
     }
     
+    //Console log to make sure actions happend
     private void displayChangeLogDetails(Object timestamp, Object action, Object originalState, Object newState) {
     String message = "Timestamp: " + timestamp + "\n" +
                      "Action: " + action + "\n" +

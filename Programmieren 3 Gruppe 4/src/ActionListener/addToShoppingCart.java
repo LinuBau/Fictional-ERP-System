@@ -68,6 +68,25 @@ public class addToShoppingCart extends JDialog implements ActionListener {
         cdTextField.setEnabled(m.getIsCD());
         mp3CheckBox.setEnabled(m.isIsMp3());
     }
+    
+        private void setEnabledAndMaxValues() {
+    Musik m = parent.getShoppingCartListner().getMusik();
+    int verfuegbareCDs = m.getCdCount();
+    int verfuegbareVinyls = m.getVinylCount();
+
+    // Holen Sie die Mengen aus dem Benutzerprofil
+    int index = parent.getProfilList().getIndexofLogin();
+    int gespeicherteCdMenge = parent.getProfilList().get(index).getCdCount(m.getMusik_GUID());
+    int gespeicherteVinylMenge = parent.getProfilList().get(index).getVinylCount(m.getMusik_GUID());
+
+    platteTextField.setModel(new SpinnerNumberModel(gespeicherteVinylMenge, 0, verfuegbareVinyls, 1));
+    cdTextField.setModel(new SpinnerNumberModel(gespeicherteCdMenge, 0, verfuegbareCDs, 1));
+
+    platteTextField.setEnabled(m.getIsPlatte());
+    cdTextField.setEnabled(m.getIsCD());
+    mp3CheckBox.setEnabled(m.isIsMp3());
+}
+
 
     private void clearTextBox() {
         platteTextField.setValue(0);;
@@ -78,6 +97,7 @@ public class addToShoppingCart extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         setEnabled();
+        setEnabledAndMaxValues();
         this.setVisible(true);
         if (e.getSource().equals(hinzufuegeButton)) {
             int index = parent.getProfilList().getIndexofLogin();

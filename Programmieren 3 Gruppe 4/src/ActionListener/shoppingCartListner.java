@@ -26,6 +26,7 @@ import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import Modele.MusikTableModel;
 import SaveData_ReadData.TxtWriting;
+import javax.swing.SpinnerNumberModel;
 
 public class shoppingCartListner extends JDialog implements ActionListener {
     private JTable selectTabele;
@@ -100,9 +101,13 @@ public class shoppingCartListner extends JDialog implements ActionListener {
         int stückZahlPlatte = parent.getProfilList().get(indexofProfil).getPallteStückZahlList().get(indexl);
         int stückZahlCD = parent.getProfilList().get(indexofProfil).getCdStückZahlList().get(indexl);
         boolean isMp3 = parent.getProfilList().get(indexofProfil).getMp3Gekauft().get(indexl);
-        platteTextField.setEnabled(musikList.get(index).getIsPlatte());
-        cdTextField.setEnabled(musikList.get(index).getIsCD());
-        mp3CheckBox.setEnabled(musikList.get(index).getIsMp3());
+        Musik selectedMusik = musikList.get(index);
+        platteTextField.setModel(new SpinnerNumberModel(stückZahlPlatte, 0, selectedMusik.getVinylCount(), 1));
+        cdTextField.setModel(new SpinnerNumberModel(stückZahlCD, 0, selectedMusik.getCdCount(), 1));
+        platteTextField.setEnabled(selectedMusik.getIsPlatte());
+        cdTextField.setEnabled(selectedMusik.getIsCD());
+        mp3CheckBox.setEnabled(selectedMusik.getIsMp3());
+
         platteTextField.setValue(stückZahlPlatte);
         cdTextField.setValue(stückZahlCD);
         mp3CheckBox.setSelected(isMp3);
