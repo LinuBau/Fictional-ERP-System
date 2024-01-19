@@ -29,26 +29,27 @@ public class Musik {
     
     @Override
     public String toString() {
-        return "{" +
-                " Musik_GUID='" + getMusik_GUID() + "'" +
-                ", Musiker='" + getMusiker() + "'" +
-                ", Album='" + getAlbum() + "'" +
-                ", SongName='" + getSongName() + "'" +
-                ", Regal_Platz='" + getRegal_PlatzCD() + "'" +
-                ",Regal_PlatzPlatte="+ getRegal_PlatzPlatte()+ "'"+
-                ", CDListenpreis='" + getCDListenpreis() + "'" +
-                ", PlatteListenpreis='" + getPlatteListenpreis() + "'" +
-                ", Mp3Listenpreis='" + getMp3Listenpreis() + "'" +
-                ", CDEinkaufpreis='" + getCDEinkaufpreis() + "'" +
-                ", PlatteEinkaufpreis='" + getPlatteEinkaufpreis() + "'" +
-                ", Mp3Einkaufpreis='" + getMp3Einkaufpreis() + "'" +
-                ", Genre='" + getGenre() + "'" +
-                ", isCD='" + isIsCD() + "'" +
-                ", isPlatte='" + isIsPlatte() + "'" +
-                ", isMp3='" + isIsMp3() + "'" +
-                ", CdCount='" + getCdCount() + "'" +
-                ", VinylCount='" + getVinylCount() + "'" +                               
-                "}";
+        return "{\n" +
+       " Musik_GUID='" + getMusik_GUID() + "',\n" +
+       " Musiker='" + getMusiker() + "',\n" +
+       " Album='" + getAlbum() + "',\n" +
+       " SongName='" + getSongName() + "',\n" +
+       " Regal_PlatzCD='" + getRegal_PlatzCD() + "',\n" +
+       " Regal_PlatzPlatte='" + getRegal_PlatzPlatte() + "',\n" +
+       " CDListenpreis='" + getCDListenpreis() + "',\n" +
+       " PlatteListenpreis='" + getPlatteListenpreis() + "',\n" +
+       " Mp3Listenpreis='" + getMp3Listenpreis() + "',\n" +
+       " CDEinkaufpreis='" + getCDEinkaufpreis() + "',\n" +
+       " PlatteEinkaufpreis='" + getPlatteEinkaufpreis() + "',\n" +
+       " Mp3Einkaufpreis='" + getMp3Einkaufpreis() + "',\n" +
+       " Genre='" + getGenre() + "',\n" +
+       " isCD='" + isIsCD() + "',\n" +
+       " isPlatte='" + isIsPlatte() + "',\n" +
+       " isMp3='" + isIsMp3() + "',\n" +
+       " CdCount='" + getCdCount() + "',\n" +
+       " VinylCount='" + getVinylCount() + "'\n" +                               
+       "}";
+
     }
     
 
@@ -267,5 +268,29 @@ public class Musik {
         if (menge < 0) return; // Negative Mengen werden ignoriert
         this.VinylCount = Math.max(this.VinylCount - menge, 0);
     }
+public Musik clone() {
+    Musik copy = new Musik();
+    copy.setMusik_GUID(this.getMusik_GUID());
+    copy.setAlbum(this.getAlbum());
+    copy.setCDEinkaufpreis(this.getCDEinkaufpreis());
+    copy.setCDListenpreis(this.getCDListenpreis());
+    copy.setCdCount(this.getCdCount());
+    copy.setGenre(this.getGenre());
+    copy.setIsCD(this.getIsCD());
+    copy.setIsMp3(this.getIsMp3());
+    copy.setIsPlatte(this.getIsPlatte());
+    copy.setMBID(this.getMBID());
+    copy.setMp3Einkaufpreis(this.getMp3Einkaufpreis());
+    copy.setMp3Listenpreis(this.getMp3Listenpreis());
+    copy.setMusiker(this.getMusiker());
+    copy.setPlatteEinkaufpreis(this.getPlatteEinkaufpreis());
+    copy.setPlatteListenpreis(this.getPlatteListenpreis());
+    copy.setRegal_PlatzCD(this.getRegal_PlatzCD());
+    copy.setRegal_PlatzPlatte(this.getRegal_PlatzPlatte());
+    copy.setSongName(this.getSongName());
+    copy.setVinylCount(this.getVinylCount());
+    return copy;
+}
+
 
 }

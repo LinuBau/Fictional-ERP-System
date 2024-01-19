@@ -16,6 +16,9 @@ import javax.swing.JTextField;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
 public class BearbeitenListener implements ActionListener {
@@ -359,24 +362,56 @@ public class BearbeitenListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(SaveButton)) {          
-         bearbeitenButton();          
+        if (e.getSource().equals(SaveButton)) {  
+            if(validatePriceFields()){
+                bearbeitenButton();  
+                parent.getMusikMap().logChange("UPDATE", medium, constructMusikFromFields());
+                parent.loadChangeLogs();
+            }
+            else{
+              JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein (positive Zahlen mit maximal zwei Nachkommastellen).");
+            }
         }
         if (e.getSource().equals(delteButton)) {
+            parent.getMusikMap().logChange("DELETE", medium, null); 
             parent.getMusikMap().removeMedium(medium);
             clearTextBox();
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+            parent.loadChangeLogs();
         }
     }
+    
+private boolean validatePriceFields() {
+    String regex = "^-?[0-9]+(\\.[0-9]{1,2})?$";
 
-    private void bearbeitenButton() {
-        Musik m = new Musik();
-        m.setMusik_GUID(medium.getMusik_GUID());
+    boolean cdPriceValid = cdListenpreisTextField.getText().matches(regex);
+    boolean plattePriceValid = platteListenpreisTextField.getText().matches(regex);
+    boolean mp3PriceValid = mp3ListenpreisTextField.getText().matches(regex);
+
+    if (!cdPriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Listenpreis für CDs ist ungültig.");
+    }
+    if (!plattePriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Listenpreis für Platten ist ungültig.");
+    }
+    if (!mp3PriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Listenpreis für MP3s ist ungültig.");
+    }
+
+    return cdPriceValid && plattePriceValid && mp3PriceValid;
+}
+
+
+
+    
+    private Musik constructMusikFromFields() {
+    Musik m = new Musik();
+        m.setMusik_GUID(Integer.parseInt(musikGUIDTextField.getText()));
         m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
         m.setSongName(songNameTextField.getText());
         m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
-        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
+        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText());
         m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
         m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
         m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
@@ -389,9 +424,17 @@ public class BearbeitenListener implements ActionListener {
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
-        parent.getTableModel().getMusikList().replaceMusik(m, parent.getTableModel().getMusikList());
-        parent.updateTableWithMusikListe(parent.getTableModel().getMusikList());
+    return m;
+}
+    
+    private void bearbeitenButton() {
+    Musik m = constructMusikFromFields();
+    if (m != null) {
         parent.getMusikMap().replaceMedium(medium, m);
-
+        parent.getMusikMap().logChange("UPDATE", medium, m);
+        parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+        
     }
+}
+
 }

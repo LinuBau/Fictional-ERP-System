@@ -8,10 +8,12 @@ import MenuBar.benutzerMenuBar;
 import MenuBar.mitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
+import Modele.ChangeLogTableModel;
 import Modele.MusikTableModel;
 import SaveData_ReadData.MusikCsvListDAO;
 import ToolBar.benutzerToolBar;
 import ToolBar.mitarbeiterToolBar;
+import Traversierung.ChangeLogEntry;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
@@ -20,11 +22,13 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -42,6 +46,8 @@ public class Gui extends JFrame {
     private ResourceBundle bundle;
     private String[] language = {"Deutsch","English","France","Sverige"};
     private String[] shortlanguage = {"de","en","fr","sv"};
+    private ChangeLogTableModel changeLogTableModel;
+    private JTable changeLogTable;
 
 
 
@@ -263,6 +269,27 @@ public class Gui extends JFrame {
 
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
+        
+        
+         
+        changeLogTableModel = new ChangeLogTableModel();
+        changeLogTable = new JTable(changeLogTableModel);
+             changeLogTable.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
+            System.out.println("Mouse clicked on table");
+            JTable target = (JTable)e.getSource();
+            int row = target.getSelectedRow(); // Die ausgewählte Zeile
+            if(row >= 0 && row < changeLogTableModel.getRowCount()) {
+                Object timestamp = changeLogTableModel.getValueAt(row, 0);
+                Object action = changeLogTableModel.getValueAt(row, 1);
+                Object newState = changeLogTableModel.getValueAt(row, 2);                
+                displayChangeLogDetails(timestamp, action, newState);
+            }
+        }
+    }
+});
+        
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -293,6 +320,9 @@ public class Gui extends JFrame {
         getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
         getContentPane().add(northPanel, BorderLayout.NORTH);
         setLocationRelativeTo(null);
+         JPanel changeLogPanel = new JPanel(new BorderLayout());
+        changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
+        getContentPane().add(changeLogPanel, BorderLayout.EAST);
 
         // Add Mouse Pressed Event
         AtributTabelle.addMouseListener(new MouseAdapter() {
@@ -303,6 +333,9 @@ public class Gui extends JFrame {
                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
             }
         });
+        
+        
+        loadChangeLogs();
 
         // Create MenuBar
         setJMenuBar(new mitarbeiterMenuBar(this,language,shortlanguage));
@@ -319,7 +352,26 @@ public class Gui extends JFrame {
          bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-
+        
+        
+        changeLogTableModel = new ChangeLogTableModel();
+        changeLogTable = new JTable(changeLogTableModel);
+             changeLogTable.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
+            System.out.println("Mouse clicked on table");
+            JTable target = (JTable)e.getSource();
+            int row = target.getSelectedRow(); // Die ausgewählte Zeile
+            if(row >= 0 && row < changeLogTableModel.getRowCount()) {
+                Object timestamp = changeLogTableModel.getValueAt(row, 0);
+                Object action = changeLogTableModel.getValueAt(row, 1);
+                Object newState = changeLogTableModel.getValueAt(row, 2);                
+                displayChangeLogDetails(timestamp, action, newState);
+            }
+        }
+    }
+});
+        
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
@@ -349,6 +401,9 @@ public class Gui extends JFrame {
         getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
         getContentPane().add(northPanel, BorderLayout.NORTH);
         setLocationRelativeTo(null);
+        JPanel changeLogPanel = new JPanel(new BorderLayout());
+        changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
+        getContentPane().add(changeLogPanel, BorderLayout.EAST);
 
         // Add Mouse Pressed Event
         AtributTabelle.addMouseListener(new MouseAdapter() {
@@ -359,14 +414,29 @@ public class Gui extends JFrame {
                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
             }
         });
-
+          
+        loadChangeLogs();
+   
         // Create MenuBar
         setJMenuBar(new mitarbeiterMenuBar(this,language,shortlanguage));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
     }
-
+    
+    public void loadChangeLogs() {
+        List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // Holt die Changelogs
+        changeLogTableModel.setChangeLogs(changeLogs);
+        changeLogTableModel.fireTableDataChanged(); // Aktualisiert die Tabelle
+    }
+    
+    private void displayChangeLogDetails(Object timestamp, Object action, Object originalState) {
+    String message = "Timestamp: " + timestamp + "\n" +
+                     "Action: " + action + "\n" +
+                     "New State: " + originalState;
+    JOptionPane.showMessageDialog(this, message, "ChangeLog Details", JOptionPane.INFORMATION_MESSAGE);
+}
+    
     public static void main(String[] args) {
 
         

@@ -19,6 +19,8 @@ public class MusikMap {
     private HashMap<Double, List<Musik>> cdListenpreisMap;
     private HashMap<Double, List<Musik>> platteListenpreisMap;
     private HashMap<Double, List<Musik>> mp3ListenpreisMap;
+    private List<ChangeLogEntry> changeLog = new ArrayList<>();
+
 
     public MusikMap(MusikList musikList) {
         this.musikList = musikList; // Verwendet die übergebene MusikList-Instanz
@@ -49,6 +51,7 @@ public class MusikMap {
     public void addMedium(Musik neuesMedium) {
         musikList.add(neuesMedium);
         updateAllMaps(neuesMedium);
+        
     }
 
     public void removeMedium(Musik zuEntfernendesMedium) {
@@ -202,4 +205,14 @@ public class MusikMap {
      public HashMap<String, List<Musik>> getTitleMap() {
          return titleMap;
      }
+     
+     public void logChange(String action, Musik original, Musik updated) {
+    ChangeLogEntry logEntry = new ChangeLogEntry(action, original, updated);
+    changeLog.add(logEntry);
+    System.out.println("Change Log: Action=" + action + ", Old Musik=" + (original != null ? original.toString() : "null") + ", New Musik=" + (updated != null ? updated.toString() : "null"));
+
+}
+public List<ChangeLogEntry> getChangeLogs() {
+        return changeLog; 
+    }
 }        

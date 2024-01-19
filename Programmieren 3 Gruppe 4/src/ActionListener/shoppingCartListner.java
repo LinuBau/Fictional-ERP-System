@@ -152,9 +152,12 @@ public class shoppingCartListner extends JDialog implements ActionListener {
                 Musik musik = musikList.get(i);
                 int bestellteCdMenge = (Integer) cdTextField.getValue(); 
                 int bestellteVinylMenge = (Integer) platteTextField.getValue(); 
+                Musik oldMedium = musik.clone();
 
                 musik.reduziereCdAnzahl(bestellteCdMenge);
                 musik.reduziereVinylAnzahl(bestellteVinylMenge);
+                parent.getMusikMap().logChange("UPDATE", oldMedium, musik);
+
             }
             String filepath = JFileChooserTxt();
             TxtWriting pdfwriter = new TxtWriting(filepath, true, musikList,

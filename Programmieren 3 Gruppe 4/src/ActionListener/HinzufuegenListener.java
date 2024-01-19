@@ -223,11 +223,14 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
                 && !IdisOk) {
             parent.getMusikMap().addMedium(m);
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+            parent.getMusikMap().logChange("ADD", null, m);
+
         } else {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idUsedError"), "Error", JOptionPane.ERROR_MESSAGE);
             IdisOk = true;
         }
         return IdisOk;
+
     }
 
 
