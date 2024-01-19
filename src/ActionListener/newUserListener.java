@@ -18,6 +18,7 @@ import App_GUI.loginGUi;
 import GeschaftsObejekt.profil;
 
 public class newUserListener extends JDialog implements ActionListener {
+
     private JPanel centerconetentPanel;
     private boolean ismitarbeiter = false;
     private JLabel userNameLabel;
@@ -57,9 +58,9 @@ public class newUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox,passwordField));
+        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox, passwordField));
         hinzufügenButton.addActionListener(this);
-        
+
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);

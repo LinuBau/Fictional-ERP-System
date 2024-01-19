@@ -29,7 +29,7 @@ public class ProfilListDOA extends AbstractDAO {
             profilList pl = (profilList) obj;
             int size = in.readInt();
             ProfilDOA pd = new ProfilDOA(out, in);
-            for(int i = 0; i<size;i++){
+            for (int i = 0; i < size; i++) {
                 pl.add(pd.read());
                 System.out.println(pl.get(i).getUsername());
             }

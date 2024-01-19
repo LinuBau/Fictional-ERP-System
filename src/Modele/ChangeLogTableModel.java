@@ -1,4 +1,3 @@
-
 package Modele;
 
 import Traversierung.ChangeLogEntry;
@@ -7,12 +6,13 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ChangeLogTableModel extends AbstractTableModel {
+
     private List<ChangeLogEntry> changeLogs;
 
     public ChangeLogTableModel() {
         changeLogs = new ArrayList<>();
     }
-    
+
     public void setChangeLogs(List<ChangeLogEntry> changeLogs) {
         this.changeLogs = changeLogs;
     }
@@ -24,15 +24,15 @@ public class ChangeLogTableModel extends AbstractTableModel {
     public List<ChangeLogEntry> getChangeLogs() {
         return changeLogs;
     }
-    
-        @Override
+
+    @Override
     public int getRowCount() {
         return changeLogs.size();
     }
 
     @Override
-    public int getColumnCount() {    
-        return 4; 
+    public int getColumnCount() {
+        return 4;
     }
 
     @Override

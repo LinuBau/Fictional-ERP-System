@@ -7,6 +7,7 @@ import ActionListener.HinzufuegenListener;
 import App_GUI.Gui;
 
 public class mitarbeiterToolBar extends JToolBar {
+
     JButton hinzufügeButton;
     Gui parent;
 

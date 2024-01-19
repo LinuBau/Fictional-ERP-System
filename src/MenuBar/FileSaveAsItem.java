@@ -14,6 +14,7 @@ import App_GUI.Gui;
  * @author ninfr
  */
 public class FileSaveAsItem extends JMenuItem {
+
     FileSaveAsItem(Gui parent) {
         super(parent.getL10NText("saveas"));
         this.addActionListener(new FileSaveAsAction(parent));

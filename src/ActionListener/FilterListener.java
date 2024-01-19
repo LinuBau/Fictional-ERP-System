@@ -29,6 +29,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 public class FilterListener implements ActionListener {
+
     private final MusikMap musikMap;
     private JToggleButton toggleButtonCD;
     private JToggleButton toggleButtonMP3;
@@ -39,7 +40,7 @@ public class FilterListener implements ActionListener {
     private JComboBox<String> albumComboBox;
     private JComboBox<String> titleComboBox;
     private JComboBox<String> artistComboBox;
-    
+
     private JSpinner mindestpreisSpinner;
     private JSpinner höchstpreisSpinner;
 
@@ -57,24 +58,22 @@ public class FilterListener implements ActionListener {
         toggleButtonMP3 = new JToggleButton(parent.getL10NText("mp3"), true);
         toggleButtonVinyl = new JToggleButton(parent.getL10NText("v"), true);
 
-        
         SpinnerNumberModel minModel = new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 0.5);
         SpinnerNumberModel maxModel = new SpinnerNumberModel(100, 0.0, Double.MAX_VALUE, 0.5);
-        
+
         mindestpreisSpinner = new JSpinner(minModel);
         höchstpreisSpinner = new JSpinner(maxModel);
-        
+
         mindestpreisSpinner.setPreferredSize(new Dimension(100, 20));
         höchstpreisSpinner.setPreferredSize(new Dimension(100, 20));
-        
+
         titleComboBox = new JComboBox<>();
         titleComboBox.setEditable(true);
         titleComboBox.addItem(parent.getL10NText("all"));
         musikMap.getTitleMap().keySet().stream().sorted().forEach(titleComboBox::addItem);
-        
-        
+
         JTextField titleTextField = (JTextField) titleComboBox.getEditor().getEditorComponent();
-        titleTextField.addKeyListener(new KeyAdapter(){
+        titleTextField.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
                 SwingUtilities.invokeLater(() -> {
                     String text = titleTextField.getText();
@@ -85,23 +84,22 @@ public class FilterListener implements ActionListener {
 
                     titleComboBox.removeAllItems();
                     musikMap.getTitleMap().keySet().stream()
-                        .filter(title -> title.toLowerCase().startsWith(text.toLowerCase()))
-                        .forEach(titleComboBox::addItem);
+                            .filter(title -> title.toLowerCase().startsWith(text.toLowerCase()))
+                            .forEach(titleComboBox::addItem);
 
                     titleComboBox.showPopup();
                     titleTextField.setText(text);
                     titleTextField.setCaretPosition(text.length());
-                    });
-             }
+                });
+            }
         });
-        
-        
+
         artistComboBox = new JComboBox<>();
         artistComboBox.setEditable(true);
         artistComboBox.addItem(parent.getL10NText("all"));
         JTextField artistTextField = (JTextField) artistComboBox.getEditor().getEditorComponent();
-        artistTextField.addKeyListener(new KeyAdapter(){
-         public void keyReleased(KeyEvent e) {
+        artistTextField.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
                 SwingUtilities.invokeLater(() -> {
                     String text = artistTextField.getText();
                     if (text.isEmpty()) {
@@ -111,14 +109,14 @@ public class FilterListener implements ActionListener {
 
                     artistComboBox.removeAllItems();
                     musikMap.getArtistMap().keySet().stream()
-                        .filter(artist -> artist.toLowerCase().startsWith(text.toLowerCase()))
-                        .forEach(artistComboBox::addItem);
+                            .filter(artist -> artist.toLowerCase().startsWith(text.toLowerCase()))
+                            .forEach(artistComboBox::addItem);
 
                     artistComboBox.showPopup();
                     artistTextField.setText(text);
                     artistTextField.setCaretPosition(text.length());
-                    });
-             }
+                });
+            }
         });
 
         albumComboBox = new JComboBox<>();
@@ -137,16 +135,16 @@ public class FilterListener implements ActionListener {
 
                     albumComboBox.removeAllItems();
                     musikMap.getAlbumMap().keySet().stream()
-                        .filter(album -> album.toLowerCase().startsWith(text.toLowerCase()))
-                        .forEach(albumComboBox::addItem);
+                            .filter(album -> album.toLowerCase().startsWith(text.toLowerCase()))
+                            .forEach(albumComboBox::addItem);
 
                     albumComboBox.showPopup();
                     albumTextField.setText(text);
                     albumTextField.setCaretPosition(text.length());
-                    });
-             }
+                });
+            }
         });
-         
+
         genreComboBox = new JComboBox<>();
         genreComboBox.addItem(parent.getL10NText("all")); // Option für alle Genres
         List<String> sortedGenres = musikMap.getGenreMap().keySet().stream()
@@ -154,28 +152,27 @@ public class FilterListener implements ActionListener {
                 .sorted()
                 .collect(Collectors.toList());
         sortedGenres.forEach(genreComboBox::addItem);
-    
-        
+
         // Erstellen des Eingabepanels
         JPanel eingabePanel = new JPanel(new GridLayout(8, 2, 10, 10));
-        eingabePanel.add(new JLabel(parent.getL10NText("t")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("t") + ": "));
         eingabePanel.add(titleComboBox);
-        eingabePanel.add(new JLabel(parent.getL10NText("a")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("a") + ": "));
         eingabePanel.add(albumComboBox);
-        eingabePanel.add(new JLabel(parent.getL10NText("i")+ ": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("i") + ": "));
         eingabePanel.add(artistComboBox);
-        eingabePanel.add(new JLabel(parent.getL10NText("g")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("g") + ": "));
         eingabePanel.add(genreComboBox);
-        eingabePanel.add(new JLabel(parent.getL10NText("mtyp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mtyp") + ": "));
         eingabePanel.add(createMedientypenPanel());
-        eingabePanel.add(new JLabel(parent.getL10NText("mp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mp") + ": "));
         eingabePanel.add(mindestpreisSpinner);
-        eingabePanel.add(new JLabel(parent.getL10NText("hp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("hp") + ": "));
         eingabePanel.add(höchstpreisSpinner);
-        
+
         eingabePanel.validate();
         // Erstellen des Filterknopfes
-        trefferAnzeige = new JLabel(parent.getL10NText("tr")+": 0");
+        trefferAnzeige = new JLabel(parent.getL10NText("tr") + ": 0");
 
         JButton filternButton = new JButton(parent.getL10NText("f"));
         filternButton.addActionListener(this);
@@ -204,78 +201,75 @@ public class FilterListener implements ActionListener {
     }
 
     @Override
-public void actionPerformed(ActionEvent e) {
-    double minPreis = (double) mindestpreisSpinner.getValue();
-    double maxPreis = (double) höchstpreisSpinner.getValue();
-    String originalTitel = (String) titleComboBox.getSelectedItem();
-    String originalArtist = (String) artistComboBox.getSelectedItem();
-    String originalAlbum = (String) albumComboBox.getSelectedItem();
-    String originalGenre = (String) genreComboBox.getSelectedItem();
+    public void actionPerformed(ActionEvent e) {
+        double minPreis = (double) mindestpreisSpinner.getValue();
+        double maxPreis = (double) höchstpreisSpinner.getValue();
+        String originalTitel = (String) titleComboBox.getSelectedItem();
+        String originalArtist = (String) artistComboBox.getSelectedItem();
+        String originalAlbum = (String) albumComboBox.getSelectedItem();
+        String originalGenre = (String) genreComboBox.getSelectedItem();
 
-    final String titel = (originalTitel == null || originalTitel.trim().isEmpty()) ? parent.getL10NText("all") : originalTitel.trim();
-    final String artist = (originalArtist == null || originalArtist.trim().isEmpty()) ? parent.getL10NText("all") : originalArtist.trim();
-    final String album = (originalAlbum == null || originalAlbum.trim().isEmpty()) ? parent.getL10NText("all") : originalAlbum.trim();
-    final String genre = (originalGenre == null || originalGenre.trim().isEmpty()) ? parent.getL10NText("all") : originalGenre.trim();
-    
-    boolean isCDSelected = toggleButtonCD.isSelected();
-    boolean isMP3Selected = toggleButtonMP3.isSelected();
-    boolean isVinylSelected = toggleButtonVinyl.isSelected();
+        final String titel = (originalTitel == null || originalTitel.trim().isEmpty()) ? parent.getL10NText("all") : originalTitel.trim();
+        final String artist = (originalArtist == null || originalArtist.trim().isEmpty()) ? parent.getL10NText("all") : originalArtist.trim();
+        final String album = (originalAlbum == null || originalAlbum.trim().isEmpty()) ? parent.getL10NText("all") : originalAlbum.trim();
+        final String genre = (originalGenre == null || originalGenre.trim().isEmpty()) ? parent.getL10NText("all") : originalGenre.trim();
 
-  
-    List<Musik> gefilterteListe = musikMap.getMusikList().stream()
-            .filter(m -> {
-                if (genre != null && !genre.equals(parent.getL10NText("all"))) {
-                    List<Musik> genreList = musikMap.getGenreMap().getOrDefault(genre, Collections.emptyList());
-                    if (!genreList.contains(m)) {
-                        return false;
+        boolean isCDSelected = toggleButtonCD.isSelected();
+        boolean isMP3Selected = toggleButtonMP3.isSelected();
+        boolean isVinylSelected = toggleButtonVinyl.isSelected();
+
+        List<Musik> gefilterteListe = musikMap.getMusikList().stream()
+                .filter(m -> {
+                    if (genre != null && !genre.equals(parent.getL10NText("all"))) {
+                        List<Musik> genreList = musikMap.getGenreMap().getOrDefault(genre, Collections.emptyList());
+                        if (!genreList.contains(m)) {
+                            return false;
+                        }
                     }
-                }
-                
-                if (artist != null && !artist.equals(parent.getL10NText("all"))) {
-                    List<Musik> artistList = musikMap.getArtistMap().getOrDefault(artist, Collections.emptyList());
-                    if (!artistList.contains(m)) {
-                        return false;
-                    }
-                }
-                
-                if (titel != null && !titel.equals(parent.getL10NText("all"))) {
-                    List<Musik> titelList = musikMap.getTitleMap().getOrDefault(titel, Collections.emptyList());
-                    if (!titelList.contains(m)) {
-                        return false;
-                    }
-                }
-                
-                
-                if (album != null && !album.equals(parent.getL10NText("all"))) {
-                    List<Musik> albumList = musikMap.getAlbumMap().getOrDefault(album, Collections.emptyList());
-                    if (!albumList.contains(m)) {
-                        return false;
-                    }
-                }
-                
-                
-                if ((isCDSelected && m.getIsCD() && m.getCDListenpreis() >= minPreis && m.getCDListenpreis() <= maxPreis) ||
-                    (isMP3Selected && m.getIsMp3() && m.getMp3Listenpreis() >= minPreis && m.getMp3Listenpreis() <= maxPreis) ||
-                    (isVinylSelected && m.getIsPlatte() && m.getPlatteListenpreis() >= minPreis && m.getPlatteListenpreis() <= maxPreis)) {
-                    return true;
-                }
-                return false;
-            })
-            .collect(Collectors.toList());
 
-    TreeMap<String, Musik> sortierteErgebnisse = gefilterteListe.stream()
-            .collect(Collectors.toMap(
-                    Musik::getSongName,
-                    m -> m,
-                    (existing, replacement) -> existing,
-                    TreeMap::new));
+                    if (artist != null && !artist.equals(parent.getL10NText("all"))) {
+                        List<Musik> artistList = musikMap.getArtistMap().getOrDefault(artist, Collections.emptyList());
+                        if (!artistList.contains(m)) {
+                            return false;
+                        }
+                    }
 
-    MusikList gefilterteErgebnisse = new MusikList();
-    gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
-    
-    long anzahlTreffer = gefilterteErgebnisse.size();
-    trefferAnzeige.setText(parent.getL10NText("tr") + ": " + anzahlTreffer);
+                    if (titel != null && !titel.equals(parent.getL10NText("all"))) {
+                        List<Musik> titelList = musikMap.getTitleMap().getOrDefault(titel, Collections.emptyList());
+                        if (!titelList.contains(m)) {
+                            return false;
+                        }
+                    }
 
-    parent.updateTableWithMusikListe(gefilterteErgebnisse);
-}
+                    if (album != null && !album.equals(parent.getL10NText("all"))) {
+                        List<Musik> albumList = musikMap.getAlbumMap().getOrDefault(album, Collections.emptyList());
+                        if (!albumList.contains(m)) {
+                            return false;
+                        }
+                    }
+
+                    if ((isCDSelected && m.getIsCD() && m.getCDListenpreis() >= minPreis && m.getCDListenpreis() <= maxPreis)
+                            || (isMP3Selected && m.getIsMp3() && m.getMp3Listenpreis() >= minPreis && m.getMp3Listenpreis() <= maxPreis)
+                            || (isVinylSelected && m.getIsPlatte() && m.getPlatteListenpreis() >= minPreis && m.getPlatteListenpreis() <= maxPreis)) {
+                        return true;
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
+        TreeMap<String, Musik> sortierteErgebnisse = gefilterteListe.stream()
+                .collect(Collectors.toMap(
+                        Musik::getSongName,
+                        m -> m,
+                        (existing, replacement) -> existing,
+                        TreeMap::new));
+
+        MusikList gefilterteErgebnisse = new MusikList();
+        gefilterteErgebnisse.addAll(sortierteErgebnisse.values());
+
+        long anzahlTreffer = gefilterteErgebnisse.size();
+        trefferAnzeige.setText(parent.getL10NText("tr") + ": " + anzahlTreffer);
+
+        parent.updateTableWithMusikListe(gefilterteErgebnisse);
+    }
 }

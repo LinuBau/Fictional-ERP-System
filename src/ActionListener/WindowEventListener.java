@@ -36,13 +36,13 @@ public class WindowEventListener implements WindowListener {
 
         int x = JOptionPane.showOptionDialog(
                 null,
-                ""+parent.getL10NText("wantToSave"),
+                "" + parent.getL10NText("wantToSave"),
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
                 options,
-                options[0]           
+                options[0]
         );
 
         if (x == 1) {
@@ -82,14 +82,13 @@ public class WindowEventListener implements WindowListener {
         }
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        } 
-        else {
+        } else {
             parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             return;
         }
         System.out.println("Fenster schließen");
         System.exit(0);
-        
+
     }
 
     @Override
