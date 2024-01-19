@@ -7,9 +7,7 @@ import SaveData_ReadData.MusikDAO;
 public class Programmieren3Gruppe4 {
 
     public static void main(String[] args) {
-        Gui.main(args);
-        
-        
+        Gui.main(args);  
     }
 }
 

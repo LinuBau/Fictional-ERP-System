@@ -64,7 +64,7 @@ public class newUserListener extends JDialog implements ActionListener {
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);
-        this.setSize(500, 150);
+        this.setSize(500, 200);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
     }
