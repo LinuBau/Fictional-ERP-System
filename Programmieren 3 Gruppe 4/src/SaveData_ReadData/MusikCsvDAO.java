@@ -52,7 +52,10 @@ public class MusikCsvDAO extends AbstractCsvDOA {
 
     protected void toMusik_Medium(String csv, String splitCondition,Musik MM) {
         String[] csvStrings = csv.split(splitCondition);
-        
+     if (csvStrings.length != 17) {
+        System.err.println("Unerwartete Anzahl von Elementen in der Zeile: " + csv);
+        return;
+    }
          try 
          {
         MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim())); // trim() entfernt Leerzeichen
@@ -61,67 +64,36 @@ public class MusikCsvDAO extends AbstractCsvDOA {
     }
     
         MM.setMusiker(csvStrings[1]);
-        MM.setAlbum(csvStrings[2]);
-        MM.setSongName(csvStrings[3]);
-        MM.setRegal_PlatzCD(csvStrings[4]);
-        MM.setRegal_PlatzPlatte(csvStrings[5]);
-        
-        try
-        {
-        MM.setCDListenpreis(Double.parseDouble(csvStrings[6]));
-        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[7]));
-        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[8]));
-        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[9]));
-        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[10]));
-        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[11]));
-        
-        } catch (NumberFormatException e) {
-        System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
-    }
-        MM.setGenre(csvStrings[12]);
-        MM.setIsCD(Boolean.parseBoolean(csvStrings[13]));
-        MM.setIsPlatte(Boolean.parseBoolean(csvStrings[14]));
-        MM.setIsMp3(Boolean.parseBoolean(csvStrings[15]));
-        MM.setCdCount(Integer.parseInt(csvStrings[16]));
-        MM.setVinylCount(Integer.parseInt(csvStrings[17]));
-
-        /*try {
-            MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim()));
-        } catch (NumberFormatException e) {
-            System.err.println("Fehler beim Parsen von Musik_GUID: " + csvStrings[0]);
-        }
-        
-
-        MM.setMBID(csvStrings[1]);
-        
-        MM.setMusiker(csvStrings[2]);
+        MM.setMBID(csvStrings[2]);
         MM.setAlbum(csvStrings[3]);
         MM.setSongName(csvStrings[4]);
         MM.setRegal_PlatzCD(csvStrings[5]);
         MM.setRegal_PlatzPlatte(csvStrings[6]);
         
-        try {
-            MM.setCDListenpreis(Double.parseDouble(csvStrings[7]));
-            MM.setPlatteListenpreis(Double.parseDouble(csvStrings[8]));
-            MM.setMp3Listenpreis(Double.parseDouble(csvStrings[9]));
-            MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[10]));
-            MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[11]));
-            MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[12]));
+        try
+        {
+        MM.setCDListenpreis(Double.parseDouble(csvStrings[7]));
+        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[8]));
+        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[9]));
+        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[10]));
+        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[11]));
+        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[12]));
         
         } catch (NumberFormatException e) {
-            System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
-        }
-        
+        System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
+    }
         MM.setGenre(csvStrings[13]);
-        MM.setIsCD(Boolean.parseBoolean(csvStrings[14]));
-        MM.setIsPlatte(Boolean.parseBoolean(csvStrings[15]));
-        MM.setIsMp3(Boolean.parseBoolean(csvStrings[16]));*/
+        MM.setIsMp3(Boolean.parseBoolean(csvStrings[14]));
+        MM.setCdCount(Integer.parseInt(csvStrings[15]));
+        MM.setVinylCount(Integer.parseInt(csvStrings[16]));
+
+
         
     }
     private String tocvs(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
-             //MM.getMBID() + splitKondiotn+
+             MM.getMBID() + splitKondiotn+
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +
@@ -134,8 +106,6 @@ public class MusikCsvDAO extends AbstractCsvDOA {
              MM.getPlatteEinkaufpreis() + splitKondiotn +
              MM.getMp3Einkaufpreis() + splitKondiotn +
              MM.getGenre() + splitKondiotn +
-             MM.isIsCD() + splitKondiotn +
-             MM.isIsPlatte() + splitKondiotn +
              MM.isIsMp3() + splitKondiotn +
              MM.getCdCount() + splitKondiotn +
              MM.getVinylCount()

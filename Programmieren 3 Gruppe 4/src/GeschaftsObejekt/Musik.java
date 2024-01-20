@@ -80,13 +80,9 @@ public int hashCode() {
     return Objects.hash(Musik_GUID, CdCount, VinylCount, MBID, Artist, Album, SongName, Regal_PlatzCD, Regal_PlatzPlatte, CDListenpreis, PlatteListenpreis, Mp3Listenpreis, CDEinkaufpreis, PlatteEinkaufpreis, Mp3Einkaufpreis, Genre, CD, Platte, Mp3);
 }
 
-
-  
-    
-
     public Musik(int Musik_GUID,String MBID, String Musiker, String Album, String SongName, String Regal_PlatzCD,String Regal_PlatzPlatte,
             double CDListenpreis, double PlatteListenpreis, double Mp3Listenpreis, double CDEinkaufpreis,
-            double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, boolean isCD, boolean isPlatte,
+            double PlatteEinkaufpreis, double Mp3Einkaufpreis, String Genre, 
             boolean isMp3, int CdCount,int VinylCount ) {
         this.Musik_GUID = Musik_GUID;
         this.MBID = MBID;
@@ -102,8 +98,6 @@ public int hashCode() {
         this.PlatteEinkaufpreis = PlatteEinkaufpreis;
         this.Mp3Einkaufpreis = Mp3Einkaufpreis;
         this.Genre = Genre;
-        this.CD = isCD;
-        this.Platte = isPlatte;
         this.Mp3 = isMp3;
         this.CdCount = CdCount;
         this.VinylCount = VinylCount;
@@ -302,15 +296,13 @@ public int hashCode() {
 public Musik clone() {
     Musik copy = new Musik();
     copy.setMusik_GUID(this.getMusik_GUID());
+    copy.setMBID(this.getMBID());
     copy.setAlbum(this.getAlbum());
     copy.setCDEinkaufpreis(this.getCDEinkaufpreis());
     copy.setCDListenpreis(this.getCDListenpreis());
     copy.setCdCount(this.getCdCount());
     copy.setGenre(this.getGenre());
-    copy.setIsCD(this.getIsCD());
     copy.setIsMp3(this.getIsMp3());
-    copy.setIsPlatte(this.getIsPlatte());
-    copy.setMBID(this.getMBID());
     copy.setMp3Einkaufpreis(this.getMp3Einkaufpreis());
     copy.setMp3Listenpreis(this.getMp3Listenpreis());
     copy.setMusiker(this.getMusiker());

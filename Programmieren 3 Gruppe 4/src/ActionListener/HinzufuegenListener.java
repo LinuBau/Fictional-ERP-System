@@ -143,6 +143,10 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
         this.getContentPane().add(hinzufuegenPanel, BorderLayout.CENTER);
+        
+        cdCheckBox.setEnabled(false);
+        platteCheckBox.setEnabled(false);
+        
 
         this.setModal(true);
         this.setVisible(false);
