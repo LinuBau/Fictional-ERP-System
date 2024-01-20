@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginGUi extends JFrame {
+
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
     private JLabel passwordLabel;
@@ -38,9 +39,9 @@ public class LoginGUi extends JFrame {
     private ResourceBundle bundel;
     private JButton loginButton;
     private JButton newUserButton;
-    private String[] language = {"Deutsch","English","France","Sverige"};
-    private String[] shortlanguage = {"de","en","fr","sv"};
-    
+    private String[] language = {"Deutsch", "English", "France", "Sverige"};
+    private String[] shortlanguage = {"de", "en", "fr", "sv"};
+
     public LoginGUi(String languageShort) {
         profilList = new ProfilList();
         try {
@@ -59,16 +60,16 @@ public class LoginGUi extends JFrame {
         createLoginPanel();
     }
 
-    public LoginGUi(ProfilList profilList,MusikList musikList,String languageShort){
+    public LoginGUi(ProfilList profilList, MusikList musikList, String languageShort) {
         this.profilList = profilList;
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         createLoginPanel();
     }
-    
-    public void createLoginPanel(){
+
+    public void createLoginPanel() {
         centerconetentPanel = new JPanel(new GridLayout(5, 4));
-        userNameLabel = new JLabel(this.getL10NText("usser")+": ");
+        userNameLabel = new JLabel(this.getL10NText("usser") + ": ");
         passwordLabel = new JLabel(this.getL10NText("psw"));
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
@@ -82,15 +83,15 @@ public class LoginGUi extends JFrame {
         centerconetentPanel.add(passwordField);
         centerconetentPanel.add(new JPanel());
         centerconetentPanel.add(new JPanel());
-        
+
         passwordField.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            loginButton.doClick(); // Simuliert einen Klick auf den Login-Button durch enter
-        }
-    });
-        
-        JPanel southPanel = new JPanel(new GridLayout(1,3));
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginButton.doClick(); // Simuliert einen Klick auf den Login-Button durch enter
+            }
+        });
+
+        JPanel southPanel = new JPanel(new GridLayout(1, 3));
         loginButton = new JButton(this.getL10NText("log"));
         newUserButton = new JButton(this.getL10NText("nhin"));
         showPassword = new JCheckBox(this.getL10NText("pa"));
@@ -98,7 +99,6 @@ public class LoginGUi extends JFrame {
         southPanel.add(loginButton);
         southPanel.add(showPassword);
         makeActionListner();
-     
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
@@ -108,38 +108,41 @@ public class LoginGUi extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private  void makeActionListner(){
+    private void makeActionListner() {
         if (musikList == null) {
             loginButton.addActionListener(new LoginListener(this));
             newUserButton.addActionListener(new NewUserListener(this));
             showPassword.addActionListener(new ShowPasswordListener(showPassword, passwordField));
-        }else{
-            loginButton.addActionListener(new LoginListener(this,musikList));
+        } else {
+            loginButton.addActionListener(new LoginListener(this, musikList));
             newUserButton.addActionListener(new NewUserListener(this));
             showPassword.addActionListener(new ShowPasswordListener(showPassword, passwordField));
         }
-       
+
     }
 
-    public String getL10NText(String key){
+    public String getL10NText(String key) {
         return bundel.getString(key);
     }
 
     public String getUsername() {
         return this.usserNameTextField.getText();
     }
-    public Locale getLocale(){
+
+    public Locale getLocale() {
         return locale;
     }
 
-    public ProfilList getProfilList(){
+    public ProfilList getProfilList() {
         return this.profilList;
     }
+
     public int getPassword() {
         String tmp = new String(passwordField.getPassword());
         return tmp.hashCode();
     }
-    public void w(){
+
+    public void w() {
         try {
             ProfilListDAO pd = new ProfilListDAO("logindata.data", true);
             pd.write(profilList);
@@ -148,5 +151,5 @@ public class LoginGUi extends JFrame {
             e.printStackTrace();
         }
     }
-   
+
 }

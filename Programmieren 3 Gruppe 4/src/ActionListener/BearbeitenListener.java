@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
 public class BearbeitenListener implements ActionListener {
+
     public JPanel eingabePanel;
     private JTextField genreComboBox;
     private JTextField musikGUIDTextField;
@@ -93,61 +94,61 @@ public class BearbeitenListener implements ActionListener {
         // Textflied vor all Compents
         eingabePanel = new JPanel(new BorderLayout());
 
-        centerPanel.add(new JLabel(parent.getL10NText("mid")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("mid") + ": "));
         centerPanel.add(musikGUIDTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("mbid")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("mbid") + ": "));
         centerPanel.add(mbidTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("m")+":" ));
+        centerPanel.add(new JLabel(parent.getL10NText("m") + ":"));
         centerPanel.add(musikerTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("a")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("a") + ": "));
         centerPanel.add(albumTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("sn")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("sn") + ": "));
         centerPanel.add(songNameTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("rpcd") + ": "));
         centerPanel.add(regalPlatzCDTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("rpp")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("rpp") + ": "));
         centerPanel.add(regalPlatzPlatteTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpcd") + ": "));
         centerPanel.add(cdListenpreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("lpp")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpp") + ": "));
         centerPanel.add(platteListenpreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("lpmp3") + ": "));
         centerPanel.add(mp3ListenpreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epcd")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epcd") + ": "));
         centerPanel.add(cdEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epp")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epp") + ": "));
         centerPanel.add(platteEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epmp3") + ": "));
         centerPanel.add(mp3EinkaufspreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("g")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("g") + ": "));
         centerPanel.add(genreComboBox);
-        
+
         centerPanel.add(new JLabel("CdCount: "));
         centerPanel.add(cdCountSpinner);
-        
+
         centerPanel.add(new JLabel("VinylCount: "));
         centerPanel.add(vinylCountSpinner);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("cd") + ": "));
         southcenterPanel.add(cdCheckBox);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("sp")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("sp") + ": "));
         southcenterPanel.add(platteCheckBox);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("mp3") + ": "));
         southcenterPanel.add(mp3CheckBox);
 
         southsouthPanel.add(saveButton);
@@ -197,44 +198,44 @@ public class BearbeitenListener implements ActionListener {
         JPanel southsouthPanel = new JPanel(new GridLayout(1, 3));
         // Textflied vor all Compents
         eingabePanel = new JPanel(new BorderLayout());
-        
-        centerPanel.add(new JLabel(parent.getL10NText("mid")+": "));
+
+        centerPanel.add(new JLabel(parent.getL10NText("mid") + ": "));
         centerPanel.add(musikGUIDTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("m")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("m") + ": "));
         centerPanel.add(musikerTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("a")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("a") + ": "));
         centerPanel.add(albumTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("sn")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("sn") + ": "));
         centerPanel.add(songNameTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epcd")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epcd") + ": "));
         centerPanel.add(cdEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epp")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epp") + ": "));
         centerPanel.add(platteEinkaufspreisTextField);
 
-        centerPanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
+        centerPanel.add(new JLabel(parent.getL10NText("epmp3") + ": "));
         centerPanel.add(mp3EinkaufspreisTextField);
 
         centerPanel.add(new JLabel(parent.getL10NText("g")));
         centerPanel.add(genreComboBox);
-        
+
         centerPanel.add(new JLabel("CdCount: "));
         centerPanel.add(cdCountSpinner);
-        
+
         centerPanel.add(new JLabel("VinylCount: "));
         centerPanel.add(vinylCountSpinner);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("cd")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("cd") + ": "));
         southcenterPanel.add(cdCheckBox);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("sp")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("sp") + ": "));
         southcenterPanel.add(platteCheckBox);
 
-        southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
+        southcenterPanel.add(new JLabel(parent.getL10NText("mp3") + ": "));
         southcenterPanel.add(mp3CheckBox);
         // Add Button to Panel
         southsouthPanel.add(saveButton);
@@ -349,7 +350,7 @@ public class BearbeitenListener implements ActionListener {
         platteEinkaufspreisTextField.setText("0");
         mp3EinkaufspreisTextField.setText("0");
         cdCountSpinner.setValue(0);
-        vinylCountSpinner.setValue(0);        
+        vinylCountSpinner.setValue(0);
         genreComboBox.setText("");
         cdCheckBox.setSelected(false);
         platteCheckBox.setSelected(false);
@@ -359,78 +360,73 @@ public class BearbeitenListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(saveButton)) {  
-            if(validatePriceFields() && validateAmount()){
-                bearbeitenButton();  
+        if (e.getSource().equals(saveButton)) {
+            if (validatePriceFields() && validateAmount()) {
+                bearbeitenButton();
                 parent.getMusikMap().logChange("UPDATE", medium, constructMusikFromFields());
                 parent.loadChangeLogsForTable();
-            }
-            else{
-              JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein.");
             }
         }
         if (e.getSource().equals(deleteButton)) {
-            parent.getMusikMap().logChange("DELETE", medium, null); 
+            parent.getMusikMap().logChange("DELETE", medium, null);
             parent.getMusikMap().removeMedium(medium);
             clearTextBox();
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             parent.loadChangeLogsForTable();
         }
     }
-    
-private boolean validatePriceFields() {
-    String regex = "^[0-9]+(\\.[0-9]{1,2})?$$";
 
-    boolean cdPriceValid = cdListenpreisTextField.getText().matches(regex);
-    boolean plattePriceValid = platteListenpreisTextField.getText().matches(regex);
-    boolean mp3PriceValid = mp3ListenpreisTextField.getText().matches(regex);
-    boolean mp3BuyPriceValid = mp3EinkaufspreisTextField.getText().matches(regex);
-    boolean cdBuyPriceValid = cdEinkaufspreisTextField.getText().matches(regex);
-    boolean vinylBuyPriceValid = platteEinkaufspreisTextField.getText().matches(regex);
+    private boolean validatePriceFields() {
+        String regex = "^[0-9]+(\\.[0-9]{1,2})?$$";
 
+        boolean cdPriceValid = cdListenpreisTextField.getText().matches(regex);
+        boolean plattePriceValid = platteListenpreisTextField.getText().matches(regex);
+        boolean mp3PriceValid = mp3ListenpreisTextField.getText().matches(regex);
+        boolean mp3BuyPriceValid = mp3EinkaufspreisTextField.getText().matches(regex);
+        boolean cdBuyPriceValid = cdEinkaufspreisTextField.getText().matches(regex);
+        boolean vinylBuyPriceValid = platteEinkaufspreisTextField.getText().matches(regex);
 
-    if (!cdPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Listenpreis für CDs ist ungültig.");
-    }
-    if (!plattePriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Listenpreis für Platten ist ungültig.");
-    }
-    if (!mp3PriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Listenpreis für MP3s ist ungültig.");
-    }
-    if (!mp3BuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für MP3s ist ungültig.");
-    }
-    if (!cdBuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für CDs ist ungültig.");
-    }
-    if (!vinylBuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für Platten ist ungültig.");
+        if (!cdPriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Listenpreis für CDs ist ungültig.");
+        }
+        if (!plattePriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Listenpreis für Platten ist ungültig.");
+        }
+        if (!mp3PriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Listenpreis für MP3s ist ungültig.");
+        }
+        if (!mp3BuyPriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Einkaufspreis für MP3s ist ungültig.");
+        }
+        if (!cdBuyPriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Einkaufspreis für CDs ist ungültig.");
+        }
+        if (!vinylBuyPriceValid) {
+            JOptionPane.showMessageDialog(null, "Der Einkaufspreis für Platten ist ungültig.");
+        }
+
+        return cdPriceValid && plattePriceValid && mp3PriceValid && mp3BuyPriceValid && cdBuyPriceValid && vinylBuyPriceValid;
     }
 
-    return cdPriceValid && plattePriceValid && mp3PriceValid && mp3BuyPriceValid && cdBuyPriceValid && vinylBuyPriceValid;
-}
+    private boolean validateAmount() {
+        String regex = "^[1-9]\\d*$";
+        boolean isCdCountValid = cdCountSpinner.getValue().toString().matches(regex);
+        boolean isVinylCountValid = vinylCountSpinner.getValue().toString().matches(regex);
 
-private boolean validateAmount(){
-    String regex = "^[1-9]\\d*$";
-    boolean isCdCountValid = cdCountSpinner.getValue().toString().matches(regex);
-    boolean isVinylCountValid = vinylCountSpinner.getValue().toString().matches(regex);
-    
-    if(!isCdCountValid){
-                JOptionPane.showMessageDialog(null, "Die CD Menge ist ungültig");
-    }
-    if(!isVinylCountValid){
-                        JOptionPane.showMessageDialog(null, "Die Vinyl Menge ist ungültig");
+        if (!isCdCountValid) {
+            JOptionPane.showMessageDialog(null, "Die CD Menge ist ungültig");
+        }
+        if (!isVinylCountValid) {
+            JOptionPane.showMessageDialog(null, "Die Vinyl Menge ist ungültig");
 
-    }
+        }
         return isCdCountValid && isVinylCountValid;
-}
+    }
 
-
-
-    
     private Musik constructMusikFromFields() {
-    Musik m = new Musik();
+        Musik m = new Musik();
         m.setMusik_GUID(Integer.parseInt(musikGUIDTextField.getText()));
         m.setMBID(mbidTextField.getText());
         m.setMusiker(musikerTextField.getText());
@@ -450,17 +446,17 @@ private boolean validateAmount(){
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
-    return m;
-}
-    
-    private void bearbeitenButton() {
-    Musik m = constructMusikFromFields();
-    if (m != null) {
-        parent.getMusikMap().replaceMedium(medium, m);
-        parent.getMusikMap().logChange("UPDATE", medium, m);
-        parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
-        
+        return m;
     }
-}
+
+    private void bearbeitenButton() {
+        Musik m = constructMusikFromFields();
+        if (m != null) {
+            parent.getMusikMap().replaceMedium(medium, m);
+            parent.getMusikMap().logChange("UPDATE", medium, m);
+            parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+
+        }
+    }
 
 }

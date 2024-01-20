@@ -12,12 +12,15 @@ import GeschaftsObejekt.MusikList;
 import SaveData_ReadData.MusikCsvListDAO;
 
 public class FileOpenAction extends AbstractAction {
+
     private Gui parent;
-    public FileOpenAction(Gui parent,String text, ImageIcon icon, String desc ){
-        super(text,icon);
+
+    public FileOpenAction(Gui parent, String text, ImageIcon icon, String desc) {
+        super(text, icon);
         putValue(SHORT_DESCRIPTION, desc);
         this.parent = parent;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser chooser = new JFileChooser();

@@ -15,34 +15,35 @@ public class ChangeLanguageListener implements ActionListener {
     LoginGUi parentgGUi;
     String language;
 
-    public ChangeLanguageListener(Gui p,String language){
-        parent =p;
+    public ChangeLanguageListener(Gui p, String language) {
+        parent = p;
         this.language = language;
     }
-    public ChangeLanguageListener(LoginGUi parent,String language){
+
+    public ChangeLanguageListener(LoginGUi parent, String language) {
         this.parentgGUi = parent;
         this.language = language;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(parent != null){
+        if (parent != null) {
             int index = parent.getProfilList().getIndexofLogin();
-            Gui mainWindow = new Gui(parent.getProfilList().get(index).getIsmitarbeiter(),parent.getProfilList(),parent.getMusikMap().getMusikList(),new Locale(language));
+            Gui mainWindow = new Gui(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent.getMusikMap().getMusikList(), new Locale(language));
             mainWindow.setTitle(mainWindow.getL10NText("mk"));
             mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
             mainWindow.setLocationRelativeTo(null);
             parent.setVisible(false);
             mainWindow.setVisible(true);
-        }else{
-        LoginGUi loginWindow = new LoginGUi(language);
-         loginWindow.setTitle("Login");
-         loginWindow.setSize(500, 150);
-         loginWindow.setLocationRelativeTo(null);
-         parentgGUi.setVisible(false);
-         loginWindow.setVisible(true);
+        } else {
+            LoginGUi loginWindow = new LoginGUi(language);
+            loginWindow.setTitle("Login");
+            loginWindow.setSize(500, 150);
+            loginWindow.setLocationRelativeTo(null);
+            parentgGUi.setVisible(false);
+            loginWindow.setVisible(true);
         }
-        
+
     }
-    
+
 }

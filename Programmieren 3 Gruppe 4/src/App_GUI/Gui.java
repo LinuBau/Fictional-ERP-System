@@ -50,21 +50,19 @@ public class Gui extends JFrame {
     private ChangeLogTableModel changeLogTableModel;
     private JTable changeLogTable;
 
-
-
-    public Gui(boolean starten, ProfilList pl,Locale languageLocale) {
+    public Gui(boolean starten, ProfilList pl, Locale languageLocale) {
         if (starten) {
-            initialiseMitarbeiterFarme(pl,languageLocale);
+            initialiseMitarbeiterFarme(pl, languageLocale);
         } else {
-            initialiseUsserFrame(pl,languageLocale);
+            initialiseUsserFrame(pl, languageLocale);
         }
     }
 
-    public Gui(boolean starten, ProfilList pl, MusikList ml,Locale languageLocale) {
+    public Gui(boolean starten, ProfilList pl, MusikList ml, Locale languageLocale) {
         if (starten) {
-            initialiseMitarbeiterFarme(pl, ml,languageLocale);
+            initialiseMitarbeiterFarme(pl, ml, languageLocale);
         } else {
-            initialiseUsserFrame(pl, ml,languageLocale);
+            initialiseUsserFrame(pl, ml, languageLocale);
         }
     }
 
@@ -80,7 +78,8 @@ public class Gui extends JFrame {
     public MusikMap getMusikMap() {
         return this.musikmap;
     }
-    public String getL10NText(String key){
+
+    public String getL10NText(String key) {
         return bundle.getString(key);
     }
 
@@ -91,7 +90,8 @@ public class Gui extends JFrame {
     public ShoppingCartListner getShoppingCartListner() {
         return this.shoppingCartListner;
     }
-    public Locale getLocale(){
+
+    public Locale getLocale() {
         return this.locale;
     }
 
@@ -99,13 +99,12 @@ public class Gui extends JFrame {
         return this.profilList;
     }
 
-    private void initialiseUsserFrame(ProfilList pl,Locale languageLocale) {
+    private void initialiseUsserFrame(ProfilList pl, Locale languageLocale) {
         this.profilList = pl;
 
         //Create Locale
         locale = languageLocale;
         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
-    
 
         // Importing Data
         musikList = new MusikList();
@@ -118,9 +117,8 @@ public class Gui extends JFrame {
         }
         createUsserFrame();
     }
-    
 
-    private void initialiseUsserFrame(ProfilList pl, MusikList ml,Locale languageLocale) {
+    private void initialiseUsserFrame(ProfilList pl, MusikList ml, Locale languageLocale) {
         this.profilList = pl;
         this.musikList = ml;
 
@@ -129,13 +127,14 @@ public class Gui extends JFrame {
         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         createUsserFrame();
     }
-  private void createUsserFrame(){
-          // Initializing the MusikMap
+
+    private void createUsserFrame() {
+        // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
         ChangeLogCsvDAO changeLogCsvDoa = new ChangeLogCsvDAO();
         List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
         musikmap.setChangeLogs(loadedChangeLogs);
-        
+
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
@@ -147,20 +146,20 @@ public class Gui extends JFrame {
         eingabePanel.add(bearbeitenListener.getUsserBearbeitenPanel());
 
         // Initializing sortetd JTable
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
         String[] tableValue = new String[18];
-        for(int i=0;i<tableValue.length;i++){
+        for (int i = 0; i < tableValue.length; i++) {
             tableValue[i] = getL10NText(tableKeys[i]);
         }
         MusikList sotierteList = new MusikList();
         sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
-        tableModel = new MusikTableModel(sotierteList,tableValue);
+        tableModel = new MusikTableModel(sotierteList, tableValue);
         AtributTabelle = new JTable(tableModel);
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(eingabePanel, BorderLayout.CENTER);
 
         // Remove Collum that user are not allowod to see
-        int[] columnsToHide = { 0, 4, 5, 9, 10, 11 };
+        int[] columnsToHide = {0, 4, 5, 9, 10, 11};
         int removeCount = 0;
         for (int i : columnsToHide) {
             AtributTabelle.removeColumn(AtributTabelle.getColumnModel().getColumn(i - removeCount));
@@ -193,16 +192,17 @@ public class Gui extends JFrame {
         addWindowListener(new WindowEventListener(this));
 
     }
+
     /**
-     * 
+     *
      * @param pl
      */
 
-    private void initialiseMitarbeiterFarme(ProfilList pl,Locale languageLocale) {
+    private void initialiseMitarbeiterFarme(ProfilList pl, Locale languageLocale) {
         this.profilList = pl;
-         //Create Locale
-         locale = languageLocale;
-         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
+        //Create Locale
+        locale = languageLocale;
+        bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
 
         // Importing Data
         musikList = new MusikList();
@@ -214,72 +214,71 @@ public class Gui extends JFrame {
             e1.printStackTrace();
         }
         createMitarbeiterFrame();
-     
+
     }
 
-    private void initialiseMitarbeiterFarme(ProfilList pl, MusikList ml,Locale languageLocale) {
+    private void initialiseMitarbeiterFarme(ProfilList pl, MusikList ml, Locale languageLocale) {
         this.profilList = pl;
         this.musikList = ml;
-         //Create Locale
-         locale = languageLocale;
-         bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
+        //Create Locale
+        locale = languageLocale;
+        bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         createMitarbeiterFrame();
     }
-    
-    private void createMitarbeiterFrame(){
-           // Initializing the MusikMap
+
+    private void createMitarbeiterFrame() {
+        // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
         ChangeLogCsvDAO changeLogCsvDoa = new ChangeLogCsvDAO();
         List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
         musikmap.setChangeLogs(loadedChangeLogs);
-        String[] ColumShort = {"ts", "action", "nstate" , "ostate"};
+        String[] ColumShort = {"ts", "action", "nstate", "ostate"};
         String[] ColumName = new String[4];
-        for(int i=0;i<ColumShort.length;i++){
+        for (int i = 0; i < ColumShort.length; i++) {
             ColumName[i] = this.getL10NText(ColumShort[i]);
         }
-         //Initialize ChangeLogTableModel
+        //Initialize ChangeLogTableModel
         changeLogTableModel = new ChangeLogTableModel(ColumName);
         changeLogTableModel.setChangeLogs(loadedChangeLogs);
         changeLogTable = new JTable(changeLogTableModel);
-        
+
         //add clickablility for changeloginformation
-             changeLogTable.addMouseListener(new MouseAdapter() {
-    public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
-            System.out.println("Mouse clicked on table");
-            JTable target = (JTable)e.getSource();
-            int row = target.getSelectedRow(); // Die ausgewählte Zeile
-            if(row >= 0 && row < changeLogTableModel.getRowCount()) {
-                Object timestamp = changeLogTableModel.getValueAt(row, 0);
-                Object action = changeLogTableModel.getValueAt(row, 1);
-                Object newState = changeLogTableModel.getValueAt(row, 3);     
-                Object ogstate = changeLogTableModel.getValueAt(row, 2);
-                displayChangeLogDetails(timestamp, action, newState, ogstate);
+        changeLogTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) { // Reagiert auf einfaches Klicken
+                    System.out.println("Mouse clicked on table");
+                    JTable target = (JTable) e.getSource();
+                    int row = target.getSelectedRow(); // Die ausgewählte Zeile
+                    if (row >= 0 && row < changeLogTableModel.getRowCount()) {
+                        Object timestamp = changeLogTableModel.getValueAt(row, 0);
+                        Object action = changeLogTableModel.getValueAt(row, 1);
+                        Object newState = changeLogTableModel.getValueAt(row, 3);
+                        Object ogstate = changeLogTableModel.getValueAt(row, 2);
+                        displayChangeLogDetails(timestamp, action, newState, ogstate);
+                    }
+                }
             }
-        }
-    }
-});
-        
+        });
 
         // Initializing the+ ActionListner
         filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
 
         // add FilterPanel and EditPanel#
-        JPanel eingabePanel = new JPanel(new GridLayout(1,3));
+        JPanel eingabePanel = new JPanel(new GridLayout(1, 3));
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeiterPanel());
         eingabePanel.add(new JScrollPane(changeLogTable));
 
-        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
+        String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3", "CdCount", "VinylCount"};
         String[] tableValue = new String[18];
-        for(int i=0;i<tableValue.length;i++){
+        for (int i = 0; i < tableValue.length; i++) {
             tableValue[i] = getL10NText(tableKeys[i]);
         }
         // Initializing sortetd JTable
         MusikList sotierteList = new MusikList();
         sotierteList.addAll(musikmap.sortMusikListBySongName(musikList));
-        tableModel = new MusikTableModel(sotierteList,tableValue);
+        tableModel = new MusikTableModel(sotierteList, tableValue);
         AtributTabelle = new JTable(tableModel);
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(eingabePanel, BorderLayout.CENTER);
@@ -301,8 +300,7 @@ public class Gui extends JFrame {
                 bearbeitenListener.setMusik(tableModel.getMusikList().get(row));
             }
         });
-        
-        
+
         loadChangeLogsForTable();
 
         // Create MenuBar
@@ -311,35 +309,31 @@ public class Gui extends JFrame {
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
     }
-    
+
     public void loadChangeLogsForTable() {
         List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // get Changelogs
         changeLogTableModel.setChangeLogs(changeLogs);
         changeLogTableModel.sortChangeLogs(); // update changelogtable
     }
-    
+
     //Console log to make sure actions happend
     private void displayChangeLogDetails(Object timestamp, Object action, Object originalState, Object newState) {
-    String message = "Timestamp: " + timestamp + "\n" +
-                     "Action: " + action + "\n" +
-                     "New State: " + originalState + "\n" +
-                             "newState" + newState;
-    JOptionPane.showMessageDialog(this, message, "ChangeLog Details", JOptionPane.INFORMATION_MESSAGE);
-}
-    
+        String message = "Timestamp: " + timestamp + "\n"
+                + "Action: " + action + "\n"
+                + "New State: " + originalState + "\n"
+                + "newState" + newState;
+        JOptionPane.showMessageDialog(this, message, "ChangeLog Details", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public static void main(String[] args) {
 
-        
         LoginGUi loginWindow = new LoginGUi("de");
-         loginWindow.setTitle("Login");
-         loginWindow.setSize(500, 150);
-         loginWindow.setLocationRelativeTo(null);
-         loginWindow.setVisible(true);
-         // loginWindow.w()
-         System.out.println(System.getProperty("java.class.path"));
+        loginWindow.setTitle("Login");
+        loginWindow.setSize(500, 150);
+        loginWindow.setLocationRelativeTo(null);
+        loginWindow.setVisible(true);
+        // loginWindow.w()
+        System.out.println(System.getProperty("java.class.path"));
 
-    
-
-         
-    }    
+    }
 }

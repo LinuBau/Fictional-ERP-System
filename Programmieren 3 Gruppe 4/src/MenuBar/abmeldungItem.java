@@ -6,7 +6,8 @@ import ActionListener.AbmeldeListener;
 import App_GUI.Gui;
 
 public class AbmeldungItem extends JMenuItem {
-    public AbmeldungItem(Gui p){
+
+    public AbmeldungItem(Gui p) {
         super(p.getL10NText("out"));
         this.addActionListener(new AbmeldeListener(p));
     }

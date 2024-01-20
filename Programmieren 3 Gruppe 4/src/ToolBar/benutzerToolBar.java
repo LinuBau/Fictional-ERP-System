@@ -6,6 +6,7 @@ import javax.swing.JToolBar;
 import App_GUI.Gui;
 
 public class BenutzerToolBar extends JToolBar {
+
     JButton shoppingKartButton;
     Gui parent;
 

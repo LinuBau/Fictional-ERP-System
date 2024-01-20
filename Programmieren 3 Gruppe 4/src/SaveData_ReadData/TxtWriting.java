@@ -8,6 +8,7 @@ import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.Profil;
 
 public class TxtWriting extends AbstractCsvDAO {
+
     private MusikList musikList;
     Profil profil;
 
@@ -20,9 +21,9 @@ public class TxtWriting extends AbstractCsvDAO {
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
-            String filepath = (String)obj;
-            String header = "Rechnung\n\nKundenname: " +
-                    "nAdresse: Musterstraße 123\nStadt: Musterstadt";
+            String filepath = (String) obj;
+            String header = "Rechnung\n\nKundenname: "
+                    + "nAdresse: Musterstraße 123\nStadt: Musterstadt";
             out.println(header);
             out.println("Datum: " + LocalDate.now());
 
@@ -58,12 +59,12 @@ public class TxtWriting extends AbstractCsvDAO {
 
             out.println("Gesamt: " + berechneGesamtPreis() + "€");
 
-            System.out.println("Die Rechnung wurde erfolgreich als Text exportiert: "+filepath);
+            System.out.println("Die Rechnung wurde erfolgreich als Text exportiert: " + filepath);
 
         }
     }
 
-    private  double berechneGesamtPreis() {
+    private double berechneGesamtPreis() {
         double summe = 0;
         for (int i = 0; i < musikList.size(); i++) {
             summe += musikList.get(i).getPreisofAll(musikList.get(i), profil.getPallteStückZahlList().get(i),

@@ -1,4 +1,3 @@
-
 package SaveData_ReadData;
 
 import java.io.BufferedReader;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public abstract class AbstractCsvDAO {
+
     protected PrintWriter out;
     protected BufferedReader in;
 

@@ -29,6 +29,7 @@ import SaveData_ReadData.TxtWriting;
 import javax.swing.SpinnerNumberModel;
 
 public class ShoppingCartListner extends JDialog implements ActionListener {
+
     private JTable selectTabele;
     private MusikTableModel tableModel;
     private MusikList musikList;
@@ -48,10 +49,10 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         parent = p;
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
         String[] tableValue = new String[16];
-        for(int i=0;i<tableValue.length;i++){
+        for (int i = 0; i < tableValue.length; i++) {
             tableValue[i] = parent.getL10NText(tableKeys[i]);
         }
-        tableModel = new MusikTableModel(musikList,tableValue);
+        tableModel = new MusikTableModel(musikList, tableValue);
         selectTabele = new JTable(tableModel);
         speicherButton = new JButton(parent.getL10NText("save"));
         orderButton = new JButton(parent.getL10NText("order"));
@@ -66,7 +67,7 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         buttonPanel.add(speicherButton);
         buttonPanel.add(loeschenButton);
 
-        int[] columnsToHide = { 0, 4, 5, 9, 10, 11, 13, 14, 15 };
+        int[] columnsToHide = {0, 4, 5, 9, 10, 11, 13, 14, 15};
         int removeCount = 0;
         for (int i : columnsToHide) {
             selectTabele.removeColumn(selectTabele.getColumnModel().getColumn(i - removeCount));
@@ -85,7 +86,7 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
                 fillTextField(index);
             }
         });
-        
+
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         this.getContentPane().add(new JScrollPane(selectTabele), BorderLayout.CENTER);
@@ -153,10 +154,10 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         }
 
         if (e.getSource().equals(orderButton)) {
-             for (int i = 0; i < musikList.size(); i++) {
+            for (int i = 0; i < musikList.size(); i++) {
                 Musik musik = musikList.get(i);
-                int bestellteCdMenge = (Integer) cdTextField.getValue(); 
-                int bestellteVinylMenge = (Integer) platteTextField.getValue(); 
+                int bestellteCdMenge = (Integer) cdTextField.getValue();
+                int bestellteVinylMenge = (Integer) platteTextField.getValue();
                 Musik oldMedium = musik.clone();
 
                 musik.reduziereCdAnzahl(bestellteCdMenge);
