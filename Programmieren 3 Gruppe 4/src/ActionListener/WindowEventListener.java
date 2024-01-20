@@ -7,10 +7,14 @@ import java.io.IOException;
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.profilList;
+import SaveData_ReadData.ChangeLogCsvDOA;
 import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import SaveData_ReadData.ProfilListDOA;
+import Traversierung.ChangeLogEntry;
+import Traversierung.MusikMap;
 import java.io.File;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,11 +22,17 @@ import javax.swing.JOptionPane;
 public class WindowEventListener implements WindowListener {
 
     private Gui parent;
+    private MusikMap musikMap;
+    private ChangeLogCsvDOA changeLogCsvDOA;
+
 
     public WindowEventListener(Gui p) {
         super();
         this.parent = p;
+        this.changeLogCsvDOA = new ChangeLogCsvDOA();
     }
+    
+   
 
     @Override
     public void windowOpened(WindowEvent e) {
@@ -49,6 +59,8 @@ public class WindowEventListener implements WindowListener {
             JFileChooser chooser = new JFileChooser();
             chooser.setAcceptAllFileFilterUsed(false);
             chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            List<ChangeLogEntry> changeLogs = parent.getMusikMap().getChangeLogs();
+             changeLogCsvDOA.write(changeLogs);
 
             int returnval = chooser.showSaveDialog(parent);
 
@@ -74,8 +86,11 @@ public class WindowEventListener implements WindowListener {
         if (x == 0) {
             System.out.println(parent.getClass().getName());
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
+            List<ChangeLogEntry> changeLogs = parent.getMusikMap().getChangeLogs();
+             changeLogCsvDOA.write(changeLogs);
             System.out.println(parent.getL10NText("save"));
         }
+        
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } 
@@ -114,7 +129,7 @@ public class WindowEventListener implements WindowListener {
     }
 
     public static void saveListe(MusikList musikList, profilList profilList) {
-        MusikListDAO mld = new MusikListDAO("setup.data", true);
+        MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", true);
         ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
         try {
             mld.write(musikList);

@@ -10,6 +10,7 @@ import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import Modele.ChangeLogTableModel;
 import Modele.MusikTableModel;
+import SaveData_ReadData.ChangeLogCsvDOA;
 import SaveData_ReadData.MusikCsvListDAO;
 import ToolBar.benutzerToolBar;
 import ToolBar.mitarbeiterToolBar;
@@ -22,6 +23,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -118,7 +120,10 @@ public class Gui extends JFrame {
 
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-
+        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
+        musikmap.setChangeLogs(loadedChangeLogs);
+        
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
@@ -187,6 +192,9 @@ public class Gui extends JFrame {
 
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
+        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
+        musikmap.setChangeLogs(loadedChangeLogs);
 
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
@@ -269,11 +277,15 @@ public class Gui extends JFrame {
 
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-        
+        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
+        musikmap.setChangeLogs(loadedChangeLogs);
         
          //Initialize ChangeLogTableModel
         changeLogTableModel = new ChangeLogTableModel();
+        changeLogTableModel.setChangeLogs(loadedChangeLogs);
         changeLogTable = new JTable(changeLogTableModel);
+        
         //add clickablility for changeloginformation
              changeLogTable.addMouseListener(new MouseAdapter() {
     public void mouseClicked(MouseEvent e) {
@@ -337,7 +349,7 @@ public class Gui extends JFrame {
         });
         
         
-        loadChangeLogs();
+        loadChangeLogsForTable();
 
         // Create MenuBar
         setJMenuBar(new mitarbeiterMenuBar(this,language,shortlanguage));
@@ -354,7 +366,9 @@ public class Gui extends JFrame {
          bundle = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-        
+        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
+        musikmap.setChangeLogs(loadedChangeLogs);
         //initializes ChangeLogTableModel
         changeLogTableModel = new ChangeLogTableModel();
         changeLogTable = new JTable(changeLogTableModel);
@@ -421,7 +435,7 @@ public class Gui extends JFrame {
             }
         });
           
-        loadChangeLogs();
+        loadChangeLogsForTable();
    
         // Create MenuBar
         setJMenuBar(new mitarbeiterMenuBar(this,language,shortlanguage));
@@ -430,7 +444,7 @@ public class Gui extends JFrame {
         addWindowListener(new WindowEventListener(this));
     }
     
-    public void loadChangeLogs() {
+    public void loadChangeLogsForTable() {
         List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // get Changelogs
         changeLogTableModel.setChangeLogs(changeLogs);
         changeLogTableModel.fireTableDataChanged(); // update changelogtable
@@ -459,5 +473,5 @@ public class Gui extends JFrame {
     
 
          
-    }
+    }    
 }

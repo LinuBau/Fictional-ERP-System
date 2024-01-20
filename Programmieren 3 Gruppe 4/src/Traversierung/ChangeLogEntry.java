@@ -19,6 +19,14 @@ public class ChangeLogEntry {
         this.originalState = originalState; 
         this.newState = newState; 
     }
+    public ChangeLogEntry(LocalDateTime timestamp, String action, Musik originalState, Musik newState) {
+        this.timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); 
+        this.action = action;
+        this.originalState = originalState; 
+        this.newState = newState; 
+    }
+    
+    
     // Getter
     public LocalDateTime getTimestamp() {
         return timestamp;

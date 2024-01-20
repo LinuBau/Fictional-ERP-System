@@ -60,7 +60,6 @@ public class BearbeitenListener implements ActionListener {
     }
 
     public JPanel getMitarbeiterBearbeitenPanel() {
-        NumberFormat format = new DecimalFormat("#.00");
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
         mbidTextField = new JTextField();
@@ -69,12 +68,12 @@ public class BearbeitenListener implements ActionListener {
         songNameTextField = new JTextField();
         regalPlatzCDTextField = new JTextField();
         regalPlatzPlatteTextField = new JTextField();
-        cdListenpreisTextField = new JFormattedTextField(format);
-        platteListenpreisTextField = new JFormattedTextField(format);
-        mp3ListenpreisTextField = new JFormattedTextField(format);
-        cdEinkaufspreisTextField = new JFormattedTextField(format);
-        platteEinkaufspreisTextField = new JFormattedTextField(format);
-        mp3EinkaufspreisTextField = new JFormattedTextField(format);
+        cdListenpreisTextField = new JFormattedTextField();
+        platteListenpreisTextField = new JFormattedTextField();
+        mp3ListenpreisTextField = new JFormattedTextField();
+        cdEinkaufspreisTextField = new JFormattedTextField();
+        platteEinkaufspreisTextField = new JFormattedTextField();
+        mp3EinkaufspreisTextField = new JFormattedTextField();
         cdCountSpinner = new JSpinner();
         vinylCountSpinner = new JSpinner();
         cdCheckBox = new JCheckBox();
@@ -363,13 +362,13 @@ public class BearbeitenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(SaveButton)) {  
-            if(validatePriceFields()){
+            if(validatePriceFields() && validateAmount()){
                 bearbeitenButton();  
                 parent.getMusikMap().logChange("UPDATE", medium, constructMusikFromFields());
-                parent.loadChangeLogs();
+                parent.loadChangeLogsForTable();
             }
             else{
-              JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein (positive Zahlen mit maximal zwei Nachkommastellen).");
+              JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein.");
             }
         }
         if (e.getSource().equals(delteButton)) {
@@ -377,16 +376,20 @@ public class BearbeitenListener implements ActionListener {
             parent.getMusikMap().removeMedium(medium);
             clearTextBox();
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
-            parent.loadChangeLogs();
+            parent.loadChangeLogsForTable();
         }
     }
     
 private boolean validatePriceFields() {
-    String regex = "^-?[0-9]+(\\.[0-9]{1,2})?$";
+    String regex = "^[0-9]+(\\.[0-9]{1,2})?$$";
 
     boolean cdPriceValid = cdListenpreisTextField.getText().matches(regex);
     boolean plattePriceValid = platteListenpreisTextField.getText().matches(regex);
     boolean mp3PriceValid = mp3ListenpreisTextField.getText().matches(regex);
+    boolean mp3BuyPriceValid = mp3EinkaufspreisTextField.getText().matches(regex);
+    boolean cdBuyPriceValid = cdEinkaufspreisTextField.getText().matches(regex);
+    boolean vinylBuyPriceValid = platteEinkaufspreisTextField.getText().matches(regex);
+
 
     if (!cdPriceValid) {
         JOptionPane.showMessageDialog(null, "Der Listenpreis für CDs ist ungültig.");
@@ -397,8 +400,32 @@ private boolean validatePriceFields() {
     if (!mp3PriceValid) {
         JOptionPane.showMessageDialog(null, "Der Listenpreis für MP3s ist ungültig.");
     }
+    if (!mp3BuyPriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für MP3s ist ungültig.");
+    }
+    if (!cdBuyPriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für CDs ist ungültig.");
+    }
+    if (!vinylBuyPriceValid) {
+        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für Platten ist ungültig.");
+    }
 
-    return cdPriceValid && plattePriceValid && mp3PriceValid;
+    return cdPriceValid && plattePriceValid && mp3PriceValid && mp3BuyPriceValid && cdBuyPriceValid && vinylBuyPriceValid;
+}
+
+private boolean validateAmount(){
+    String regex = "^[1-9]\\d*$";
+    boolean isCdCountValid = cdCountSpinner.getValue().toString().matches(regex);
+    boolean isVinylCountValid = vinylCountSpinner.getValue().toString().matches(regex);
+    
+    if(!isCdCountValid){
+                JOptionPane.showMessageDialog(null, "Die CD Menge ist ungültig");
+    }
+    if(!isVinylCountValid){
+                        JOptionPane.showMessageDialog(null, "Die Vinyl Menge ist ungültig");
+
+    }
+        return isCdCountValid && isVinylCountValid;
 }
 
 
