@@ -14,21 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-<<<<<<< Updated upstream:Programmieren 3 Gruppe 4/src/ActionListener/newUserListener.java
 import App_GUI.loginGUi;
-=======
-import App_GUI.Gui;
-import GeschaftsObejekt.MusikList;
->>>>>>> Stashed changes:src/ActionListener/newMitarbeiterListener.java
 import GeschaftsObejekt.profil;
 import GeschaftsObejekt.profilList;
-import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.ProfilListDOA;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class newUserListener extends JDialog implements ActionListener {
+
     private JPanel centerconetentPanel;
-    private boolean ismitarbeiter = false;
     private JLabel userNameLabel;
     private JLabel passwordLabel;
     private JButton hinzufügenButton;
@@ -45,8 +40,8 @@ public class newUserListener extends JDialog implements ActionListener {
 
         showPasswordCheckBox = new JCheckBox(parent.getL10NText("pa"));
         hinzufügenButton = new JButton(parent.getL10NText("add"));
-        userNameLabel = new JLabel(parent.getL10NText("usser"));
-        passwordLabel = new JLabel(parent.getL10NText("psw"));
+        userNameLabel = new JLabel("   " + parent.getL10NText("usser") + ": ");
+        passwordLabel = new JLabel("   " + parent.getL10NText("psw") + ": ");
 
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
@@ -66,23 +61,15 @@ public class newUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox,passwordField));
+        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox, passwordField));
         hinzufügenButton.addActionListener(this);
-        
+
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);
-        this.setSize(500, 150);
+        this.setSize(500, 200);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
-    }
-
-    public boolean getIsmitarbeiter() {
-        return this.ismitarbeiter;
-    }
-
-    public void setIsmitarbeiter(boolean ismitarbeiter) {
-        this.ismitarbeiter = ismitarbeiter;
     }
     
     public static void saveProfil( profilList profilList) {
@@ -100,26 +87,21 @@ public class newUserListener extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
-<<<<<<< Updated upstream:Programmieren 3 Gruppe 4/src/ActionListener/newUserListener.java
-            profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
-            parent.getProfilList().add(p);
-            int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
-            if (index != -1) {
-                loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),
-                        parent);
-=======
             String ussername = usserNameTextField.getText();
-            profil p = new profil(ussername, getPassword(), true);
+            profil p = new profil(ussername, getPassword(), false);
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
-                JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
-                newMitarbeiterListener.saveProfil(parent.getProfilList());
+                int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
+                if (index != -1) {
+                    loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),
+                            parent);
+                }
+                newUserListener.saveProfil(parent.getProfilList());
                 this.setVisible(false);
-            } else {
+            }else{
                 JOptionPane.showMessageDialog(this, "Ussername ist vergeben", "Error", JOptionPane.ERROR_MESSAGE);
->>>>>>> Stashed changes:src/ActionListener/newMitarbeiterListener.java
             }
-            this.setVisible(false);
+            
         }
     }
 
