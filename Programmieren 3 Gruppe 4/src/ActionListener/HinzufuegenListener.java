@@ -197,14 +197,14 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         } catch (Exception e1) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        /*try {
+        try {
             String mbidText = mbidTextField.getText();
             if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length()==36) {
                 m.setMBID(mbidText);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
         m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
         m.setSongName(songNameTextField.getText());
