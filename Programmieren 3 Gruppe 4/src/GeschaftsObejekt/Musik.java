@@ -281,11 +281,13 @@ public int hashCode() {
     public void reduziereCdAnzahl(int menge) {
         if (menge < 0) return; // Negative Mengen werden ignoriert
         this.CdCount = Math.max(this.CdCount - menge, 0);
+        updateVerfuegbarkeit();
     }
     
     public void reduziereVinylAnzahl(int menge) {
         if (menge < 0) return; // Negative Mengen werden ignoriert
         this.VinylCount = Math.max(this.VinylCount - menge, 0);
+        updateVerfuegbarkeit();
     }
     
      private void updateVerfuegbarkeit() {
