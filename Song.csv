@@ -109,6 +109,66 @@
 55,Janet Jackson,Rhythm Nation 1814,Escapade,A55,B55,10.99,18.99,0.99,7.99,14.99,0.89,Pop,true,true,true
 56,Bob Marley & The WailersLegend,No Woman, No Cry,A56,B56,12.99,21.99,1.49,9.99,17.99,1.19,Reggae,true,true,true
 57,The Clash,London Calling,London Calling,A57,B57,9.99,17.99,0.79,6.99,12.99,0.69,Punk,true,true,true
-4873,fjkd,dfkng,fgj,dfjkg,,0.0,0.0,0.0,0.0,0.0,0.0,,true,false,false
-6348,hkfdh,ich sein,ich bin,Regal Platz1,Regal Platz2,34.89,67.1,78.76,20.0,40.54,32.1,Pop,false,true,true
-432,kadh,,,,,0.0,0.0,0.0,0.0,0.0,0.0,,false,false,false
+60,Sam Smith,In the Lonely Hour,Stay With Me,A60,B60,12.99,21.99,1.49,9.99,17.99,1.19,Pop,true,true,true
+61,George Michael,Faith,Faith,A61,B61,9.99,17.99,0.79,6.99,12.99,0.69,Pop,true,true,true
+62,Eagles,Hotel California,Hotel California,A62,B62,11.99,20.99,1.29,8.99,15.99,1.09,Rock,true,true,true
+63,Kanye West,My Beautiful Dark Twisted Fantasy,Runaway,A63,B63,13.99,22.99,1.69,10.99,19.99,1.39,Hip-Hop,true,true,true
+64,Tina Turner,Private Dancer,What's Love Got to Do With It,A64,B64,8.99,16.99,0.59,5.99,11.99,0.49,Rock,true,true,true
+65,Marvin Gaye,What's Going On,What's Going On,A65,B65,10.99,18.99,0.99,7.99,14.99,0.89,R&B,true,true,true
+66,Red Hot Chili Peppers,Blood Sugar Sex Magik,Under the Bridge,A66,B66,12.99,21.99,1.49,9.99,17.99,1.19,Alternative,true,true,true
+67,The Weeknd,After Hours,Blinding Lights,A67,B67,9.99,17.99,0.79,6.99,12.99,0.69,R&B,true,true,true
+68,Ed Sheeran,No.6 Collaborations Project,Shape of You,A68,B68,11.99,20.99,1.29,8.99,15.99,1.09,Pop,true,true,true
+69,The Beatles,Please Please Me,I Saw Her Standing There,A69,B69,13.99,22.99,1.69,10.99,19.99,1.39,Rock,true,true,true
+72,David Bowie,Heroes,Heroes,A72,B72,14.99,23.99,1.29,10.99,18.99,0.99,Rock,true,true,true
+73,Amy Winehouse,Back to Black,Rehab,A73,B73,12.99,20.99,1.19,9.99,16.99,0.89,Soul,true,true,false
+74,The Killers,Hot Fuss,Mr. Brightside,A74,B74,11.99,19.99,1.09,8.99,14.99,0.79,Alternative,true,false,true
+75,Gorillaz,Demon Days,Feel Good Inc.,A75,B75,13.99,21.99,1.39,10.99,17.99,1.09,Hip-Hop,false,true,true
+76,Norah Jones,Come Away with Me,Don't Know Why,A76,B76,9.99,17.99,0.69,6.99,13.99,0.59,Jazz,true,true,false
+77,The Strokes,Is This It,Last Nite,A77,B77,10.99,18.99,0.99,7.99,15.99,0.89,Rock,false,true,true
+78,Oasis,(What's the Story) Morning Glory?,Wonderwall,A78,B78,12.99,20.99,1.19,9.99,16.99,0.89,Britpop,true,false,false
+79,Arctic Monkeys,AM,Do I Wanna Know?,A79,B79,14.99,22.99,1.29,11.99,18.99,0.99,Indie,true,true,false
+80,Fleetwood Mac,Rumours,Go Your Own Way,A80,B80,11.99,19.99,1.09,8.99,14.99,0.79,Rock,true,false,true
+81,Pink Floyd,The Dark Side of the Moon,Time,A81,B81,15.99,24.99,1.59,11.99,19.99,1.19,Psychedelic Rock,true,true,false
+82,Bob Dylan,Highway 61 Revisited,Like a Rolling Stone,A82,B82,13.99,22.99,1.39,10.99,17.99,1.09,Folk Rock,true,false,true
+83,The Beatles,Revolver,Eleanor Rigby,A83,B83,12.99,21.99,1.29,9.99,16.99,0.99,Rock,false,true,true
+84,Michael Jackson,Bad,The Way You Make Me Feel,A84,B84,14.99,23.99,1.49,11.99,18.99,1.29,Pop,true,true,false
+85,Prince,Purple Rain,When Doves Cry,A85,B85,11.99,20.99,1.09,8.99,15.99,0.89,Rock,true,false,true
+86,Nirvana,Nevermind,Smells Like Teen Spirit,A86,B86,13.99,22.99,1.39,10.99,17.99,1.19,Grunge,false,true,false
+87,Queen,A Night at the Opera,Bohemian Rhapsody,A87,B87,15.99,24.99,1.59,11.99,19.99,1.29,Rock,true,true,true
+88,Foo Fighters,The Colour and the Shape,Everlong,A88,B88,12.99,21.99,1.29,9.99,16.99,0.99,Alternative Rock,true,false,false
+89,Led Zeppelin,Led Zeppelin IV,Black Dog,A89,B89,14.99,23.99,1.49,11.99,18.99,1.39,Hard Rock,false,true,true
+90,The Clash,London Calling,London Calling,A90,B90,11.99,20.99,1.09,8.99,15.99,0.89,Punk,true,true,false
+91,Radiohead,OK Computer,Karma Police,A91,B91,13.99,22.99,1.39,10.99,17.99,1.19,Alternative,false,false,true
+92,U2,The Joshua Tree,With or Without You,A92,B92,12.99,21.99,1.29,9.99,16.99,0.99,Rock,true,true,true
+93,Bruce Springsteen,Born to Run,Thunder Road,A93,B93,15.99,24.99,1.59,11.99,19.99,1.29,Rock,true,false,true
+94,Adele,21,Rolling in the Deep,A94,B94,11.99,20.99,1.09,8.99,15.99,0.89,Pop,true,true,false
+95,The Rolling Stones,Exile on Main St.,Tumbling Dice,A95,B95,13.99,22.99,1.39,10.99,17.99,1.19,Rock,false,true,true
+200,Fleetwood Mac,Rumours,Go Your Own Way,A200,B200,11.99,19.99,1.09,8.99,14.99,0.79,Rock,true,false,true
+201,Pink Floyd,The Dark Side of the Moon,Time,A201,B201,15.99,24.99,1.59,11.99,19.99,1.19,Psychedelic Rock,true,true,false
+202,Bob Dylan,Highway 61 Revisited,Like a Rolling Stone,A202,B202,13.99,22.99,1.39,10.99,17.99,1.09,Folk Rock,true,false,true
+203,The Beatles,Revolver,Eleanor Rigby,A203,B203,12.99,21.99,1.29,9.99,16.99,0.99,Rock,false,true,true
+204,Michael Jackson,Bad,The Way You Make Me Feel,A204,B204,14.99,23.99,1.49,11.99,18.99,1.29,Pop,true,true,false
+205,Prince,Purple Rain,When Doves Cry,A205,B205,11.99,20.99,1.09,8.99,15.99,0.89,Rock,true,false,true
+206,Nirvana,Nevermind,Smells Like Teen Spirit,A206,B206,13.99,22.99,1.39,10.99,17.99,1.19,Grunge,false,true,false
+207,Queen,A Night at the Opera,Bohemian Rhapsody,A207,B207,15.99,24.99,1.59,11.99,19.99,1.29,Rock,true,true,true
+208,Foo Fighters,The Colour and the Shape,Everlong,A208,B208,12.99,21.99,1.29,9.99,16.99,0.99,Alternative Rock,true,false,false
+209,Led Zeppelin,Led Zeppelin IV,Black Dog,A209,B209,14.99,23.99,1.49,11.99,18.99,1.39,Hard Rock,false,true,true
+210,The Clash,London Calling,London Calling,A210,B210,11.99,20.99,1.09,8.99,15.99,0.89,Punk,true,true,false
+150,AC/DC,Back in Black,Hells Bells,A150,B150,12.99,21.99,1.29,9.99,16.99,0.99,Hard Rock,true,true,true
+151,The Eagles,Hotel California,Hotel California,A151,B151,15.99,24.99,1.59,11.99,19.99,1.29,Rock,true,true,true
+152,Bob Marley and The Wailers,Legend,No Woman No Cry,A152,B152,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true
+153,Elton John,Goodbye Yellow Brick Road,Rocket Man,A153,B153,13.99,22.99,1.39,10.99,17.99,1.19,Pop,true,true,false
+154,David Bowie,Ziggy Stardust,Moonage Daydream,A154,B154,14.99,23.99,1.49,11.99,18.99,1.29,Rock,true,true,false
+155,The Who,Who's Next,Baba O'Riley,A155,B155,11.99,20.99,1.09,8.99,15.99,0.89,Rock,true,true,false
+156,U2,War,Sunday Bloody Sunday,A156,B156,13.99,22.99,1.39,10.99,17.99,1.19,Rock,true,true,false
+157,Bruce Springsteen,Born in the USA,Dancing in the Dark,A157,B157,12.99,21.99,1.29,9.99,16.99,0.99,Rock,true,true,false
+158,Pearl Jam,Ten,Alive,A158,B158,14.99,23.99,1.49,11.99,18.99,1.29,Grunge,true,true,false
+159,Led Zeppelin,Physical Graffiti,Kashmir,A159,B159,15.99,24.99,1.59,11.99,19.99,1.29,Hard Rock,true,true,true
+300,Bob Marley and The Wailers,Legend,Is This Love,A300,B300,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true
+301,Bob Marley and The Wailers,Legend,No Woman No Cry,A301,B301,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,true,true
+302,Bob Marley and The Wailers,Legend,Could You Be Loved,A302,B302,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true
+303,Bob Marley and The Wailers,Legend,Three Little Birds,A303,B303,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,true,false
+304,Bob Marley and The Wailers,Legend,Buffalo Soldier,A304,B304,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,true,true
+305,Bob Marley and The Wailers,Legend,Get Up Stand Up,A305,B305,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true
+306,Bob Marley and The Wailers,Legend,Stir It Up,A306,B306,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,true,false
+307,Bob Marley and The Wailers,Legend,One Love/People Get Ready,A307,B307,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true
