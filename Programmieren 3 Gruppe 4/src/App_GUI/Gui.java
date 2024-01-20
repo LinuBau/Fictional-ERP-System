@@ -315,7 +315,7 @@ public class Gui extends JFrame {
     public void loadChangeLogsForTable() {
         List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // get Changelogs
         changeLogTableModel.setChangeLogs(changeLogs);
-        changeLogTableModel.fireTableDataChanged(); // update changelogtable
+        changeLogTableModel.sortChangeLogs(); // update changelogtable
     }
     
     //Console log to make sure actions happend
