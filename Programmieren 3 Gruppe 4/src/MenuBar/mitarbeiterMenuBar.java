@@ -10,6 +10,6 @@ public class mitarbeiterMenuBar extends JMenuBar {
     public mitarbeiterMenuBar(Gui parent){
        super();
        this.add(new FileMenu(parent));
-       this.add(new SettingsMenu(parent));
+       this.add(new mitarbeiterSettingsMenu(parent));
     }
 }

@@ -10,9 +10,9 @@ public class ChangeLogTableModel extends AbstractTableModel {
     private final String[] columnNames;
     private List<ChangeLogEntry> changeLogs;
 
-    public ChangeLogTableModel(String[] cN) {
+    public ChangeLogTableModel(String[] columnNames) {
         changeLogs = new ArrayList<>();
-        this.columnNames = cN;
+        this.columnNames = columnNames;
     }
     
     public void setChangeLogs(List<ChangeLogEntry> changeLogs) {
@@ -25,6 +25,10 @@ public class ChangeLogTableModel extends AbstractTableModel {
 
     public List<ChangeLogEntry> getChangeLogs() {
         return changeLogs;
+    }
+        @Override
+    public String getColumnName(int column) {
+        return columnNames[column];
     }
     
         @Override
