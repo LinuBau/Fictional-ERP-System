@@ -129,6 +129,7 @@ public int hashCode() {
     
     public void setCdCount(int CdCount){
         this.CdCount = CdCount;
+        updateVerfuegbarkeit();
     }
     
     public int getVinylCount(){
@@ -137,6 +138,7 @@ public int hashCode() {
     
     public void setVinylCount(int VinylCount){
         this.VinylCount = VinylCount;
+        updateVerfuegbarkeit();
     }
 
     public int getMusik_GUID() {
@@ -281,14 +283,6 @@ public int hashCode() {
     public Musik() {
     }
     
-//    public void addToChangeLog(String action, Musik originalState, Musik newState) {
-//        ChangeLogEntry entry = new ChangeLogEntry(action, originalState, newState);
-//        changeLog.add(entry);
-//    }
-//
-//    public List<ChangeLogEntry> getChangeLog() {
-//        return changeLog;
-//    }
     
     public void reduziereCdAnzahl(int menge) {
         if (menge < 0) return; // Negative Mengen werden ignoriert
@@ -299,6 +293,12 @@ public int hashCode() {
         if (menge < 0) return; // Negative Mengen werden ignoriert
         this.VinylCount = Math.max(this.VinylCount - menge, 0);
     }
+    
+     private void updateVerfuegbarkeit() {
+        this.CD = this.CdCount > 0;
+        this.Platte = this.VinylCount > 0;
+    }
+    
 public Musik clone() {
     Musik copy = new Musik();
     copy.setMusik_GUID(this.getMusik_GUID());
