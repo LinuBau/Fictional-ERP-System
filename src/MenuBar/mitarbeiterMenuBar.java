@@ -6,9 +6,9 @@ import App_GUI.Gui;
 
 public class mitarbeiterMenuBar extends JMenuBar {
 
-    public mitarbeiterMenuBar(Gui parent, String[] language, String[] shortlanguage) {
+    public mitarbeiterMenuBar(Gui parent) {
         super();
         this.add(new FileMenu(parent));
-        this.add(new SettingsMenu(parent, language, shortlanguage));
+        this.add(new MitarbeiterSettingsMenu(parent));
     }
 }
