@@ -24,8 +24,7 @@ public class MusikDAO extends AbstractDAO {
     public void write(Object obj) throws IOException {
         if (out != null) {
             Musik MM = (Musik) obj;
-            out.writeInt(MM.getMusik_GUID());
-            out.writeUTF(MM.getMBID());
+            out.writeInt(MM.getMusik_GUID());           
             out.writeUTF(MM.getMusiker());
             out.writeUTF(MM.getAlbum());
             out.writeUTF(MM.getSongName());
@@ -38,11 +37,10 @@ public class MusikDAO extends AbstractDAO {
             out.writeDouble(MM.getPlatteEinkaufpreis());
             out.writeDouble(MM.getMp3Einkaufpreis());
             out.writeUTF(MM.getGenre());
-            out.writeBoolean(MM.getIsCD());
-            out.writeBoolean(MM.getIsPlatte());
             out.writeBoolean(MM.getIsMp3());
             out.writeInt(MM.getCdCount());
             out.writeInt(MM.getVinylCount());
+            out.writeUTF(MM.getMBID());
         }
     }
 /**
@@ -55,7 +53,7 @@ public class MusikDAO extends AbstractDAO {
         if (in != null) {
             Musik MM = (Musik) obj;
             MM.setMusik_GUID(in.readInt());
-            MM.setMBID(in.readUTF());
+            
             MM.setMusiker(in.readUTF());
             MM.setAlbum(in.readUTF());
             MM.setSongName(in.readUTF());
@@ -68,11 +66,10 @@ public class MusikDAO extends AbstractDAO {
             MM.setPlatteEinkaufpreis(in.readDouble());
             MM.setMp3Einkaufpreis(in.readDouble());
             MM.setGenre(in.readUTF());
-            MM.setIsCD(in.readBoolean());
-            MM.setIsPlatte(in.readBoolean());
             MM.setIsMp3(in.readBoolean());
             MM.setCdCount(in.readInt());
             MM.setVinylCount(in.readInt());
+            MM.setMBID(in.readUTF());
         }
     }
 

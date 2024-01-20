@@ -64,28 +64,28 @@ public class MusikCsvDAO extends AbstractCsvDOA {
     }
     
         MM.setMusiker(csvStrings[1]);
-        MM.setMBID(csvStrings[2]);
-        MM.setAlbum(csvStrings[3]);
-        MM.setSongName(csvStrings[4]);
-        MM.setRegal_PlatzCD(csvStrings[5]);
-        MM.setRegal_PlatzPlatte(csvStrings[6]);
+        MM.setAlbum(csvStrings[2]);
+        MM.setSongName(csvStrings[3]);
+        MM.setRegal_PlatzCD(csvStrings[4]);
+        MM.setRegal_PlatzPlatte(csvStrings[5]);
         
         try
         {
-        MM.setCDListenpreis(Double.parseDouble(csvStrings[7]));
-        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[8]));
-        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[9]));
-        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[10]));
-        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[11]));
-        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[12]));
+        MM.setCDListenpreis(Double.parseDouble(csvStrings[6]));
+        MM.setPlatteListenpreis(Double.parseDouble(csvStrings[7]));
+        MM.setMp3Listenpreis(Double.parseDouble(csvStrings[8]));
+        MM.setCDEinkaufpreis(Double.parseDouble(csvStrings[9]));
+        MM.setPlatteEinkaufpreis(Double.parseDouble(csvStrings[10]));
+        MM.setMp3Einkaufpreis(Double.parseDouble(csvStrings[11]));
         
         } catch (NumberFormatException e) {
         System.err.println("Fehler beim Parsen der Preise: " + e.getMessage());
     }
-        MM.setGenre(csvStrings[13]);
-        MM.setIsMp3(Boolean.parseBoolean(csvStrings[14]));
-        MM.setCdCount(Integer.parseInt(csvStrings[15]));
-        MM.setVinylCount(Integer.parseInt(csvStrings[16]));
+        MM.setGenre(csvStrings[12]);
+        MM.setIsMp3(Boolean.parseBoolean(csvStrings[13]));
+        MM.setCdCount(Integer.parseInt(csvStrings[14]));
+        MM.setVinylCount(Integer.parseInt(csvStrings[15]));
+        MM.setMBID(csvStrings[16]);
 
 
         
@@ -93,7 +93,6 @@ public class MusikCsvDAO extends AbstractCsvDOA {
     private String tocvs(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
-             MM.getMBID() + splitKondiotn+
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +
@@ -108,7 +107,9 @@ public class MusikCsvDAO extends AbstractCsvDOA {
              MM.getGenre() + splitKondiotn +
              MM.isIsMp3() + splitKondiotn +
              MM.getCdCount() + splitKondiotn +
-             MM.getVinylCount()
+             MM.getVinylCount() + splitKondiotn +
+             MM.getMBID() 
+
             ;
     }
 }
