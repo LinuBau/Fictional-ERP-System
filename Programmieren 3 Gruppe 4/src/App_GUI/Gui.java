@@ -19,6 +19,7 @@ import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -263,9 +264,10 @@ public class Gui extends JFrame {
         bearbeitenListener = new BearbeitenListener(this);
 
         // add FilterPanel and EditPanel#
-        JPanel eingabePanel = new JPanel(new FlowLayout());
+        JPanel eingabePanel = new JPanel(new GridLayout(1,3));
         eingabePanel.add(filterListener.getFilterPanel());
         eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
+        eingabePanel.add(new JScrollPane(changeLogTable));
 
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
         String[] tableValue = new String[18];
@@ -287,9 +289,6 @@ public class Gui extends JFrame {
         getContentPane().add(new JScrollPane(AtributTabelle), BorderLayout.CENTER);
         getContentPane().add(northPanel, BorderLayout.NORTH);
         setLocationRelativeTo(null);
-         JPanel changeLogPanel = new JPanel(new BorderLayout());
-        changeLogPanel.add(new JScrollPane(changeLogTable), BorderLayout.CENTER);
-        getContentPane().add(changeLogPanel, BorderLayout.EAST);
 
         // Add Mouse Pressed Event
         AtributTabelle.addMouseListener(new MouseAdapter() {
