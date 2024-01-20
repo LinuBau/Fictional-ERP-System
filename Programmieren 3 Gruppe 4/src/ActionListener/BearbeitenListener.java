@@ -40,7 +40,7 @@ public class BearbeitenListener implements ActionListener {
     private JCheckBox cdCheckBox;
     private JCheckBox platteCheckBox;
     private JCheckBox mp3CheckBox;
-    private JButton delteButton;
+    private JButton deleteButton;
     private JButton saveButton;
     private JButton reinhörenButton;
     private ReinhörenListener reinhörenListener;
@@ -77,7 +77,7 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
-        delteButton = new JButton(parent.getL10NText("delete"));
+        deleteButton = new JButton(parent.getL10NText("delete"));
         saveButton = new JButton(parent.getL10NText("save"));
         reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
@@ -151,7 +151,7 @@ public class BearbeitenListener implements ActionListener {
         southcenterPanel.add(mp3CheckBox);
 
         southsouthPanel.add(saveButton);
-        southsouthPanel.add(delteButton);
+        southsouthPanel.add(deleteButton);
 
         southsouthPanel.add(reinhörenButton);
         eingabePanel.add(centerPanel, BorderLayout.CENTER);
@@ -160,7 +160,7 @@ public class BearbeitenListener implements ActionListener {
         eingabePanel.add(southPanel, BorderLayout.SOUTH);
         // add ActionListner
         saveButton.addActionListener(this);
-        delteButton.addActionListener(this);
+        deleteButton.addActionListener(this);
         reinhörenButton.addActionListener(reinhörenListener);
 
         setMitarbeiterEnable(true);
@@ -287,7 +287,7 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setEnabled(b);
         platteCheckBox.setEnabled(b);
         mp3CheckBox.setEnabled(b);
-        delteButton.setEnabled(b);
+        deleteButton.setEnabled(b);
         saveButton.setEnabled(b);
         reinhörenButton.setEnabled(b);
     }
@@ -369,7 +369,7 @@ public class BearbeitenListener implements ActionListener {
               JOptionPane.showMessageDialog(null, "Bitte geben Sie gültige Preise ein.");
             }
         }
-        if (e.getSource().equals(delteButton)) {
+        if (e.getSource().equals(deleteButton)) {
             parent.getMusikMap().logChange("DELETE", medium, null); 
             parent.getMusikMap().removeMedium(medium);
             clearTextBox();
