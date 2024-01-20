@@ -88,7 +88,6 @@ public class ChangeLogCsvDAO {
     private String toCsv(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
-             MM.getMBID() + splitKondiotn+
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +
@@ -106,7 +105,8 @@ public class ChangeLogCsvDAO {
              MM.isIsMp3() + splitKondiotn +
              MM.getCdCount() + splitKondiotn +
              MM.getVinylCount() + splitKondiotn +
-             MM.getMBID()
+             MM.getMBID()+
+             MM.getMBID() + splitKondiotn
             ;
     }
 
