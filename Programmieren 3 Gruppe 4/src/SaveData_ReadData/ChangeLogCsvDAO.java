@@ -105,7 +105,6 @@ public class ChangeLogCsvDAO {
              MM.isIsMp3() + splitKondiotn +
              MM.getCdCount() + splitKondiotn +
              MM.getVinylCount() + splitKondiotn +
-             MM.getMBID()+
              MM.getMBID() + splitKondiotn
             ;
     }
