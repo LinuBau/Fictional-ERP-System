@@ -14,13 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
 import App_GUI.loginGUi;
 import GeschaftsObejekt.profil;
-import GeschaftsObejekt.profilList;
-import SaveData_ReadData.ProfilListDOA;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 
 public class newUserListener extends JDialog implements ActionListener {
     private JPanel centerconetentPanel;
@@ -43,6 +38,7 @@ public class newUserListener extends JDialog implements ActionListener {
         hinzufügenButton = new JButton(parent.getL10NText("add"));
         userNameLabel = new JLabel(parent.getL10NText("usser"));
         passwordLabel = new JLabel(parent.getL10NText("psw"));
+
         usserNameTextField = new JTextField();
         passwordField = new JPasswordField();
 
@@ -79,31 +75,16 @@ public class newUserListener extends JDialog implements ActionListener {
     public void setIsmitarbeiter(boolean ismitarbeiter) {
         this.ismitarbeiter = ismitarbeiter;
     }
-    
-    public static void saveProfil( profilList profilList) {
-        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
-        try {
-            pld.write(profilList);
-            pld.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
-            String ussername = usserNameTextField.getText();
-            profil p = new profil(ussername, getPassword(), false);
-            if (parent.getProfilList().unique(ussername)) {
-                parent.getProfilList().add(p);
-                JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
-                newUserListener.saveProfil(parent.getProfilList());
-                this.setVisible(false); 
-            } else {
-                JOptionPane.showMessageDialog(this, "Ussername ist vergeben", "Error", JOptionPane.ERROR_MESSAGE);
+            profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
+            parent.getProfilList().add(p);
+            int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
+            if (index != -1) {
+                loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),parent);
             }
             this.setVisible(false);
         }
