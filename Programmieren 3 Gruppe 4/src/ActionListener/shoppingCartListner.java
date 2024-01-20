@@ -25,7 +25,7 @@ import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import Modele.MusikTableModel;
-import SaveData_ReadData.TxtWriting;
+import SaveData_ReadData.TextWriting;
 import javax.swing.SpinnerNumberModel;
 
 public class ShoppingCartListner extends JDialog implements ActionListener {
@@ -166,7 +166,7 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
 
             }
             String filepath = JFileChooserTxt();
-            TxtWriting pdfwriter = new TxtWriting(filepath, true, musikList,
+            TextWriting pdfwriter = new TextWriting(filepath, true, musikList,
                     parent.getProfilList().get(parent.getProfilList().getIndexofLogin()));
             try {
                 pdfwriter.write(filepath);

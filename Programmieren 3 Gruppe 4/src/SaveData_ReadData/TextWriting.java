@@ -7,12 +7,12 @@ import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.Profil;
 
-public class TxtWriting extends AbstractCsvDAO {
+public class TextWriting extends AbstractCsvDAO {
 
     private MusikList musikList;
     Profil profil;
 
-    public TxtWriting(String filepath, boolean writing, MusikList musikList, Profil profil) {
+    public TextWriting(String filepath, boolean writing, MusikList musikList, Profil profil) {
         super(filepath, writing);
         this.musikList = musikList;
         this.profil = profil;
