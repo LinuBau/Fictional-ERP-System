@@ -59,8 +59,7 @@ public class WindowEventListener implements WindowListener {
             JFileChooser chooser = new JFileChooser();
             chooser.setAcceptAllFileFilterUsed(false);
             chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-            List<ChangeLogEntry> changeLogs = parent.getMusikMap().getChangeLogs();
-             changeLogCsvDOA.write(changeLogs);
+             changeLogCsvDOA.write(parent.getMusikMap().getChangeLogs());
 
             int returnval = chooser.showSaveDialog(parent);
 
