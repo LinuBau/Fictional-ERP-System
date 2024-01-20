@@ -24,5 +24,17 @@ public class profilList extends ArrayList<profil>  {
         }
         return -1;
     }
-    
+    public boolean unique(String ussername){
+            ListIterator<profil> it = listIterator();
+        if(ussername == null){
+            while (it.hasNext()) {
+                if (it.next().getUsername().equals(ussername)) {
+                    return false;
+                }
+            }
+        }else{
+            return true;
+        }
+        return true;
+    }
 }

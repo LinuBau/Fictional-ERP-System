@@ -25,7 +25,7 @@ public class MusikDAO extends AbstractDAO {
         if (out != null) {
             Musik MM = (Musik) obj;
             out.writeInt(MM.getMusik_GUID());
-            //out.writeUTF(MM.getMBID());
+            out.writeUTF(MM.getMBID());
             out.writeUTF(MM.getMusiker());
             out.writeUTF(MM.getAlbum());
             out.writeUTF(MM.getSongName());
@@ -55,7 +55,7 @@ public class MusikDAO extends AbstractDAO {
         if (in != null) {
             Musik MM = (Musik) obj;
             MM.setMusik_GUID(in.readInt());
-           // MM.setMBID(in.readUTF());
+            MM.setMBID(in.readUTF());
             MM.setMusiker(in.readUTF());
             MM.setAlbum(in.readUTF());
             MM.setSongName(in.readUTF());

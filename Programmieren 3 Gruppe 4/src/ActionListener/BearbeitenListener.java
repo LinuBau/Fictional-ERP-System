@@ -16,8 +16,6 @@ import javax.swing.JTextField;
 
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
-import java.math.BigDecimal;
-import java.text.ParseException;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 

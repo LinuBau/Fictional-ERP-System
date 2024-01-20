@@ -23,7 +23,7 @@ public class Musik {
     private boolean CD;
     private boolean Platte;
     private boolean Mp3;
- //   private List<ChangeLogEntry> changeLog = new ArrayList<>();
+
     
     @Override
     public String toString() {
