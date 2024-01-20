@@ -1,4 +1,4 @@
-﻿1,The Beatles,Abbey Road,Come Together,A1,B1,10.99,19.99,0.99,7.99,14.99,0.89,Rock,true,true,true,349,512
+0,The Beatles,Abbey Road,Come Together,A1,B1,10.99,19.99,0.99,7.99,14.99,0.89,Rock,true,true,true,349,512
 2,BeyoncÃ©,Lemonade,Formation,hjfhdh,B2,12.99,21.99,1.49,9.99,17.99,1.19,Pop,true,true,true,726,183
 3,Queen,Greatest Hits hj,Bohemian Rhapsody,du,B3,9.99,17.99,0.79,6.99,12.99,0.69,Rock,true,true,true,132,899
 4,Michael Jackson,Thriller,Billie Jean,A4,B4,11.99,20.99,1.29,8.99,15.99,1.09,Pop,true,true,true,879,291
@@ -94,7 +94,7 @@
 210,The Clash,London Calling,London Calling,A210,B210,11.99,20.99,1.09,8.99,15.99,0.89,Punk,true,true,false,185,654
 150,AC/DC,Back in Black,Hells Bells,A150,B150,12.99,21.99,1.29,9.99,16.99,0.99,Hard Rock,true,true,true,759,678
 151,The Eagles,Hotel California,Hotel California,A151,B151,15.99,24.99,1.59,11.99,19.99,1.29,Rock,true,true,true,241,123
-152,Bob Marley and The Wailers,Legend,No Woman No Cry,A152,B152,11.99,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true,918,567
+152,Bob Marley and The Wailers,Legend,No Woman No Cry,A152,B152,11.95,20.99,1.09,8.99,15.99,0.89,Reggae,true,false,true,918,567
 153,Elton John,Goodbye Yellow Brick Road,Rocket Man,A153,B153,13.99,22.99,1.39,10.99,17.99,1.19,Pop,true,true,false,385,234
 154,David Bowie,Ziggy Stardust,Moonage Daydream,A154,B154,14.99,23.99,1.49,11.99,18.99,1.29,Rock,true,true,false,601,543
 155,The Who,Who's Next,Baba O'Riley,A155,B155,11.99,20.99,1.09,8.99,15.99,0.89,Rock,true,true,false,23,432
