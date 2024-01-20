@@ -47,8 +47,6 @@ public class Gui extends JFrame {
     private FilterListener filterListener;
     private Locale locale;
     private ResourceBundle bundle;
-    private String[] language = {"Deutsch","English","France","Sverige"};
-    private String[] shortlanguage = {"de","en","fr","sv"};
     private ChangeLogTableModel changeLogTableModel;
     private JTable changeLogTable;
 
@@ -189,7 +187,7 @@ public class Gui extends JFrame {
         });
 
         // Create MenuBar
-        setJMenuBar(new benutzerMenuBar(this,language,shortlanguage));
+        setJMenuBar(new benutzerMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
@@ -234,9 +232,13 @@ public class Gui extends JFrame {
         ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
         List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
         musikmap.setChangeLogs(loadedChangeLogs);
-        
+        String[] ColumShort = {"ts", "action", "nstate" , "ostate"};
+        String[] ColumName = new String[4];
+        for(int i=0;i<ColumShort.length;i++){
+            ColumName[i] = this.getL10NText(ColumShort[i]);
+        }
          //Initialize ChangeLogTableModel
-        changeLogTableModel = new ChangeLogTableModel();
+        changeLogTableModel = new ChangeLogTableModel(ColumName);
         changeLogTableModel.setChangeLogs(loadedChangeLogs);
         changeLogTable = new JTable(changeLogTableModel);
         
@@ -304,7 +306,7 @@ public class Gui extends JFrame {
         loadChangeLogsForTable();
 
         // Create MenuBar
-        setJMenuBar(new mitarbeiterMenuBar(this,language,shortlanguage));
+        setJMenuBar(new mitarbeiterMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));

@@ -96,7 +96,7 @@ public class newUserListener extends JDialog implements ActionListener {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
             String ussername = usserNameTextField.getText();
-            profil p = new profil(ussername, getPassword(), true);
+            profil p = new profil(ussername, getPassword(), false);
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
                 JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));

@@ -7,10 +7,12 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ChangeLogTableModel extends AbstractTableModel {
+    private final String[] columnNames;
     private List<ChangeLogEntry> changeLogs;
 
-    public ChangeLogTableModel() {
+    public ChangeLogTableModel(String[] cN) {
         changeLogs = new ArrayList<>();
+        this.columnNames = cN;
     }
     
     public void setChangeLogs(List<ChangeLogEntry> changeLogs) {
