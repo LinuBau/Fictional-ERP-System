@@ -3,6 +3,8 @@ package Modele;
 
 import Traversierung.ChangeLogEntry;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -17,6 +19,7 @@ public class ChangeLogTableModel extends AbstractTableModel {
     
     public void setChangeLogs(List<ChangeLogEntry> changeLogs) {
         this.changeLogs = changeLogs;
+        sortChangeLogs();
     }
 
     public void addChangeLog(ChangeLogEntry entry) {
@@ -57,5 +60,13 @@ public class ChangeLogTableModel extends AbstractTableModel {
                 return null;
         }
     }
-
+public void sortChangeLogs() {
+    Collections.sort(changeLogs, new Comparator<ChangeLogEntry>() {
+        @Override
+        public int compare(ChangeLogEntry entry1, ChangeLogEntry entry2) {
+            return entry1.getTimestamp().compareTo(entry2.getTimestamp());
+        }
+    });
+    fireTableDataChanged(); 
+}
 }
