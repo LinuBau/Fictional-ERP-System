@@ -61,7 +61,6 @@ public class WindowEventListener implements WindowListener {
             List<ChangeLogEntry> changeLogs = parent.getMusikMap().getChangeLogs();
             changeLogCsvDOA.write(changeLogs);
             System.out.println(parent.getL10NText("save"));
-            System.out.println("Fenster schließen");
             System.exit(0);
             
         }
@@ -88,7 +87,6 @@ public class WindowEventListener implements WindowListener {
                     e1.printStackTrace();
                 }
                 System.out.println(parent.getL10NText("save"));
-                System.out.println("Fenster schließen");
                 System.exit(0);
             } else if (returnval == JFileChooser.CANCEL_OPTION || returnval == JFileChooser.ERROR_OPTION) {
                 parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
