@@ -392,10 +392,6 @@ private boolean validatePriceFields() {
     boolean vinylBuyPriceValid = platteEinkaufspreisTextField.getText().matches(regex);
 
 
-        boolean cdPriceValid = cdListenpreisTextField.getText().matches(regex);
-        boolean plattePriceValid = platteListenpreisTextField.getText().matches(regex);
-        boolean mp3PriceValid = mp3ListenpreisTextField.getText().matches(regex);
-
         if (!cdPriceValid) {
             JOptionPane.showMessageDialog(null, "Der Listenpreis für CDs ist ungültig.");
         }
@@ -407,18 +403,6 @@ private boolean validatePriceFields() {
         }
 
         return cdPriceValid && plattePriceValid && mp3PriceValid;
-    }
-    if (!mp3BuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für MP3s ist ungültig.");
-    }
-    if (!cdBuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für CDs ist ungültig.");
-    }
-    if (!vinylBuyPriceValid) {
-        JOptionPane.showMessageDialog(null, "Der Einkaufspreis für Platten ist ungültig.");
-    }
-
-    return cdPriceValid && plattePriceValid && mp3PriceValid && mp3BuyPriceValid && cdBuyPriceValid && vinylBuyPriceValid;
 }
 
 private boolean validateAmount(){

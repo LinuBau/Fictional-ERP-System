@@ -326,4 +326,10 @@ public class Gui extends JFrame {
         System.out.println(System.getProperty("java.class.path"));
 
     }
+    
+public void loadChangeLogsForTable() {
+        List<ChangeLogEntry> changeLogs = musikmap.getChangeLogs(); // get Changelogs
+        changeLogTableModel.setChangeLogs(changeLogs);
+        changeLogTableModel.fireTableDataChanged(); // update changelogtable
+    }
 }
