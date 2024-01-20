@@ -88,7 +88,6 @@ public class ChangeLogCsvDAO {
     private String toCsv(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
-             MM.getMBID() + splitKondiotn+
              MM.getMusiker() + splitKondiotn +
              MM.getAlbum() + splitKondiotn +
              MM.getSongName() + splitKondiotn +
@@ -101,8 +100,6 @@ public class ChangeLogCsvDAO {
              MM.getPlatteEinkaufpreis() + splitKondiotn +
              MM.getMp3Einkaufpreis() + splitKondiotn +
              MM.getGenre() + splitKondiotn +
-             MM.isIsCD() + splitKondiotn +
-             MM.isIsPlatte() + splitKondiotn +
              MM.isIsMp3() + splitKondiotn +
              MM.getCdCount() + splitKondiotn +
              MM.getVinylCount() + splitKondiotn +
@@ -112,7 +109,7 @@ public class ChangeLogCsvDAO {
 
     protected void csvToMusik_Medium(String csv, String splitCondition,Musik MM) {
         String[] csvStrings = csv.split(splitCondition);
-        int erwarteteAnzahlVonFeldern = 18;
+        int erwarteteAnzahlVonFeldern = 17;
         if (csvStrings.length < erwarteteAnzahlVonFeldern) {
         System.err.println("Ungültige Zeile in CSV: " + csv);
         return; // oder werfen Sie eine Ausnahme

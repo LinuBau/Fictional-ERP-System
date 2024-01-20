@@ -84,6 +84,8 @@ public class MusikTableModel extends AbstractTableModel {
                 return row.getCdCount();
             case 17:
                 return row.getVinylCount();
+            case 18: 
+                return row.getMBID();
             default:
                 return null;
         }
@@ -148,6 +150,8 @@ public class MusikTableModel extends AbstractTableModel {
                 break;
             case 17:
                 row.setVinylCount((Integer) aValue);
+            case 18: 
+                row.setMBID((String)aValue);
             default:
                 throw new ArrayIndexOutOfBoundsException();
         }
