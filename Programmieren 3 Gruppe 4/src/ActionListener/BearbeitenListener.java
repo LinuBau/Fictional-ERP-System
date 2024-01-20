@@ -432,6 +432,7 @@ private boolean validateAmount(){
     private Musik constructMusikFromFields() {
     Musik m = new Musik();
         m.setMusik_GUID(Integer.parseInt(musikGUIDTextField.getText()));
+        m.setMBID(mbidTextField.getText());
         m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
         m.setSongName(songNameTextField.getText());
