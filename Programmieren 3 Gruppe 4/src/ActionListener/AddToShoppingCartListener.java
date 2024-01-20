@@ -19,14 +19,14 @@ import javax.swing.SpinnerNumberModel;
 import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 
-public class addToShoppingCart extends JDialog implements ActionListener {
+public class AddToShoppingCartListener extends JDialog implements ActionListener {
     private JSpinner platteTextField;
     private JSpinner cdTextField;
     private JCheckBox mp3CheckBox;
     private JButton hinzufuegeButton;
     private Gui parent;
 
-    public addToShoppingCart(Gui p) {
+    public AddToShoppingCartListener(Gui p) {
         parent = p;
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100,1);
         SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 100,1);

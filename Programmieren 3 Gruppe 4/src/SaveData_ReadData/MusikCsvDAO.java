@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 import GeschaftsObejekt.Musik;
 
-public class MusikCsvDAO extends AbstractCsvDOA {
+public class MusikCsvDAO extends AbstractCsvDAO {
 
     private String splitCondition = ",";
 

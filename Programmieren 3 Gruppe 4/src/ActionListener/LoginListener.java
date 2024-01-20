@@ -6,24 +6,24 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import App_GUI.Gui;
-import App_GUI.loginGUi;
+import App_GUI.LoginGUi;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profilList;
+import GeschaftsObejekt.ProfilList;
 
-public class loginListner implements ActionListener {
-    private loginGUi parent;
+public class LoginListener implements ActionListener {
+    private LoginGUi parent;
     private MusikList musikList;
 
-    public loginListner(loginGUi p) {
+    public LoginListener(LoginGUi p) {
         parent = p;
     }
 
-    public loginListner(loginGUi p, MusikList ml) {
+    public LoginListener(LoginGUi p, MusikList ml) {
         this.parent = p;
         musikList = ml;
     }
 
-    public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent) {
+    public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList,parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -32,7 +32,7 @@ public class loginListner implements ActionListener {
         mainWindow.setVisible(true);
     }
 
-    public static void login(boolean ismitarbeiter, profilList profilList, loginGUi parent, MusikList musikList) {
+    public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent, MusikList musikList) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList,musikList,parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);

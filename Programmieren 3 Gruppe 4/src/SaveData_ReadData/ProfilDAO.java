@@ -6,22 +6,22 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import GeschaftsObejekt.profil;
+import GeschaftsObejekt.Profil;
 
-public class ProfilDOA extends AbstractDAO {
+public class ProfilDAO extends AbstractDAO {
 
-    public ProfilDOA(String Filename, boolean write) {
+    public ProfilDAO(String Filename, boolean write) {
         super(Filename, write);
     }
 
-    public ProfilDOA(DataOutputStream Ouput, DataInputStream Input) {
+    public ProfilDAO(DataOutputStream Ouput, DataInputStream Input) {
         super(Ouput, Input);
     }
 
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
-            profil p = (profil) obj;
+            Profil p = (Profil) obj;
             out.writeUTF(p.getUsername());
             out.writeInt(p.getPasswordHash());
             out.writeBoolean(p.getIsmitarbeiter());
@@ -87,10 +87,10 @@ public class ProfilDOA extends AbstractDAO {
             for (int i = 0; i < mp3Size; i++) {
                 mp3.add(in.readBoolean());
             }
-            obj = new profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
+            obj = new Profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
         }
     }
-    public profil read() throws IOException{
+    public Profil read() throws IOException{
             if (in != null) {
             String username = in.readUTF();
             int passwordHash = in.readInt();
@@ -119,7 +119,7 @@ public class ProfilDOA extends AbstractDAO {
             for (int i = 0; i < mp3Size; i++) {
                 mp3.add(in.readBoolean());
             }
-            profil p = new profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
+            Profil p = new Profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
             return p;
         }else{
             return null;

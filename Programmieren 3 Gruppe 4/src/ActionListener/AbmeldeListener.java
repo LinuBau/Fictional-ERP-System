@@ -4,18 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import App_GUI.Gui;
-import App_GUI.loginGUi;
+import App_GUI.LoginGUi;
 
-public class abmeldeListner implements ActionListener {
+public class AbmeldeListener implements ActionListener {
 
     Gui parent;
-    public abmeldeListner(Gui p ){
+    public AbmeldeListener(Gui p ){
         this.parent =p;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        loginGUi newLogin = new loginGUi(parent.getProfilList(),parent.getMusikMap().getMusikList(),parent.getLocale().getLanguage());
+        LoginGUi newLogin = new LoginGUi(parent.getProfilList(),parent.getMusikMap().getMusikList(),parent.getLocale().getLanguage());
         newLogin.setTitle("Login");
         newLogin.setSize(500, 150);
         newLogin.setLocationRelativeTo(null);

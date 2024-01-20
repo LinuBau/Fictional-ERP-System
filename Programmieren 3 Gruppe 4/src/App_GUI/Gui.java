@@ -1,19 +1,19 @@
 package App_GUI;
 
 import ActionListener.WindowEventListener;
-import ActionListener.shoppingCartListner;
+import ActionListener.ShoppingCartListner;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profilList;
-import MenuBar.benutzerMenuBar;
-import MenuBar.mitarbeiterMenuBar;
+import GeschaftsObejekt.ProfilList;
+import MenuBar.BenutzerMenuBar;
+import MenuBar.MitarbeiterMenuBar;
 import ActionListener.BearbeitenListener;
 import ActionListener.FilterListener;
 import Modele.ChangeLogTableModel;
 import Modele.MusikTableModel;
-import SaveData_ReadData.ChangeLogCsvDOA;
+import SaveData_ReadData.ChangeLogCsvDAO;
 import SaveData_ReadData.MusikCsvListDAO;
-import ToolBar.benutzerToolBar;
-import ToolBar.mitarbeiterToolBar;
+import ToolBar.BenutzerToolBar;
+import ToolBar.MitarbeiterToolBar;
 import Traversierung.ChangeLogEntry;
 import Traversierung.MusikMap;
 
@@ -41,9 +41,9 @@ public class Gui extends JFrame {
     private MusikTableModel tableModel;
     private MusikMap musikmap;
     private MusikList musikList;
-    private profilList profilList;
+    private ProfilList profilList;
     private BearbeitenListener bearbeitenListener;
-    private shoppingCartListner shoppingCartListner;
+    private ShoppingCartListner shoppingCartListner;
     private FilterListener filterListener;
     private Locale locale;
     private ResourceBundle bundle;
@@ -52,7 +52,7 @@ public class Gui extends JFrame {
 
 
 
-    public Gui(boolean starten, profilList pl,Locale languageLocale) {
+    public Gui(boolean starten, ProfilList pl,Locale languageLocale) {
         if (starten) {
             initialiseMitarbeiterFarme(pl,languageLocale);
         } else {
@@ -60,7 +60,7 @@ public class Gui extends JFrame {
         }
     }
 
-    public Gui(boolean starten, profilList pl, MusikList ml,Locale languageLocale) {
+    public Gui(boolean starten, ProfilList pl, MusikList ml,Locale languageLocale) {
         if (starten) {
             initialiseMitarbeiterFarme(pl, ml,languageLocale);
         } else {
@@ -88,18 +88,18 @@ public class Gui extends JFrame {
         return this.tableModel;
     }
 
-    public shoppingCartListner getShoppingCartListner() {
+    public ShoppingCartListner getShoppingCartListner() {
         return this.shoppingCartListner;
     }
     public Locale getLocale(){
         return this.locale;
     }
 
-    public profilList getProfilList() {
+    public ProfilList getProfilList() {
         return this.profilList;
     }
 
-    private void initialiseUsserFrame(profilList pl,Locale languageLocale) {
+    private void initialiseUsserFrame(ProfilList pl,Locale languageLocale) {
         this.profilList = pl;
 
         //Create Locale
@@ -120,7 +120,7 @@ public class Gui extends JFrame {
     }
     
 
-    private void initialiseUsserFrame(profilList pl, MusikList ml,Locale languageLocale) {
+    private void initialiseUsserFrame(ProfilList pl, MusikList ml,Locale languageLocale) {
         this.profilList = pl;
         this.musikList = ml;
 
@@ -132,14 +132,14 @@ public class Gui extends JFrame {
   private void createUsserFrame(){
           // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        ChangeLogCsvDAO changeLogCsvDoa = new ChangeLogCsvDAO();
         List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
         musikmap.setChangeLogs(loadedChangeLogs);
         
         // Initializing the ActionListner
         filterListener = new FilterListener(this, musikmap);
         bearbeitenListener = new BearbeitenListener(this);
-        shoppingCartListner = new shoppingCartListner(this);
+        shoppingCartListner = new ShoppingCartListner(this);
 
         // add FilterPanel and EditPanel
         JPanel eingabePanel = new JPanel(new FlowLayout());
@@ -167,7 +167,7 @@ public class Gui extends JFrame {
             removeCount++;
         }
 
-        northPanel.add(new benutzerToolBar(this), BorderLayout.NORTH);
+        northPanel.add(new BenutzerToolBar(this), BorderLayout.NORTH);
 
         // Setting up the layout
         getContentPane().setLayout(new BorderLayout());
@@ -187,7 +187,7 @@ public class Gui extends JFrame {
         });
 
         // Create MenuBar
-        setJMenuBar(new benutzerMenuBar(this));
+        setJMenuBar(new BenutzerMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
@@ -198,7 +198,7 @@ public class Gui extends JFrame {
      * @param pl
      */
 
-    private void initialiseMitarbeiterFarme(profilList pl,Locale languageLocale) {
+    private void initialiseMitarbeiterFarme(ProfilList pl,Locale languageLocale) {
         this.profilList = pl;
          //Create Locale
          locale = languageLocale;
@@ -217,7 +217,7 @@ public class Gui extends JFrame {
      
     }
 
-    private void initialiseMitarbeiterFarme(profilList pl, MusikList ml,Locale languageLocale) {
+    private void initialiseMitarbeiterFarme(ProfilList pl, MusikList ml,Locale languageLocale) {
         this.profilList = pl;
         this.musikList = ml;
          //Create Locale
@@ -229,7 +229,7 @@ public class Gui extends JFrame {
     private void createMitarbeiterFrame(){
            // Initializing the MusikMap
         musikmap = new MusikMap(musikList);
-        ChangeLogCsvDOA changeLogCsvDoa = new ChangeLogCsvDOA();
+        ChangeLogCsvDAO changeLogCsvDoa = new ChangeLogCsvDAO();
         List<ChangeLogEntry> loadedChangeLogs = changeLogCsvDoa.read();
         musikmap.setChangeLogs(loadedChangeLogs);
         String[] ColumShort = {"ts", "action", "nstate" , "ostate"};
@@ -284,7 +284,7 @@ public class Gui extends JFrame {
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.add(eingabePanel, BorderLayout.CENTER);
 
-        northPanel.add(new mitarbeiterToolBar(this), BorderLayout.NORTH);
+        northPanel.add(new MitarbeiterToolBar(this), BorderLayout.NORTH);
 
         // Setting up the layout
         getContentPane().setLayout(new BorderLayout());
@@ -306,7 +306,7 @@ public class Gui extends JFrame {
         loadChangeLogsForTable();
 
         // Create MenuBar
-        setJMenuBar(new mitarbeiterMenuBar(this));
+        setJMenuBar(new MitarbeiterMenuBar(this));
 
         // add WindowEventListner
         addWindowListener(new WindowEventListener(this));
@@ -330,7 +330,7 @@ public class Gui extends JFrame {
     public static void main(String[] args) {
 
         
-        loginGUi loginWindow = new loginGUi("de");
+        LoginGUi loginWindow = new LoginGUi("de");
          loginWindow.setTitle("Login");
          loginWindow.setSize(500, 150);
          loginWindow.setLocationRelativeTo(null);

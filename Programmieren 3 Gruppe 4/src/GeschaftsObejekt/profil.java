@@ -3,7 +3,7 @@ package GeschaftsObejekt;
 import java.util.ArrayList;
 import java.util.List;
 
-public class profil {
+public class Profil {
     private final String username;
     private final int passwordHash;
     private ArrayList<Integer> musikId;
@@ -12,7 +12,7 @@ public class profil {
     private ArrayList<Boolean> mp3Gekauft;
     private final boolean ismitarbeiter;
 
-    public profil(String username, int passwordHash, boolean ismitarbeiter) {
+    public Profil(String username, int passwordHash, boolean ismitarbeiter) {
         this.username = username;
         this.passwordHash = passwordHash;
         this.ismitarbeiter = ismitarbeiter;
@@ -22,7 +22,7 @@ public class profil {
         this.mp3Gekauft = new ArrayList<>();
     }
 
-    public profil(String username, int passwordHash, boolean ismitarbeiter, List<Integer> id, List<Integer> platteStück,
+    public Profil(String username, int passwordHash, boolean ismitarbeiter, List<Integer> id, List<Integer> platteStück,
             List<Integer> cdStück, List<Boolean> mp3) {
         this.username = username;
         this.passwordHash = passwordHash;
@@ -47,7 +47,7 @@ public class profil {
         mp3Gekauft.clear();
     }
 
-    public int ismitarbeiter(profil p) {
+    public int ismitarbeiter(Profil p) {
         if (p.getIsmitarbeiter()) {
             return 1;
         } else {

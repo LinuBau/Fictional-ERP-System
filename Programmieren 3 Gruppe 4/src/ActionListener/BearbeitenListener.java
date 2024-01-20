@@ -245,7 +245,7 @@ public class BearbeitenListener implements ActionListener {
         southPanel.add(southsouthPanel, BorderLayout.SOUTH);
         eingabePanel.add(southPanel, BorderLayout.SOUTH);
         // Add ActionListner
-        SaveButton.addActionListener(new addToShoppingCart(parent));
+        SaveButton.addActionListener(new AddToShoppingCartListener(parent));
         reinhörenButton.addActionListener(reinhörenListener);
 
         // Defauft
