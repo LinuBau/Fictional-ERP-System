@@ -268,7 +268,7 @@ public class Gui extends JFrame {
         // add FilterPanel and EditPanel#
         JPanel eingabePanel = new JPanel(new GridLayout(1,3));
         eingabePanel.add(filterListener.getFilterPanel());
-        eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeitenPanel());
+        eingabePanel.add(bearbeitenListener.getMitarbeiterBearbeiterPanel());
         eingabePanel.add(new JScrollPane(changeLogTable));
 
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3","CdCount", "VinylCount"};
