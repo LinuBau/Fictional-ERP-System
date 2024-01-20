@@ -28,7 +28,7 @@ import Modele.MusikTableModel;
 import SaveData_ReadData.TxtWriting;
 import javax.swing.SpinnerNumberModel;
 
-public class shoppingCartListner extends JDialog implements ActionListener {
+public class ShoppingCartListner extends JDialog implements ActionListener {
     private JTable selectTabele;
     private MusikTableModel tableModel;
     private MusikList musikList;
@@ -42,7 +42,7 @@ public class shoppingCartListner extends JDialog implements ActionListener {
     private Musik musik;
     private Gui parent;
 
-    public shoppingCartListner(Gui p) {
+    public ShoppingCartListner(Gui p) {
         JPanel buttonPanel = new JPanel(new GridLayout(2, 3));
         musikList = new MusikList();
         parent = p;

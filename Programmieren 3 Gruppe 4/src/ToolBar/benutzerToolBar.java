@@ -5,11 +5,11 @@ import javax.swing.JToolBar;
 
 import App_GUI.Gui;
 
-public class benutzerToolBar extends JToolBar {
+public class BenutzerToolBar extends JToolBar {
     JButton shoppingKartButton;
     Gui parent;
 
-    public benutzerToolBar(Gui p) {
+    public BenutzerToolBar(Gui p) {
         parent = p;
         setSize(200, 10);
         shoppingKartButton = new JButton(p.getL10NText("wk"));

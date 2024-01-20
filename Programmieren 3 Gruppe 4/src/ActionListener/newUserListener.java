@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import App_GUI.loginGUi;
-import GeschaftsObejekt.profil;
+import App_GUI.LoginGUi;
+import GeschaftsObejekt.Profil;
 
-public class newUserListener extends JDialog implements ActionListener {
+public class NewUserListener extends JDialog implements ActionListener {
     private JPanel centerconetentPanel;
     private boolean ismitarbeiter = false;
     private JLabel userNameLabel;
@@ -27,9 +27,9 @@ public class newUserListener extends JDialog implements ActionListener {
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private JPanel southPanel;
-    private loginGUi parent;
+    private LoginGUi parent;
 
-    public newUserListener(loginGUi lg) {
+    public NewUserListener(LoginGUi lg) {
         centerconetentPanel = new JPanel(new GridLayout(5, 4));
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
@@ -57,7 +57,7 @@ public class newUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox,passwordField));
+        showPasswordCheckBox.addActionListener(new ShowPasswordListener(showPasswordCheckBox,passwordField));
         hinzufügenButton.addActionListener(this);
         
         this.getContentPane().setLayout(new BorderLayout());
@@ -76,13 +76,13 @@ public class newUserListener extends JDialog implements ActionListener {
         if (e.getSource().equals(hinzufügenButton)) {
             String ussername = usserNameTextField.getText().trim();
             if(parent.getProfilList().unique(ussername)){
-                 profil p = new profil(ussername, getPassword(), ismitarbeiter);
+                 Profil p = new Profil(ussername, getPassword(), ismitarbeiter);
             parent.getProfilList().add(p);
-            newMitarbeiterListener.saveProfil(parent.getProfilList());
+            NewMitarbeiterListener.saveProfil(parent.getProfilList());
             }
             int index = parent.getProfilList().indexOfLogin(ussername, getPassword());
             if (index != -1) {
-                loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),parent);
+                LoginListener.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),parent);
             }
             this.setVisible(false);
         }

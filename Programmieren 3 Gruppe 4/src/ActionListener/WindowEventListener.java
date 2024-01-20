@@ -6,11 +6,11 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profilList;
-import SaveData_ReadData.ChangeLogCsvDOA;
+import GeschaftsObejekt.ProfilList;
+import SaveData_ReadData.ChangeLogCsvDAO;
 import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
-import SaveData_ReadData.ProfilListDOA;
+import SaveData_ReadData.ProfilListDAO;
 import Traversierung.ChangeLogEntry;
 import Traversierung.MusikMap;
 import java.io.File;
@@ -23,13 +23,13 @@ public class WindowEventListener implements WindowListener {
 
     private Gui parent;
     private MusikMap musikMap;
-    private ChangeLogCsvDOA changeLogCsvDOA;
+    private ChangeLogCsvDAO changeLogCsvDOA;
 
 
     public WindowEventListener(Gui p) {
         super();
         this.parent = p;
-        this.changeLogCsvDOA = new ChangeLogCsvDOA();
+        this.changeLogCsvDOA = new ChangeLogCsvDAO();
     }
     
    
@@ -129,9 +129,9 @@ public class WindowEventListener implements WindowListener {
         System.out.println("Fenster beenden");
     }
 
-    public static void saveListe(MusikList musikList, profilList profilList) {
+    public static void saveListe(MusikList musikList, ProfilList profilList) {
         MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", true);
-        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
+        ProfilListDAO pld = new ProfilListDAO("logindata.data", true);
         try {
             mld.write(musikList);
             pld.write(profilList);

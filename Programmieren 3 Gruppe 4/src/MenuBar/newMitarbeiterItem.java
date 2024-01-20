@@ -1,14 +1,14 @@
 
 package MenuBar;
 
-import ActionListener.newMitarbeiterListener;
+import ActionListener.NewMitarbeiterListener;
 import App_GUI.Gui;
 import javax.swing.JMenuItem;
 
 
-public class newMitarbeiterItem extends JMenuItem {
-    public newMitarbeiterItem(Gui p){
+public class NewMitarbeiterItem extends JMenuItem {
+    public NewMitarbeiterItem(Gui p){
         super(p.getL10NText("mithinf"));
-        this.addActionListener(new newMitarbeiterListener(p));
+        this.addActionListener(new NewMitarbeiterListener(p));
     }
 }

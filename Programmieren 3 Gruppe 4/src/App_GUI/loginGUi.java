@@ -9,14 +9,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import ActionListener.loginListner;
-import ActionListener.newUserListener;
-import ActionListener.showPasswordListner;
+import ActionListener.LoginListener;
+import ActionListener.NewUserListener;
+import ActionListener.ShowPasswordListener;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profil;
-import GeschaftsObejekt.profilList;
-import MenuBar.loginMenuBar;
-import SaveData_ReadData.ProfilListDOA;
+import GeschaftsObejekt.Profil;
+import GeschaftsObejekt.ProfilList;
+import MenuBar.LoginMenuBar;
+import SaveData_ReadData.ProfilListDAO;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -25,12 +25,12 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class loginGUi extends JFrame {
+public class LoginGUi extends JFrame {
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
     private JLabel passwordLabel;
     private JCheckBox showPassword;
-    private profilList profilList;
+    private ProfilList profilList;
     private JTextField usserNameTextField;
     private JPasswordField passwordField;
     private MusikList musikList;
@@ -41,10 +41,10 @@ public class loginGUi extends JFrame {
     private String[] language = {"Deutsch","English","France","Sverige"};
     private String[] shortlanguage = {"de","en","fr","sv"};
     
-    public loginGUi(String languageShort) {
-        profilList = new profilList();
+    public LoginGUi(String languageShort) {
+        profilList = new ProfilList();
         try {
-            ProfilListDOA profilListDOA = new ProfilListDOA("logindata.data", false);
+            ProfilListDAO profilListDOA = new ProfilListDAO("logindata.data", false);
             profilListDOA.read(profilList);
             profilListDOA.close();
             System.out.println(profilList.size());
@@ -52,14 +52,14 @@ public class loginGUi extends JFrame {
             e.printStackTrace();
         }
         String mit = "mitarbeiter";
-        profil m = new profil(mit, mit.hashCode(), true);
+        Profil m = new Profil(mit, mit.hashCode(), true);
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
         profilList.add(m);
         createLoginPanel();
     }
 
-    public loginGUi(profilList profilList,MusikList musikList,String languageShort){
+    public LoginGUi(ProfilList profilList,MusikList musikList,String languageShort){
         this.profilList = profilList;
         locale = new Locale(languageShort);
         bundel = ResourceBundle.getBundle("I18NPropertiesFiles/Bundel", locale);
@@ -103,20 +103,20 @@ public class loginGUi extends JFrame {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
-        setJMenuBar(new loginMenuBar(this));
+        setJMenuBar(new LoginMenuBar(this));
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private  void makeActionListner(){
         if (musikList == null) {
-            loginButton.addActionListener(new loginListner(this));
-            newUserButton.addActionListener(new newUserListener(this));
-            showPassword.addActionListener(new showPasswordListner(showPassword, passwordField));
+            loginButton.addActionListener(new LoginListener(this));
+            newUserButton.addActionListener(new NewUserListener(this));
+            showPassword.addActionListener(new ShowPasswordListener(showPassword, passwordField));
         }else{
-            loginButton.addActionListener(new loginListner(this,musikList));
-            newUserButton.addActionListener(new newUserListener(this));
-            showPassword.addActionListener(new showPasswordListner(showPassword, passwordField));
+            loginButton.addActionListener(new LoginListener(this,musikList));
+            newUserButton.addActionListener(new NewUserListener(this));
+            showPassword.addActionListener(new ShowPasswordListener(showPassword, passwordField));
         }
        
     }
@@ -132,7 +132,7 @@ public class loginGUi extends JFrame {
         return locale;
     }
 
-    public profilList getProfilList(){
+    public ProfilList getProfilList(){
         return this.profilList;
     }
     public int getPassword() {
@@ -141,7 +141,7 @@ public class loginGUi extends JFrame {
     }
     public void w(){
         try {
-            ProfilListDOA pd = new ProfilListDOA("logindata.data", true);
+            ProfilListDAO pd = new ProfilListDAO("logindata.data", true);
             pd.write(profilList);
             pd.close();
         } catch (Exception e) {

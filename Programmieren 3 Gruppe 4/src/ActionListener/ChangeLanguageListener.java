@@ -7,19 +7,19 @@ import java.util.Locale;
 import javax.swing.JFrame;
 
 import App_GUI.Gui;
-import App_GUI.loginGUi;
+import App_GUI.LoginGUi;
 
-public class changeLanguageListner implements ActionListener {
+public class ChangeLanguageListener implements ActionListener {
 
     Gui parent;
-    loginGUi parentgGUi;
+    LoginGUi parentgGUi;
     String language;
 
-    public changeLanguageListner(Gui p,String language){
+    public ChangeLanguageListener(Gui p,String language){
         parent =p;
         this.language = language;
     }
-    public changeLanguageListner(loginGUi parent,String language){
+    public ChangeLanguageListener(LoginGUi parent,String language){
         this.parentgGUi = parent;
         this.language = language;
     }
@@ -35,7 +35,7 @@ public class changeLanguageListner implements ActionListener {
             parent.setVisible(false);
             mainWindow.setVisible(true);
         }else{
-        loginGUi loginWindow = new loginGUi(language);
+        LoginGUi loginWindow = new LoginGUi(language);
          loginWindow.setTitle("Login");
          loginWindow.setSize(500, 150);
          loginWindow.setLocationRelativeTo(null);

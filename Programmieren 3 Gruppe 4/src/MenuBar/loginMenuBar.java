@@ -2,10 +2,10 @@ package MenuBar;
 
 import javax.swing.JMenuBar;
 
-import App_GUI.loginGUi;
+import App_GUI.LoginGUi;
 
-public class loginMenuBar extends JMenuBar  {
-    public loginMenuBar(loginGUi parent){
-        this.add(new loginSettingsMenu(parent));
+public class LoginMenuBar extends JMenuBar  {
+    public LoginMenuBar(LoginGUi parent){
+        this.add(new LoginSettingsMenu(parent));
     }
 }

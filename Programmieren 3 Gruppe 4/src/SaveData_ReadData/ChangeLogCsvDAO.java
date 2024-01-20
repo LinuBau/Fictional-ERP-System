@@ -13,7 +13,7 @@ import java.util.List;
 import Traversierung.ChangeLogEntry;
 import GeschaftsObejekt.Musik;
 
-public class ChangeLogCsvDOA {
+public class ChangeLogCsvDAO {
 
     private static final String FILENAME = "Changelogs.csv";
     private static final String SPLIT_CONDITION1 = ",";

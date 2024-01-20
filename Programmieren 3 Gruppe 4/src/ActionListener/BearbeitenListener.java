@@ -41,7 +41,7 @@ public class BearbeitenListener implements ActionListener {
     private JCheckBox platteCheckBox;
     private JCheckBox mp3CheckBox;
     private JButton delteButton;
-    private JButton SaveButton;
+    private JButton saveButton;
     private JButton reinhörenButton;
     private ReinhörenListener reinhörenListener;
     Gui parent;
@@ -57,7 +57,7 @@ public class BearbeitenListener implements ActionListener {
         reinhörenListener.setMedium(m);
     }
 
-    public JPanel getMitarbeiterBearbeitenPanel() {
+    public JPanel getMitarbeiterBearbeiterPanel() {
         genreComboBox = new JTextField();
         musikGUIDTextField = new JTextField();
         mbidTextField = new JTextField();
@@ -78,7 +78,7 @@ public class BearbeitenListener implements ActionListener {
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
         delteButton = new JButton(parent.getL10NText("delete"));
-        SaveButton = new JButton(parent.getL10NText("save"));
+        saveButton = new JButton(parent.getL10NText("save"));
         reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
 
@@ -150,7 +150,7 @@ public class BearbeitenListener implements ActionListener {
         southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
         southcenterPanel.add(mp3CheckBox);
 
-        southsouthPanel.add(SaveButton);
+        southsouthPanel.add(saveButton);
         southsouthPanel.add(delteButton);
 
         southsouthPanel.add(reinhörenButton);
@@ -159,7 +159,7 @@ public class BearbeitenListener implements ActionListener {
         southPanel.add(southsouthPanel, BorderLayout.SOUTH);
         eingabePanel.add(southPanel, BorderLayout.SOUTH);
         // add ActionListner
-        SaveButton.addActionListener(this);
+        saveButton.addActionListener(this);
         delteButton.addActionListener(this);
         reinhörenButton.addActionListener(reinhörenListener);
 
@@ -185,7 +185,7 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
-        SaveButton = new JButton(parent.getL10NText("wkh"));
+        saveButton = new JButton(parent.getL10NText("wkh"));
 
         reinhörenButton = new JButton(parent.getL10NText("hear"));
         reinhörenListener = new ReinhörenListener();
@@ -237,7 +237,7 @@ public class BearbeitenListener implements ActionListener {
         southcenterPanel.add(new JLabel(parent.getL10NText("mp3")+": "));
         southcenterPanel.add(mp3CheckBox);
         // Add Button to Panel
-        southsouthPanel.add(SaveButton);
+        southsouthPanel.add(saveButton);
         southsouthPanel.add(reinhörenButton);
         // make add Panel to return Panel
         eingabePanel.add(centerPanel, BorderLayout.CENTER);
@@ -245,11 +245,11 @@ public class BearbeitenListener implements ActionListener {
         southPanel.add(southsouthPanel, BorderLayout.SOUTH);
         eingabePanel.add(southPanel, BorderLayout.SOUTH);
         // Add ActionListner
-        SaveButton.addActionListener(new addToShoppingCart(parent));
+        saveButton.addActionListener(new AddToShoppingCartListener(parent));
         reinhörenButton.addActionListener(reinhörenListener);
 
         // Defauft
-        SaveButton.setEnabled(true);
+        saveButton.setEnabled(true);
         reinhörenButton.setEnabled(true);
         genreComboBox.setEnabled(false);
         musikGUIDTextField.setEnabled(false);
@@ -288,7 +288,7 @@ public class BearbeitenListener implements ActionListener {
         platteCheckBox.setEnabled(b);
         mp3CheckBox.setEnabled(b);
         delteButton.setEnabled(b);
-        SaveButton.setEnabled(b);
+        saveButton.setEnabled(b);
         reinhörenButton.setEnabled(b);
     }
 
@@ -331,7 +331,7 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(m.getIsCD());
         platteCheckBox.setSelected(m.getIsPlatte());
         mp3CheckBox.setSelected(m.getIsMp3());
-        SaveButton.setEnabled(true);
+        saveButton.setEnabled(true);
         reinhörenButton.setEnabled(true);
     }
 
@@ -359,7 +359,7 @@ public class BearbeitenListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(SaveButton)) {  
+        if (e.getSource().equals(saveButton)) {  
             if(validatePriceFields() && validateAmount()){
                 bearbeitenButton();  
                 parent.getMusikMap().logChange("UPDATE", medium, constructMusikFromFields());

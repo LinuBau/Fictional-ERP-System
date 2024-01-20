@@ -5,13 +5,13 @@ import java.time.LocalDate;
 
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
-import GeschaftsObejekt.profil;
+import GeschaftsObejekt.Profil;
 
-public class TxtWriting extends AbstractCsvDOA {
+public class TxtWriting extends AbstractCsvDAO {
     private MusikList musikList;
-    profil profil;
+    Profil profil;
 
-    public TxtWriting(String filepath, boolean writing, MusikList musikList, profil profil) {
+    public TxtWriting(String filepath, boolean writing, MusikList musikList, Profil profil) {
         super(filepath, writing);
         this.musikList = musikList;
         this.profil = profil;

@@ -2,22 +2,22 @@ package SaveData_ReadData;
 
 import java.io.IOException;
 
-import GeschaftsObejekt.profil;
-import GeschaftsObejekt.profilList;
+import GeschaftsObejekt.Profil;
+import GeschaftsObejekt.ProfilList;
 
-public class ProfilListDOA extends AbstractDAO {
+public class ProfilListDAO extends AbstractDAO {
 
-    public ProfilListDOA(String Filename, boolean write) {
+    public ProfilListDAO(String Filename, boolean write) {
         super(Filename, write);
     }
 
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
-            profilList pl = (profilList) obj;
+            ProfilList pl = (ProfilList) obj;
             out.writeInt(pl.size());
-            ProfilDOA pd = new ProfilDOA(out, null);
-            for (profil p : pl) {
+            ProfilDAO pd = new ProfilDAO(out, null);
+            for (Profil p : pl) {
                 pd.write(p);
             }
         }
@@ -26,9 +26,9 @@ public class ProfilListDOA extends AbstractDAO {
     @Override
     public void read(Object obj) throws IOException {
         if (in != null) {
-            profilList pl = (profilList) obj;
+            ProfilList pl = (ProfilList) obj;
             int size = in.readInt();
-            ProfilDOA pd = new ProfilDOA(out, in);
+            ProfilDAO pd = new ProfilDAO(out, in);
             for(int i = 0; i<size;i++){
                 pl.add(pd.read());
                 System.out.println(pl.get(i).getUsername());

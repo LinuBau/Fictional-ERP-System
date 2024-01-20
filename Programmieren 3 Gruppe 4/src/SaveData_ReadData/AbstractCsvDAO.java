@@ -7,14 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public abstract class AbstractCsvDOA {
+public abstract class AbstractCsvDAO {
     protected PrintWriter out;
     protected BufferedReader in;
 
-    public AbstractCsvDOA() {
+    public AbstractCsvDAO() {
     }
 
-    public AbstractCsvDOA(String filename, boolean writing) {
+    public AbstractCsvDAO(String filename, boolean writing) {
         try {
             if (writing) {
                 out = new PrintWriter(filename);
@@ -25,7 +25,7 @@ public abstract class AbstractCsvDOA {
         }
     }
 
-    public AbstractCsvDOA(PrintWriter out, BufferedReader in) {
+    public AbstractCsvDAO(PrintWriter out, BufferedReader in) {
         this.in = in;
         this.out = out;
     }

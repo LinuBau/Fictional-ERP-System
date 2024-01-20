@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
 import javax.swing.JPasswordField;
 
-public class showPasswordListner implements ActionListener {
+public class ShowPasswordListener implements ActionListener {
     JCheckBox checkBox;
     JPasswordField passwordField;
-    public showPasswordListner(JCheckBox checkBox,JPasswordField pf){
+    public ShowPasswordListener(JCheckBox checkBox,JPasswordField pf){
         this.checkBox = checkBox;
         this.passwordField = pf;
     }

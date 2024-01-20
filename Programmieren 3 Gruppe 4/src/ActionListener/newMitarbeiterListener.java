@@ -1,9 +1,9 @@
 package ActionListener;
 
 import App_GUI.Gui;
-import GeschaftsObejekt.profil;
-import GeschaftsObejekt.profilList;
-import SaveData_ReadData.ProfilListDOA;
+import GeschaftsObejekt.Profil;
+import GeschaftsObejekt.ProfilList;
+import SaveData_ReadData.ProfilListDAO;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  *
  * @author linus
  */
-public class newMitarbeiterListener extends JDialog implements ActionListener {
+public class NewMitarbeiterListener extends JDialog implements ActionListener {
 
     private JPanel centerconetentPanel;
     private JLabel userNameLabel;
@@ -35,7 +35,7 @@ public class newMitarbeiterListener extends JDialog implements ActionListener {
     private JPanel southPanel;
     private Gui parent;
 
-    public newMitarbeiterListener(Gui lg) {
+    public NewMitarbeiterListener(Gui lg) {
         centerconetentPanel = new JPanel(new GridLayout(5, 4));
         southPanel = new JPanel(new FlowLayout());
         parent = lg;
@@ -63,7 +63,7 @@ public class newMitarbeiterListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(new showPasswordListner(showPasswordCheckBox, passwordField));
+        showPasswordCheckBox.addActionListener(new ShowPasswordListener(showPasswordCheckBox, passwordField));
         hinzufügenButton.addActionListener(this);
 
         this.getContentPane().setLayout(new BorderLayout());
@@ -79,8 +79,8 @@ public class newMitarbeiterListener extends JDialog implements ActionListener {
         return tmp.hashCode();
     }
 
-    public static void saveProfil(profilList profilList) {
-        ProfilListDOA pld = new ProfilListDOA("logindata.data", true);
+    public static void saveProfil(ProfilList profilList) {
+        ProfilListDAO pld = new ProfilListDAO("logindata.data", true);
         try {
             pld.write(profilList);
             pld.close();
@@ -94,10 +94,10 @@ public class newMitarbeiterListener extends JDialog implements ActionListener {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
             String ussername = usserNameTextField.getText().trim();
-            profil p = new profil(ussername, getPassword(), true);
+            Profil p = new Profil(ussername, getPassword(), true);
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
-                newMitarbeiterListener.saveProfil(parent.getProfilList());
+                NewMitarbeiterListener.saveProfil(parent.getProfilList());
                 JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
                 this.setVisible(false);
             } else {

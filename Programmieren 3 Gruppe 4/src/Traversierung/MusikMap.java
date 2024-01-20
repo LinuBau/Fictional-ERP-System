@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
-import SaveData_ReadData.ChangeLogCsvDOA;
+import SaveData_ReadData.ChangeLogCsvDAO;
 import Traversierung.ChangeLogEntry;
 import java.util.HashSet;
 import java.util.Set;
@@ -220,13 +220,13 @@ public List<ChangeLogEntry> getChangeLogs() {
     return new ArrayList<>(changeLog);
 }
 public void loadChangeLogsFromCsv() {
-    ChangeLogCsvDOA changeLogCsvDOA = new ChangeLogCsvDOA();
+    ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
     List<ChangeLogEntry> loadedLogs = changeLogCsvDOA.read();
     changeLog.addAll(loadedLogs);
 }
 
 public void saveChangeLogsToCsv() {
-    ChangeLogCsvDOA changeLogCsvDOA = new ChangeLogCsvDOA();
+    ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
     changeLogCsvDOA.write(new ArrayList<>(changeLog));
 }
 public void setChangeLogs(List<ChangeLogEntry> changeLogList) {

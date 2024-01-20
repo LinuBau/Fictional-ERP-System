@@ -4,8 +4,8 @@ import javax.swing.JMenuBar;
 
 import App_GUI.Gui;
 
-public class benutzerMenuBar extends JMenuBar {
-    public benutzerMenuBar(Gui p) {
+public class BenutzerMenuBar extends JMenuBar {
+    public BenutzerMenuBar(Gui p) {
         super();
         this.add(new SettingsMenu(p));
     }

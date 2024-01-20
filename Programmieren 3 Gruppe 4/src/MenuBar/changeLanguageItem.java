@@ -2,17 +2,17 @@ package MenuBar;
 
 import javax.swing.JMenuItem;
 
-import ActionListener.changeLanguageListner;
+import ActionListener.ChangeLanguageListener;
 import App_GUI.Gui;
-import App_GUI.loginGUi;
+import App_GUI.LoginGUi;
 
-public class changeLanguageItem extends JMenuItem {
-    public changeLanguageItem(Gui parent,String language,String languageshort){
+public class ChangeLanguageItem extends JMenuItem {
+    public ChangeLanguageItem(Gui parent,String language,String languageshort){
         super(language);
-        addActionListener(new changeLanguageListner(parent, languageshort));
+        addActionListener(new ChangeLanguageListener(parent, languageshort));
     }
-    public changeLanguageItem(loginGUi parent,String language,String languageshort){
+    public ChangeLanguageItem(LoginGUi parent,String language,String languageshort){
         super(language);
-        addActionListener(new changeLanguageListner(parent, languageshort));
+        addActionListener(new ChangeLanguageListener(parent, languageshort));
     }
 }
