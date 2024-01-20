@@ -1,6 +1,4 @@
-
 package Actions;
-
 
 import App_GUI.Gui;
 import GeschaftsObejekt.MusikList;
@@ -17,16 +15,16 @@ import SaveData_ReadData.MusikListDAO;
 import SaveData_ReadData.ProfilListDAO;
 import java.io.IOException;
 
-
-
 public class FileSaveAction extends AbstractAction {
+
     private Gui parent;
 
-    public FileSaveAction(Gui parent){
+    public FileSaveAction(Gui parent) {
         super();
         this.parent = parent;
     }
-        public static void saveListe(MusikList musikList, ProfilList profilList) {
+
+    public static void saveListe(MusikList musikList, ProfilList profilList) {
         MusikCsvListDAO mld = new MusikCsvListDAO("Songs.csv", true);
         ProfilListDAO pld = new ProfilListDAO("logindata.data", true);
         try {
@@ -39,14 +37,10 @@ public class FileSaveAction extends AbstractAction {
         }
 
     }
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         FileSaveAction.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
         System.out.println("Speichern");
     }
 }
-
-    
-

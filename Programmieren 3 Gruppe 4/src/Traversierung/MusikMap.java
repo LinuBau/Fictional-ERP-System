@@ -25,7 +25,6 @@ public class MusikMap {
     private HashMap<Double, List<Musik>> mp3ListenpreisMap;
     private Set<ChangeLogEntry> changeLog = new HashSet<>();
 
-
     public MusikMap(MusikList musikList) {
         this.musikList = musikList; // Verwendet die übergebene MusikList-Instanz
         initializeMaps();
@@ -55,7 +54,7 @@ public class MusikMap {
     public void addMedium(Musik neuesMedium) {
         musikList.add(neuesMedium);
         updateAllMaps(neuesMedium);
-        
+
     }
 
     public void removeMedium(Musik zuEntfernendesMedium) {
@@ -78,25 +77,25 @@ public class MusikMap {
         removeMediumFromMap(genreMap, medium.getGenre(), medium);
         removeMediumFromMap(albumMap, medium.getAlbum(), medium);
         removeMediumFromMap(titleMap, medium.getSongName(), medium);
-       removeMediumFromMediumTypMap(medium);
-       removeMediumFromPreisMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
-       removeMediumFromPreisMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
-       removeMediumFromPreisMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+        removeMediumFromMediumTypMap(medium);
+        removeMediumFromPreisMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
+        removeMediumFromPreisMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
+        removeMediumFromPreisMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
     }
-    
-    private void removeMediumFromMediumTypMap(Musik medium) {
-    if (medium.getIsCD()) {
-        removeMediumFromMap(mediumTypMap, "CD", medium);
-    }
-    if (medium.getIsPlatte()) {
-        removeMediumFromMap(mediumTypMap, "Platte", medium);
-    }
-    if (medium.getIsMp3()) {
-        removeMediumFromMap(mediumTypMap, "MP3", medium);
-    }
-}
 
-     private void removeMediumFromPreisMap(HashMap<Double, List<Musik>> map, Double key, Musik medium) {
+    private void removeMediumFromMediumTypMap(Musik medium) {
+        if (medium.getIsCD()) {
+            removeMediumFromMap(mediumTypMap, "CD", medium);
+        }
+        if (medium.getIsPlatte()) {
+            removeMediumFromMap(mediumTypMap, "Platte", medium);
+        }
+        if (medium.getIsMp3()) {
+            removeMediumFromMap(mediumTypMap, "MP3", medium);
+        }
+    }
+
+    private void removeMediumFromPreisMap(HashMap<Double, List<Musik>> map, Double key, Musik medium) {
         List<Musik> medienListe = map.get(key);
         if (medienListe != null) {
             medienListe.remove(medium);
@@ -106,25 +105,25 @@ public class MusikMap {
         }
     }
 
-
     private void addToMap(HashMap<String, List<Musik>> map, String key, Musik value) {
-    map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
-}
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+    }
+
     private void addToMap(HashMap<Double, List<Musik>> map, Double key, Musik value) {
-    map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
-}
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+    }
 
     private void updateAllMaps(Musik medium) {
-    addToMap(artistMap, medium.getMusiker(), medium);
-    addToMap(genreMap, medium.getGenre(), medium);
-    addToMap(albumMap, medium.getAlbum(), medium);
-    addToMap(titleMap, medium.getSongName(), medium);
-    addToMediumTypMap(medium);  
-    addToMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
-    addToMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
-    addToMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
+        addToMap(artistMap, medium.getMusiker(), medium);
+        addToMap(genreMap, medium.getGenre(), medium);
+        addToMap(albumMap, medium.getAlbum(), medium);
+        addToMap(titleMap, medium.getSongName(), medium);
+        addToMediumTypMap(medium);
+        addToMap(cdListenpreisMap, medium.getCDListenpreis(), medium);
+        addToMap(platteListenpreisMap, medium.getPlatteListenpreis(), medium);
+        addToMap(mp3ListenpreisMap, medium.getMp3Listenpreis(), medium);
     }
-    
+
     private void addToMediumTypMap(Musik medium) {
         if (medium.getIsCD()) {
             addToMap(mediumTypMap, "CD", medium);
@@ -149,88 +148,94 @@ public class MusikMap {
         return this.musikList;
     }
 
- public void replaceMedium(Musik altesmedium,Musik neuesMedium) {
+    public void replaceMedium(Musik altesmedium, Musik neuesMedium) {
         musikList.replaceMusik(neuesMedium, musikList);
-        replaceFromAllMaps(altesmedium,neuesMedium);
+        replaceFromAllMaps(altesmedium, neuesMedium);
     }
 
-     private void replaceFromAllMaps(Musik altesMedium, Musik neuesMedium) {
-    replaceMediumFromMap(artistMap, altesMedium.getMusiker(), altesMedium, neuesMedium);
-    replaceMediumFromMap(genreMap, altesMedium.getGenre(), altesMedium, neuesMedium);
-    replaceMediumFromMap(albumMap, altesMedium.getAlbum(), altesMedium, neuesMedium);
-    replaceMediumFromMap(titleMap, altesMedium.getSongName(), altesMedium, neuesMedium);
-    replaceMediumInMediumTypMap(altesMedium, neuesMedium); 
-    replaceMediumInPreisMap(cdListenpreisMap, altesMedium.getCDListenpreis(), altesMedium, neuesMedium);
-    replaceMediumInPreisMap(platteListenpreisMap, altesMedium.getPlatteListenpreis(), altesMedium, neuesMedium);
-    replaceMediumInPreisMap(mp3ListenpreisMap, altesMedium.getMp3Listenpreis(), altesMedium, neuesMedium);
-}
-     
-     private void replaceMediumInMediumTypMap(Musik altesMedium, Musik neuesMedium) {
-    if (altesMedium.getIsCD()) {
-        replaceMediumFromMap(mediumTypMap, "CD", altesMedium, neuesMedium);
+    private void replaceFromAllMaps(Musik altesMedium, Musik neuesMedium) {
+        replaceMediumFromMap(artistMap, altesMedium.getMusiker(), altesMedium, neuesMedium);
+        replaceMediumFromMap(genreMap, altesMedium.getGenre(), altesMedium, neuesMedium);
+        replaceMediumFromMap(albumMap, altesMedium.getAlbum(), altesMedium, neuesMedium);
+        replaceMediumFromMap(titleMap, altesMedium.getSongName(), altesMedium, neuesMedium);
+        replaceMediumInMediumTypMap(altesMedium, neuesMedium);
+        replaceMediumInPreisMap(cdListenpreisMap, altesMedium.getCDListenpreis(), altesMedium, neuesMedium);
+        replaceMediumInPreisMap(platteListenpreisMap, altesMedium.getPlatteListenpreis(), altesMedium, neuesMedium);
+        replaceMediumInPreisMap(mp3ListenpreisMap, altesMedium.getMp3Listenpreis(), altesMedium, neuesMedium);
     }
-    if (altesMedium.getIsPlatte()) {
-        replaceMediumFromMap(mediumTypMap, "Platte", altesMedium, neuesMedium);
-    }
-    if (altesMedium.getIsMp3()) {
-        replaceMediumFromMap(mediumTypMap, "MP3", altesMedium, neuesMedium);
-    }
-}
-     private void replaceMediumInPreisMap(HashMap<Double, List<Musik>> map, Double preis, Musik altesMedium, Musik neuesMedium) {
-    List<Musik> medienListe = map.get(preis);
-    if (medienListe != null) {
-        int index = medienListe.indexOf(altesMedium);
-        if (index != -1) {
-            medienListe.set(index, neuesMedium);
+
+    private void replaceMediumInMediumTypMap(Musik altesMedium, Musik neuesMedium) {
+        if (altesMedium.getIsCD()) {
+            replaceMediumFromMap(mediumTypMap, "CD", altesMedium, neuesMedium);
+        }
+        if (altesMedium.getIsPlatte()) {
+            replaceMediumFromMap(mediumTypMap, "Platte", altesMedium, neuesMedium);
+        }
+        if (altesMedium.getIsMp3()) {
+            replaceMediumFromMap(mediumTypMap, "MP3", altesMedium, neuesMedium);
         }
     }
-}
 
-    
+    private void replaceMediumInPreisMap(HashMap<Double, List<Musik>> map, Double preis, Musik altesMedium, Musik neuesMedium) {
+        List<Musik> medienListe = map.get(preis);
+        if (medienListe != null) {
+            int index = medienListe.indexOf(altesMedium);
+            if (index != -1) {
+                medienListe.set(index, neuesMedium);
+            }
+        }
+    }
+
     private void replaceMediumFromMap(HashMap<String, List<Musik>> map, String key, Musik medium, Musik newmedium) {
-    List<Musik> medien = map.get(key);
-    if (medien != null) {
-        int index = medien.lastIndexOf(medium);
-        if (index != -1) {
-            medien.set(index, newmedium);
+        List<Musik> medien = map.get(key);
+        if (medien != null) {
+            int index = medien.lastIndexOf(medium);
+            if (index != -1) {
+                medien.set(index, newmedium);
+            }
         }
     }
-}
-     
-     public HashMap<String, List<Musik>> getGenreMap() {
-    return genreMap;
-}
-     public HashMap<String, List<Musik>> getAlbumMap() {
-    return albumMap;
-}
-     public HashMap<String, List<Musik>> getArtistMap() {
-         return artistMap;
-     }
-     public HashMap<String, List<Musik>> getTitleMap() {
-         return titleMap;
-     }
-     
-     public void logChange(String action, Musik original, Musik updated) {
-    ChangeLogEntry logEntry = new ChangeLogEntry(action, original, updated);
-    changeLog.add(logEntry);
-    System.out.println("Change Log: Action=" + action + ", Old Musik=" + (original != null ? original.toString() : "null") + ", New Musik=" + (updated != null ? updated.toString() : "null"));
+
+    public HashMap<String, List<Musik>> getGenreMap() {
+        return genreMap;
+    }
+
+    public HashMap<String, List<Musik>> getAlbumMap() {
+        return albumMap;
+    }
+
+    public HashMap<String, List<Musik>> getArtistMap() {
+        return artistMap;
+    }
+
+    public HashMap<String, List<Musik>> getTitleMap() {
+        return titleMap;
+    }
+
+    public void logChange(String action, Musik original, Musik updated) {
+        ChangeLogEntry logEntry = new ChangeLogEntry(action, original, updated);
+        changeLog.add(logEntry);
+        System.out.println("Change Log: Action=" + action + ", Old Musik=" + (original != null ? original.toString() : "null") + ", New Musik=" + (updated != null ? updated.toString() : "null"));
+
+    }
+
+    public List<ChangeLogEntry> getChangeLogs() {
+        return new ArrayList<>(changeLog);
+    }
+
+    public void loadChangeLogsFromCsv() {
+        ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
+        List<ChangeLogEntry> loadedLogs = changeLogCsvDOA.read();
+        changeLog.addAll(loadedLogs);
+    }
+
+    public void saveChangeLogsToCsv() {
+        ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
+        changeLogCsvDOA.write(new ArrayList<>(changeLog));
+    }
+
+    public void setChangeLogs(List<ChangeLogEntry> changeLogList) {
+        this.changeLog = new HashSet<>(changeLogList);
+    }
 
 }
-public List<ChangeLogEntry> getChangeLogs() {
-    return new ArrayList<>(changeLog);
-}
-public void loadChangeLogsFromCsv() {
-    ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
-    List<ChangeLogEntry> loadedLogs = changeLogCsvDOA.read();
-    changeLog.addAll(loadedLogs);
-}
-
-public void saveChangeLogsToCsv() {
-    ChangeLogCsvDAO changeLogCsvDOA = new ChangeLogCsvDAO();
-    changeLogCsvDOA.write(new ArrayList<>(changeLog));
-}
-public void setChangeLogs(List<ChangeLogEntry> changeLogList) {
-    this.changeLog = new HashSet<>(changeLogList);
-}
-
-}        

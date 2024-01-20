@@ -9,16 +9,15 @@ import javax.swing.JFileChooser;
 import App_GUI.Gui;
 import SaveData_ReadData.MusikCsvListDAO;
 
-
-
 public class FileSaveAsAction extends AbstractAction {
+
     private Gui parent;
 
-    public FileSaveAsAction(Gui parent){
+    public FileSaveAsAction(Gui parent) {
         super();
         this.parent = parent;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser chooser = new JFileChooser();
@@ -40,5 +39,5 @@ public class FileSaveAsAction extends AbstractAction {
             System.out.println("Speichern");
         }
     }
-    
+
 }

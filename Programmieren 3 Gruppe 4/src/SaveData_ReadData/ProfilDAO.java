@@ -90,8 +90,9 @@ public class ProfilDAO extends AbstractDAO {
             obj = new Profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
         }
     }
-    public Profil read() throws IOException{
-            if (in != null) {
+
+    public Profil read() throws IOException {
+        if (in != null) {
             String username = in.readUTF();
             int passwordHash = in.readInt();
             boolean ismitarbeiter = in.readBoolean();
@@ -121,7 +122,7 @@ public class ProfilDAO extends AbstractDAO {
             }
             Profil p = new Profil(username, passwordHash, ismitarbeiter, musikId, pallteStück, cdStück, mp3);
             return p;
-        }else{
+        } else {
             return null;
         }
     }

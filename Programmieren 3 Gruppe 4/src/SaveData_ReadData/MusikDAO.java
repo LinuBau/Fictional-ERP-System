@@ -15,16 +15,18 @@ public class MusikDAO extends AbstractDAO {
     public MusikDAO(String filename, boolean write) {
         super(filename, write);
     }
-/**
- * Implimiert das schreiben des Objetks Musik
- * @param obj muss ein Musik sein 
- * @throws IOException  muss weil wir schreiben
- */
+
+    /**
+     * Implimiert das schreiben des Objetks Musik
+     *
+     * @param obj muss ein Musik sein
+     * @throws IOException muss weil wir schreiben
+     */
     @Override
     public void write(Object obj) throws IOException {
         if (out != null) {
             Musik MM = (Musik) obj;
-            out.writeInt(MM.getMusik_GUID());           
+            out.writeInt(MM.getMusik_GUID());
             out.writeUTF(MM.getMusiker());
             out.writeUTF(MM.getAlbum());
             out.writeUTF(MM.getSongName());
@@ -43,17 +45,19 @@ public class MusikDAO extends AbstractDAO {
             out.writeUTF(MM.getMBID());
         }
     }
-/**
- * Implimiert das lesen des Obejects Musik
- * @param obj muss ein Musik sein 
- * @throws IOException muss weil wir schreiben
- */
+
+    /**
+     * Implimiert das lesen des Obejects Musik
+     *
+     * @param obj muss ein Musik sein
+     * @throws IOException muss weil wir schreiben
+     */
     @Override
     public void read(Object obj) throws IOException {
         if (in != null) {
             Musik MM = (Musik) obj;
             MM.setMusik_GUID(in.readInt());
-            
+
             MM.setMusiker(in.readUTF());
             MM.setAlbum(in.readUTF());
             MM.setSongName(in.readUTF());

@@ -29,7 +29,7 @@ public class ProfilListDAO extends AbstractDAO {
             ProfilList pl = (ProfilList) obj;
             int size = in.readInt();
             ProfilDAO pd = new ProfilDAO(out, in);
-            for(int i = 0; i<size;i++){
+            for (int i = 0; i < size; i++) {
                 pl.add(pd.read());
                 System.out.println(pl.get(i).getUsername());
             }

@@ -11,6 +11,7 @@ import GeschaftsObejekt.MusikList;
 import GeschaftsObejekt.ProfilList;
 
 public class LoginListener implements ActionListener {
+
     private LoginGUi parent;
     private MusikList musikList;
 
@@ -24,7 +25,7 @@ public class LoginListener implements ActionListener {
     }
 
     public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent) {
-        Gui mainWindow = new Gui(ismitarbeiter, profilList,parent.getLocale());
+        Gui mainWindow = new Gui(ismitarbeiter, profilList, parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
@@ -33,7 +34,7 @@ public class LoginListener implements ActionListener {
     }
 
     public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent, MusikList musikList) {
-        Gui mainWindow = new Gui(ismitarbeiter, profilList,musikList,parent.getLocale());
+        Gui mainWindow = new Gui(ismitarbeiter, profilList, musikList, parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
@@ -48,10 +49,10 @@ public class LoginListener implements ActionListener {
             if (index != -1) {
                 login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent);
             }
-        }else{
+        } else {
             int index = parent.getProfilList().indexOfLogin(parent.getUsername().trim(), parent.getPassword());
             if (index != -1) {
-                login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent,musikList);
+                login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent, musikList);
             }
         }
 

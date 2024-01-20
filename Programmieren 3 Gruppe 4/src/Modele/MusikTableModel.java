@@ -11,13 +11,12 @@ public class MusikTableModel extends AbstractTableModel {
 
     private final String[] columnNames;
 
-    private final Class<?>[] columnClass = new Class[] {
+    private final Class<?>[] columnClass = new Class[]{
         Integer.class, String.class, String.class, String.class, String.class,
         String.class, Double.class, Double.class, Double.class, Double.class,
         Double.class, Double.class, String.class, Boolean.class, Boolean.class, Boolean.class,
         Integer.class, Integer.class
-};
-
+    };
 
     public MusikTableModel(MusikList musikList, String[] columnNames) {
         this.musikList = musikList;
@@ -162,11 +161,11 @@ public class MusikTableModel extends AbstractTableModel {
         return false;
     }
 
-    public MusikList getMusikList(){
+    public MusikList getMusikList() {
         return this.musikList;
     }
-    
-       // Methode zum Aktualisieren der MusikList
+
+    // Methode zum Aktualisieren der MusikList
     public void setMusikList(MusikList neueMusikList) {
         this.musikList = neueMusikList;
     }

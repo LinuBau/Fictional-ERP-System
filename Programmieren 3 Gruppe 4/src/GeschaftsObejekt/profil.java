@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Profil {
+
     private final String username;
     private final int passwordHash;
     private ArrayList<Integer> musikId;
@@ -40,7 +41,8 @@ public class Profil {
             return false;
         }
     }
-    public void clear(){
+
+    public void clear() {
         musikId.clear();
         pallteStückZahlList.clear();
         cdStückZahlList.clear();
@@ -61,7 +63,8 @@ public class Profil {
         cdStückZahlList.add(cdStückZahl);
         mp3Gekauft.add(mp3);
     }
-     public void replacetoArrayList(int index, int newpallteStückZahl, int newcdStückZahl, boolean newmp3) {
+
+    public void replacetoArrayList(int index, int newpallteStückZahl, int newcdStückZahl, boolean newmp3) {
         pallteStückZahlList.set(index, newpallteStückZahl);
         cdStückZahlList.set(index, newcdStückZahl);
         mp3Gekauft.set(index, newmp3);
@@ -117,16 +120,17 @@ public class Profil {
         cdStückZahlList.remove(index);
         mp3Gekauft.remove(index);
     }
-    
+
     public int getCdCount(int musikId) {
         int index = this.musikId.indexOf(musikId);
         if (index != -1) {
             return cdStückZahlList.get(index);
         } else {
-            return 0; 
+            return 0;
         }
     }
-     public int getVinylCount(int musikId) {
+
+    public int getVinylCount(int musikId) {
         int index = this.musikId.indexOf(musikId);
         if (index != -1) {
             return pallteStückZahlList.get(index);

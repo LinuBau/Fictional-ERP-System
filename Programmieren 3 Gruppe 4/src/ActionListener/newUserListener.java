@@ -18,6 +18,7 @@ import App_GUI.LoginGUi;
 import GeschaftsObejekt.Profil;
 
 public class NewUserListener extends JDialog implements ActionListener {
+
     private JPanel centerconetentPanel;
     private boolean ismitarbeiter = false;
     private JLabel userNameLabel;
@@ -57,9 +58,9 @@ public class NewUserListener extends JDialog implements ActionListener {
 
         southPanel.add(showPasswordCheckBox);
         southPanel.add(hinzufügenButton);
-        showPasswordCheckBox.addActionListener(new ShowPasswordListener(showPasswordCheckBox,passwordField));
+        showPasswordCheckBox.addActionListener(new ShowPasswordListener(showPasswordCheckBox, passwordField));
         hinzufügenButton.addActionListener(this);
-        
+
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         this.getContentPane().add(southPanel, BorderLayout.SOUTH);
@@ -68,21 +69,19 @@ public class NewUserListener extends JDialog implements ActionListener {
         this.setVisible(false);
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
             String ussername = usserNameTextField.getText().trim();
-            if(parent.getProfilList().unique(ussername)){
-                 Profil p = new Profil(ussername, getPassword(), ismitarbeiter);
-            parent.getProfilList().add(p);
-            NewMitarbeiterListener.saveProfil(parent.getProfilList());
+            if (parent.getProfilList().unique(ussername)) {
+                Profil p = new Profil(ussername, getPassword(), ismitarbeiter);
+                parent.getProfilList().add(p);
+                NewMitarbeiterListener.saveProfil(parent.getProfilList());
             }
             int index = parent.getProfilList().indexOfLogin(ussername, getPassword());
             if (index != -1) {
-                LoginListener.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),parent);
+                LoginListener.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(), parent);
             }
             this.setVisible(false);
         }

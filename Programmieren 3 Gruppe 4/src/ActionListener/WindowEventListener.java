@@ -25,14 +25,11 @@ public class WindowEventListener implements WindowListener {
     private MusikMap musikMap;
     private ChangeLogCsvDAO changeLogCsvDOA;
 
-
     public WindowEventListener(Gui p) {
         super();
         this.parent = p;
         this.changeLogCsvDOA = new ChangeLogCsvDAO();
     }
-    
-   
 
     @Override
     public void windowOpened(WindowEvent e) {
@@ -46,15 +43,15 @@ public class WindowEventListener implements WindowListener {
 
         int x = JOptionPane.showOptionDialog(
                 null,
-                ""+parent.getL10NText("wantToSave"),
+                "" + parent.getL10NText("wantToSave"),
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
                 options,
-                options[0]           
+                options[0]
         );
-        
+
         if (x == 0) {
             System.out.println(parent.getClass().getName());
             WindowEventListener.saveListe(parent.getMusikMap().getMusikList(), parent.getProfilList());
@@ -62,14 +59,14 @@ public class WindowEventListener implements WindowListener {
             changeLogCsvDOA.write(changeLogs);
             System.out.println(parent.getL10NText("save"));
             System.exit(0);
-            
+
         }
 
         if (x == 1) {
             JFileChooser chooser = new JFileChooser();
             chooser.setAcceptAllFileFilterUsed(false);
             chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-             changeLogCsvDOA.write(parent.getMusikMap().getChangeLogs());
+            changeLogCsvDOA.write(parent.getMusikMap().getChangeLogs());
 
             int returnval = chooser.showSaveDialog(parent);
 
@@ -93,15 +90,14 @@ public class WindowEventListener implements WindowListener {
                 return;
             }
         }
-        
+
         if (x == 2) {
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        } 
-        else {
+        } else {
             parent.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             return;
         }
-        parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @Override

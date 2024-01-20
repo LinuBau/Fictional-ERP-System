@@ -20,6 +20,7 @@ import App_GUI.Gui;
 import GeschaftsObejekt.Musik;
 
 public class AddToShoppingCartListener extends JDialog implements ActionListener {
+
     private JSpinner platteTextField;
     private JSpinner cdTextField;
     private JCheckBox mp3CheckBox;
@@ -28,13 +29,13 @@ public class AddToShoppingCartListener extends JDialog implements ActionListener
 
     public AddToShoppingCartListener(Gui p) {
         parent = p;
-        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100,1);
-        SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 100,1);
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
+        SpinnerNumberModel spinnerModel1 = new SpinnerNumberModel(0, 0, 100, 1);
         platteTextField = new JSpinner(spinnerModel);
         cdTextField = new JSpinner(spinnerModel1);
         mp3CheckBox = new JCheckBox();
-        JLabel  cdLabel = new JLabel(parent.getL10NText("cdstue"));
-        JLabel  platteLabel = new JLabel(parent.getL10NText("plstue"));
+        JLabel cdLabel = new JLabel(parent.getL10NText("cdstue"));
+        JLabel platteLabel = new JLabel(parent.getL10NText("plstue"));
         JLabel mp3Label = new JLabel(parent.getL10NText("mp3stue"));
         hinzufuegeButton = new JButton(parent.getL10NText("add"));
         JPanel centerPanel = new JPanel(new GridLayout(1, 6));
@@ -68,24 +69,23 @@ public class AddToShoppingCartListener extends JDialog implements ActionListener
         cdTextField.setEnabled(m.getIsCD());
         mp3CheckBox.setEnabled(m.isIsMp3());
     }
-    
-        private void setEnabledAndMaxValues() {
-    Musik m = parent.getShoppingCartListner().getMusik();
-    int verfuegbareCDs = m.getCdCount();
-    int verfuegbareVinyls = m.getVinylCount();
 
-    int index = parent.getProfilList().getIndexofLogin();
-    int gespeicherteCdMenge = parent.getProfilList().get(index).getCdCount(m.getMusik_GUID());
-    int gespeicherteVinylMenge = parent.getProfilList().get(index).getVinylCount(m.getMusik_GUID());
+    private void setEnabledAndMaxValues() {
+        Musik m = parent.getShoppingCartListner().getMusik();
+        int verfuegbareCDs = m.getCdCount();
+        int verfuegbareVinyls = m.getVinylCount();
 
-    platteTextField.setModel(new SpinnerNumberModel(gespeicherteVinylMenge, 0, verfuegbareVinyls, 1));
-    cdTextField.setModel(new SpinnerNumberModel(gespeicherteCdMenge, 0, verfuegbareCDs, 1));
+        int index = parent.getProfilList().getIndexofLogin();
+        int gespeicherteCdMenge = parent.getProfilList().get(index).getCdCount(m.getMusik_GUID());
+        int gespeicherteVinylMenge = parent.getProfilList().get(index).getVinylCount(m.getMusik_GUID());
 
-    platteTextField.setEnabled(m.getIsPlatte());
-    cdTextField.setEnabled(m.getIsCD());
-    mp3CheckBox.setEnabled(m.isIsMp3());
-}
+        platteTextField.setModel(new SpinnerNumberModel(gespeicherteVinylMenge, 0, verfuegbareVinyls, 1));
+        cdTextField.setModel(new SpinnerNumberModel(gespeicherteCdMenge, 0, verfuegbareCDs, 1));
 
+        platteTextField.setEnabled(m.getIsPlatte());
+        cdTextField.setEnabled(m.getIsCD());
+        mp3CheckBox.setEnabled(m.isIsMp3());
+    }
 
     private void clearTextBox() {
         platteTextField.setValue(0);;
@@ -106,10 +106,10 @@ public class AddToShoppingCartListener extends JDialog implements ActionListener
                 int cdAnzahl = 0;
                 boolean mp3Seclect = false;
                 if (platteTextField.isEnabled()) {
-                    platteAnzahl = (int)platteTextField.getValue();
+                    platteAnzahl = (int) platteTextField.getValue();
                 }
                 if (cdTextField.isEnabled()) {
-                    cdAnzahl = (int)(cdTextField.getValue());
+                    cdAnzahl = (int) (cdTextField.getValue());
                 }
                 if (mp3CheckBox.isEnabled()) {
                     mp3Seclect = mp3CheckBox.isSelected();

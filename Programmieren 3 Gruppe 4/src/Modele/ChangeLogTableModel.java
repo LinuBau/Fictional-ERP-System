@@ -1,4 +1,3 @@
-
 package Modele;
 
 import Traversierung.ChangeLogEntry;
@@ -9,6 +8,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ChangeLogTableModel extends AbstractTableModel {
+
     private final String[] columnNames;
     private List<ChangeLogEntry> changeLogs;
 
@@ -16,7 +16,7 @@ public class ChangeLogTableModel extends AbstractTableModel {
         changeLogs = new ArrayList<>();
         this.columnNames = columnNames;
     }
-    
+
     public void setChangeLogs(List<ChangeLogEntry> changeLogs) {
         this.changeLogs = changeLogs;
         sortChangeLogs();
@@ -29,19 +29,20 @@ public class ChangeLogTableModel extends AbstractTableModel {
     public List<ChangeLogEntry> getChangeLogs() {
         return changeLogs;
     }
-        @Override
+
+    @Override
     public String getColumnName(int column) {
         return columnNames[column];
     }
-    
-        @Override
+
+    @Override
     public int getRowCount() {
         return changeLogs.size();
     }
 
     @Override
-    public int getColumnCount() {    
-        return 4; 
+    public int getColumnCount() {
+        return 4;
     }
 
     @Override
@@ -60,13 +61,14 @@ public class ChangeLogTableModel extends AbstractTableModel {
                 return null;
         }
     }
-public void sortChangeLogs() {
-    Collections.sort(changeLogs, new Comparator<ChangeLogEntry>() {
-        @Override
-        public int compare(ChangeLogEntry entry1, ChangeLogEntry entry2) {
-            return entry1.getTimestamp().compareTo(entry2.getTimestamp());
-        }
-    });
-    fireTableDataChanged(); 
-}
+
+    public void sortChangeLogs() {
+        Collections.sort(changeLogs, new Comparator<ChangeLogEntry>() {
+            @Override
+            public int compare(ChangeLogEntry entry1, ChangeLogEntry entry2) {
+                return entry1.getTimestamp().compareTo(entry2.getTimestamp());
+            }
+        });
+        fireTableDataChanged();
+    }
 }
