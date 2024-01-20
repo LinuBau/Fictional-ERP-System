@@ -100,7 +100,7 @@ public class newUserListener extends JDialog implements ActionListener {
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
                 JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
-                newMitarbeiterListener.saveProfil(parent.getProfilList());
+                newUserListener.saveProfil(parent.getProfilList());
                 this.setVisible(false); 
             } else {
                 JOptionPane.showMessageDialog(this, "Ussername ist vergeben", "Error", JOptionPane.ERROR_MESSAGE);
