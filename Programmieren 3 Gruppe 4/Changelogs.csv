@@ -23,3 +23,25 @@
 2024-01-20 21:19:33,ADD,null,545;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
 2024-01-20 21:19:44,ADD,null,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
 2024-01-20 21:20:45,DELETE,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0,null
+2024-01-20 21:24:22,ADD,null,1768;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
+2024-01-20 21:23:58,UPDATE,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;true;true;true;465;347,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;false;true;true;0;347
+2024-01-20 21:23:58,UPDATE,81;q5eZkG1dLiyJeJJqgdQgtK8PrVkMSnEKCJnB;The Dark Side of the Moon;Time;A81;B81;15.99;24.99;1.59;11.99;19.99;1.19;Psychedelic Rock;true;true;true;624;328,81;q5eZkG1dLiyJeJJqgdQgtK8PrVkMSnEKCJnB;The Dark Side of the Moon;Time;A81;B81;15.99;24.99;1.59;11.99;19.99;1.19;Psychedelic Rock;true;true;true;1;328
+2024-01-20 21:23:58,DELETE,3456;Linus;Can´t stop here;Cash;s2;f21;22.22;30.0;23.0;1.0;1.0;1.0;;true;true;true;23;450,null
+2024-01-20 21:23:58,ADD,null,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
+2024-01-20 21:23:58,DELETE,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0,null
+2024-01-20 21:24:41,DELETE,1768;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0,null
+2024-01-20 21:23:58,ADD,null,3456;Linus;Can´t stop here;Cash;s2;f21;22.22;30.0;23.0;1.0;1.0;1.0;;true;true;true;23;450
+2024-01-20 21:23:58,UPDATE,33;TXDH65HYeJ0V42nbJce4mzqd6iiQ7WgfaUyc;Back in Black;Back in Black;A33;B33;9.99;17.99;0.79;6.99;12.99;0.69;Rock;true;true;true;719;672,33;TXDH65HYeJ0V42nbJce4mzqd6iiQ7WgfaUyc;Back in Black;Back in Black;A33;B33;9.99;17.99;0.79;6.99;12.99;0.69;Rock;true;true;true;719;672
+2024-01-20 21:23:58,UPDATE,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;true;true;true;465;812,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;false;true;true;0;347
+2024-01-20 21:23:58,ADD,null,545;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
+2024-01-20 21:55:35,ADD,null,1768;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
+2024-01-20 21:55:35,UPDATE,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;true;true;true;465;347,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;false;true;true;0;347
+2024-01-20 21:55:35,UPDATE,81;q5eZkG1dLiyJeJJqgdQgtK8PrVkMSnEKCJnB;The Dark Side of the Moon;Time;A81;B81;15.99;24.99;1.59;11.99;19.99;1.19;Psychedelic Rock;true;true;true;624;328,81;q5eZkG1dLiyJeJJqgdQgtK8PrVkMSnEKCJnB;The Dark Side of the Moon;Time;A81;B81;15.99;24.99;1.59;11.99;19.99;1.19;Psychedelic Rock;true;true;true;1;328
+2024-01-20 21:55:35,DELETE,3456;Linus;Can´t stop here;Cash;s2;f21;22.22;30.0;23.0;1.0;1.0;1.0;;true;true;true;23;450,null
+2024-01-20 21:55:35,ADD,null,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0
+2024-01-20 21:55:35,DELETE,1235;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0,null
+2024-01-20 21:55:35,DELETE,1768;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0,null
+2024-01-20 21:55:35,ADD,null,3456;Linus;Can´t stop here;Cash;s2;f21;22.22;30.0;23.0;1.0;1.0;1.0;;true;true;true;23;450
+2024-01-20 21:55:35,UPDATE,33;TXDH65HYeJ0V42nbJce4mzqd6iiQ7WgfaUyc;Back in Black;Back in Black;A33;B33;9.99;17.99;0.79;6.99;12.99;0.69;Rock;true;true;true;719;672,33;TXDH65HYeJ0V42nbJce4mzqd6iiQ7WgfaUyc;Back in Black;Back in Black;A33;B33;9.99;17.99;0.79;6.99;12.99;0.69;Rock;true;true;true;719;672
+2024-01-20 21:55:35,UPDATE,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;true;true;true;465;812,78;Oasis;(What's the Story) Morning Glory?;Wonderwall;A78;B78;12.99;20.99;1.19;9.99;16.99;0.89;Britpop;false;true;true;0;347
+2024-01-20 21:55:35,ADD,null,545;;;;;;0.0;0.0;0.0;0.0;0.0;0.0;;false;false;false;0;0

@@ -93,10 +93,11 @@ public class newMitarbeiterListener extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
-            String ussername = usserNameTextField.getText();
+            String ussername = usserNameTextField.getText().trim();
             profil p = new profil(ussername, getPassword(), true);
             if (parent.getProfilList().unique(ussername)) {
                 parent.getProfilList().add(p);
+                newMitarbeiterListener.saveProfil(parent.getProfilList());
                 JOptionPane.showMessageDialog(parent, parent.getL10NText("mithin"));
                 this.setVisible(false);
             } else {

@@ -68,21 +68,19 @@ public class newUserListener extends JDialog implements ActionListener {
         this.setVisible(false);
     }
 
-    public boolean getIsmitarbeiter() {
-        return this.ismitarbeiter;
-    }
 
-    public void setIsmitarbeiter(boolean ismitarbeiter) {
-        this.ismitarbeiter = ismitarbeiter;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
         if (e.getSource().equals(hinzufügenButton)) {
-            profil p = new profil(usserNameTextField.getText(), getPassword(), ismitarbeiter);
+            String ussername = usserNameTextField.getText().trim();
+            if(parent.getProfilList().unique(ussername)){
+                 profil p = new profil(ussername, getPassword(), ismitarbeiter);
             parent.getProfilList().add(p);
-            int index = parent.getProfilList().indexOfLogin(usserNameTextField.getText(), getPassword());
+            newMitarbeiterListener.saveProfil(parent.getProfilList());
+            }
+            int index = parent.getProfilList().indexOfLogin(ussername, getPassword());
             if (index != -1) {
                 loginListner.login(parent.getProfilList().get(index).getIsmitarbeiter(), parent.getProfilList(),parent);
             }

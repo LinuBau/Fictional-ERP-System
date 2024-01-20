@@ -71,64 +71,64 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         mp3CheckBox = new JCheckBox();
 
         this.setLayout(new FlowLayout());
-       // Textflied vor all Compents
+        // Textflied vor all Compents
         JPanel eingabePanel = new JPanel(new GridLayout(19, 2));
 
-        eingabePanel.add(new JLabel(parent.getL10NText("mid")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mid") + ": "));
         eingabePanel.add(musikGUIDTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("mbid")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mbid") + ": "));
         eingabePanel.add(mbidTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("m")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("m") + ": "));
         eingabePanel.add(musikerTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("a")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("a") + ": "));
         eingabePanel.add(albumTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("sn")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("sn") + ": "));
         eingabePanel.add(songNameTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("rpcd")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("rpcd") + ": "));
         eingabePanel.add(regalPlatzCDTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("rpp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("rpp") + ": "));
         eingabePanel.add(regalPlatzPlatteTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("lpcd")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpcd") + ": "));
         eingabePanel.add(cdListenpreisTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("lpp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpp") + ": "));
         eingabePanel.add(platteListenpreisTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("lpmp3")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("lpmp3") + ": "));
         eingabePanel.add(mp3ListenpreisTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("epcd")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epcd") + ": "));
         eingabePanel.add(cdEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("epp")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epp") + ": "));
         eingabePanel.add(platteEinkaufspreisTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("epmp3")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("epmp3") + ": "));
         eingabePanel.add(mp3EinkaufspreisTextField);
-        
-        eingabePanel.add(new JLabel(parent.getL10NText("CdCount")+": "));
+
+        eingabePanel.add(new JLabel(parent.getL10NText("CdCount") + ": "));
         eingabePanel.add(cdCountSpinner);
-        
-        eingabePanel.add(new JLabel(parent.getL10NText("VinylCount")+": "));
+
+        eingabePanel.add(new JLabel(parent.getL10NText("VinylCount") + ": "));
         eingabePanel.add(vinylCountSpinner);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("g")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("g") + ": "));
         eingabePanel.add(genreTextField);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("cd")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("cd") + ": "));
         eingabePanel.add(cdCheckBox);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("p")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("p") + ": "));
         eingabePanel.add(platteCheckBox);
 
-        eingabePanel.add(new JLabel(parent.getL10NText("mp3")+": "));
+        eingabePanel.add(new JLabel(parent.getL10NText("mp3") + ": "));
         eingabePanel.add(mp3CheckBox);
         fillTextBox();
 
@@ -143,10 +143,9 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
         this.getContentPane().add(hinzufuegenPanel, BorderLayout.CENTER);
-        
+
         cdCheckBox.setEnabled(false);
         platteCheckBox.setEnabled(false);
-        
 
         this.setModal(true);
         this.setVisible(false);
@@ -169,19 +168,20 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         genreTextField.setText("");
         cdCountSpinner.setValue(0);
         vinylCountSpinner.setValue(0);
-        
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
+        fillTextBox();
         if (e.getSource().equals(beenden)) {
             this.setVisible(false);
         }
         if (e.getSource().equals(Hinzufuegen)) {
             boolean visibility = musikHinzufügen();
             this.setVisible(visibility);
+
         }
     }
 
@@ -189,7 +189,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         Musik m = new Musik();
         boolean IdisOk = true;
         try {
-            String GUidText = musikGUIDTextField.getText();
+            String GUidText = musikGUIDTextField.getText().trim();
             if (!(GUidText.equals("0")) && !(GUidText == null)) {
                 m.setMusik_GUID(Integer.parseInt(GUidText));
                 IdisOk = false;
@@ -198,33 +198,36 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
         try {
-            String mbidText = mbidTextField.getText();
-            if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length()==36) {
+            String mbidText = mbidTextField.getText().trim();
+            if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length() == 36) {
                 m.setMBID(mbidText);
+            } else {
+                IdisOk = true;
+                JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        m.setMusiker(musikerTextField.getText());
-        m.setAlbum(albumTextField.getText());
-        m.setSongName(songNameTextField.getText());
-        m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
-        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
-        m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
-        m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
-        m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
-        m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
-        m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
-        m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setMusiker(musikerTextField.getText().trim());
+        m.setAlbum(albumTextField.getText().trim());
+        m.setSongName(songNameTextField.getText().trim());
+        m.setRegal_PlatzCD(regalPlatzCDTextField.getText().trim());
+        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", ".").trim());
+        m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".").trim()));
+        m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".").trim()));
+        m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".").trim()));
+        m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".").trim()));
+        m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".").trim()));
+        m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".").trim()));
         m.setCdCount((int) cdCountSpinner.getValue());
         m.setVinylCount((int) vinylCountSpinner.getValue());
-        
-        m.setGenre(genreTextField.getText());
+
+        m.setGenre(genreTextField.getText().trim());
         m.setIsCD(cdCheckBox.isSelected());
         m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
         if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID())
-                && !IdisOk) {
+                && (!IdisOk)) {
             parent.getMusikMap().addMedium(m);
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             parent.getMusikMap().logChange("ADD", null, m);
@@ -237,6 +240,5 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         return IdisOk;
 
     }
-
 
 }

@@ -31,13 +31,13 @@ public class MusikList extends ArrayList<Musik> {
         if(mbid == null){
             while (it.hasNext()) {
                 if (it.next().getMBID().equals(mbid)) {
-                    return true;
+                    return false;
                 }
             }
         }else{
-            return false;
+            return true;
         }
-        return false;
+        return true;
     }
     public int getIndex(int id){
        ListIterator<Musik> it = listIterator();
