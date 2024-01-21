@@ -14,7 +14,7 @@ import SaveData_ReadData.ChangeLogCsvDAO;
 import SaveData_ReadData.MusikCsvListDAO;
 import ToolBar.BenutzerToolBar;
 import ToolBar.MitarbeiterToolBar;
-import Traversierung.ChangeLogEntry;
+import GeschaftsObejekt.ChangeLogEntry;
 import Traversierung.MusikMap;
 
 import java.awt.BorderLayout;

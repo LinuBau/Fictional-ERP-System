@@ -1,6 +1,6 @@
 package Modele;
 
-import Traversierung.ChangeLogEntry;
+import GeschaftsObejekt.ChangeLogEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

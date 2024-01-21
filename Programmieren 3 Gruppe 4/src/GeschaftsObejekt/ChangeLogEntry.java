@@ -1,4 +1,4 @@
-package Traversierung;
+package GeschaftsObejekt;
 
 import GeschaftsObejekt.Musik;
 import java.time.LocalDateTime;
