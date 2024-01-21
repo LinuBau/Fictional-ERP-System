@@ -355,7 +355,7 @@ public class BearbeitenListener implements ActionListener {
         cdCheckBox.setSelected(false);
         platteCheckBox.setSelected(false);
         mp3CheckBox.setSelected(false);
-        setMitarbeiterEnable(true);
+        setMitarbeiterEnable(false);
     }
 
     @Override
