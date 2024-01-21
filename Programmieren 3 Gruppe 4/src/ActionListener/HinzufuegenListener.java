@@ -209,9 +209,9 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
         m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
         m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setVinylCount((int)vinylCountSpinner.getValue());
+        m.setCdCount((int)cdCountSpinner.getValue());
         m.setGenre(genreTextField.getText());
-        m.setIsCD(cdCheckBox.isSelected());
-        m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
 
         if (!IdisOk) {
