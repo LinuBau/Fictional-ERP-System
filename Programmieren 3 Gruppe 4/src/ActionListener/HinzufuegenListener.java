@@ -43,6 +43,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private JCheckBox mp3CheckBox;
     private JButton beenden;
     private JButton Hinzufuegen;
+    public int maxGuid;
     Gui parent;
 
     public HinzufuegenListener(Gui p) {
@@ -69,6 +70,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         cdCheckBox = new JCheckBox();
         platteCheckBox = new JCheckBox();
         mp3CheckBox = new JCheckBox();
+        maxGuid= parent.getMusikMap().getMusikList().getMaxGUID();
 
         this.setLayout(new FlowLayout());
         // Textflied vor all Compents
@@ -143,13 +145,32 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(eingabePanel, BorderLayout.NORTH);
         this.getContentPane().add(hinzufuegenPanel, BorderLayout.CENTER);
-
+        musikGUIDTextField.setEnabled(false);
         cdCheckBox.setEnabled(false);
         platteCheckBox.setEnabled(false);
 
         this.setModal(true);
         this.setVisible(false);
 
+    }
+
+    public void clearTextBox() {
+        musikGUIDTextField.setText(String.valueOf(maxGuid++));
+        mbidTextField.setText("");
+        musikerTextField.setText("");
+        albumTextField.setText("");
+        songNameTextField.setText("");
+        regalPlatzCDTextField.setText("");
+        regalPlatzPlatteTextField.setText("");
+        cdListenpreisTextField.setText("0");
+        platteListenpreisTextField.setText("0");
+        mp3ListenpreisTextField.setText("0");
+        cdEinkaufspreisTextField.setText("0");
+        platteEinkaufspreisTextField.setText("0");
+        mp3EinkaufspreisTextField.setText("0");
+        genreTextField.setText("");
+        cdCountSpinner.setValue(0);
+        vinylCountSpinner.setValue(0);
     }
 
     public void fillTextBox() {
@@ -174,7 +195,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
-        fillTextBox();
+        clearTextBox();
         if (e.getSource().equals(beenden)) {
             this.setVisible(false);
         }
@@ -188,16 +209,9 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     private boolean musikHinzufügen() {
         Musik m = new Musik();
         boolean IdisOk = true;
-        try {
-            String GUidText = musikGUIDTextField.getText();
-            System.out.println(Integer.parseInt(GUidText+"xxxxx"));
-            if (!(GUidText.equals("0")) && !(GUidText == null)) {
-                m.setMusik_GUID(Integer.parseInt(GUidText));
-                IdisOk = false;
-            }
-        } catch (Exception e1) {
-            JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+
+        m.setMusik_GUID(maxGuid);
+
         try {
             String mbidText = mbidTextField.getText().trim();
             if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length() == 36) {
@@ -247,4 +261,5 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             return true;
         }
     }
+
 }

@@ -55,5 +55,15 @@ public class MusikList extends ArrayList<Musik> {
         int index = getIndex(newmedium.getMusik_GUID());
         musikList.set(index, newmedium);
     }
+    public int getMaxGUID(){
+        int max = 0;
+           ListIterator<Musik> it = listIterator();
+            while (it.hasNext()) {
+                if (it.next().getMusik_GUID()> max) {
+                    max = it.previous().getMusik_GUID();
+                }
+            }
+            return max;
+    }
 
 }
