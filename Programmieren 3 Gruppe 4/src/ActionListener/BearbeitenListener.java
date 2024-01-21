@@ -447,8 +447,6 @@ public class BearbeitenListener implements ActionListener {
         m.setCdCount((int) cdCountSpinner.getValue());
         m.setVinylCount((int) vinylCountSpinner.getValue());
         m.setGenre(genreComboBox.getText());
-        m.setIsCD(cdCheckBox.isSelected());
-        m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
         return m;
     }
