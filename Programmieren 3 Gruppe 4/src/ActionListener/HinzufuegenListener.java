@@ -223,20 +223,20 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        m.setMusiker(musikerTextField.getText().trim());
-        m.setAlbum(albumTextField.getText().trim());
-        m.setSongName(songNameTextField.getText().trim());
-        m.setRegal_PlatzCD(regalPlatzCDTextField.getText().trim());
-        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", ".").trim());
-        m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".").trim()));
-        m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".").trim()));
-        m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".").trim()));
-        m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".").trim()));
-        m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".").trim()));
-        m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".").trim()));
-        m.setCdCount((int) cdCountSpinner.getValue());
-        m.setVinylCount((int) vinylCountSpinner.getValue());
-        m.setGenre(genreTextField.getText().trim());
+       m.setMusiker(musikerTextField.getText());
+        m.setAlbum(albumTextField.getText());
+        m.setSongName(songNameTextField.getText());
+        m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
+        m.setRegal_PlatzPlatte(regalPlatzPlatteTextField.getText().replace(",", "."));
+        m.setCDListenpreis(Double.parseDouble(cdListenpreisTextField.getText().replace(",", ".")));
+        m.setPlatteListenpreis(Double.parseDouble(platteListenpreisTextField.getText().replace(",", ".")));
+        m.setMp3Listenpreis(Double.parseDouble(mp3ListenpreisTextField.getText().replace(",", ".")));
+        m.setCDEinkaufpreis(Double.parseDouble(cdEinkaufspreisTextField.getText().replace(",", ".")));
+        m.setPlatteEinkaufpreis(Double.parseDouble(platteEinkaufspreisTextField.getText().replace(",", ".")));
+        m.setMp3Einkaufpreis(Double.parseDouble(mp3EinkaufspreisTextField.getText().replace(",", ".")));
+        m.setGenre(genreTextField.getText());
+        m.setIsCD(cdCheckBox.isSelected());
+        m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
 
         if (!IdisOk) {
