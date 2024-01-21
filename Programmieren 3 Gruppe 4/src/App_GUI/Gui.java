@@ -329,7 +329,7 @@ public class Gui extends JFrame {
 
         LoginGUi loginWindow = new LoginGUi("de");
         loginWindow.setTitle("Login");
-        loginWindow.setSize(500, 150);
+        loginWindow.setSize(500, 200);
         loginWindow.setLocationRelativeTo(null);
         loginWindow.setVisible(true);
         // loginWindow.w()

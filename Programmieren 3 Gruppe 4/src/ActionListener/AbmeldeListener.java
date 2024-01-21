@@ -18,7 +18,7 @@ public class AbmeldeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         LoginGUi newLogin = new LoginGUi(parent.getProfilList(), parent.getMusikMap().getMusikList(), parent.getLocale().getLanguage());
         newLogin.setTitle("Login");
-        newLogin.setSize(500, 150);
+        newLogin.setSize(500, 200);
         newLogin.setLocationRelativeTo(null);
         parent.setVisible(false);
         newLogin.setVisible(true);
