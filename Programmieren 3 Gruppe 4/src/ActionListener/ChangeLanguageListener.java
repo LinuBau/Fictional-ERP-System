@@ -38,7 +38,7 @@ public class ChangeLanguageListener implements ActionListener {
         } else {
             LoginGUi loginWindow = new LoginGUi(language);
             loginWindow.setTitle("Login");
-            loginWindow.setSize(500, 150);
+            loginWindow.setSize(500, 200);
             loginWindow.setLocationRelativeTo(null);
             parentgGUi.setVisible(false);
             loginWindow.setVisible(true);
