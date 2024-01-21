@@ -11,7 +11,7 @@ import SaveData_ReadData.ChangeLogCsvDAO;
 import SaveData_ReadData.MusikCsvListDAO;
 import SaveData_ReadData.MusikListDAO;
 import SaveData_ReadData.ProfilListDAO;
-import Traversierung.ChangeLogEntry;
+import GeschaftsObejekt.ChangeLogEntry;
 import Traversierung.MusikMap;
 import java.io.File;
 import java.util.List;

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import SaveData_ReadData.ChangeLogCsvDAO;
-import Traversierung.ChangeLogEntry;
+import GeschaftsObejekt.ChangeLogEntry;
 import java.util.HashSet;
 import java.util.Set;
 
