@@ -104,7 +104,7 @@ public class LoginGUi extends JFrame {
         getContentPane().add(centerconetentPanel, BorderLayout.CENTER);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
         setJMenuBar(new LoginMenuBar(this));
-
+        
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 

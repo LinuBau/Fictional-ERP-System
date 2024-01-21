@@ -27,6 +27,7 @@ public class LoginListener implements ActionListener {
     public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList, parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
+        mainWindow.setSize(1000,800);
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
@@ -36,6 +37,7 @@ public class LoginListener implements ActionListener {
     public static void login(boolean ismitarbeiter, ProfilList profilList, LoginGUi parent, MusikList musikList) {
         Gui mainWindow = new Gui(ismitarbeiter, profilList, musikList, parent.getLocale());
         mainWindow.setTitle(mainWindow.getL10NText("mk"));
+        mainWindow.setSize(1000,800);
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setLocationRelativeTo(null);
         parent.setVisible(false);
