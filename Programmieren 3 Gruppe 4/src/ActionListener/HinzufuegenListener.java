@@ -155,6 +155,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     }
 
     public void fillTextBox() {
+        mbidTextField.setText("");
         musikGUIDTextField.setText("");
         musikerTextField.setText("");
         albumTextField.setText("");
@@ -178,6 +179,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         this.setVisible(true);
         if (e.getSource().equals(beenden)) {
             this.setVisible(false);
+            fillTextBox();
         }
         if (e.getSource().equals(Hinzufuegen)) {
             boolean visibility = musikHinzufügen();
@@ -230,6 +232,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             parent.getMusikMap().logChange("ADD", null, m);
             parent.loadChangeLogsForTable();
+            fillTextBox();
             return false;
         } else {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idUsedError"), "Error", JOptionPane.ERROR_MESSAGE);
