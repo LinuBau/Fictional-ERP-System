@@ -189,7 +189,8 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         Musik m = new Musik();
         boolean IdisOk = true;
         try {
-            String GUidText = musikGUIDTextField.getText().trim();
+            String GUidText = musikGUIDTextField.getText();
+            System.out.println(Integer.parseInt(GUidText+"xxxxx"));
             if (!(GUidText.equals("0")) && !(GUidText == null)) {
                 m.setMusik_GUID(Integer.parseInt(GUidText));
                 IdisOk = false;
@@ -203,7 +204,7 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
                 m.setMBID(mbidText);
             } else {
                 IdisOk = true;
-                JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "ich bin asdguia", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
@@ -222,22 +223,28 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
         m.setCdCount((int) cdCountSpinner.getValue());
         m.setVinylCount((int) vinylCountSpinner.getValue());
         m.setGenre(genreTextField.getText().trim());
-        m.setIsCD(cdCheckBox.isSelected());
-        m.setIsPlatte(platteCheckBox.isSelected());
         m.setIsMp3(mp3CheckBox.isSelected());
-        if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID())
-                && (!IdisOk)) {
-            parent.getMusikMap().addMedium(m);
-            parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
-            parent.getMusikMap().logChange("ADD", null, m);
-            parent.loadChangeLogsForTable();
 
-        } else {
-            JOptionPane.showMessageDialog(this, parent.getL10NText("idUsedError"), "Error", JOptionPane.ERROR_MESSAGE);
-            IdisOk = true;
+        if (!IdisOk) {
+            addToMusikList(m);
+        }else{
+            JOptionPane.showMessageDialog(this, "fuckoff", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
         return IdisOk;
 
     }
 
+    public boolean addToMusikList(Musik m) {
+        if (parent.getMusikMap().getMusikList().unique(m.getMusik_GUID())) {
+            parent.getMusikMap().addMedium(m);
+            parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
+            parent.getMusikMap().logChange("ADD", null, m);
+            parent.loadChangeLogsForTable();
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, parent.getL10NText("idUsedError"), "Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+    }
 }
