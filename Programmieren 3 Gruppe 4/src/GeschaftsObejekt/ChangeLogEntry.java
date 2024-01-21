@@ -60,6 +60,7 @@ public class ChangeLogEntry {
         this.newState = newState;
     }
 
+    // timestamps werden beim Vergleich nicht beim vertgleich beachtet, um bei doppelten eingaben durch das set trotzdem nur einen Changelog aufzunehmen
     @Override
     public String toString() {
         return "ChangeLogEntry{"

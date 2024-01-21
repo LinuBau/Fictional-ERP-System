@@ -48,7 +48,7 @@ public class ChangeLogCsvDAO {
         return entries;
     }
 
-    // Hilfsmethode zum Konvertieren eines ChangeLogEntry in einen CSV-String
+    // zum Konvertieren eines ChangeLogEntry in einen CSV-String
     private String entryToCsv(ChangeLogEntry entry) {
         return entry.getTimestamp().format(FORMATTER) + SPLIT_CONDITION1
                 + entry.getAction() + SPLIT_CONDITION1
@@ -56,7 +56,7 @@ public class ChangeLogCsvDAO {
                 + musikToCsv(entry.getNewState());
     }
 
-    // Hilfsmethode zum Konvertieren eines CSV-Strings in ein ChangeLogEntry-Objekt
+    //zum Konvertieren eines CSV-Strings in ein ChangeLogEntry-Objekt
     private ChangeLogEntry csvToChangeLogEntry(String csvLine) {
         String[] parts = csvLine.split(SPLIT_CONDITION1);
         LocalDateTime timestamp = LocalDateTime.parse(parts[0], FORMATTER);
@@ -67,7 +67,7 @@ public class ChangeLogCsvDAO {
         return new ChangeLogEntry(timestamp, action, originalState, newState);
     }
 
-    // Hilfsmethoden zur Formatierung und zum Parsen von Musik-Objekten
+    // zur Formatierung und zum Parsen von Musik-Objekten
     private String musikToCsv(Musik musik) {
         if (musik == null) {
             return "null";
@@ -84,7 +84,7 @@ public class ChangeLogCsvDAO {
         return musik;
     }
 
-    // Hilfsmethoden zur Formatierung und zum Parsen von Musik-Objekten
+    // zur Formatierung und zum Parsen von Musik-Objekten
     private String toCsv(String splitKondiotn,Musik MM) {
         return  
              MM.getMusik_GUID() + splitKondiotn +
@@ -112,7 +112,7 @@ public class ChangeLogCsvDAO {
         int erwarteteAnzahlVonFeldern = 17;
         if (csvStrings.length < erwarteteAnzahlVonFeldern) {
             System.err.println("Ungültige Zeile in CSV: " + csv);
-            return; // oder werfen Sie eine Ausnahme
+            return; 
         }
         try {
             MM.setMusik_GUID(Integer.parseInt(csvStrings[0].trim())); // trim() entfernt Leerzeichen

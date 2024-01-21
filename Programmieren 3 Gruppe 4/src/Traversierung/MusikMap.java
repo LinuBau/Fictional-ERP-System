@@ -12,9 +12,19 @@ import GeschaftsObejekt.ChangeLogEntry;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Die Klasse MusikMap dient der Verwaltung einer Sammlung von Musik-Objekten.
+ * Sie stellt verschiedene Hashmaps zur Verfügung, um Musikobjekte nach verschiedenen Attributen
+ * zu kategorisieren, was effiziente Abfragen und Operationen ermöglicht.
+ * Zusätzlich wird ein Änderungsprotokoll geführt, um alle Änderungen an der Sammlung nachvollziehen zu können.
+ */
+
 public class MusikMap {
 
     private final MusikList musikList;
+    
+    // Die folgenden Maps dienen der Indizierung von Musikobjekten nach ihren Eigenschaften.
+    // Dies ermöglicht einen schnellen Zugriff auf die Objekte basierend auf Attributen wie Titel, Künstler usw.    
     private HashMap<String, List<Musik>> titleMap;
     private HashMap<String, List<Musik>> artistMap;
     private HashMap<String, List<Musik>> genreMap;
@@ -23,6 +33,8 @@ public class MusikMap {
     private HashMap<Double, List<Musik>> cdListenpreisMap;
     private HashMap<Double, List<Musik>> platteListenpreisMap;
     private HashMap<Double, List<Musik>> mp3ListenpreisMap;
+    
+    // Set für das Änderungsprotokoll, um alle Modifikationen zu erfassen.
     private Set<ChangeLogEntry> changeLog = new HashSet<>();
 
     public MusikMap(MusikList musikList) {
