@@ -371,11 +371,15 @@ public class BearbeitenListener implements ActionListener {
         }
         if (e.getSource().equals(deleteButton)) {
             parent.getMusikMap().logChange("DELETE", medium, null);
-            parent.getMusikMap().removeMedium(medium);
+            delete();
             clearTextBox();
             parent.updateTableWithMusikListe(parent.getMusikMap().getMusikList());
             parent.loadChangeLogsForTable();
         }
+    }
+    
+    private void delete(){
+        parent.getMusikMap().removeMedium(medium);
     }
 
     private boolean validatePriceFields() {
