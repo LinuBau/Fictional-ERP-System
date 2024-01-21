@@ -45,9 +45,12 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
     private Gui parent;
     private JLabel VenylAnzahlText;
     private JLabel CDAnzahlText;
+    private JLabel Mp3check;
 
     public ShoppingCartListner(Gui p) {
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 3));
+        JPanel northPanel =  new JPanel(new GridLayout(2, 1));
+        JPanel countPanel =  new JPanel(new GridLayout(1, 6));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
         musikList = new MusikList();
         parent = p;
         String[] tableKeys = {"mid", "k", "at", "st", "rc", "rs", "cvp", "svp", "mvp", "cep", "sep", "mep", "g", "cd", "sp", "mp3"};
@@ -62,14 +65,18 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         loeschenButton = new JButton(parent.getL10NText("delete"));
         VenylAnzahlText = new JLabel(parent.getL10NText("VinylCount")+":");
         CDAnzahlText = new JLabel(parent.getL10NText("CdCount")+":");
+        Mp3check = new JLabel(parent.getL10NText("mp3")+":");
         platteTextField = new JSpinner();
         cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
-        buttonPanel.add(VenylAnzahlText);
-        buttonPanel.add(platteTextField);
-        buttonPanel.add(CDAnzahlText);
-        buttonPanel.add(cdTextField);
-        buttonPanel.add(mp3CheckBox);
+        northPanel.add(countPanel);
+        northPanel.add(buttonPanel);
+        countPanel.add(VenylAnzahlText);
+        countPanel.add(platteTextField);
+        countPanel.add(CDAnzahlText);
+        countPanel.add(cdTextField);
+        countPanel.add(Mp3check);
+        countPanel.add(mp3CheckBox);
         buttonPanel.add(orderButton);
         buttonPanel.add(speicherButton);
         buttonPanel.add(loeschenButton);
@@ -95,7 +102,7 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         });
 
         this.getContentPane().setLayout(new BorderLayout());
-        this.getContentPane().add(buttonPanel, BorderLayout.NORTH);
+        this.getContentPane().add(northPanel, BorderLayout.NORTH);
         this.getContentPane().add(new JScrollPane(selectTabele), BorderLayout.CENTER);
         this.setSize(1000, 1000);
         this.setModalityType(JDialog.ModalityType.APPLICATION_MODAL);
@@ -115,7 +122,6 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         platteTextField.setEnabled(selectedMusik.getIsPlatte());
         cdTextField.setEnabled(selectedMusik.getIsCD());
         mp3CheckBox.setEnabled(selectedMusik.getIsMp3());
-
         platteTextField.setValue(stückZahlPlatte);
         cdTextField.setValue(stückZahlCD);
         mp3CheckBox.setSelected(isMp3);
