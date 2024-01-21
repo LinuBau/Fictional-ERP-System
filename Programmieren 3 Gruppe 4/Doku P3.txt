@@ -1,0 +1,465 @@
+Dokumentation:
+
+Paketübersicht: Traversierung
+Das Paket Traversierung ist zuständig für die Handhabung von Musikdaten innerhalb der MusikMap-Anwendung. Es bildet die Grundlage für die Strukturierung und das Mapping von Musikobjekten nach unterschiedlichen Attributen und ermöglicht damit eine effiziente Durchführung von Such- und Verwaltungsoperationen.
+
+Klassenbeschreibung:
+
+MusikMap:
+Die Klasse MusikMap ist das Herzstück des Pakets Traversierung. Sie hält eine Sammlung von Musikobjekten und stellt Methoden zum Hinzufügen, Entfernen und Aktualisieren dieser Objekte bereit. Weiterhin bietet sie Funktionalitäten, um Musikstücke basierend auf verschiedenen Eigenschaften zu durchsuchen.
+
+Methoden:
+
+addMedium(Musik neuesMedium): Fügt der Sammlung ein neues Musikobjekt hinzu.
+removeMedium(Musik zuEntfernendesMedium): Entfernt ein Musikobjekt aus der Sammlung.
+updateMedienListe(List<Musik> neueMedienListe): Aktualisiert die Mediensammlung basierend auf einer Liste neuer Medien.
+logChange(String action, Musik original, Musik updated): Hält Änderungen an den Musikobjekten fest.
+Verwendung:
+Ein neues Musikobjekt hinzufügen:
+Ein neues Musikobjekt kann zur Sammlung hinzugefügt werden, indem eine Instanz von Musik erzeugt und an die addMedium-Methode übergeben wird.
+
+Ein Musikobjekt entfernen:
+Ein Musikobjekt kann aus der Sammlung entfernt werden, indem die removeMedium-Methode mit dem betreffenden Musikobjekt aufgerufen wird.
+
+Designentscheidungen:
+
+HashMaps für Attribut-Indizierung: Die Wahl fiel auf HashMaps, um eine effiziente Suche nach verschiedenen Musikattributen zu ermöglichen.
+HashSet für das Änderungsprotokoll: Die Nutzung eines HashSet stellt sicher, dass alle Änderungen eindeutig und transparent gespeichert werden.
+Zukünftige Erweiterungen:
+Das Design der Klasse MusikMap ist flexibel gehalten, sodass zukünftige Erweiterungen, wie beispielsweise verbesserte Suchfunktionen oder die Integration externer Musikdatenbanken, möglich sind.
+
+
+
+
+
+
+Paketübersicht: ToolBar
+Das Paket ToolBar bietet eine Benutzeroberflächenkomponente für die MusikMap-Anwendung, die spezielle Werkzeugleisten für unterschiedliche Benutzertypen bereitstellt. Es gibt zwei Arten von Toolbars, eine für Mitarbeiter und eine für Benutzer, die jeweils unterschiedliche Funktionen und Buttons enthalten.
+
+Klassenbeschreibungen:
+
+MitarbeiterToolBar:
+Die MitarbeiterToolBar-Klasse erweitert die JToolBar-Klasse und ist speziell für die Interaktion mit Mitarbeiterfunktionen ausgelegt. Sie enthält Buttons für Mitarbeiteraktionen wie das Hinzufügen neuer Musikobjekte zur Sammlung.
+
+Methoden und Komponenten:
+
+hinzufügeButton: Ein Button, der das Hinzufügen neuer Musikobjekte ermöglicht. Beim Klicken wird der HinzufuegenListener ausgelöst, der die Logik für das Hinzufügen von Musikobjekten handhabt.
+BenutzerToolBar:
+Die BenutzerToolBar-Klasse stellt eine Toolbar für die Benutzeroberfläche dar, die von Endbenutzern genutzt wird. Sie verfügt über Buttons für Benutzeraktionen, wie z.B. das Anzeigen und Verwalten des Warenkorbs.
+
+Methoden und Komponenten:
+
+shoppingKartButton: Ein Button, der es dem Benutzer ermöglicht, den Warenkorb zu öffnen und zu bearbeiten. Der Button ist mit einem Event Listener verbunden, der die entsprechende Funktionalität bereitstellt.
+Verwendung:
+Die Toolbars werden in der GUI der Anwendung instanziiert und angezeigt, um Benutzern je nach Rolle die entsprechenden Funktionen zugänglich zu machen. Die MitarbeiterToolBar wird in der Mitarbeiteransicht und die BenutzerToolBar in der Kundenansicht hinzugefügt.
+
+Designentscheidungen:
+
+Spezialisierung durch Vererbung: Durch die Verwendung der Vererbung der JToolBar-Klasse können spezifische Werkzeugleisten für verschiedene Anwendungsfälle erstellt werden.
+Lokalisierung: Die Buttons nutzen die getL10NText-Methode der Gui-Klasse, um lokalisierten Text anzuzeigen, was die internationale Verwendung der Anwendung unterstützt.
+Zukünftige Erweiterungen:
+Die Toolbars können um zusätzliche Buttons und Funktionen erweitert werden, um weitere Aktionen zu unterstützen. Die Struktur der Klassen ermöglicht es, weitere Listener für neue Funktionen zu implementieren, ohne die bestehende Funktionalität zu beeinträchtigen.
+
+
+
+
+
+Paketübersicht: SaveData_ReadData
+Das Paket SaveData_ReadData stellt Klassen und Methoden bereit, um Musikdaten persistent zu speichern und zu lesen. Es unterstützt verschiedene Formate und Speichermedien, wie CSV-Dateien und binäre Datenströme. Das Paket ermöglicht das Laden und Speichern von Profilen, Musiklisten und Änderungsprotokollen.
+
+Klassenbeschreibungen:
+
+AbstractDAO:
+Diese abstrakte Klasse bietet Grundfunktionalitäten zum Schreiben und Lesen von Datenströmen, um die Erstellung von konkreten DAO-Klassen (Data Access Object) zu vereinfachen. Sie definiert abstrakte Methoden write und read, die in abgeleiteten Klassen implementiert werden müssen.
+
+AbstractCsvDAO:
+Ähnlich wie AbstractDAO, aber spezialisiert auf das Schreiben und Lesen von CSV-Dateien. Diese Klasse wird als Basis für alle CSV-bezogenen Datenzugriffsklassen verwendet.
+
+TextWriting:
+Eine spezialisierte Klasse zum Schreiben von Rechnungen in Textform. Sie nimmt Musiklisten und Profilinformationen, um eine Rechnung zu generieren und als Textdatei zu speichern.
+
+ProfilDAO:
+Verantwortlich für das Schreiben und Lesen von Profilobjekten in binärer Form. Diese Klasse kümmert sich um die Serialisierung und Deserialisierung von Profildaten in und aus Datenströmen.
+
+ProfilListDAO:
+Erweitert AbstractDAO und implementiert das Schreiben und Lesen einer Liste von Profilobjekten. Diese Klasse wird typischerweise verwendet, um alle Anwenderprofile der Anwendung zu laden oder zu speichern.
+
+MusikDAO:
+Eine Klasse für das Schreiben und Lesen von einzelnen Musikobjekten in binärer Form.
+
+MusikListDAO:
+Eine Klasse zum Speichern und Laden von Musiklisten. Sie verwendet MusikDAO für die eigentliche Schreib- und Lesearbeit für jedes Musikobjekt.
+
+MusikCsvDAO und MusikCsvListDAO:
+Diese Klassen sind für das Schreiben und Lesen von Musikobjekten und Musiklisten im CSV-Format zuständig. Sie bieten Methoden, um Musikobjekte in CSV-Zeilen umzuwandeln und umgekehrt.
+
+Verwendung:
+Die DAO-Klassen werden in der Anwendung genutzt, um Daten wie Musiklisten, Benutzerprofile und Änderungsprotokolle zu laden und zu speichern. Hierbei wird auf die Serialisierung und Deserialisierung von Objekten Wert gelegt, um eine konsistente Datenhaltung zu gewährleisten.
+
+Designentscheidungen:
+
+Verwendung von abstrakten Basisklassen: Diese Entscheidung bietet eine gemeinsame Schnittstelle und reduziert den Code-Duplizierung zwischen ähnlichen DAO-Klassen.
+Binäre vs. Text-basierte Speicherung: Die Wahl, verschiedene Formate zu unterstützen, ermöglicht eine flexible Nutzung der Daten je nach Anforderung, z.B. binär für Effizienz oder CSV für die Kompatibilität und menschenlesbare Formate.
+Zukünftige Erweiterungen:
+Die Architektur des Pakets ist so konzipiert, dass sie leicht erweitert werden kann, um Unterstützung für weitere Datenformate wie JSON oder XML hinzuzufügen oder um Cloud-basierte Speicherlösungen zu integrieren.
+
+Hinweise zur Fehlerbehandlung:
+Die Klassen fangen typische IO-Fehler ab und protokollieren diese. Für eine verbesserte Benutzererfahrung sollten Fehler dem Benutzer in einer verständlichen Form mitgeteilt und mögliche Lösungsschritte vorgeschlagen werden.
+
+Die Klassen und Methoden des Pakets SaveData_ReadData sind entscheidend für die Datenpersistenz und die Integrität der Anwendung und sollten mit Sorgfalt verwendet und erweitert werden.
+
+
+
+
+
+
+Paketübersicht: Modele
+Das Paket Modele stellt Modelle für die Darstellung von Daten in Tabellenform zur Verfügung. Diese Modelle sind essenziell für die Verbindung von Geschäftslogik (in Form von Musik- und ChangeLog-Objekten) mit der Benutzeroberfläche, insbesondere mit Tabellenkomponenten. Die Klassen in diesem Paket erweitern AbstractTableModel und definieren, wie Daten gelesen und geschrieben werden, wenn sie in einem JTable-Widget angezeigt werden.
+
+Klassenbeschreibungen:
+
+MusikTableModel:
+Diese Klasse repräsentiert das Tabellenmodell für Musikobjekte. Es definiert die Struktur der Tabelle, die Spaltennamen und Typen, sowie die Methoden zum Abrufen und Festlegen von Zellenwerten. Die Klasse ermöglicht es, eine MusikList in einer tabellarischen Ansicht zu präsentieren.
+
+Methoden und Komponenten:
+
+getRowCount(): Gibt die Anzahl der Zeilen zurück, die der Größe der MusikListe entspricht.
+getColumnCount(): Gibt die Anzahl der Spalten zurück, basierend auf den Spaltennamen.
+getValueAt(int rowIndex, int columnIndex): Gibt den Wert der angegebenen Zelle zurück.
+setValueAt(Object aValue, int rowIndex, int columnIndex): Setzt den Wert der angegebenen Zelle.
+isCellEditable(int rowIndex, int columnIndex): Gibt zurück, ob eine Zelle editierbar ist (hier standardmäßig false).
+getMusikList(): Gibt die zugrunde liegende MusikList zurück.
+setMusikList(MusikList neueMusikList): Ermöglicht das Aktualisieren der MusikList, die das Modell verwendet.
+ChangeLogTableModel:
+Dieses Modell ist für die Anzeige von Änderungsprotokollen in einer Tabelle zuständig. Es verwaltet eine Liste von ChangeLogEntry-Objekten und definiert, wie diese Daten in einer Tabelle dargestellt werden.
+
+Methoden und Komponenten:
+
+setChangeLogs(List<ChangeLogEntry> changeLogs): Setzt die Liste der Änderungsprotokolle, die angezeigt werden soll.
+addChangeLog(ChangeLogEntry entry): Fügt der Tabelle einen neuen Eintrag hinzu.
+getChangeLogs(): Gibt die Liste der Änderungsprotokolle zurück.
+sortChangeLogs(): Sortiert die Änderungsprotokolle nach Zeitstempel.
+Verwendung:
+Die Modelle aus dem Paket Modele werden eingesetzt, um Daten in Tabellen in der GUI anzuzeigen. Durch die Verwendung von AbstractTableModel können die Modelle leicht an JTable-Komponenten gebunden werden, was die Darstellung und Aktualisierung von Daten in der Benutzeroberfläche vereinfacht.
+
+Designentscheidungen:
+
+Verwendung von AbstractTableModel: Diese Entscheidung ermöglicht eine einfache Integration mit Swing-Tabellenkomponenten und unterstützt die Trennung von Datenverwaltung und Darstellung.
+Nicht-editierbare Zellen: Um die Datenintegrität zu schützen, sind Zellen standardmäßig nicht editierbar, was bedeutet, dass Änderungen an den Daten über definierte Geschäftslogikpfade statt über die GUI erfolgen müssen.
+Zukünftige Erweiterungen:
+Das Modell könnte um Editierfunktionen erweitert werden, um Benutzern das Ändern von Daten direkt in der Tabelle zu ermöglichen. Es könnte auch eine Funktion zur Filterung oder Suche hinzugefügt werden, um die Benutzerfreundlichkeit für große Datenmengen zu verbessern.
+
+Hinweise zur Fehlerbehandlung:
+Die Modelle sollten eine angemessene Fehlerbehandlung beinhalten, falls ungültige Daten versucht werden zu setzen oder Probleme beim Lesen der Daten auftreten. Diese sollten in einer Weise behandelt werden, die dem Benutzer hilfreiche Informationen liefert, ohne die Anwendung zu stören.
+
+
+
+
+
+Paketübersicht: MenuBar
+Das Paket MenuBar stellt verschiedene Menüleisten und Menüelemente für die Benutzeroberfläche der MusikMap-Anwendung bereit. Die Menüs bieten Funktionen wie das Ändern der Spracheinstellungen, das Erstellen neuer Mitarbeiter, das Speichern von Daten und die Abmeldung von Benutzern.
+
+Klassenbeschreibungen:
+
+SettingsMenu:
+Ein Menü, das Einstellungsoptionen enthält, einschließlich der Sprachauswahl und einer Abmeldeoption. Es wird verwendet, um Benutzern die Möglichkeit zu bieten, die Anwendungseinstellungen anzupassen.
+
+NewMitarbeiterItem:
+Ein Menüelement, das die Funktion bereitstellt, einen neuen Mitarbeiter hinzuzufügen. Es ist mit einem NewMitarbeiterListener verbunden, um die entsprechende Aktion auszuführen.
+
+MitarbeiterSettingsMenu:
+Ein spezielles Einstellungsmenü für Mitarbeiter, das Optionen zum Hinzufügen neuer Mitarbeiter, Ändern der Sprache und Abmelden beinhaltet.
+
+MitarbeiterMenuBar:
+Eine Menüleiste speziell für Mitarbeiter, die verschiedene Menüs wie FileMenu und MitarbeiterSettingsMenu enthält.
+
+LoginSettingsMenu:
+Ein Einstellungsmenü, das auf der Login-Oberfläche angezeigt wird. Es beinhaltet Optionen zur Sprachauswahl.
+
+LoginMenuBar:
+Eine Menüleiste für die Login-Oberfläche, die das LoginSettingsMenu beinhaltet.
+
+FileMenu:
+Ein Menü, das Optionen zum Öffnen, Speichern und Speichern unter für Dateien bietet. Jede Option ist mit einer entsprechenden Aktion verbunden.
+
+ChangeLanguageSupMenu:
+Ein Menü, das eine Liste von Sprachoptionen enthält. Jede Sprache ist mit einem ChangeLanguageItem verbunden, um die Sprache der Anwendung zu ändern.
+
+ChangeLanguageItem:
+Ein Menüelement, das eine spezifische Sprache repräsentiert. Es verwendet einen ChangeLanguageListener, um die Sprache der Anwendung zu wechseln.
+
+BenutzerMenuBar:
+Eine Menüleiste für Benutzer, die das SettingsMenu beinhaltet.
+
+AbmeldungItem:
+Ein Menüelement, das die Funktion zum Abmelden bietet. Es ist mit einem AbmeldeListener verbunden.
+
+Verwendung:
+Die Menüleisten und Menüelemente des Pakets MenuBar werden in der grafischen Benutzeroberfläche der Anwendung verwendet, um Benutzern den Zugang zu verschiedenen Funktionen und Einstellungen zu ermöglichen. Die Menüs sind an die Rolle des Benutzers (Mitarbeiter oder normaler Benutzer) und den Kontext (Login oder Hauptanwendung) angepasst.
+
+Designentscheidungen:
+
+Anpassbare Menüelemente: Die Menüelemente sind flexibel und können je nach Benutzerrolle oder Anwendungszustand angepasst werden.
+Lokalisierung: Die Menüelemente unterstützen die Lokalisierung, um die Anwendung in verschiedenen Sprachen bereitzustellen.
+Zukünftige Erweiterungen:
+Die Menüleisten und Menüelemente könnten um zusätzliche Funktionen erweitert werden, z.B. um neue Werkzeuge oder Optionen für fortgeschrittene Benutzereinstellungen. Die Lokalisierung könnte um weitere Sprachen ergänzt werden, um die Anwendung für ein breiteres Publikum zugänglich zu machen.
+
+Hinweise zur Fehlerbehandlung:
+Die Interaktionen innerhalb der Menüs sollten angemessen behandelt werden, um Fehler wie falsche Benutzereingaben oder Probleme bei der Ausführung der Aktionen zu vermeiden. Fehlermeldungen sollten klar und verständlich sein.
+
+
+
+
+
+
+
+
+Paketübersicht:I18NPropertiesFiles 
+Das Paket I18NPropertiesFiles enthält mehrere Property-Dateien für die Internationalisierung (I18N) der MusikMap-Anwendung. Diese Dateien definieren Schlüssel-Wert-Paare, wobei jeder Schlüssel einem bestimmten Text in der Anwendung entspricht und der Wert die übersetzte Entsprechung in einer bestimmten Sprache darstellt.
+
+Dateistruktur und Inhalt:
+Die Property-Dateien sind nach Sprachen organisiert und beinhalten Übersetzungen für verschiedene Anwendungstexte wie Menübezeichnungen, Buttons, Label, Fehlermeldungen und sonstige Benutzeroberflächenelemente.
+
+Beispiele für Schlüssel-Wert-Paare:
+
+save = Speichern: Der Schlüssel save wird im GUI mit dem Wert "Speichern" übersetzt, was dem deutschen Wort für "Save" entspricht.
+mid = MusikID: Hier wird der Schlüssel mid mit "MusikID" übersetzt, was für "MusicID" in Deutsch steht.
+Verwendung:
+Die Property-Dateien werden in der Anwendung verwendet, um Texte basierend auf der ausgewählten Sprache zu laden. Wenn ein Benutzer die Sprache ändert, liest die Anwendung die entsprechenden Schlüssel aus der passenden Property-Datei, um die Benutzeroberfläche zu aktualisieren.
+
+Designentscheidungen:
+
+Schlüsselbasierte Übersetzung: Die Verwendung von Schlüsseln (z.B. save, mid) statt direkter Texteingaben ermöglicht eine einfache Anpassung und Wartung der Übersetzungen.
+Getrennte Dateien für jede Sprache: Dies ermöglicht eine klare Trennung der verschiedenen Sprachversionen und erleichtert das Hinzufügen neuer Übersetzungen.
+Zukünftige Erweiterungen:
+Das System kann leicht um zusätzliche Sprachen erweitert werden, indem neue Property-Dateien hinzugefügt werden. Es können auch kontextbezogene Übersetzungen implementiert werden, um beispielsweise unterschiedliche Übersetzungen je nach Anwendungszustand oder Benutzerrolle bereitzustellen.
+
+Hinweise zur Fehlerbehandlung:
+
+Fehlende Übersetzungen: Wenn ein Schlüssel in einer Property-Datei nicht gefunden wird, sollte die Anwendung standardmäßig auf eine Standardsprache oder einen Fallback-Text zurückgreifen.
+Formatierungsfehler: Die Struktur der Property-Dateien muss sorgfältig beibehalten werden, um Lesefehler zu vermeiden.
+Die Pflege und Erweiterung der I18NPropertiesFiles ist wesentlich für die Benutzerfreundlichkeit der Anwendung in verschiedenen Sprachregionen. Es ist wichtig, dass die Übersetzungen stets aktuell gehalten und bei der Einführung neuer Funktionen oder Texte in der Anwendung entsprechend ergänzt werden.
+
+
+
+
+
+
+
+
+
+
+Paketübersicht:GeschaftsObejekt 
+Das Paket GeschaftsObejekt definiert wichtige Geschäftsobjekte für die MusikMap-Anwendung, darunter Profil, Musik, MusikList, ProfilList und ChangeLogEntry. Diese Klassen repräsentieren die Kerndatenstrukturen der Anwendung und dienen als Grundlage für die Datenverwaltung und -logik.
+
+Klassenbeschreibungen:
+
+Profil:
+Diese Klasse repräsentiert ein Benutzerprofil und enthält Benutzerinformationen wie Benutzername, Passworthash, Rolleninformationen (Mitarbeiter oder Kunde) sowie Listen für Musik-IDs, gekaufte Musikstücke und Musikformate.
+
+Musik:
+Diese Klasse repräsentiert ein Musikobjekt und enthält Informationen wie Musik-ID, Künstler, Album, Songname, Regalplatzierungen, Preise, Genre und Verfügbarkeit in verschiedenen Formaten (CD, Vinyl, Mp3).
+
+MusikList:
+Eine Erweiterung der ArrayList, spezialisiert auf die Verwaltung von Musik-Objekten. Es beinhaltet Methoden zur Überprüfung der Einzigartigkeit von Musik-IDs und MBIDs sowie zum Ersetzen von Musikobjekten in der Liste.
+
+ProfilList:
+Ebenfalls eine Erweiterung der ArrayList, spezialisiert auf die Verwaltung von Profil-Objekten. Die Klasse enthält Methoden zur Identifizierung von angemeldeten Benutzern und zur Überprüfung der Einzigartigkeit von Benutzernamen.
+
+ChangeLogEntry:
+Ein Objekt dieser Klasse repräsentiert einen Eintrag im Änderungsprotokoll, einschließlich Zeitstempel, Aktionstyp und den Zuständen von Musikobjekten vor und nach der Änderung.
+
+Verwendung:
+Die Klassen in diesem Paket werden verwendet, um die wesentlichen Datenstrukturen der MusikMap-Anwendung zu definieren. Sie sind zentral für die Datenverwaltung, Benutzerauthentifizierung, Änderungsprotokollierung und die Darstellung von Musikdaten.
+
+Designentscheidungen:
+
+Objektorientierter Ansatz: Die Verwendung von Klassen zur Repräsentation von Geschäftsobjekten erleichtert die Datenverwaltung und fördert die Wiederverwendbarkeit von Code.
+Erweiterung von Standard-Java-Kollektionen: Durch die Erweiterung von ArrayList werden spezialisierte Funktionen für Musik- und Profilobjekte bereitgestellt, ohne die grundlegende Funktionalität und Leistung der Standardkollektionen zu beeinträchtigen.
+Zukünftige Erweiterungen:
+
+Die Klassen könnten um zusätzliche Funktionen erweitert werden, um beispielsweise erweiterte Such- und Filtermechanismen zu unterstützen.
+Integration mit Datenbanken oder anderen Persistenzmechanismen könnte hinzugefügt werden, um eine effizientere Speicherung und Abfrage großer Datenmengen zu ermöglichen.
+Hinweise zur Fehlerbehandlung:
+
+Die Methoden sollten robust gegenüber ungültigen Daten und Zuständen sein. Beispielsweise sollten Methoden zur Identifizierung von Benutzern oder Musikobjekten angemessen auf nicht existierende IDs oder falsche Passwörter reagieren.
+Beim Überschreiben von Methoden wie equals und hashCode ist darauf zu achten, dass diese korrekt und konsistent implementiert werden, um Probleme bei der Verwendung in Kollektionen zu vermeiden.
+Die Klassen im Paket GeschaftsObejekt bilden das Rückgrat der MusikMap-Anwendung, indem sie die notwendigen Strukturen für die Speicherung und Verarbeitung von Benutzer- und Musikdaten bereitstellen. Ihre sorgfältige Entwicklung und Wartung ist entscheidend für die Stabilität und Funktionalität der Anwendung.
+
+
+
+
+
+
+
+
+
+Paketübersicht:App_GUI 
+Das Paket App_GUI bildet die grafische Benutzeroberfläche (GUI) der MusikMap-Anwendung. Es enthält Klassen zur Erstellung und Verwaltung verschiedener GUI-Elemente wie Fenster, Menüs, Toolbars und Tabellen. Diese Klassen sind verantwortlich für die Interaktion mit dem Benutzer und die Darstellung der Daten aus dem Geschäftslogik-Teil der Anwendung.
+
+Klassenbeschreibungen:
+
+LoginGUi:
+Diese Klasse stellt das Login-Fenster dar und ermöglicht es dem Benutzer, sich in der Anwendung anzumelden. Sie verwaltet Benutzereingaben für Benutzernamen und Passwort und interagiert mit den Profil- und Sprachressourcen.
+
+Gui:
+Die Hauptklasse für die Benutzeroberfläche der Anwendung. Sie initialisiert und verwaltet verschiedene GUI-Elemente wie die Musik- und Änderungsprotokolltabellen, Toolbars und Menüs. Sie dient als zentrale Schnittstelle zwischen der Benutzeroberfläche und der Geschäftslogik.
+
+Verwendung:
+
+LoginGUi wird verwendet, um die Anmeldung zu ermöglichen und den Benutzer zur Hauptoberfläche der Anwendung weiterzuleiten.
+Gui dient als Hauptfenster für die Anwendung, das je nach Benutzerrolle (Mitarbeiter oder Benutzer) unterschiedliche Funktionen und Ansichten bietet.
+Designentscheidungen:
+
+Trennung von GUI und Geschäftslogik: Diese Klassen konzentrieren sich ausschließlich auf die Benutzeroberfläche und interagieren mit anderen Teilen der Anwendung über definierte Schnittstellen.
+Internationalisierung: Durch die Verwendung von Resource Bundles unterstützt die GUI Mehrsprachigkeit, was die Anwendung benutzerfreundlicher macht.
+Ereignisgesteuerte Programmierung: Die GUI-Komponenten reagieren auf Benutzeraktionen wie Klicks und Eingaben, was zu einer reaktiven und interaktiven Benutzererfahrung führt.
+Zukünftige Erweiterungen:
+
+Erweiterte Benutzerinteraktionen und Validierungen könnten implementiert werden, um die Benutzererfahrung zu verbessern und Fehler zu vermeiden.
+Die GUI könnte um weitere Funktionen erweitert werden, um zusätzliche Anforderungen oder Benutzerfeedback zu berücksichtigen.
+Hinweise zur Fehlerbehandlung:
+
+Es sollte sichergestellt werden, dass die GUI angemessen auf Fehler in der Geschäftslogik reagiert, z. B. durch Anzeigen von Fehlermeldungen.
+Die Validierung von Benutzereingaben sollte implementiert werden, um die Eingabe ungültiger Daten zu verhindern.
+Das Paket App_GUI ist entscheidend für die Benutzerinteraktion mit der MusikMap-Anwendung. Die sorgfältige Gestaltung und Implementierung dieser GUI-Komponenten trägt wesentlich zur Benutzerfreundlichkeit und Funktionalität der Anwendung bei.
+
+
+
+
+
+
+
+
+
+Paketübersicht:Actions
+Das Paket Actions stellt Aktionen zur Verfügung, die in der MusikMap-Anwendung ausgeführt werden können, insbesondere im Zusammenhang mit Dateioperationen wie Speichern, Speichern unter und Öffnen von Dateien. Die Klassen in diesem Paket erweitern AbstractAction und implementieren das Interface ActionListener, um auf Benutzerinteraktionen zu reagieren.
+
+Klassenbeschreibungen:
+
+FileSaveAsAction:
+
+Zweck: Ermöglicht dem Benutzer das Speichern der aktuellen Musikliste in einer Datei. Der Benutzer kann den Speicherort und den Dateinamen über einen JFileChooser Dialog auswählen.
+Schlüsselmethoden:
+actionPerformed: Öffnet einen Datei-Speichern-Dialog und schreibt die Musikliste in die ausgewählte Datei.
+FileSaveAction:
+
+Zweck: Speichert die Musikliste und die Profil-Liste in den Standarddateien.
+Schlüsselmethoden:
+saveListe: Speichert die Musikliste und Profil-Liste in vordefinierten Dateien.
+actionPerformed: Wird aufgerufen, wenn der Benutzer die Speicheraktion auslöst.
+FileOpenAction:
+
+Zweck: Ermöglicht dem Benutzer das Öffnen einer Musikliste aus einer Datei.
+Schlüsselmethoden:
+actionPerformed: Öffnet einen Datei-Öffnen-Dialog und lädt die ausgewählte Musikliste in die Anwendung.
+Verwendung:
+
+FileSaveAsAction wird verwendet, wenn der Benutzer die aktuelle Musikliste unter einem neuen Namen oder an einem neuen Ort speichern möchte.
+FileSaveAction dient dazu, die aktuellen Daten schnell und unkompliziert zu speichern.
+FileOpenAction ermöglicht das Laden einer Musikliste aus einer externen Quelle.
+Designentscheidungen:
+
+Verwendung von Standard-Java-Swing-Komponenten (JFileChooser) zur Implementierung der Dateioperationen.
+Trennung der Dateioperationen in separate Klassen für eine klare Struktur und Wiederverwendbarkeit.
+Zukünftige Erweiterungen:
+
+Erweiterung der Funktionalität um zusätzliche Dateiformate und Operationen wie Exportieren und Importieren in/aus verschiedenen Formaten.
+Verbesserung der Benutzeroberfläche und Benutzerführung bei Dateioperationen.
+Hinweise zur Fehlerbehandlung:
+
+Implementierung robuster Fehlerbehandlung und Benutzerfeedback bei Fehlschlägen von Dateioperationen, wie fehlerhaften Speichervorgängen oder dem Öffnen nicht unterstützter Dateiformate.
+Das Paket Actions spielt eine wesentliche Rolle in der Benutzerinteraktion mit der MusikMap-Anwendung, indem es grundlegende Funktionen für die Verwaltung von Musiklisten-Daten durch Dateioperationen bereitstellt. Die Gestaltung und Implementierung dieser Funktionen sind entscheidend für die Datensicherheit und Benutzerfreundlichkeit der Anwendung.
+
+
+
+
+
+
+
+
+
+Paketübersicht:ActionListener 
+Das Paket ActionListener enthält eine Sammlung von Listener-Klassen, die auf verschiedene Benutzeraktionen innerhalb der MusikMap-Anwendung reagieren. Diese Klassen implementieren das ActionListener Interface oder andere relevante Listener-Interfaces und bieten spezifische Funktionalitäten wie das Öffnen von Fenstern, Speichern von Daten, Anzeigen von Dialogen, etc.
+
+Klassenbeschreibungen:
+
+WindowEventListener:
+
+Zweck: Verwaltung von Window-Events wie Öffnen und Schließen des Hauptfensters.
+Schlüsselmethoden:
+windowClosing: Zeigt Optionen zum Speichern von Daten vor dem Schließen des Fensters.
+ShowPasswordListener:
+
+Zweck: Steuert die Anzeige des Passwortes in einem Passwortfeld.
+Schlüsselmethoden:
+actionPerformed: Ändert die Anzeige des Passwortfeldes basierend auf dem Zustand einer Checkbox.
+ShoppingCartListener:
+
+Zweck: Verwaltet den Warenkorb innerhalb der Anwendung.
+Schlüsselmethoden:
+actionPerformed: Führt Aktionen wie das Hinzufügen oder Entfernen von Artikeln im Warenkorb durch.
+ReinhörenListener:
+
+Zweck: Ermöglicht das Anhören einer Musikprobe über einen Webdienst.
+Schlüsselmethoden:
+actionPerformed: Öffnet den Standard-Webbrowser und führt eine Suche auf einer Musikplattform durch.
+NewUserListener und NewMitarbeiterListener:
+
+Zweck: Erstellung neuer Benutzer- oder Mitarbeiterkonten.
+Schlüsselmethoden:
+actionPerformed: Registriert neue Benutzer oder Mitarbeiter und speichert ihre Daten.
+LoginListener:
+
+Zweck: Verwaltet den Login-Prozess.
+Schlüsselmethoden:
+actionPerformed: Überprüft die Anmeldedaten und öffnet das entsprechende Hauptfenster.
+FilterListener:
+
+Zweck: Filtert die angezeigten Musikdaten basierend auf Benutzereingaben.
+Schlüsselmethoden:
+actionPerformed: Wendet Filterkriterien auf die Musikliste an und aktualisiert die Anzeige.
+FileCloseItemListener:
+
+Zweck: Behandelt die Aktion "Beenden" im Menü.
+Schlüsselmethoden:
+actionPerformed: Beendet die Anwendung.
+ChangeLanguageListener:
+
+Zweck: Ändert die Sprache der Benutzeroberfläche.
+Schlüsselmethoden:
+actionPerformed: Wechselt die Sprache und lädt das UI neu.
+HinzufuegenListener:
+
+Zweck: Fügt neue Musikstücke zur Anwendung hinzu.
+Schlüsselmethoden:
+actionPerformed: Speichert neue Musikdaten und aktualisiert die Anzeige.
+AddToShoppingCartListener:
+
+Zweck: Fügt ausgewählte Musikstücke zum Warenkorb hinzu.
+Schlüsselmethoden:
+actionPerformed: Aktualisiert den Warenkorb mit ausgewählten Artikeln.
+AbmeldeListener:
+
+Zweck: Behandelt die Abmeldung und kehrt zum Login-Bildschirm zurück.
+Schlüsselmethoden:
+actionPerformed: Wechselt vom Hauptfenster zurück zum Login-Bildschirm.
+Verwendung:
+
+Die Listener-Klassen sind zentral für das Event-Handling in der MusikMap-Anwendung und werden in verschiedenen GUI-Komponenten wie Buttons, Menüs und Dialogfenstern verwendet.
+Sie ermöglichen die Interaktion des Benutzers mit der Anwendung, indem sie auf Benutzeraktionen wie Klicks, Texteingaben und Auswahlereignisse reagieren.
+Designentscheidungen:
+
+Die klare Trennung der einzelnen Funktionalitäten in verschiedene Listener-Klassen fördert die Wartbarkeit und Skalierbarkeit des Codes.
+Die Implementierung spezifischer Listener für unterschiedliche Anwendungsfälle sorgt für eine bessere Übersichtlichkeit und leichtere Fehlersuche.
+Zukünftige Erweiterungen:
+
+Integration zusätzlicher Funktionalitäten wie fortgeschrittene Filteroptionen oder verbesserte Sicherheitsmaßnahmen bei der Benutzerverwaltung.
+Erweiterung der Internationalisierung durch Hinzufügen weiterer Sprachen.
+Hinweise zur Fehlerbehandlung:
+
+Robuste Fehlerbehandlung und Benutzerfeedback in jeder Klasse, um eine benutzerfreundliche und fehlertolerante Anwendung zu gewährleisten.
+Sorgfältige Prüfung der Benutzereingaben, um ungültige oder schädliche Daten zu vermeiden.
+Das Paket ActionListener ist ein integraler Bestandteil der MusikMap-Anwendung, da es eine direkte Verbindung zwischen der Benutzeroberfläche und den zugrunde liegenden Funktionen herstellt. Durch die effektive Implementierung dieser Listener wird die Benutzererfahrung verbessert und die Funktionalität der Anwendung erweitert.
+
+Erstellt von ChatGPT4.0 durch übergabe der Klasseninhalte
