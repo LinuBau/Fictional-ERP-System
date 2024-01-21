@@ -26,6 +26,7 @@ import GeschaftsObejekt.Musik;
 import GeschaftsObejekt.MusikList;
 import Modele.MusikTableModel;
 import SaveData_ReadData.TextWriting;
+import javax.swing.JLabel;
 import javax.swing.SpinnerNumberModel;
 
 public class ShoppingCartListner extends JDialog implements ActionListener {
@@ -42,6 +43,8 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
     private int index;
     private Musik musik;
     private Gui parent;
+    private JLabel VenylAnzahlText;
+    private JLabel CDAnzahlText;
 
     public ShoppingCartListner(Gui p) {
         JPanel buttonPanel = new JPanel(new GridLayout(2, 3));
@@ -57,10 +60,14 @@ public class ShoppingCartListner extends JDialog implements ActionListener {
         speicherButton = new JButton(parent.getL10NText("save"));
         orderButton = new JButton(parent.getL10NText("order"));
         loeschenButton = new JButton(parent.getL10NText("delete"));
+        VenylAnzahlText = new JLabel(parent.getL10NText("VinylCount")+":");
+        CDAnzahlText = new JLabel(parent.getL10NText("CdCount")+":");
         platteTextField = new JSpinner();
         cdTextField = new JSpinner();
         mp3CheckBox = new JCheckBox();
+        buttonPanel.add(VenylAnzahlText);
         buttonPanel.add(platteTextField);
+        buttonPanel.add(CDAnzahlText);
         buttonPanel.add(cdTextField);
         buttonPanel.add(mp3CheckBox);
         buttonPanel.add(orderButton);
