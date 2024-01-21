@@ -154,27 +154,8 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     }
 
-    public void clearTextBox() {
-        musikGUIDTextField.setText(String.valueOf(maxGuid++));
-        mbidTextField.setText("");
-        musikerTextField.setText("");
-        albumTextField.setText("");
-        songNameTextField.setText("");
-        regalPlatzCDTextField.setText("");
-        regalPlatzPlatteTextField.setText("");
-        cdListenpreisTextField.setText("0");
-        platteListenpreisTextField.setText("0");
-        mp3ListenpreisTextField.setText("0");
-        cdEinkaufspreisTextField.setText("0");
-        platteEinkaufspreisTextField.setText("0");
-        mp3EinkaufspreisTextField.setText("0");
-        genreTextField.setText("");
-        cdCountSpinner.setValue(0);
-        vinylCountSpinner.setValue(0);
-    }
-
     public void fillTextBox() {
-
+        musikGUIDTextField.setText("");
         musikerTextField.setText("");
         albumTextField.setText("");
         songNameTextField.setText("");
@@ -195,7 +176,6 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(true);
-        clearTextBox();
         if (e.getSource().equals(beenden)) {
             this.setVisible(false);
         }
@@ -208,22 +188,17 @@ public class HinzufuegenListener extends JDialog implements ActionListener {
 
     private boolean musikHinzufügen() {
         Musik m = new Musik();
-        boolean IdisOk = true;
+        boolean IdisOk = false;
 
-        m.setMusik_GUID(maxGuid);
+        m.setMusik_GUID(++maxGuid);
 
         try {
             String mbidText = mbidTextField.getText().trim();
-            if (parent.getMusikMap().getMusikList().mbidunique(mbidText) && mbidText.length() == 36) {
-                m.setMBID(mbidText);
-            } else {
-                IdisOk = true;
-                JOptionPane.showMessageDialog(this, "ich bin asdguia", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            m.setMBID(mbidText);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, parent.getL10NText("idError"), "Error", JOptionPane.ERROR_MESSAGE);
         }
-       m.setMusiker(musikerTextField.getText());
+        m.setMusiker(musikerTextField.getText());
         m.setAlbum(albumTextField.getText());
         m.setSongName(songNameTextField.getText());
         m.setRegal_PlatzCD(regalPlatzCDTextField.getText());
