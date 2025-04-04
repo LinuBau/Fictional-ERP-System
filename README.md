@@ -12,9 +12,9 @@ It is a fictional ERP (Enterprise Resource Planning) system for a company that s
   - **Employee Login:**  
     Username: `mitarbeiter`  
     Password: `mitarbeiter`
-  -**User Login:**
-    Username:`Whateveryouwant`
-    Password:`Whateveryouwant`
+  - **User Login:**  
+    Username: `whateveryouwant`  
+    Password: `whateveryouwant`
 - Java Swing-based graphical user interface
 - Load song data from a CSV file
 - Able to change languages at runtime
