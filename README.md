@@ -17,8 +17,8 @@ It is a fictional ERP (Enterprise Resource Planning) system for a company that s
     Password:`Whateveryouwant`
 - Java Swing-based graphical user interface
 - Load song data from a CSV file
-- Abale to Change Langues at Run Time
-- Change Catalog to See the Delevopmnt of Data
+- Able to change languages at runtime
+- Change catalog to see the development of data
 - Create invoices linked to customers and songs
 - Export invoices as TXT files
 
@@ -31,7 +31,6 @@ It is a fictional ERP (Enterprise Resource Planning) system for a company that s
    - Select the `Songs.csv` file from the project folder `Programmieren 3 Gruppe 4`.
 
 ## Technologies Used
-
 - Java
 - Java Swing
 
