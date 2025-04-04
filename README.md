@@ -26,7 +26,7 @@ It is a fictional ERP (Enterprise Resource Planning) system for a company that s
 
 1. Run the `.jar` file.
 2. If the song list is empty upon startup:
-   - Log in as an employee.
+   - Log in as an employee or User.
    - In the menu bar, go to **File → Open**.
    - Select the `Songs.csv` file from the project folder `Programmieren 3 Gruppe 4`.
 
